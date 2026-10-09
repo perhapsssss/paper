@@ -1,0 +1,17 @@
+[
+ {"figure":"Fig. 1","source_page":3,"image":"assets/figures/fig2-full.png","caption_block_id":"fig-01-caption","crop_status":"page-render crop","issues":"Full figure crop contains the LIPM, CIP and nonlinear-model diagrams; figure caption is separately translated."},
+ {"figure":"Fig. 2","source_page":3,"image":"assets/figures/fig-02.png","caption_block_id":"fig-02-caption","crop_status":"page-render crop","issues":"The source vector diagram shares page space with Table 1; page crop retained at source resolution."},
+ {"figure":"Fig. 3","source_page":4,"image":"assets/figures/fig-03.png","caption_block_id":"fig-03-caption","crop_status":"page-render crop","issues":"Composite vector illustration; translation includes a textual description of left/right subfigures."},
+ {"figure":"Fig. 4","source_page":5,"image":"assets/figures/fig-04.png","caption_block_id":"fig-04-caption","crop_status":"page-render crop","issues":"Diagram extracted from PDF page render."},
+ {"figure":"Fig. 5","source_page":6,"image":"assets/figures/fig-05.png","caption_block_id":"fig-05-caption","crop_status":"extracted embedded image","issues":"None"},
+ {"figure":"Fig. 6","source_page":6,"image":"assets/figures/fig-06.png","caption_block_id":"fig-06-caption","crop_status":"extracted embedded image","issues":"None"},
+ {"figure":"Fig. 7","source_page":7,"image":"assets/figures/fig-07.png","caption_block_id":"fig-07-caption","crop_status":"extracted embedded image","issues":"None"},
+ {"figure":"Fig. 8","source_page":7,"image":"assets/figures/fig-08.png","caption_block_id":"fig-08-caption","crop_status":"extracted embedded image","issues":"None"},
+ {"figure":"Fig. 9","source_page":8,"image":"assets/figures/fig-09.png","caption_block_id":"fig-09-caption","crop_status":"extracted embedded image","issues":"None"},
+ {"figure":"Fig. 10","source_page":8,"image":"assets/figures/fig-10.png","caption_block_id":"fig-10-caption","crop_status":"extracted embedded image","issues":"None"},
+ {"figure":"Fig. 11","source_page":8,"image":"assets/figures/fig-11.png","caption_block_id":"fig-11-caption","crop_status":"extracted embedded image","issues":"None"},
+ {"figure":"Fig. 12","source_page":8,"image":"assets/figures/fig-12.png","caption_block_id":"fig-12-caption","crop_status":"extracted embedded image","issues":"None"},
+ {"figure":"Fig. 13","source_page":9,"image":"assets/figures/fig-13.png","caption_block_id":"fig-13-caption","crop_status":"extracted embedded image","issues":"None"},
+ {"figure":"Fig. 14","source_page":9,"image":"assets/figures/fig-14.png","caption_block_id":"fig-14-caption","crop_status":"extracted embedded image","issues":"None"},
+ {"figure":"Appendix pseudocode","source_page":10,"image":"assets/figures/appendix-pseudocode.png","caption_block_id":"appendix-pseudocode-caption","crop_status":"extracted embedded image","issues":"Image has no separate figure number in source."}
+]

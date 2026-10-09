@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f2ed">
+  <title>论文译读室</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">文</span><span>论文译读室<small>RESEARCH READING ROOM</small></span></a>
+    <nav><a class="active" href="index.html">论文库</a><a href="#about">使用说明</a></nav>
+    <a class="quiet-link" href="README.md">维护指南 ↗</a>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">PERSONAL RESEARCH LIBRARY</p>
+        <h1>把论文读成<br><em>自己的知识库。</em></h1>
+        <p class="lede">按统一格式整理原文、中文译文、公式、图表和术语。每篇论文都有独立阅读页，也能在这里统一检索。</p>
+        <a class="button" href="#library">浏览论文 <span>↓</span></a>
+      </div>
+      <div class="hero-art" aria-hidden="true"><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="book"><i></i><i></i><i></i><b>R</b></div><span class="art-label label-one">TRANSLATION</span><span class="art-label label-two">FORMULA · FIGURE · TERM</span><span class="art-dot"></span></div>
+      <div class="hero-index"><span>LIBRARY INDEX</span><strong id="paperCount">01</strong><span>papers</span></div>
+    </section>
+    <section class="library" id="library">
+      <div class="section-head"><div><p class="eyebrow">THE COLLECTION</p><h2>论文目录</h2></div><label class="search"><span>⌕</span><input id="search" type="search" placeholder="搜索标题、作者、主题…" aria-label="搜索论文"></label></div>
+      <div class="filters" id="filters"><button class="filter active" data-tag="全部">全部 <span id="allCount">0</span></button></div>
+      <div class="paper-grid" id="paperGrid"></div>
+      <div class="empty" id="empty" hidden>没有找到匹配的论文。试试其他关键词。</div>
+    </section>
+    <section class="about" id="about"><span class="about-number">01 — 04</span><div><p class="eyebrow">A CONSISTENT READING FORMAT</p><h2>从 PDF 到可回看的<br>研究材料。</h2></div><div class="about-steps"><div><b>01</b><span>结构化译文</span><small>保留章节、公式与引用</small></div><div><b>02</b><span>段落对照</span><small>原文和译文并排核读</small></div><div><b>03</b><span>图表与术语</span><small>素材归档，概念统一</small></div><div><b>04</b><span>持续积累</span><small>新论文沿用同一套版式</small></div></div></section>
+  </main>
+  <footer><span>论文译读室</span><span>本地研究资料 · 持续更新</span></footer>
+  <script src="site.js"></script>
+</body>
+</html>

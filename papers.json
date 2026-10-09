@@ -1,0 +1,17 @@
+[
+  {
+    "id": "humanoid-nonlinear-state-estimation",
+    "title": "人形机器人非线性状态估计框架",
+    "title_original": "A nonlinear state estimation framework for humanoid robots",
+    "authors": ["Jingchao Li", "Zhaohui Yuan", "Sheng Dong", "Jingqin Zhang", "Jianrui Zhang"],
+    "year": 2022,
+    "venue": "Robotics and Autonomous Systems 153, 104100",
+    "doi": "10.1016/j.robot.2022.104100",
+    "tags": ["人形机器人", "状态估计", "DLKF", "IEKF"],
+    "abstract": "提出融合 IMU、关节编码器和足底 FSR 的非线性状态估计框架，使用 DLKF 补偿模型误差，并用 IEKF 估计浮动基座运动学。",
+    "project": "papers/humanoid-nonlinear-state-estimation",
+    "reader": "papers/humanoid-nonlinear-state-estimation/translation-reading.html",
+    "cover": "papers/humanoid-nonlinear-state-estimation/assets/figures/fig-14.png",
+    "status": "已完成"
+  }
+]
