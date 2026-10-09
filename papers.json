@@ -11,6 +11,7 @@
     "abstract": "提出融合 IMU、关节编码器和足底 FSR 的非线性状态估计框架，使用 DLKF 补偿模型误差，并用 IEKF 估计浮动基座运动学。",
     "project": "papers/humanoid-nonlinear-state-estimation",
     "reader": "papers/humanoid-nonlinear-state-estimation/translation-reading.html",
+    "pdf": "papers/humanoid-nonlinear-state-estimation/original.pdf",
     "cover": "papers/humanoid-nonlinear-state-estimation/assets/figures/fig-14.png",
     "status": "已完成"
   }
