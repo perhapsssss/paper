@@ -1,0 +1,64 @@
+        JOURNAL OF LATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2015                                                                                       1
+
+     Robust Dynamic Locomotion via Reinforcement
+       Learning and Novel Whole Body Controller
+
+                           Donghyun Kim, Jaemin Lee, and Luis Sentis, Member, IEEE
+
+
+
+
+
+          Abstract—We propose a robust dynamic walking controller   bipedal humanoid robots. A closely related work to ours, [2]
+          consisting of a dynamic locomotion planner, a reinforcement   utilizes a trajectory parametrization of the dynamic locomotion
+          learning process for robustness, and a novel whole-body locomo-                                                                       process [3], speciﬁcally customized for a particular robot, the
+          tion controller (WBLC). Previous approaches specify either the
+                                                    NAO. As such, our study can be viewed as a generalization of          position or the timing of steps, however, the proposed locomotion
+         planner simultaneously computes both of these parameters as   this type of work to more general models typically used in the
+         locomotion outputs. Our locomotion strategy relies on devising  dynamic walking communities [4] – e.g. inverted pendulums.2017
+        a reinforcement learning (RL) approach for robust walking. The   In addition, the previous line of work on NAO robots, has
+         learned policy generates multi step walking patterns, and the                                                                 remained quiet with respect to quantifying robustness. In the
+         process  is quick enough to be suitable for real-time controls.
+                                                           work presented here, we address robustness as a main thrust        For learning, we devise an RL strategy that uses a phase spaceAug         planner (PSP) and a linear inverted pendulum model to make the   performing detailed simulations with respect to unplanned and
+7  problem tractable and very fast. Then, the learned policy is used   large disturbances at moderate walking speeds.
+          to provide goal-based commands to the WBLC, which calculates     Since IP dynamics are in a reduced manifold, we propose
+          the torque commands to be executed in full-humanoid robots.                                                                    a new type of whole-body controllers that are highly robust
+        The WBLC combines multiple prioritized tasks and calculates
+                                                               and  effective  to  transfer the IP-based locomotion process          the  associated  reaction  forces based on  practical  inequality
+          constraints. The novel formulation includes efﬁcient calculation   into the full humanoid model. In particular we incorporate
+          of the time derivatives of various Jacobians. This provides high-  new efﬁciently-computed feedforward terms, momentum and
+          ﬁdelity dynamic control of fast motions. More speciﬁcally, we   balancing tasks, and more accurate contact models while main-[cs.RO]
+        compute the time derivative of the Jacobian for various tasks                                                                            taining the key capability of task prioritization. In addition we
+        and the Jacobian of the centroidal momentum task by utilizing
+                                                                    completely reformulate the control structures for whole-body         Lie group operators and operational space dynamics respectively.
+        The integration of RL-PSP and the WBLC provides highly   control with respect to previous work of ours on this area of
+          robust,  versatile, and practical locomotion including steering   whole-body control. We accommodate for the new models and
+         while walking and handling push disturbances of up to 520 N   also achieve high computational efﬁciency. As such, we build
+         during an interval of 0.1 sec. Theoretical and numerical results                                                            on our long time history of devising whole-body controllers,
+         are tested through a 3D physics-based simulation of the humanoid
+                                                                                    this time around making signiﬁcant algorithmic changes. We         robot Valkyrie.
+                                                                          believe these transformations constitute a quantum leap with
+           Index Terms—Biped Locomotion, Reinforcement Learning,                                                                           respect to whole-body controllers with dynamic locomotion
+        Whole Body Control
+                                                                                  capabilities.
+                                                            The combination  of RL-IP-PSP  for locomotion  pattern
+                                        I. INTRODUCTION                       generation achieves signiﬁcant robustness by training a neural
+                                                                 network through an actor-critic process with many possible       We explore the performance of a reinforcement learning
+                                                                       center-of-mass states, representing potential disturbances, then        (RL) process and a new whole-body impedance and forcearXiv:1708.02205v1                                                                   learning successful step timing and foot position policies for          controller for robust dynamic locomotion on a full biped hu-
+                                                                          recovery. Utilizing step timing and foot positions is not typ-        manoid dynamical model. Full-bodied 3D humanoid dynamic
+                                                                                  ically explored because simultaneously varying both of these        walking based on inverted pendulum (IP) dynamics and RL
+                                                                     parameters results in nonlinear system dynamics. [5] proposed         has not been studied to date. To enable the RL process to run
+                                                                    a model predictive control (MPC) method for synthesizing          efﬁciently, we found that utilizing phase-space planning (PSP)
+                                                                  walking patterns based on desired foot positions, kinematic          [1] provides a space of practical parameters that enables the
+                                                                                    limits, and given step timing.  [6] formulated a nonlinear          transition function to operate in the reduced inverted pendulum
+                                                                        optimization problem to solve two walking steps ahead of time         manifold. A key advantage of using an IP model is that  it
+                                                                              to reduce computational cost. [7] linearized an optimization         generalizes locomotion for many types of systems with a light
+                                                               problem by searching for a solution one step ahead of time.        dependency with their concrete kinematic structure. Using an
+                                                                         In contrast, instead of relying on runtime optimizations, we         IP model not only reduces the search space but also enables the
+                                                                                  train a control policy ofﬂine using an IP model, and use       same procedure to be used across different types of full-bodied
+                                                                                                             it afterwards for real-time control of full humanoid robots
+            D. Kim and J. Lee are with the Department of Mechanical Engineering,   being physically disturbed. Therefore, our learned locomotion
+           University of Texas at Austin, Austin, TX, 78712 USA e-mail: .            planning generator can plan hundreds of steps ahead of time
+             L. sentis is with the Department of Aerospace Engineering and Applied
+          Mechanics, University of Texas at Austin, Austin, TX, 78712                in an instant, compared to the stepping time scale. As such,
+             Manuscript received April 19, 2005; revised August 26, 2015.           speed is a key characteristic of the proposed planning and

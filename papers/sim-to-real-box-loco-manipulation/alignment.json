@@ -1,0 +1,162 @@
+[
+  {
+    "id": "abstract-01",
+    "section": "摘要",
+    "type": "paragraph",
+    "source_ids": [
+      "abstract-01"
+    ],
+    "translation_ids": [
+      "zh-abstract-01"
+    ],
+    "source": "We propose a learning-based approach to box loco-manipulation for a humanoid robot.",
+    "translation": [
+      "本文提出一种面向人形机器人的箱体移动操作学习方法。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "abstract-02",
+    "section": "摘要",
+    "type": "paragraph",
+    "source_ids": [
+      "abstract-02"
+    ],
+    "translation_ids": [
+      "zh-abstract-02"
+    ],
+    "source": "We present a sim-to-real reinforcement learning approach for training general box pickup and carrying skills for the bipedal robot Digit.",
+    "translation": [
+      "作者采用仿真到现实强化学习，为 Digit 双足机器人学习具有泛化能力的箱体抓取和搬运技能。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "eq-reward",
+    "section": "系统概览",
+    "type": "equation",
+    "source_ids": [
+      "eq-reward"
+    ],
+    "translation_ids": [
+      "zh-eq-reward"
+    ],
+    "source": "$$R=\\sum_i w_i\\exp(-r_i).$$",
+    "translation": [
+      "$$R=\\sum_i w_i\\exp(-r_i).$$"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "skills",
+    "section": "系统概览",
+    "type": "paragraph",
+    "source_ids": [
+      "skills"
+    ],
+    "translation_ids": [
+      "zh-skills"
+    ],
+    "source": "We break down the full box loco-manipulation task into five distinct behaviors: WALK, STAND, PICKUP, WALKWITHBOX, and STANDWITHBOX.",
+    "translation": [
+      "完整任务分成 WALK、STAND、PICKUP、WALKWITHBOX 和 STANDWITHBOX 五种行为。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "action-space",
+    "section": "拾取策略",
+    "type": "paragraph",
+    "source_ids": [
+      "action-space"
+    ],
+    "translation_ids": [
+      "zh-action-space"
+    ],
+    "source": "Adding the action output to the current motor positions resulted in faster learning.",
+    "translation": [
+      "将策略动作叠加到当前电机位置，能加快拾取策略的学习。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fig-01-caption",
+    "section": "引言",
+    "type": "caption",
+    "source_ids": [
+      "fig-01-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-01-caption"
+    ],
+    "source": "We learn box loco-manipulation policies in simulation and transfer directly to real hardware.",
+    "translation": [
+      "图 1. 五项技能在仿真中学习并直接迁移到实机 Digit。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fig-03-caption",
+    "section": "拾取策略",
+    "type": "caption",
+    "source_ids": [
+      "fig-03-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-03-caption"
+    ],
+    "source": "Example hand position trajectory for a box pickup.",
+    "translation": [
+      "图 3. 箱体拾取的双手目标轨迹示例。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fig-04-caption",
+    "section": "消融实验",
+    "type": "caption",
+    "source_ids": [
+      "fig-04-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-04-caption"
+    ],
+    "source": "Reward curve comparison between different learning setups.",
+    "translation": [
+      "图 4. 不同奖励及动作空间下的学习曲线。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "result",
+    "section": "仿真结果",
+    "type": "paragraph",
+    "source_ids": [
+      "result"
+    ],
+    "translation_ids": [
+      "zh-result"
+    ],
+    "source": "The pickup policy succeeds on 96.15% of 10,000 randomized episodes.",
+    "translation": [
+      "PICKUP 策略在 10,000 个随机回合中的成功率为 96.15%。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "hardware",
+    "section": "实机结果",
+    "type": "paragraph",
+    "source_ids": [
+      "hardware"
+    ],
+    "translation_ids": [
+      "zh-hardware"
+    ],
+    "source": "We demonstrate successful sim-to-real transfer on the humanoid robot Digit.",
+    "translation": [
+      "论文展示了学习策略成功迁移至 Digit 实机。"
+    ],
+    "notes": ""
+  }
+]

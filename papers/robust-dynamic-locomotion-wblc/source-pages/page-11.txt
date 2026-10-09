@@ -1,0 +1,57 @@
+JOURNAL OF LATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2015                                                                                      11
+
+
+
+
+
+Fig. 13.  Details of push recovery given various external forces. In this test we demonstrate the ability of Valkyrie to recover from pushes of various
+magnitudes and directions. In (a), Valkyrie’s feet collide with each other, but the planner ﬁnds another path that allows it to recover.
+
+
+where,                                              To ﬁnd the dynamics,  ˙x = f(x), which will lead to the
+                                                             switching state solution, let us remove the t term by plugging
+         r   g                                Eq. (38) into Eq. (35).
+           ω =                    apx + b,
+                                            + ω˙x −px       2A                  1                                1                                                     x = Ax                                                 + B                                                          + px      (39)         A =                       (x0 −px) +                                                   ˙x0  ,            (36)                                                        2A                                                                       x + ω˙x −px                  2                         ω
+
+                  1
+         B =                       (x0 −px) −1 ˙x0  .
+                  2          ω                                                                   1                                                      −px −˙x ) =   2AB˙x               (40)Note  that  this equation  is  the same  for  the y  direction.                2(x      ω   x + ω −px
+Based on Eq. (35), we can ﬁnd an analytical solution for                                             ˙x  2
+                                                                  (x −px)2 −    = 4AB                 (41)
+PSP, summarized  in Algorithm  2.   x1, y1,  xapex,2, and                    ω
+xswitch are vector quantities corresponding to the variables
+(x1, ˙x1), (y1, ˙y1), (xapex,2, ˙xapex,2), and (xswitch, ˙xswitch).  By performong some algebra we get,
+Let us focus on obtaining the step switching time. We can
+                                                                                              ˙x2 = ω2((x −px)2 −4AB),
+                                                                                                                        (42)
+ Algorithm 2: Computation of tswitch, py                                                                                              ˙x2 = ω2 (x −px)2 −(x0 −px)2 + ˙x20,
+  Input:  x1, y1, px, ˙xapex, ˙yapex
+  Result:  (tswitch, py)
+                                                      which yields,
+  xswitch ←Find_Switching_State(x1, px, ˙xapex) ;
+                           // Eq.(43), (44)        r g
+                                                                                                         ˙x = ±                                                                         (x −px)2 −(x0 −px)2 + ˙x20.     (43)   tswitch ←Get_Time(x1, xswtich) ;     // Eq.(38)                                                           h
+  tapex ←Get_Time(xswitch, px, xapex) ; // Eq.(38)
+                                                       Given two phase trajectories associate with consecutive walk-
+  yswitch ←GetState(y1, tswitch) ;     // Eq.(35)
+                                                              ing steps, px,1 and px,2 and assuming the robot walks forward,
+  py ←Find_Py(yswitch, ˙yapex, tapex) ;  // Eq.(45)                                                                                      i.e. ˙xswitch is positive, we calculate the phase space intersec-
+                                                                    tion point via continuity of velocities from Eq. (43):
+
+easily manipulate Eq. (35) to analytical solve for the time
+                                                                1    C
+variable,                                                             xswitch =        + (px,1 + px,2)
+                                                                2  px,2 −px,1
+                   1                                                                                                              ˙x20,2 −˙x20,1
+              x +    ˙x = 2Aeωt + px,                 C = (x0,1 −px,1)2 −(x0,2 −px,2)2 +
+                ω                                                                      ω2
+                                                         (37)                                                           (44)
+                   1
+              x +    ˙x −px = 2Aeωt,
+                ω                                        We can now ﬁnd the step switching time by plugging the com-
+                                                           puted switching position into Eqs (43) and (38). In addition,which renders
+                                             we can obtain the timing at the apex velocity from Eq. (38).
+                                  1                        The ﬁnal step is to ﬁnd the y directional foot placement. We                  1    x + ω ˙x −px
+                    t =   ln                         .             (38)   ﬁrst calculate yswitch by pluggin tswitch into the y directional
+              ω       2A

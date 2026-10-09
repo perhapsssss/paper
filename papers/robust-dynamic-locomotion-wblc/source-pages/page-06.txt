@@ -1,0 +1,61 @@
+JOURNAL OF LATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2015                                                                                       6
+
+
+                                                                  task than body rotational tasks as we will soon see. In addition,
+                                                        sometimes it is not possible to simultaneously fulﬁll linear and
+                                                              angular momentum speciﬁcations. For that reason, we speciﬁc
+                                       CoM behavior as a hard constraint while relaxing angular
+                                                                behavior, i.e.
+                                                        min F⊤r QFr + ∥Fdcm,ang −WangFr∥2
+                                                                      Fr
+
+                                                                  Subject to.  µ|Fr,z| ≥|Fr,x|                       (14)
+                                                                                µ|Fr,z| ≥|Fr,y|
+                                                           Fdcm,lin −WlinFr = 0
+                                                      where Fdcm,lin and Fdcm,ang are the desired linear and angular
+                                                                    parts of the CM, µ represents a friction coefﬁcient related to
+                                                                 the contact surfaces, Q is a weighting matrix, and Wang and
+                                                  Wlin are mappings from reaction forces to angular and linear
+                                                  momenta behaviors. Based on the results of this optimization,
+                                                        Fr, the desired value of the CAM task can be calculated as
+                                                                 follows:
+                                                                 Icm¨xdcm = Fdcm =  Fdcm,lin  WangFr  ⊤,      (15)
+
+                                                      where Icm  is a spatial inertial term. Notice that the term
+                                            WangFr might be different than Fdcm,ang since the desired
+                                                              angular behavior might violate friction cone constraints. From
+                                                                 the above equation, we extract the desired CM acceleration
+                                               command ¨xdcm for usage in the controller hierarchy. MoreFig. 7.  Block Diagram of the Proposed Whole-Body Locomotion Con-
+troller. In WBLC, motion commands are compounded as joint accelerations   concretely, ¨xdcm =  ¨xdCoM αdang  , where the ﬁrst term within
+based on null-space projection methods. The CM task speciﬁcation is usd to   the parenthesis is the desired CoM acceleration and the sec-
+compute reaction forces via QP optimization including unilateral contacts and
+                                                     ond term is the desired angular acceleration. Both of thesefriction cone constraints. The computed joint acceleration and reaction forces
+are used to sove for torque commands, which are the ﬁnal output of WBLC.  commands are used separately in the hierarchy deﬁned in Eq.
+                                                                           (9), to produce the joint acceleration command ¨q[task] which
+                                                                    in turn yields ¨qd via Eq. (12). Plugging this last term into
+B. Optimizing Reaction Forces of Underactuated Robots                                                          Eq. (11) we obtain
+  Based on the desired joint acceleration given in (Eq. (9)),
+                               A  ¨q[task] + Nn|prec(n)¨qres +b+g+J⊤r Fr = U ⊤τ, (16)WBLC ﬁnds torque commands via the following equation:
+                                                      which can be written in matrix form as
+       A(q)¨qd + b(q, ˙q) + g(q) + J⊤r Fr = U ⊤τ,    (11)
+                                                 ⊤                   τ
+where q ∈Rn+6 and b(q, ˙q) and g(q) are the joint space      U    −ANn|prec(n)      ¨qres  = τ[task],      (17)
+coriolis/centrifugal and gravity terms, respectively. Fr and Jr
+                                                      where we have deﬁned the termrepresent the reaction forces and the corresponding contact
+Jacobian. τ ∈Rn and U ⊤∈R(n+6)×(n)  represent the                 τ[task] ≜A¨q[task] + b + g + J⊤r Fr.        (18)
+actuator torque commands and the selection matrix mapping
+actuated torque to the ﬂoating base dynamics. Note that ¨qd is  We now have an underdetermined matrix system which can
+chosen as,                                               be solved via pseudo inversion as
+                  ¨qd = ¨q[task] + Nn|prec(n)¨qres,           (12)          τ        ⊤             +                                          = U    −ANn|prec(n)     τ[task]     (19)
+                                                                                     ¨qreswith
+              Nn|prec(n) = Nprec(n)Nn|n−1           (13)  where (.)+ represents the Moore-Penrose pseudo inverse op-
+                                                                      eration.where ¨qres is a residual joint acceleration command.
+  To ﬁnd the reaction forces Fr, we specify a centroidal
+                                                                         IV. TIME DERIVATIVE OF JACOBIANmomentum (CM) operational task. A CM task consists of
+linear and angular momenta portions. The linear part, corre-    The ability to compute efﬁciently the time derivative of
+sponds to the robot’s CoM behavior, Fcm,lin, and is typically   Jacobian operators for fast operational space control has been
+used for locomotion planning. On the other hand, the angular   overlooked. However it plays an important role on robustifying
+behavior, the so-called CAM, Fcm,ang, is typically set to zero   fast movements. Fig.8 shows that the tracking performance of
+value. Setting the angular task to zero creates conﬂict with   a simple serial manipulator is signiﬁcantly enhanced by using
+other tasks, such as body rotational tasks. We circumvent this   the term ˙J ˙q via Operational Space Control (OPC), where J
+problem by projecting angular behavior as a lower priority    is the Jacobian of the end effector and ˙q is the vector of joint

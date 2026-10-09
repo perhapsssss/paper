@@ -1,0 +1,7 @@
+JOURNAL OF LATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2015                                                                                      15
+
+
+
+[45] Y. Abe, M. Da Silva, and  J. Popovi´c, “Multiobjective control with
+      frictional contacts,” in ACM SIGGRAPH/Eurographics symposium on
+     Computer animation.  Eurographics Association, 2007, pp. 249–258.

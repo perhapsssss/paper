@@ -1,0 +1,74 @@
+we denote as Rbox:                                     D. Skill Transitions
+
+              rbox height = ∥pbox −[0.4, 0, hcmd]∥                Once we have all 5 necessary box loco-manipulation skills,
+                                              we need to connect them together in order to achieve the full              rbox orient = |Φbox| + |Θbox|
+                                               left                 right                       task. Through out execution, we will transtion from one skill
+              rbox force = ∥F hand,box∥+ ∥F hand,box∥                 to another, and the policies need to be able to handle such
+              rhand roll = |Φlefthand| + |Φrighthand|                      a transition. Fig. 2 shows the allowed transitions between
+                                                                   different policies. Using this we can create a workflow in
+There is also an additional termination condition. The box
+                                                      which one policy is used to generate an initial state distribution
+locomotion policy will always be initialized with a box already
+                                                           with which we can use to train the next skill.
+in the hands, and it is not allowed to lose contact with the
+                                                 More specifically, we first train a regular walking policy.
+box else the training episode will terminate.
+                                       We then use this to generate many low-speed states fromDomain Randomization. The regular locomotion policy uses
+                                                    which we want to transition to standing from. These form
+only the base dynamics randomization described in Section III.
+                                                               the initial state distribution for training the standing policy.For the box locomotion policy, similar to the box pickup
+                                        We can then use the standing policy to generate intial statespolicies, there is randomization to the policy’s box mass
+                                                                   for the box pickup policy and so on.(±0.5kg) and dimension (±5cm) input.
+                                                   To ensure smooth transitions between policies, we also
+C. Standing Policies                                               linearly interpolate between the two policies’ actions over 10
+  We want to train standing policies to transition from    timesteps. This action “warmup” is applied during training
+walking to static standing states. Since the standing policy   as well, and so during initial state distribution generation we
+only has the goal of standing still, there is no c input to the   save the last applied action along with the robot state.
+standing policy and it only receives the robot state s.
+  The standing box policy has the same goal and learning                  V. SIMULATION RESULTS
+setup as the normal standing policy, with only minor mod-
+                                          We first conduct quantitative evaluations for the Digit model
+ifications to the reward. Since in this case there is a box
+                                                                    in the MuJoCo simulator. Each evaluation averages over 10K
+that we would like to control, the command input c for the
+                                                           episodes using the same episode generation approach as
+standing box policy includes the box dimensions, mass, and
+                                                              described for training. For example, for the evaluation of the
+a box height command.
+                                              PICKUP policy we randomly sample box pose, mass, size,
+Scenario Distribution. At the start of each training episode
+                                                      and target location.
+the robot  is  initialized to a random walking  state (see
+                                                          Overall Policy Performance. For each of the 5 learned
+Section IV-D for more details). For the box standing policy
+                                                                    policies we consider an episode a success if: 1) the robot does
+the box height command is also randomized.
+                                                              not fall over, and 2) the box remains in the robot’s hands at the
+Reward Function. The reward function consists of the
+                                                       end of the episode for behaviors that involve the box. Further,
+following terms (in addition to Rstand and the usual regulator
+                                                                    for behaviors that involve the box, we also measure the error
+reward Rreg):
+                                                                  for successful episodes, which is the distance between the
+             rbase vel = ∥vbase∥                                          final position of the box and the commanded target position of
+              rheight = |hbase −0.9|                                 the box. Table IV records the success rate and error for each
+                                                             of the policies. Overall we see that the policies all achieve
+           rarm = ∥pleftarm −[0.15, 0.3, −0.1]∥+                                                          a high success rate and also produce relatively small errors.
+                      ∥prightarm −[0.15, −0.3, −0.1]∥                These results show that the policies are all quite robust to the
+              rstance width = |(pyleftfoot −pyrightfoot ) −0.385|             randomization of the scenario distribution and the transition
+                                                                     starting states that they will typically be initiated in.
+              rstance x = |pxleftfoot −pxrightfoot |                                                         Limits of PickUp Policy. We also conducted additional
+Note that here pleft\rightarm    denotes the position of the arms in the   simulation experiments for our most complex full-body
+torso’s frame. There is also a sparse reward penalty of −0.1   behavior, PickUp. First, we evaluated its performance outside
+is there is a self collision. The training episode terminates if   of the training distribution of box parameters. To do this
+the robot has fallen over or if either foot is off the ground  we performed an incrementally increasing search for the
+after 100 policy timesteps.                          maximum box mass, size, and starting pose that the policy
+  The box standing policy follows the same reward function   can successfully pickup. In each test, only one parameter
+with the addition of the box reward Rbox described above.   type is varied at a time with all other box parameters kept at
+The termination conditions are the same as well, with an    the mean value of the training distribution. In particualar, we
+additional termination if either hand loses contact with the   turned domain randomization off and continually incremented
+box.                                                          the particular parameter under test until a pickup failure
+Domain Randomization. Like the locomotion policies, the   occured. Section V shows that the learned PickUp policy
+regular standing policy use only the base dynamics random-   generalizes quite well outside of the training distribution and
+ization while the box standing policy has randomization to    is able to pickup boxes much larger and heavier than those
+the box mass (±0.5kg) and dimension (±5cm) input.               it saw during training.

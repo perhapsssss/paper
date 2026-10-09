@@ -1,0 +1,65 @@
+JOURNAL OF LATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2015                                                                                       4
+
+
+ Algorithm 1: Actor-Critic with Eligibility Traces
+  Input: ˆv(s, w), ∀s ∈S, w ∈R18×30×56+1                                                                                                                          min      max
+  Input: π(a|s, θ), ∀a ∈A, s ∈S, θ ∈R(18×30×56+1)×6
+                                                                                                                                                               weighted                                                                                                                                                                                                                    ......    connections                                         min      max  Result: θ, w
+   Initialize policy weights θ and state-value weights w                  Input layer                                                                                       Action
+                                                                                                                                                                                        Bias                                                        min      max
+   while (variances of policy is large) do                                                                             node                  Output layer                           Truncated
+     Randomly pick s in S                                                                      Hiddenradial basislayerfunctionof Gaussiannodes                                          normal distribution
+     eθ ←0 (eligibility trace of policy parameters)
+    ew ←0 (eligibility trace of value parameters)               Fig. 5.   Radial Basis Function Neural Network for Walking Policy
+                                                                          Representation. Outputs of the neural network are means and standard
+      I ←1                                                                 deviations of each action value. The truncated normal distributions deﬁned
+      while (s is not terminal) do                               by the outputs are used to stochastically pick actions.
+       a ∼π(·|s, θ)
+            s′, R ←T(s, a)                                                                     Fig. 5 shows that outputs of the RBF network are means
+         δ ←R + γˆv(s′, w) −ˆv(s, w)                                                       and standard deviations of truncated normal  distributions,
+       ew ←λwew + I∇wˆv(s, w)                         π(a|s, θ). The range of  the  distributions  are  selected by
+        eθ ←λθeθ + I∇θ log π(a|s, θ)                      considering the desired walking speed and step length limits
+     w ←w + βδew                                                               as follows:
+       θ ←θ + αδeθ
+                                                                                                                    · 0.1 ≤px ≤0.5 (m),         I ←γI
+         s ←s′                                                                                            · 0.03 ≤˙xapex ≤0.37 (m/s),               (2)     end
+  end                                                                                                           · −0.25 ≤˙yapex ≤0.25 (m/s).
+
+                                                   The network’s outputs are linearly weighted by θ; thus, the
+                                                          purpose of RL is to ﬁnd the weights θ given candidate actions
+                                                                      that minimized the desired cost.
+                                                     The instantaneous reward is deﬁned by the forward velocity
+                                                                    error and lateral step size error:                    Phase               Linear
+                    Space               Inverted
+                                   R = −(˙xnomapex −˙xapex)2 −15×(pnomy   −py)2 −(˙yapex)2. (3)                      Planner           Pendulum
+
+                                                   The set target for the learning process is to achieve recovery
+                                                             behaviors that maintain a straight forward direction, ˙yapex =
+Fig. 4.  Transition Function. The transition function relies on two models:
+PSP and LIPM. Given an apex state and a considered action, PSP computes  0 while keeping a nominal lateral directional step size. We
+step timing and location information that serve as inputs to the LIPM model.   choose ˙xnomapex = 0.2m/s and pnomy  = 0.3m. The reward comes
+Then, LIPM solves for the next apex state based on the given state and the  from the transition function described before, given current
+provided inputs.
+                                                        apex and action states selected from the truncated distributions.
+                                                                                  If the next predicted apex state incurs a terminal condition,
+                                                                 the transition function gives a negative reward of −5.0, andAlgorithm 2 the process of ﬁnding the switching times and
+                                                                 the process terminates and starts a new iteration. The set ofthe next apex states is explained in detail.
+                                                                  safe conditions (i.e. opposite to the terminal conditions) is the
+  The next item, ˆv(s, w), corresponds to the value function -
+                                                                    intersection of the following predicates:
+similar to the cost-to-go function in Dynamic Programming.
+We store its learned values using a radial basis function (RBF)                                 · tapex > 0.12 (s),
+neural network [19]. The network uses a three-dimensional
+                                                                                                                            · tswitch > 0.12 (s),                   (4)input vector consisting of the CoM apex state.
+                                                                                                                            · 0.1 < py < 0.5 (m),
+                     · −0.14 ≤yapex ≤0.2 (m),
+                                                      which reﬂect the ability of the robot to swing its legs and the
+                     ·   0.03 ≤˙xapex ≤0.61 (m/s),             (1)                                                                          lateral step length. Notice that we do not include a predicate
+                     · −0.55 ≤˙yapex ≤0.55 (m/s).               about the sagittal step length because it is already bounded by
+                                                                 the allowable action range. The learning process ends when the
+The hidden layer consists of a bias term and 18 × 30 × 56   variance of the learned policy becomes small enough (< 0.07
+Gaussian functions with centers on a grid with 2cm spacing   units in our case). The usual number of iterations required to
+along each input dimension. The policy function also consists   complete the learning process is about 30,000, and the process
+of an RBF neural network but a little different from the value   usually takes about 1 min to compute on a dual-core, 3.0
+function because of actions are chosen based on an stochastic  GHz, Intel i7 processor thanks to the speed of our analytic
+evaluation.                                        PSP method.

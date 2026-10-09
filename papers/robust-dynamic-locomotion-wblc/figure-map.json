@@ -1,0 +1,106 @@
+[
+  {
+    "figure": 1,
+    "page": 2,
+    "path": "assets/figures/fig-01.png",
+    "caption_id": "fig-01-caption",
+    "caption_zh": "Valkyrie 实机与物理仿真模型。",
+    "crop_status": "由原 PDF 页面裁出图体，图注另行翻译"
+  },
+  {
+    "figure": 2,
+    "page": 2,
+    "path": "assets/figures/fig-02.png",
+    "caption_id": "fig-02-caption",
+    "caption_zh": "PIPM 和 CoM 多步相图。",
+    "crop_status": "由原 PDF 页面裁出图体，图注另行翻译"
+  },
+  {
+    "figure": 3,
+    "page": 3,
+    "path": "assets/figures/fig-03.png",
+    "caption_id": "fig-03-caption",
+    "caption_zh": "相空间规划器计算切换和侧向落脚位置。",
+    "crop_status": "由原 PDF 页面裁出图体，图注另行翻译"
+  },
+  {
+    "figure": 4,
+    "page": 4,
+    "path": "assets/figures/fig-04.png",
+    "caption_id": "fig-04-caption",
+    "caption_zh": "PSP 与 LIPM 转换函数。",
+    "crop_status": "由原 PDF 页面裁出图体，图注另行翻译"
+  },
+  {
+    "figure": 5,
+    "page": 4,
+    "path": "assets/figures/fig-05.png",
+    "caption_id": "fig-05-caption",
+    "caption_zh": "行走策略 RBF 神经网络。",
+    "crop_status": "由原 PDF 页面裁出图体，图注另行翻译"
+  },
+  {
+    "figure": 6,
+    "page": 5,
+    "path": "assets/figures/fig-06.png",
+    "caption_id": "fig-06-caption",
+    "caption_zh": "学习策略的连续步态相图。",
+    "crop_status": "由原 PDF 页面裁出图体，图注另行翻译"
+  },
+  {
+    "figure": 7,
+    "page": 6,
+    "path": "assets/figures/fig-07.png",
+    "caption_id": "fig-07-caption",
+    "caption_zh": "WBLC 控制框图。",
+    "crop_status": "由原 PDF 页面裁出图体，图注另行翻译"
+  },
+  {
+    "figure": 8,
+    "page": 7,
+    "path": "assets/figures/fig-08.png",
+    "caption_id": "fig-08-caption",
+    "caption_zh": "包含与不包含 Jdot qdot 的跟踪比较。",
+    "crop_status": "由原 PDF 页面裁出图体，图注另行翻译"
+  },
+  {
+    "figure": 9,
+    "page": 7,
+    "path": "assets/figures/fig-09.png",
+    "caption_id": "fig-09-caption",
+    "caption_zh": "多自由度开链机构。",
+    "crop_status": "由原 PDF 页面裁出图体，图注另行翻译"
+  },
+  {
+    "figure": 10,
+    "page": 8,
+    "path": "assets/figures/fig-10.png",
+    "caption_id": "fig-10-caption",
+    "caption_zh": "不同层级下躯干摇摆、姿态误差和力矩。",
+    "crop_status": "由原 PDF 页面裁出图体，图注另行翻译"
+  },
+  {
+    "figure": 11,
+    "page": 9,
+    "path": "assets/figures/fig-11.png",
+    "caption_id": "fig-11-caption",
+    "caption_zh": "动态行走方向切换。",
+    "crop_status": "由原 PDF 页面裁出图体，图注另行翻译"
+  },
+  {
+    "figure": 12,
+    "page": 10,
+    "path": "assets/figures/fig-12.png",
+    "caption_id": "fig-12-caption",
+    "caption_zh": "520 N 扰动下的恢复。",
+    "crop_status": "由原 PDF 页面裁出图体，图注另行翻译"
+  },
+  {
+    "figure": 13,
+    "page": 11,
+    "path": "assets/figures/fig-13.png",
+    "caption_id": "fig-13-caption",
+    "caption_zh": "不同推力下的恢复。",
+    "crop_status": "由原 PDF 页面裁出图体，图注另行翻译"
+  }
+]

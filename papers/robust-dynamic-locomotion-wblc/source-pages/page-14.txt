@@ -1,0 +1,80 @@
+JOURNAL OF LATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2015                                                                                      14
+
+
+[grant #N000141512507] and NASA Johnson Space Center,    [24]  S. Caron, Q. Cuong Pham, and Y. Nakamura, “Leveraging Cone Double
+NSF/NASA NRI Grant [grant #NNX12AM03G].                        Description for Multi-contact Stability of Humanoids with Applications
+                                                                                           to Statics and Dynamics,” in Robotics: Science and Systems.  Robotics:
+                                                                               Science and Systems Foundation, Jul. 2015.
+                 REFERENCES                                 [25] D. Kim, Y. Zhao, G. Thomas, B. R. Fernandez, and L. Sentis, “Stabi-
+                                                                                             lizing Series-Elastic Point-Foot Bipeds Using Whole-Body Operational
+ [1] Y. Zhao and L. Sentis, “A three dimensional foot placement planner for        Space Control,” IEEE Transactions on Robotics, vol. 32, no. 6, pp. 1362–
+     locomotion in very rough terrains,” in 12th International Conference on        1379, 2016.
+    Humanoid Robots (Humanoids), 2012, pp. 726–733.                      [26]  J. Morimoto and C. Atkeson, “Learning Biped Locomotion,” IEEE
+ [2]  P. MacAlpine and P. Stone, “Using dynamic rewards to learn a fully         Robotics & Automation Magazine, vol. 14, no. 2, pp. 41–51, 2007.
+     holonomic bipedal walk,” in AAMAS Adaptive Learning Agents (ALA),    [27] N. Sugimoto and J. Morimoto, “Phase-dependent trajectory optimiza-
+      Valencia, 2012.                                                                     tion for CPG-based biped walking using path integral reinforcement
+ [3] C. Graf, A. H¨artl, T. R¨ofer, and T. Laue, “A robust closed-loop gait          learning,” in 13th International Conference on Humanoid Robots (Hu-
+      for the standard platform league humanoid,” in A workshop of the 2009         manoids).  IEEE, 2011, pp. 255–260.
+    IEEE-RAS Intl. Conf. On Humanoid Robots (Humanoids 2009), 2009.    [28] M. Missura and S. Behnke, “Online learning of foot placement for bal-
+ [4]  in Dynamic Walking, Mariehamn, Finland, June 4-9 2017. [Online].        anced bipedal walking,” in 14th International Conference on Humanoid
+      Available: http://ruina.tam.cornell.edu/DynamicWalking2017                  Robots (Humanoids).  IEEE, 2014, pp. 322–328.
+ [5] A. Herdt, N.  Perrin, and  P.-B. Wieber, “Walking without thinking    [29] R. Tedrake, T. W. Zhang, and H. S. Seung, “Stochastic policy gradient
+     about it,” in International Conference on Intelligent Robots and Systems         reinforcement learning on a simple 3D biped,” in International Con-
+     (IROS).  IEEE, 2010, pp. 190–195.                                            ference on Intelligent Robots and Systems (IROS).   IEEE, 2004, pp.
+ [6]  P. Kryczka,  P. Kormushev, N. G. Tsagarakis, and D. G. Caldwell,        2849–2854 vol.3.
+     “Online regeneration of bipedal walking gait pattern optimizing footstep    [30]  T. Erez, K. Lowrey, Y. Tassa, V. Kumar, S. Kolev, and E. Todorov, “An
+     placement and timing,” in 2015 IEEE/RSJ International Conference on          integrated system for real-time model predictive control of humanoid
+      Intelligent Robots and Systems (IROS).  IEEE, 2015, pp. 3352–3357.           robots,” in 13th International Conference on Humanoid Robots (Hu-
+ [7] M. Khadiv, A. Herzog, S. A. A. Moosavian, and L. Righetti, “Step         manoids).  IEEE, 2013, pp. 292–299.
+     timing adjustment: A step toward generating robust gaits,” in 2016 IEEE-    [31] E. C. Whitman and C. G. Atkeson, “Control of a walking biped using
+    RAS 16th International Conference on Humanoid Robots (Humanoids).         a combination of simple policies,” in 9th International Conference on
+     IEEE, 2016, pp. 35–42.                                            Humanoid Robots (Humanoids).  IEEE, 2009, pp. 520–527.
+ [8] L. Sentis, “Synthesis and control of whole-body behaviors in humanoid    [32] L. Sentis, J. Petersen, and R. Philippsen, “Implementation and stability
+     systems,” Ph.D. dissertation, Stanford, 2007.                                     analysis of prioritized whole-body compliant controllers on a wheeled
+ [9]  T. Koolen,  J. Smith, G. Thomas, S. Bertrand,  J. Carff, N. Mertins,        humanoid robot in uneven terrains,” Autonomous Robots, vol. 35, no. 4,
+     D. Stephen, P. Abeles,  J. Englsberger, S. Mccrory et  al., “Summary         pp. 301–319, 2013.
+      of team ihmc’s virtual robotics challenge entry,” in 13th International    [33]  F. Flacco, A. De Luca, and O. Khatib, “Motion control of redundant
+     Conference on Humanoid Robots (Humanoids).  IEEE, 2013, pp. 307–         robots under joint constraints: Saturation in the null space,” in IEEE
+     314.                                                                             International Conference on Robotics and Automation (ICRA).  IEEE,
+[10]  S. Feng, E. Whitman, X. Xinjilefu, and C. G. Atkeson, “Optimization-        2012, pp. 285–292.
+     based full body control for the darpa robotics challenge,” Journal of    [34]  J. Lee, N. Mansard, and J. Park, “Intermediate desired value approach
+      Field Robotics, vol. 32, no. 2, pp. 293–312, 2015.                                for task transition of robots in kinematic control,” IEEE Transactions
+[11]  S. Kuindersma, F. Permenter, and R. Tedrake, “An efﬁciently solvable        on Robotics, vol. 28, no. 6, pp. 1260–1277, 2012.
+      quadratic program for stabilizing dynamic locomotion,” in International    [35] O. Kanoun,  F. Lamiraux, and P.-B. Wieber, “Kinematic control of
+     Conference on Robotics and Automation (ICRA).   IEEE, 2014, pp.         redundant manipulators: Generalizing the task-priority framework to
+     2589–2594.                                                                       inequality task,” IEEE Transactions on Robotics, vol. 27, no. 4, pp.
+[12] L. Saab, O. E. Ramos, F. Keith, N. Mansard, P. Soueres, and J.-Y.        785–792, 2011.
+     Fourquet, “Dynamic whole-body motion generation under rigid contacts    [36]  S. Moe, A. R. Teel, G. Antonelli, and K. Y. Pettersen, “Stability analysis
+     and other unilateral constraints,” IEEE Transactions on Robotics, vol. 29,          for set-based control within the singularity-robust multiple task-priority
+     no. 2, pp. 346–362, 2013.                                                       inverse kinematics framework,” in 54th Annual Conference on Decision
+[13] B. Siciliano and  J.-J. Slotine, “A general framework for managing        and Control (CDC).  IEEE, 2015, pp. 171–178.
+     multiple tasks in highly redundant robotic systems,” in 5th International    [37] M. Johnson, B. Shrewsbury, S. Bertrand, T. Wu, D. Duran, M. Floyd,
+     Conference on Advanced Robotics (ICAR), ’Robots in Unstructured           P. Abeles, D. Stephen, N. Mertins, A. Lesman et al., “Team ihmc’s
+     Environments’.  IEEE, 1991, pp. 1211–1216.                                  lessons learned from the darpa robotics challenge  trials,” Journal of
+[14] L. Sentis and O. Khatib, “Synthesis of whole-body behaviors through         Field Robotics, vol. 32, no. 2, pp. 192–208, 2015.
+      hierarchical control of behavioral primitives,” International Journal of    [38] B. J. Stephens and C. G. Atkeson, “Dynamic balance force control for
+    Humanoid Robotics, vol. 2, no. 04, pp. 505–518, 2005.                       compliant humanoid robots,” in Intelligent Robots and Systems (IROS),
+[15] N. Mansard, O. Khatib, and A. Kheddar, “A uniﬁed approach to integrate        2010 IEEE/RSJ International Conference on.  IEEE, 2010, pp. 1248–
+      unilateral constraints  in the stack of  tasks,” IEEE Transactions on        1255.
+     Robotics, vol. 25, no. 3, pp. 670–685, 2009.                              [39] L. Sentis, J. Park, and O. Khatib, “Compliant control of multicontact
+[16]  J.  Englsberger, C.  Ott, and A.  Albu-Schaffer, “Three-Dimensional        and center-of-mass behaviors in humanoid robots,” IEEE Transactions
+     Bipedal Walking Control Based on Divergent Component of Motion.”        on robotics, vol. 26, no. 3, pp. 483–501, 2010.
+    IEEE Transactions on Robotics, vol. 31, no. 2, pp. 355–368, 2015.        [40] M. Hutter, H. Sommer, C. Gehring, M. Hoepﬂinger, M. Bloesch, and
+[17]  S. Kajita, F. Kanehiro, and K. Kaneko, “Biped walking pattern gen-        R. Siegwart, “Quadrupedal locomotion using hierarchical operational
+      eration by using preview control of zero-moment point,” International         space control,” The International Journal of Robotics Research, vol. 33,
+     Conference on Robotics and Automation (ICRA), vol. 2, pp. 1620–1626         no. 8, pp. 1047–1062, 2014.
+      vol.2, 2003.                                                              [41] O. E. Ramos, N. Mansard, and P. Soueres, “Whole-body motion integrat-
+[18] R. S. Sutton and A. G. Barto, “Reinforcement learning: An introduction,”         ing the capture point in the operational space inverse dynamics control,”
+     2011.                                                                               in 14th International Conference on Humanoid Robots (Humanoids).
+[19] E. C˘alin, “Multidimensional function approximation using neural net-        IEEE, 2014, pp. 707–712.
+     works.”                                                                  [42] M. Mistry,  J. Nakanishi, and S. Schaal, “Task space control with
+[20]  J. Kim, “Lie group formulation of articulated rigid body dynamics.”             prioritization for balance and locomotion,” in International Conference
+[21] M. Khadiv, A. Herzog, S. A. A. Moosavian, and L.  Righetti, “A        on Intelligent Robots (IROS).  IEEE, 2007, pp. 331–338.
+      robust walking controller based on online step location and duration    [43]  J. Carpentier, S. Tonneau, M. Naveau, O. Stasse, and N. Mansard,
+     optimization for bipedal locomotion,” arXiv.org, Apr. 2017.                “A  versatile and  efﬁcient  pattern  generator  for  generalized legged
+[22] M. VUKOBRATOVI´C and B. BOROVAC, “ZERO-MOMENT POINT         locomotion,” in International Conference on Robotics and Automation
+  — THIRTY FIVE YEARS OF ITS LIFE,” International Journal of        (ICRA).  IEEE, 2016, pp. 3555–3561.
+    Humanoid Robotics, vol. 01, no. 01, pp. 157–173, Mar. 2004.             [44] A. Escande, N. Mansard, and P.-B. Wieber, “Hierarchical quadratic
+[23]  J. E. Pratt and R. Tedrake, “Velocity-Based Stability Margins for Fast        programming: Fast online humanoid-robot motion  generation,” The
+     Bipedal Walking,”  in Fast Motions  in Biomechanics and Robotics.         International Journal of Robotics Research, vol. 33, no. 7, pp. 1006–
+      Berlin, Heidelberg: Springer Berlin Heidelberg, 2006, pp. 299–324.            1028, 2014.

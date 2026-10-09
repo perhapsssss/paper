@@ -1,0 +1,61 @@
+JOURNAL OF LATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2015                                                                                       3
+
+
+                                                    (a) Straight Walking     (b) Change the direction
+                                                                                    {b}
+                                                                 {a}
+
+
+
+
+
+                                                                                 {b}
+                                                                           {a}
+
+
+                                                              {b}
+
+                                                         {a}
+
+
+Fig. 3. Phase Space Planner (PSP). (a) shows the method to ﬁnd a switching time and a lateral foot placement position given forward step location and an
+apex velocity. In the sagittal phase plot, we can see the given current CoM state and the apex state uniquely deﬁne switching states     . From an initial state,
+the planner computes the switching and apex times. These two timing values are used to ﬁnd the next step location in the lateral plane. (b) is the process
+to steer the robot’s walking direction. When changing the walking direction, we ﬁrst align the orientation of the next local frame to the direction the robot
+intends to go, and second we project the current CoM state into the next local frame.
+
+
+the inherent directional walking constraints of PSP. PSP gener-  new frame. The original PSP algorithm devised locomotion
+ates effective step switching information using simpliﬁed mod-   trajectories via numerical integration. However, for algorithmic
+els such as the prismatic inverted pendulum model (PIPM). In   speed purposes, the methods presented here assume that the
+Fig. 2, we show phase plots across multiple walking steps of  CoM height  is linear allowing us to exploit an analytical
+the CoM sagittal and lateral phase portraits based on PIPM   solution (see Appendix. A).
+dynamics. In the sagittal plane, the path consists of connected     Considering a one step ahead plan, an initial CoM state,
+parabolas, while in the frontal plane, the walking path follows  and  desired  future  states  [px,  ˙xapex,  ˙yapex]⊤PSP ﬁnds
+semi-periodic parabolas in a closed cycle. For convenience, we   the next step position and timing,  py,   tswitch ⊤. Notice
+will use x for the sagittal plane and y for the frontal plane.     that the walking direction is indicated using apex velocities,
+                                                                                               [˙xapex,  ˙yapex]⊤. We will now see that our formulation of
+A. Phase Space Planner                             PSP makes the RL problem more efﬁcient by reducing the
+  Leading step planning generators, such as Divergent Com-   dimensionality of the learned state variables.
+ponent of Motion [16], ﬁnd CoM paths given step positions
+and  their timing as input information. The ZMP Preview
+Control method [17] has different mechanics but the generated   B. The Reinforcement Learning Problem
+output can be interpreted as ﬁnding the CoM path given step
+                                                 As mentioned before, a central part of our walking method-position and timing input information. In contrast, PSP ﬁnds
+                                                          ology is to achieve robustness via reinforcement learning. Thethe step switching time and lateral foot positions, given sagittal
+                                                             technique we use is the Actor-Critic with Eligibility Tracesfoot positions and apex velocities (Fig. 3). The apex states are
+                                                         method. We summarize this process in Algorithm 1 which isthose at the instant when the sagittal CoM velocity is at its
+                                                        an adaptation [18]. We deﬁne s, as CoM apex states, s ≜minimum; equivalently, they can be considered as states where
+the sagittal CoM position is zero in a local frame attached to    yapex,   ˙xapex,   ˙yapex ⊤. Notice that s does not include the
+the stance foot, i.e. below the CoM sagittal position.            variable xapex because it is assumed to be always zero in the
+  In Fig. 3(a), we can see that the current robot’s CoM state   local frame. We deﬁne actions, a ≜  px,   ˙xapex,   ˙yapex ⊤,
+and the next desired apex state uniquely deﬁne a switching   as input parameters to the PSP process. A transition function,
+state     , a switching time, and an apex time. These timings   T(s, a), computes the next apex state, s′, and the instanta-
+are used to ﬁnd the next  lateral foot position, py,2. Note   neous reward value. In Fig. 4, we show the transition function,
+that the resultant locomotion trajectory is straight forward if   consisting of two stages: 1) ﬁnding step timing and position
+˙xapex is a positive number and ˙yapex = 0. In contrast, the   values via PSP, and 2) computing the next apex state via
+proposed algorithm, applies a simple and elegant modiﬁcation   an analytic solution of the linear inverted pendulum model
+that allows to dynamically steer the biped in any direction   (LIPM). The ﬁrst stage is described in Appendix A and allows
+of walking (see Fig. 3(b)). When we need to turn walking   to ﬁnd tswitch, tapex, and py from the current apex state and
+direction, we re-initialize the orientation of the local frame   chosen action. The second stage, ﬁnds the next apex state using
+{b} to the new direction and project the current state to the   the analytic solution of the CoM dynamics (see Eq. (35)). In

@@ -1,0 +1,62 @@
+                 Body Mass          [−0.2, 0.2]
+
+                       Joint Damping         [−0.5, 2.5]
+
+                 Ground Friction        [−0.3, 0.2]
+
+               Center of Mass Position   [−0.05, 0.05]
+
+TABLE I: Dynamics randomization ranges. All ranges are in
+percentage values, so a range of [−0.2, 0.2] corresponds to a
+range of ±20% of the original value.
+                                                        target position of x       Fig. 3: Example hand position trajectory for a box pickup.
+       px,t     position of x at time t     p∗x,t             at time t         The hands start from the initial robot pose, move to the side
+                                                    contact indicator        of the box (shown in blue), make contact with it, and then
+                  contact force                   between x and y
+     Fx, y                                                  cx, y                                                    (1 if in contact,        bring  it to the target location. In this example the target              between x and y
+                                             0 otherwise)          location is directly above the box.
+    Φx          roll angle of x       Θx        pitch angle of x                                                      and be on the ground or up to 1.3m in the air. The starting
+     vx          velocity of x          ax        acceleration of x       box yaw orientation may be ±22.5◦. The target location is
+                  quaternion
+     q∗x         orientation of x       pix/y/z     x/y/z position of i       randomized within the same range, except the z position of
+                                                               the target will only be above the starting location. The box
+     ut        action at time t         τ             torque
+                                                                   length, width, and height may each be between 20 to 45cm,
+TABLE  II: Definition of state variables used in reward   and the mass may be between 1 to 10kg.
+functions.                                      Reward Function. To train box pickup policies, we take
+in front the robot. In addition, we aim to learn pickup behavior    inspiration from previous work on learning locomotion
+that has smooth, natural motions and timings (e.g. not too fast    policies [5, 23]. Those works described walking through
+or too slow). To define the pickup behavior we break it down    stance and swing phases, in other words specifying how and
+into two phases: 1) a contact phase, where the hands aim to   when the feet should contact with the ground. This general
+make contact with the box, and 2) the lift phase, where the    principal of perscribing contact can be applied to almost
+hands aim to move the box to a target position. The phases   any interaction task, and is the main idea we utilize for our
+are dictated by hand selected times, relative to the start of   reward function. In contrast to locomotion, box pickup is
+the behavior, which is time t = 0. In particular, the contact   a non-periodic behavior and we use a non-periodic clock
+phase ends at time tcontact = 100 and then lift phase ends at    signal with phase reference points tcontact and  tlift to define
+tlift = 175.                                                     the reward.
+  The command input c to the pickup policy consists of: 1)      In particular, the reward function has the form
+box dimensions, mass, and starting pose, 2) the target position
+                                          R = Rtraj + Rbox + Rstand + Rregto move the box, and 3) two phase indicators pcontact and plift,
+which each go linearly from 0 to 1 from the start to end of   where Rtraj rewards hand motion consistent with a box pickup,
+each phase. For ease of hardware testing, we assume that the   Rbox is designed to encourage proper interaction with the
+box pose is only explicitly known at the start of the behavior.   box, Rstand aims to ensure the robot is stably standing, and
+Once the box is picked up and has moved, we approximate    Rreg aims to regulate forces to ensure smoothness and help
+the pose with the average pose of the hands, which avoids                                                                sim-to-real transfer. Below we describe the set of reward
+the need for real-time estimation of box pose. Given that the   terms used to define each of these components noting that
+hands are in contact with the box, it is reasonable to assume    the weights for each term are provided in Table III.
+that the box centroid position is going to be roughly between                                                                                Rtraj rewards being close to the target trajectory over time
+the hands.                                                     and having a hand orientation of zero using the following
+  The action space of box pickup policy differs from the                                                               terms:
+locomotion policies. In particular, the locomotion policies add
+the policy’s action output to a static “neutral” offset. Rather,           rhand pos = ∥plefthand,t −p∗lefthand,t∥+ ∥prighthand,t −p∗righthand,t∥
+for box pickup we found that adding the action output to                                                                               rhand roll = |Φlefthand| + |Φrighthand|
+the current motor positions resulted in faster learning (see
+Section V). This is likely due to the much larger variance   To describe the desired hand motions, we construct a hand
+in motion profile of the pickup behavior from the neutral    position trajectory by choosing three goal hand positions,
+position compared to locomotion behavior.                   along with a timestamp for each, and linearly interpolate
+Scenario Distribution. At the beginning of each training   between them as shown in Figure 3. For the contact phase,
+episode, we spawn a box in a random location in front of the    the hands should first be out along each side of the box, and
+robot. The task is then to move the hands to the box, pick it   then eventually actually touching the box along it’s transverse
+up, and move it to a randomized target location above the    faces. Since tcontact is 100 timesteps (2 seconds), we design
+table. The starting box location may be randomized within 35    the hands to be 10cm besides the box (goal position 1) at 1.5
+to 50cm in front of the robot, ±30cm to the side of the robot,   seconds and then at 2 seconds the hands should be on the

@@ -1,0 +1,62 @@
+JOURNAL OF LATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2015                                                                                       9
+
+
+    ·  ¨x6 ∈R28: Full Joint Posture
+Most tasks above are self-explanatory. We introduce a partial
+joint posture consisting on keeping the initial joint positions
+for  all robot joints except for the shoulder pitch and  roll,
+and the knee pitch. This task is used for the sole purpose of
+testing performance when multiple tasks conﬂict. In particular,
+the partial joint posture conﬂicts with the CAM task within
+the above task set and viceversa. For our test, we use two
+hierarchies:
+      H1 = {¨x1 →¨x2 →¨x3 →¨x4 →¨x5 →¨x6}
+                                                         (32)
+      H2 = {¨x1 →¨x3 →¨x4 →¨x5 →¨x2 →¨x6}
+The second hierarchy, H2, is more appropriate than the ﬁrst
+one, H1  to achieve accurate control of the body shaking
+(orientation) task. This is accomplished by assigning higher
+priority to the body orientation task and moving backwards the
+CAM task. As shown in Fig. 10 (a), changing the hierarchy
+levels cause different whole body motions. Fig. 10 (b) shows
+the body orientation task error for the two task hierarchies.
+The body orientation performance from H2 is better than that
+of H1. This can be seen in the interval from 4.0 s to 4.5 s
+in Fig. 10 (b). In addition, the different hierarchies cause not
+only different movements but also different torque proﬁles. As
+shown in Fig. 10 (c), higher torques are needed for H2 than
+for H1.
+
+
+B. Dynamic Walking with Directional Change
+
+  Walking can be broken down into three phases: double
+contact, right foot contact, and left foot contact. To represent
+these phases we deﬁne the following task hierarchy in WBLC:
+    ·  ¨x1 ∈R3: Linear CoM position
+    ·  ¨x2 ∈R3: Pelvis Orientation                                         Fig. 11. Continuous walking directional change Valkyrie shows a complex
+    ·  ¨x3 ∈R3: Body Orientation                                  dynamic walking pattern involving changing walking direction. (a) shows a
+    ·  ¨x4 ∈R3: (for the single contact phases) Foot Orientation    topmappedview tooftheValkyrienext localand itsframe.walkingLocalpath.frames(b) Shosrotatehowwiththetherobot’sdesiredCoMwalkingstate
+    ·  ¨x5 ∈R3: (for the single contact phases) Foot Position       direction. For each step, the stance foot becomes the origin of the local frame,
+    ·  ¨x6 ∈R6: Neck and Torso Joint Posture                     and the orientation of the frame is aligned with the desired walking direction.
+    ·  ¨x7 ∈R3: Centroidal Angular Momentum                  Thethe plannerpreviousﬁndsswitchingthe footCoMplacementstate is projectedwith the newto thestate.current local frame, and
+    ·  ¨x8 ∈R10: Arms Joint Posture
+To produce swing foot trajectories, we deﬁne third degree B-
+splines, which guarantee acceleration continuity. The orien-   C. Push Recovery while Walking
+tation coordinates for the robot’s body, pelvis, and feet are
+                                                     To validate push recovery, we conduct simulated experi-described using quaternions. For each step, these orientation
+                                                       ments under large external disturbances and in various di-tasks are commanded to smoothly switch from the current
+                                                                      rections. Although WBLC  is robust to small deviations offrame to next one. Given  initial CoM states, our locomo-
+                                                                 the CoM trajectory, for external disturbances we rely on thetion planner computes foot positions and their timing while
+                                                               learned recovery policies described in the theory sections.satisfying the desired walking directional changes. In our
+                                            When the norm of the CoM state error,test shown in Fig. 11, Valkyrie takes ﬁrst 12 steps while
+continuously changing its walking direction by 18.8 ◦per step.                                                                             xd −x
+After that, Valkyrie takes 5 forward steps with no directional                 error =                       ,              (33)                                                                                            0.5(˙xd −˙x)
+change. Then, Valkyrie takes another 12 steps while changing
+direction by, −18.8◦per step. The user only speciﬁes the    is over a threshold equal to 0.05 m and for longer than 0.02s,
+walking directions while RL-PSP automatically ﬁnds the foot   our planner computes a new trajectory starting from the current
+positions and their timing using the learned policy. The learned  CoM state. Instead of setting the new CoM control goal to be
+policy consists only on switching states and step locations.   the current (disturbed) CoM state, we have experienced that it
+The desired position, velocity, and acceleration of the CoM    is better to deﬁne a controller goal, xnew, equal to
+are computed with the analytic equation of the LIP model at
+runtime.                                                           xnew = γxd + (1 −γ)x,              (34)

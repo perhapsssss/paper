@@ -1,0 +1,63 @@
+JOURNAL OF LATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2015                                                                                      13
+
+
+of a known stable central patter generated (CPG) walking   reaction forces as inequality  constraints based on solving
+trajectories using RL. However, no focus is given to dealing   a quadratic programming optimization problem with desired
+with large external disturbances. In addition, our focus is on   center of mass trajectories. Treatment of reaction forces as
+the generation of trajectories from scratch without prior stable   inequality constraints in the WBC communities dates back to
+locomotion patterns.                                            the work by [38]. And it showcases one of the weaknesses of
+  In [28], robust walking trajectories to external pushes are   our group’s formulation of WBC. In early versions [39] we
+achieved based on capture point trajectory optimization via   treated reaction forces as equality constraints. Such treatment
+gradient based learning updates. In this work, the capture point   corresponds to bilateral contact constraints, i.e. assuming that
+method is used as an analytic controller to initiate the learning   the ﬂoor contacts are actually rigid anchors. This is obviously
+process with information about foot placement, step-timing,   an inaccurate model. One of the main objectives of this paper
+and ZMP controls. Although the authors also show learning    is to use a realistic unilateral contact model for WBC while
+of push recovery strategies without previous capture point   maintaining one of  its main strengths, efﬁcient prioritized
+generated trajectories, our focus is stronger on autonomously   control.
+learning the locomotion process without reliance on already     Bipedal and quadrupedal walking capabilities have been
+stable walking gaits. As such, we belief our algorithm is able   devised  using WBC.  [40] demonstrated locomotion  of a
+to learn from scratch recovery strategies in a more generic   quadrupedal robot by utilizing hierarchical tasks based on
+sense, for instance to recover from pushes in any direction   least-square problems. The integration of the versatile capture
+while walking. Like ours, autonomous learning of periodic   point (CP) as an operational space of WBC was proposed and
+gaits has been explored before in passive dynamic walkers   controlled either as a constraint or a task for bipedal humanoid
+[29]. Once more, our focus  is on gait generators that can   robots [41]. The robot’s Center of Gravity (CoG) has been used
+produce non-periodic gaits and tolerate large push disturbances   as a task controller for a while, such as in [42]. Walking pattern
+in all directions of motion.                                     generators have been incorporated into WBC in multiple in-
+  The dynamic locomotion community has previously used   stances such as in [43]. During the DARPA robotics challenge,
+online optimization methods instead of RL, such as model pre-   several top participants incorporated WBC’s into their strategy
+dictive control (MPC). The main problem of these approaches   for achieving mobile dexterous capabilities. For instance, high-
+is the high computational  cost. To mitigate  this problem,   level trajectory optimization and low-level optimization with
+researchers have made signiﬁcant efforts to develop efﬁcient   inverse dynamics were integrated into the framework by [10].
+computational processes. [30] used the gradient of a cost    As stated before, during the DRC several humanoid robots
+function to solve the MPC problem efﬁciently. [21] linearized  were controlled via WBC including QP solvers for dealing
+the planning problem by optimizing over one step ahead   with reaction  forces. By introducing QP and task  hierar-
+of time. Our approach relying on learned neural networks   chy (HQP), whole-body motion of humanoid robots could
+replaces the need for complex online computations, enabling   be controlled with the intrinsic reactive advantages of task
+the generation of hundreds of steps in an instant compared   prioritization  [44]. Compared with  projection-based WBC
+to the stepping time scales. [31] proposed a controller for a   algorithms, optimization-based WBC, such as HQP, can in-
+12 DoF biped system by using dynamic programming and a   corporate multiple inequality constraints [12], which are useful
+lookup table that was obtained ofﬂine based on simple models.   for describing contact conditions such as friction cones [45].
+The multiple policies achieved from each simple model were   Overall, optimization-based WBC have been a success for
+combined to control the target system. In contrast, our work   practical applications [9]–[11]. However, their computational
+relies on the generic inverted pendulum locomotion model,   cost remains a challenge, specially  if being considered as
+and a versatile full-humanoid body controller, i.e., WBLC.     models for motion planning, such as model predictive control.
+                                                               Therefore, efﬁciency of our newly proposed whole-body con-
+                                                                                troller, dubbed WBLC, is a key consideration of this paper.
+B. Whole-Body Control
+                                                   To achieve the speed boost, we rely on a projection-base
+ WBC [14] is a family of multi and prioritized task-space   formulation. However, it is difﬁcult to incorporate inequality
+trajectory controllers for humanoid robots that rely on ﬂoating-   constraints into analytical projection-based methods; thus, our
+base dynamic and computed torque commands  as  inputs   goal is to combine both and also to maintain desired task
+to the plant.  It yields asymptotically stable control policies   hierarchy capabilities. The proposed WBLC incorporates an
+for multiple tasks with simultaneous control of operational   efﬁcient QP, the dimension of which depends only on the num-
+forces when needed.  Priorities address resource allocation   ber of contact points, and a joint acceleration level controller
+when two or more  task  trajectories cannot physically be  which only relies on projective operators, thus yielding the
+tracked by the robotic system. It naturally integrates equality   speed efﬁciency that we advocate for.
+constraints such as biarticular transmission constraints [32].
+Other groups have explored richer versions of WBC with
+                                                        ACKNOWLEDGMENT
+inequality constraints such as joint limit avoidance [15], [33],
+[34], collision avoidance [35], and singularity avoidance [36].    The  authors would  like  to thank  the members  of  the
+Several groups used evolved and more  practical versions  Human Centered Robotics Laboratory at The University of
+of WBC such as controllers used in the DARPA Robotics   Texas at Austin for their great help and support. This work
+Challenge of 2013 and 2014. For instance, [9], [37] incorporate  was supported by the Ofﬁce of Naval Research, ONR Grant

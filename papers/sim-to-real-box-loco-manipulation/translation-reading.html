@@ -1,0 +1,97 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f3f2ed"><title>人形机器人箱体移动操作的仿真到现实学习｜中译阅读版</title><script>window.MathJax={tex:{inlineMath:[["$", "$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:true}};</script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><style>
+:root{--ink:#252a31;--muted:#66717f;--accent:#246b73;--paper:#fff;--bg:#f1f3f4;--line:#dce1e4}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.82 system-ui,-apple-system,"Segoe UI",sans-serif}header{position:sticky;top:0;z-index:5;background:#ffffffed;border-bottom:1px solid var(--line);backdrop-filter:blur(8px);padding:10px 18px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}header strong{margin-right:auto;font-size:15px}button,.tool{border:1px solid #b9c5ca;background:white;border-radius:5px;padding:7px 12px;color:var(--ink);cursor:pointer;text-decoration:none;font:inherit;font-size:14px}button.active{background:var(--accent);color:white;border-color:var(--accent)}.layout{display:grid;grid-template-columns:220px minmax(0,860px) 220px;gap:26px;max-width:1400px;margin:24px auto;padding:0 20px;align-items:start}nav,.terms{position:sticky;top:76px;max-height:calc(100vh - 100px);overflow:auto;font-size:14px;line-height:1.55}nav a{display:block;color:#39505b;text-decoration:none;padding:3px 0}nav ul{padding-left:18px}main{background:var(--paper);padding:46px 56px;min-width:0;box-shadow:0 2px 12px #15202a0b}h1,h2,h3{line-height:1.35;color:#1e3038}h1{font-size:30px;margin-top:0}h2{font-size:24px;margin-top:2.2em;border-bottom:1px solid var(--line);padding-bottom:8px}h3{font-size:20px;margin-top:1.7em}p{margin:1em 0}a{color:var(--accent)}figure{margin:1.6em auto;text-align:center}img{max-width:100%;max-height:660px;object-fit:contain;display:block;margin:auto}.math{overflow-x:auto;padding:8px 0}table{border-collapse:collapse;width:100%;display:block;overflow-x:auto}th,td{border:1px solid var(--line);padding:7px}.terms{background:white;padding:14px}.terms h3{margin-top:0}details{border-top:1px solid var(--line);padding:8px 0}summary{cursor:pointer;color:var(--accent)}.parallel{display:none}body.mode-parallel .chinese{display:none}body.mode-parallel .parallel{display:block}.pair{display:grid;grid-template-columns:1fr 1fr;gap:22px;padding:12px 0;border-bottom:1px solid var(--line)}.pair>div{min-width:0;overflow-wrap:anywhere}.pair small{color:var(--muted);display:block;margin-bottom:6px}@media(max-width:1100px){.layout{grid-template-columns:180px minmax(0,1fr)}.terms{display:none}}@media(max-width:720px){.layout{display:block;margin:0;padding:0}nav{display:none}main{padding:24px 18px;box-shadow:none;font-size:16px}header{position:static}.pair{grid-template-columns:1fr;gap:8px}}@media print{header,nav,.terms{display:none!important}body,.layout{background:white;margin:0;padding:0;display:block}main{box-shadow:none;padding:0;max-width:none}body.mode-parallel .chinese{display:block}body.mode-parallel .parallel{display:none}img{max-height:220mm}}
+</style></head><body><header><strong>人形机器人箱体移动操作的仿真到现实学习</strong><button id="zhBtn" class="active" onclick="setMode('zh')">中文阅读</button><button id="parallelBtn" onclick="setMode('parallel')">中英对照摘录</button><a class="tool" href="original.pdf" target="_blank" rel="noopener">查看原文 PDF ↗</a><button onclick="window.print()">打印 / 导出 PDF</button></header><div class="layout"><nav><b>章节导航</b><div id="toc"><ul><li class="level-2"><a href="#_2">摘要</a></li><li class="level-2"><a href="#i">I. 引言</a></li><li class="level-3"><a href="#a">A. 人形机器人移动操作</a></li><li class="level-3"><a href="#b">B. 移动操作强化学习</a></li><li class="level-2"><a href="#ii">II. 系统概览</a></li><li class="level-2"><a href="#iii">III. 移动操作技能学习</a></li><li class="level-3"><a href="#a_1">A. 箱体拾取策略</a></li><li class="level-3"><a href="#b_1">B. 行走策略</a></li><li class="level-3"><a href="#c">C. 站立策略</a></li><li class="level-3"><a href="#d">D. 技能转换</a></li><li class="level-2"><a href="#iv">IV. 仿真结果</a></li><li class="level-3"><a href="#_3">消融实验</a></li><li class="level-2"><a href="#v">V. 硬件结果</a></li><li class="level-2"><a href="#vi">VI. 结论</a></li><li class="level-2"><a href="#_4">参考文献</a></li></ul></div></nav><main><article class="chinese"><h1 id="_1">人形机器人箱体移动操作的仿真到现实学习</h1>
+<p><strong>Jeremy Dao、Helei Duan、Alan Fern</strong><br />
+arXiv:2310.03191v1，2023 年 10 月</p>
+<h2 id="_2">摘要</h2>
+<p>本文提出一种面向人形机器人的箱体移动操作学习方法。机器人需要协调全身动作，在保持平衡的同时搬起不同重量、位置和朝向的箱子，这使任务尤具挑战性。作者采用仿真到现实（sim-to-real）强化学习，为 Digit 双足机器人学习具有泛化能力的箱体抓取和搬运技能。奖励函数既引导机器人与箱子按期望方式交互，也兼顾平衡与步态质量。作者将多个技能组合成完整系统，使机器人能把不同尺寸、质量和初始摆放的箱子从一张桌子搬到另一张桌子。除仿真定量结果外，论文还展示了在 Digit 实机上的成功迁移。据作者所知，这是首次在真实人形机器人上实现学习控制器完成此类移动操作任务。</p>
+<h2 id="i">I. 引言</h2>
+<p>腿式机器人强化学习主要研究行走、奔跑和复杂地形导航；物体操作的强化学习则多针对固定或稳定基座的机械臂。腿式机器人移动操作同时包含移动和物体操纵，研究相对较少。作者要解决的任务是：机器人走到箱子前、停下、搬起箱子、将其运到另一张桌子并放下。数据驱动学习有望使技能适应不同箱体尺寸、质量、姿态和位置，但箱体搬运要求全身动作协调，还要在动作平顺、不过度用力和保持平衡之间取得平衡。</p>
+<p>传统模型方法能规划抬箱时的全身运动并补偿箱体施加的额外力，但为保证始终稳定，动作往往非常保守，完成一次拾取可能需要 20 秒以上。规划方法也已用于生成较长移动操作轨迹。既有学习研究多依赖遥操作或人体动作捕捉提供示范轨迹，这会引入演示采集、运动跟踪和人与机器人动作对齐误差。移动底盘或四足机器人常将行走和机械臂操作分成两个控制模块；本文也采用技能分解，但每个学习策略都控制 Digit 的全身关节，因此行走与操作之间仍可形成协调动作。</p>
+<p>本文贡献如下：第一，设计包含接触时机、手部目标轨迹、箱体作用力和平衡项的拾取奖励，使动作平顺且不过度冲击；第二，发现拾取策略采用“相对”动作空间更利于学习，即将策略输出叠加到当前关节位置，而不是固定中立姿势；第三，将行走、站立、拾取、抱箱行走和抱箱站立分别训练，再组合成完整系统，并在 Digit 实机展示 sim-to-real 移动操作。</p>
+<h3 id="a">A. 人形机器人移动操作</h3>
+<p>既有模型式人形机器人拾取方法可以在严格稳定约束下规划搬运动作，但动作偏慢。面向长时序移动操作的规划方法已展示部分硬件结果；另有研究通过调整步态来配合物体操作。本文关注数据驱动的全身策略，直接从仿真学习与箱体接触的动作。</p>
+<h3 id="b">B. 移动操作强化学习</h3>
+<p>先前工作多使用带机械臂的移动底盘或四足机器人，并将行走与抓取分成模块。本文的技能也分开训练，但学习策略控制所有可驱动关节，因而可以协调腿、躯干与手臂。与基于遥操作、动作捕捉示范的模仿学习不同，本文以奖励为基础学习动作。</p>
+<p><img alt="图 1：仿真学习的五项 Digit 箱体移动操作技能" src="assets/figures/fig-01.png" /></p>
+<p><strong>图 1.</strong> 仿真中学习五项技能并迁移至实机。</p>
+<h2 id="ii">II. 系统概览</h2>
+<p>完整任务分成五种行为：<strong>WALK</strong>（基本行走）、<strong>STAND</strong>（由行走转为站立）、<strong>PICKUP</strong>（拾取箱体）、<strong>WALKWITHBOX</strong>（抱箱行走）和 <strong>STANDWITHBOX</strong>（抱箱站立）。系统只允许特定技能转换，例如行走后先站稳再拾取，不会从行走直接跳到拾取。这样，每种策略可以为下一项技能生成有代表性的初始状态。行为转换时，在新旧策略动作间用 10 个控制时步线性插值，训练时也包含此动作预热过程。</p>
+<p>Digit 有 20 个自由度，其中 10 个未驱动自由度。每个策略接收 67 维机器人状态 $s$ 和策略专属命令 $c$，以 50 Hz 输出各驱动关节的 PD 目标；固定增益 PD 控制器以 2 kHz 执行。策略采用两个 128 维循环隐状态层的 LSTM。训练使用 MuJoCo、PPO（近端策略优化）和梯度裁剪，并对身体质量、关节阻尼、质心位置、地面摩擦等进行动力学随机化。训练和测试直接使用仿真真值状态，并叠加随机噪声。</p>
+<p>各奖励写成若干代价项 $r_i$ 的加权指数和：</p>
+<p>$$R=\sum_i w_i\exp(-r_i).$$</p>
+<p>代价越大，对应奖励越小。不同技能共享学习框架，但按目标调整奖励项。</p>
+<p><img alt="图 2：五项策略的允许转换关系（依据论文文字重绘）" src="assets/figures/fig-02.svg" /></p>
+<p><strong>图 2.</strong> 五种策略之间的允许转换关系。此图依据正文描述重绘。</p>
+<h2 id="iii">III. 移动操作技能学习</h2>
+<h3 id="a_1">A. 箱体拾取策略</h3>
+<p>拾取策略要处理不同尺寸和重量的箱子、不同起始位置和方向，并生成平顺、速度适中的动作。行为分为两个阶段：<strong>接触阶段</strong>中双手向箱体移动并建立接触；<strong>抬升阶段</strong>中双手将箱子移动到目标位置。论文以策略启动后的步数表示阶段时钟：接触阶段在 $t_{contact}=100$（2 秒）结束，抬升阶段在 $t_{lift}=175$（3.5 秒）结束。命令包括箱体尺寸、质量、起始位姿、目标位置，以及两个随阶段线性变化的进度信号。</p>
+<p>为方便硬件测试，策略只显式使用行为开始时的箱体位姿；箱子移动后，以左右手位置的平均值近似箱体中心，避免依赖实时箱体位姿估计。箱子初始位置在机器人前方 35–50 cm、左右 ±30 cm 范围内，地面高度至 1.3 m；初始偏航角在 ±22.5° 内。目标位置采用类似范围，但目标高度只允许在初始位置上方。箱体长、宽、高各在 20–45 cm 之间，质量在 1–10 kg 之间。</p>
+<p>手部目标轨迹由若干带时间戳的目标点线性插值得到：先将手放到箱体两侧，再在接触阶段结束时贴住箱体侧面，随后在抬升阶段将手移至目标位置两侧。实验发现，在奖励中显式提供手部轨迹能显著加快训练，也提升实机成功率。</p>
+<p>拾取奖励由轨迹项、箱体交互项、站立稳定项和动作调节项组成：</p>
+<ul>
+<li><strong>轨迹项</strong>：双手跟随期望位置，并保持手部滚转角接近零。</li>
+<li><strong>箱体项</strong>：在正确时刻与箱体接触、将其抬离桌面、移动到目标位置，并保持箱体水平。接触奖励只在接触阶段末尾启用，以避免过早碰撞。</li>
+<li><strong>站立项</strong>：保持质心投影/压力中心（CoP）位于支撑区域中央，躯干竖直、双脚朝前，降低关节电机速度并抑制足端速度。</li>
+<li><strong>平滑项</strong>：抑制动作变化、关节力矩、手部接触力和箱体加速度，使机器人与箱体的交互更柔和。</li>
+</ul>
+<p>如果发生自碰撞、手部速度超过 1 m/s、躯干高度低于 40 cm、躯干俯仰超过 35°、任一脚离地，或阶段超时未完成，则终止训练回合。箱体质量额外随机 ±0.5 kg、尺寸 ±5 cm、起始位置 ±5 cm。</p>
+<p><img alt="图 3：箱体拾取中的手部目标轨迹" src="assets/figures/fig-03.png" /></p>
+<p><strong>图 3.</strong> 双手先移至箱体两侧、接触箱体，再将其搬至目标位置的示例轨迹。</p>
+<p>拾取奖励中各项权重见表 III：手部位置 0.15、手部滚转 0.05、箱体位置 0.15、箱体朝向 0.05、桌面作用力 0.05、CoP 0.1、躯干朝向 0.05、足部朝向 0.1、电机速度 0.05、足速 0.05、手部作用力 0.05、箱体加速度 0.05、动作变化 0.05、关节力矩 0.05。</p>
+<h3 id="b_1">B. 行走策略</h3>
+<p>普通行走策略沿用既有双足 sim-to-real 学习设置，并增加手臂位置奖励，使双手始终位于躯干前方且彼此保持合理间距。抱箱行走策略采用相近设置，命令额外包含箱体尺寸、质量和抱持高度。每个训练回合随机设置初始步态、前进速度（−0.5 至 1.0 m/s）、侧向速度（−0.3 至 0.3 m/s）、转向角速度（−π/8 至 π/8 rad/s）和箱体高度（1.0–1.3 m）；运行中还会再次随机化命令。抱箱行走会惩罚箱体偏离期望高度、箱体倾斜和手部过大作用力；若手失去箱体接触则终止回合。</p>
+<h3 id="c">C. 站立策略</h3>
+<p>普通站立策略把行走状态转换为静止站立，不接收额外命令，只输入机器人状态。奖励包括降低基座速度、保持基座高度约 0.9 m、维持双脚间距约 0.385 m、避免两脚前后错位，并将手臂保持在躯干前方。抱箱站立策略额外输入箱体尺寸、质量和抱持高度，继续使用箱体位置、方向与接触奖励；若任一只手失去箱体接触则终止。</p>
+<h3 id="d">D. 技能转换</h3>
+<p>策略按前述有限状态流程依次训练：先训练普通行走，再用行走策略产生低速状态训练站立；站立终态作为拾取策略的起始状态；随后训练抱箱站立和抱箱行走。训练数据保存机器人状态及最近一次动作，以便新策略接续时执行 10 步动作插值，实现平滑切换。</p>
+<h2 id="iv">IV. 仿真结果</h2>
+<p>每项策略在 MuJoCo 中用 10,000 个随机回合评估。若机器人没有摔倒，且涉及箱体的策略在结束时仍握住箱体，则记为成功；箱体任务还统计成功回合中箱体最终位置与目标位置的距离。</p>
+<table>
+<thead>
+<tr>
+<th>行为</th>
+<th style="text-align: right;">成功率</th>
+<th style="text-align: right;">箱体位置误差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PICKUP</td>
+<td style="text-align: right;">96.15%</td>
+<td style="text-align: right;">7.93 cm</td>
+</tr>
+<tr>
+<td>STAND</td>
+<td style="text-align: right;">100%</td>
+<td style="text-align: right;">不适用</td>
+</tr>
+<tr>
+<td>STANDBOX</td>
+<td style="text-align: right;">95.25%</td>
+<td style="text-align: right;">1.64 cm</td>
+</tr>
+<tr>
+<td>WALK</td>
+<td style="text-align: right;">96.1%</td>
+<td style="text-align: right;">不适用</td>
+</tr>
+<tr>
+<td>WALKBOX</td>
+<td style="text-align: right;">100%</td>
+<td style="text-align: right;">2.39 cm</td>
+</tr>
+</tbody>
+</table>
+<p>这些策略在训练分布产生的典型后继状态中保持较高成功率。进一步逐项增加单一箱体参数，直至拾取失败，发现策略可处理质量达 22.9 kg、尺寸达 64 cm 的箱子；训练范围分别仅为 1–10 kg 和 20–45 cm。测试还覆盖前后位置 56 cm、侧向偏移 41 cm、目标高度 130 cm 和偏航角 45° 等范围。</p>
+<h3 id="_3">消融实验</h3>
+<p>移除手部目标轨迹奖励后，仍能学到可完成拾取的策略，但达到相同奖励水平所需样本约增加一倍。将动作改为叠加到固定“中立”姿态，而非当前电机角度，也显著降低拾取学习效率；行走和站立策略未出现同样退化。作者据此认为，当操作目标与固定姿态差异较大时，相对动作空间更合适。</p>
+<p><img alt="图 4：不同奖励和动作空间的学习曲线" src="assets/figures/fig-04.png" /></p>
+<p><strong>图 4.</strong> 基线、去除手部轨迹奖励和绝对动作空间三种学习设置的奖励曲线。</p>
+<h2 id="v">V. 硬件结果</h2>
+<p>五项策略均成功迁移到真实 Digit，并能连续完成技能转换。机器人拾取过多个尺寸和质量的箱子，质量范围为 1–8 kg；箱子可从地面或桌面开始。导航、技能切换和行走命令仍由操作员提供；箱体位姿由机载 RGB-D 相机读取箱体上的 ArUco 标记，箱体尺寸和质量预先输入策略。</p>
+<p>实机上观察到策略有时会向一侧倾斜，作者推测与 IMU 姿态估计和仿真存在差异有关，并通过姿态输入偏置进行“质心微调”。对于 8 kg 重箱，需增加前倾修正量。作者认为这类偏差也可能来自仿真与实机的接触力差异。</p>
+<h2 id="vi">VI. 结论</h2>
+<p>本文将箱体移动操作分解为五项独立学习的行为，在 Digit 上完成了仿真训练到实机执行的迁移。策略能适应不同箱体质量、尺寸和初始位置，并完成走近箱体、拾取、搬运至目标位置和放下的整个任务。未来将通过加入规划、导航和视觉系统减少人工操作与 ArUco 标记依赖，并利用仿真及实机成功/失败样本进一步改善动力学随机化和 sim-to-real 性能。</p>
+<h2 id="_4">参考文献</h2>
+<p>参考文献条目保留英文原文，见项目 <code>source-pages/page-07.txt</code> 和随附 PDF。</p></article><article class="parallel"><h1>中英对照摘录</h1><p>此视图列出关键定义、公式及图注的对照；完整论文可在中文阅读模式或原文 PDF 中查看。</p><section class="pair"><div class="source-left"><small>摘要 · paragraph</small><p>We propose a learning-based approach to box loco-manipulation for a humanoid robot.</p></div><div class="translation-right"><small>中文</small><p>本文提出一种面向人形机器人的箱体移动操作学习方法。</p></div></section><section class="pair"><div class="source-left"><small>摘要 · paragraph</small><p>We present a sim-to-real reinforcement learning approach for training general box pickup and carrying skills for the bipedal robot Digit.</p></div><div class="translation-right"><small>中文</small><p>作者采用仿真到现实强化学习，为 Digit 双足机器人学习具有泛化能力的箱体抓取和搬运技能。</p></div></section><section class="pair" id="pair-eq-eq-reward"><div class="source-left"><small>系统概览 · equation</small><p>$$R=\sum_i w_i\exp(-r_i).$$</p></div><div class="translation-right"><small>中文</small><p>$$R=\sum_i w_i\exp(-r_i).$$</p></div></section><section class="pair"><div class="source-left"><small>系统概览 · paragraph</small><p>We break down the full box loco-manipulation task into five distinct behaviors: WALK, STAND, PICKUP, WALKWITHBOX, and STANDWITHBOX.</p></div><div class="translation-right"><small>中文</small><p>完整任务分成 WALK、STAND、PICKUP、WALKWITHBOX 和 STANDWITHBOX 五种行为。</p></div></section><section class="pair"><div class="source-left"><small>拾取策略 · paragraph</small><p>Adding the action output to the current motor positions resulted in faster learning.</p></div><div class="translation-right"><small>中文</small><p>将策略动作叠加到当前电机位置，能加快拾取策略的学习。</p></div></section><section class="pair"><div class="source-left"><small>引言 · caption</small><p>We learn box loco-manipulation policies in simulation and transfer directly to real hardware.</p></div><div class="translation-right"><small>中文</small><p>图 1. 五项技能在仿真中学习并直接迁移到实机 Digit。</p></div></section><section class="pair"><div class="source-left"><small>拾取策略 · caption</small><p>Example hand position trajectory for a box pickup.</p></div><div class="translation-right"><small>中文</small><p>图 3. 箱体拾取的双手目标轨迹示例。</p></div></section><section class="pair"><div class="source-left"><small>消融实验 · caption</small><p>Reward curve comparison between different learning setups.</p></div><div class="translation-right"><small>中文</small><p>图 4. 不同奖励及动作空间下的学习曲线。</p></div></section><section class="pair"><div class="source-left"><small>仿真结果 · paragraph</small><p>The pickup policy succeeds on 96.15% of 10,000 randomized episodes.</p></div><div class="translation-right"><small>中文</small><p>PICKUP 策略在 10,000 个随机回合中的成功率为 96.15%。</p></div></section><section class="pair"><div class="source-left"><small>实机结果 · paragraph</small><p>We demonstrate successful sim-to-real transfer on the humanoid robot Digit.</p></div><div class="translation-right"><small>中文</small><p>论文展示了学习策略成功迁移至 Digit 实机。</p></div></section></article></main><aside class="terms"><h3>术语注释</h3><details><summary>loco-manipulation（移动操作）</summary><p>机器人移动同时操纵物体。</p></details><details><summary>sim-to-real transfer（仿真到现实迁移）</summary><p>把仿真训练的策略直接用于实体机器人。</p></details><details><summary>PPO（近端策略优化）</summary><p>策略梯度强化学习算法。</p></details><details><summary>Digit（Digit 双足机器人）</summary><p>本文使用的双足人形平台。</p></details><details><summary>domain randomization（动力学随机化）</summary><p>训练时随机改变仿真参数以提升迁移鲁棒性。</p></details><details><summary>relative action space（相对动作空间）</summary><p>将策略动作叠加到当前关节位置。</p></details><details><summary>center of pressure (CoP)（压力中心（CoP））</summary><p>足底支撑区域的合力作用点。</p></details><details><summary>ArUco marker（ArUco 标记）</summary><p>用于视觉定位箱体的人工标记。</p></details></aside></div><script>function setMode(mode){document.body.classList.toggle('mode-parallel',mode==='parallel');document.getElementById('zhBtn').classList.toggle('active',mode==='zh');document.getElementById('parallelBtn').classList.toggle('active',mode==='parallel');if(window.MathJax)MathJax.typesetPromise()}if(window.MathJax)MathJax.typesetPromise();</script></body></html>

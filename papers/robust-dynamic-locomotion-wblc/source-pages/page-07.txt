@@ -1,0 +1,73 @@
+JOURNAL OF LATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2015                                                                                       7
+
+
+
+
+
+     0.2                                                            0.2
+
+
+     0.1                                                            0.1
+
+      0                                                   0
+
+    -0.1
+                                                                      -0.1
+
+    -0.2
+                                                                      -0.2
+
+    -0.3
+                                                                      -0.3
+          0     0.1    0.2    0.3    0.4    0.5    0.6                                                             0      0.1     0.2     0.3     0.4     0.5     0.6      Fig. 9.  Multi-DoF Openchain. The openchain consists of n joints. At the
+                                                                     end of the chain, the end-effector is attached to link n.
+
+
+Fig. 8.  Tracking performance comparison with and without the term
+˙J ˙q. A three-DoF planar manipulator is used to control its end effector to
+follow a vertical line (red lines) with 2 Hz frequency (blue dashed lines are   frame associated with Vi can be obtained via adjoint deriva-
+the end-effector path). The tracking results demonstrte that the (a) controller,   tions,
+which accounts for ˙J ˙q, outperforms the (b) controller.
+
+velocities. Notice that ˙J is used in our WBLC in Equation (6).                 AdTg,i (Vi) = Tg,iViTg,i−1
+The commanded task is to follow a vertical line deﬁned by                = Tg,iTg,i−1 ˙Tg,iTg,i−1           (24)
+the function, xd = [ 0.62, 0.23 sin(4πt) ]⊤. The OPC input                               −1                                                = ˙Tg,iTg,i .is
+
+            0
+  ¨x =           + Kp(xd −x) + Kv(˙xd −˙x). (20)  The adjoint mapping operator is deﬁned as      −36.32 sin(4πt)
+
+We will use Lie group theory to compute the derivatives of                               Ri,j      0
+                                                                            AdTi,j ≜                                ,           (25)point task Jacobians [20]. We implement this functionality                             [pi,j]×Ri,j   Ri,j
+using the Rigid Body Dynamics Library 2, which is a popular
+open source dynamics toolbox. In addition, we also devise a  where Ri,j and pi,j are relative rotations and positions be-
+new method to compute the time derivative of the CM Jacobian   tween points i and j. The generalized velocity of point p in
+which cannot be computed using Lie group theory.              local coordinates (see Fig. 9) can be represented as
+
+A. Time Derivative of Point Jacobian                         Vp = AdTp,nVn
+  Lie group operators provide convenient analytic deriva-          = AdTp,n−1Vn−1 + AdTp,nSn ˙qn
+tions for Jacobian computations. The SE(3) orientation and                                                                                                                 ...                                    (26)position representation of a rigid body in three-dimensional
+space consists of orientation matrix (R) and a position vector                              n
+                                          = AdTp,0V0 + X AdTp,iSi ˙qi.(p). It can also be represented via the 4 × 4 homogeneous
+transformation,                                                                             i=1
+
+                          Rg,i   pg,i
+                                                              ,              (21)                   Tg,i =                                                          Because {0} frame is the global frame (an inertial frame),                         0    1
+                                          V0 is equal to zero. On the other hand Si maps joint velocities
+where, Rg,i and pg,i represent the orientation and position   to R6, e.g. Si  is  [ 0, 0, 1, 0, 0, 0 ]T means  ˙qi  is a revolute
+of  the  ith frame  in  global  coordinates  respectively (See                                                                        joint rotating along the z local axis. The ﬁrst three positions
+Fig. 9). The velocity representation in se(3) consists of the 6-                                                               of Si represent rotational axes while the last three positions
+dimensional vector, [w, v]T , and yields the 4×4 homogeneous                                                                 represent prismatic axes. It can be shown that the Jacobian of
+equality,                                                           a point p, is equal to
+                        [wi]×  vi
+                 Vi ≜                         ,               (22)                         0    0
+                                                       Jp = AdTp,1S1  AdTp,2S2    · · ·  AdTp,nSn      (27)
+where
+                0    −wi,3    wi,2 
+                                                         (23)                         wi,3     0    −wi,1           [wi]× ≜                                       Furthermore, let’s break down the adjoint operators into the                                                                                          following chain operation                    −wi,2    wi,1     0
+
+Here, wi,1, wi,2, wi,3 are relative angular velocities along the
+                                                                    AdTp,iSi = AdTp,p′AdTp′,nAdTn,iSi.        (28)three Cartesian axes, and vi is the linear velocity. It can be
+shown that Vi = Tg,i−1 ˙Tg,i, and corresponds to the generalized
+velocity seen from the ith frame. The velocity in the global  Here p′ is a virtual point representing the position of p but with
+                                                                    local orientation with respect to frame n. As such it represents
+  2Open-source https://rbdl.bitbucket.io                                     just a position offset. In this case Tp′,n is constant and the i-th

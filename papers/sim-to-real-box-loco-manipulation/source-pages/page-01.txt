@@ -1,0 +1,79 @@
+           Sim-to-Real Learning for Humanoid Box Loco-Manipulation
+
+
+                                       Jeremy Dao, Helei Duan, Alan Fern
+
+
+
+
+            Abstract— In this work we propose a learning-based approach
+           to box loco-manipulation for a humanoid robot. This  is a
+           particularly challenging problem due to the need for whole-
+         body coordination in order to  lift boxes of varying weight,
+            position, and orientation while maintaining balance. To address
+            this challenge, we present a sim-to-real reinforcement learning
+          approach for training general box pickup and carrying skills for
+           the bipedal robot Digit. Our reward functions are designed to
+          produce the desired interactions with the box while also valuing
+          balance and gait quality. We combine the learned skills into2023    a full system for box loco-manipulation to achieve the task of
+         moving boxes from one table to another with a variety of sizes,
+           weights, and initial configurations. In addition to quantitativeOct    simulation results, we demonstrate successful sim-to-real transfer
+         on the humanoid robot Digit. To our knowledge this is the first
+4          demonstration of a learned controller for such a task on real
+          world hardware.
+
+
+                                        I. INTRODUCTION
+                                                                              Fig. 1: We learn box loco-manipulation policies in simulation
+          Most reinforcement learning (RL) research for legged   and transfer directly to real hardware. We break the task
+           robots focuses on locomotion skills such as walking, running,  down into 5 separate policies: WALK, STAND, PICKUP,[cs.RO]
+         and navigating various terrains [1–5]. On the other hand,  WALKWITHBOX, and STANDWITHBOX.
+         most RL research for object manipulation has focused on                                                                        This paper addresses this challenge by making the follow-
+          non-legged robots with fixed or stable bases (e.g. grounded                                                                       ing contribtions:
+          robotic arms) [6–8]. RL has been much less explored for
+                                                                             • We construct a reward function for learning a “box
+          loco-manipulation with legged robots, which involves both
+                                                                      pickup” skill and the associated locomotion skills. By
+        movement with and manipulation of objects. In particular, we
+                                                                           designing these functions with box interaction in mind,
+          are unaware of any work that has demonstrated successful
+                                                                             specifying when the hands should move to contact the
+           sim-to-real RL for loco-manipulation with a bipedal humanoid
+                                                                          box, and when to apply forces to move the box, along
+           robot. This is a particularly challenging problem due to the
+                                                                       with regulating the motion of the hands, we can learn
+         need for full-body coordination to manipulate and move
+                                                                       smooth, gentle motions that still achieve the task.
+           objects while also maintaining balance.
+                                                                             • Compared to previous works on locomotion, we find that
+          The main goal of this paper is to design and evaluate a
+                                                                                     for box pickup using a “relative” action space, where the
+           sim-to-real RL approach for loco-manipulation with a real
+                                                                             policy outputs are PD setpoint commands to be added
+         humanoid robot. In particular, our target task is to walk up
+                                                                                    to the current joint position, is more suited for learningarXiv:2310.03191v1    to a box, stop, pick up the box, carry it to another table, and
+                                                                  box pickup. This change in action space results in faster
+          then set it down. Using data-driven RL for this purpose has
+                                                                               learning and less forceful interaction with the box.
+          the potential to facilitate generalizion to boxes of different
+                                                                             • We present a full box loco-manipulation system where
+            sizes, masses, poses, and locations. Designing a sim-to-real
+                                                                     each skill, standing and walking with and without a
+       RL solution, however, raises a question. There is ambiguity
+                                                                          box, and box pickup, is individually learned. We show
+          about what is the “best” or most desirable way to pickup
+                                                                             successful sim-to-real on the humanoid robot Digit,
+         and move a box. How should the hands move, and how
+                                                                  which to our knowledge is the first demonstration of a
+          should the overall motion of the body coordinate with the
+                                                                             learning controller achieving a loco-manipulation task
+         hands to produce smooth, non-agressive motion that is still
+                                                                 on real world hardware.
+          robust? Furthermore, what kind of dense reward signal can
+       we provide to faciliate learning such a motion?                                          II. RELATED WORKS
+
+                                                                      A. Loco-Manipulation for Humanoids              *This work is supported by the NSF Grant No. IIS-1849343, DGE-
+           1314109, and DARPA Contract W911NF-16-1-0002.                 Much of prior research on loco-manipulation for humanoids
+               All authors are with Collaborative Robotics and Intelligent Systems
+               Institute, Oregon State University, Corvallis, Oregon, 97331, USA.         has been largely model-based and focuses on mostly static ma-
+               Email: {daoje, duanh, afern}@oregonstate.edu.                        nipulation tasks. Model-based approaches have been explored

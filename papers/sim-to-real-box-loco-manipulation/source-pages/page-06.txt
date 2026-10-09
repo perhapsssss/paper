@@ -1,0 +1,61 @@
+               PickUp    Stand   StandBox   Walk   WalkBox
+
+    Success %   96.15%   100%    95.25%    96.1%    100%
+
+    Error (cm)     7.93    N/A       1.64     N/A       2.39
+
+TABLE IV: Success rate and accuaracy for the 5 behavior
+policies as evaluated over 10K episodes in the MuJoCo
+simulator. Each policy is evaluated in a random start state
+resulting from a successful run of  its typical preceeding
+behavior (e.g. PickUp starts in a Stand end state).
+
+
+                        Maximum    Training Range
+
+             Mass (kg)           22.9             [1, 10]
+                Size (cm)           64            [20, 45]                Fig. 4: Reward curve comparison between different learning
+      X displacement (cm)      56            [35, 50]               setups. “Baseline” is the main learning setup we describe
+      Y displacement (cm)      41            [-30, 30]               in Section IV-A, “No Hand Trajectory” is the same setup
+       Z displacement (cm)      130           [0,130]              without the hand designed hand trajectory in the reward, and
+                                                          “Absolute Action Space” adds the policy output to a fixed                Rotation           45◦      [−22.5, 22.5]◦
+                                                                 position offset rather than the current motor positions.
+
+                                                    To get the pose of the box during hardware experimentsTABLE V: Test of the box PickUp policy on box parameters
+                                            we utilize Digit’s on board RGBD camera and an ArUcooutside of the training distribution. Each row shows the
+                                                         marker placed on the box. The box size and mass policy inputmaximum successful value  for the policy  for  that box
+                                                                             is hardcoded beforehand. During hardware execution, skillparameter along with the range used for training.
+                                                                      transitions, navigation, and walking commands are handled
+  PickUp Ablation. We also perform some ablation studies   by a human operator.
+on the learning setup with a focus on the PickUp behavior.     Despite the success, we do observe sim-to-real issues on
+To test if a simpler reward setup will still learn, we remove   hardware. In particular, we observe policies leaning towards
+the hand trajectory tracking reward component. The target   one direction during hardware execution. We suspect this is
+location for each hand p∗is instead just the center of the left   due to imu/oriention estimate differences on hardware. To
+and right face of the box in the box target position, and does   counteract this, we offset the orientation input in the same
+not change throughout the training episode. We found that    direction as the observed leaning. While this “center-of-mass
+we can still learn a successful box pickup policy, however,   trim” only needed turning once, it was policy specific. We
+the sample efficiency suffers greatly. As can be seen in Fig. 4,   also found that the selected trim values did not work for the
+learning without the hand trajectory, approximately doubles    heaviest boxes (8kg), where we observed the policy leaning
+the number of samples needed to reach the same reward as   forward, requiring an increase in the trim. We hypthosize that
+learning with the trajectory information.                           this error might be caused by force or contact inconsistencies
+  Our PickUp policy uses a different action space than the   between simulation and hardware.
+locomotion and standing policies. Rather than adding the
+policy output to a fixed “neutral” offset robot pose, the PickUp                      VII. CONCLUSION
+policy instead adds the policy output to the current joint motor    We presented a learned system for performing box loco-
+positions. To test the effect of this change, we train policies   manipulation on the Digit humanoid robot. We broke box
+with both action spaces. The reward curves for each are   loco-manipulation down into 5 different behaviors and learn
+presented in Fig. 4. As can be seen, using the fixed offset    separate policies for each. We were able to learn policies that
+action space learns significantly slower, about as slow as not   achieve high performance in simulation for boxes of varying
+using the hand trajectory. We did not observe this same loss   masses, sizes, and starting locations. We also demonstrated
+in sample efficiency for the standing and walking policies,   sucessful sim-to-real transfer of those polcies for full loco-
+leading us to believe that when the desired motion deviates   manipulaiton episodes, involving walking to a box, pick it
+greatly from the fixed position offset, it is beneficial to use a   up, walk to a target location, and setting it down. To our
+“relative” action space instead.                           knowledge this is the first such sim-to-real demonstration
+                                                              using fully learned policies. Future work will focus on making
+               VI. HARDWARE RESULTS                  our system more autonomous by incorporating planning,
+  We show successful sim-to-real transfer for all trained    navigation, and vision systems to remove the reliance on
+policies, including transitions between each skill. We are able   a human operator and ArUco markers. There is also room to
+to perform box pickups for multiple boxes with different   improve our sim-to-real transfer to hardware. For this we will
+masses (from 1kg to 8kg) and sizes. The pickup will also   consider both enhancing the domain randomization using in
+work for boxes on the ground and those starting on a table. We   simulation based training, and integrating real-world hardware
+refer readers to the attached video for hardware experiments.   data from successful and failed trials into the learning process.

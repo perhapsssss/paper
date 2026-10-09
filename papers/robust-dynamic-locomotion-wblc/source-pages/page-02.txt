@@ -1,0 +1,60 @@
+JOURNAL OF LATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2015                                                                                       2
+
+
+
+
+
+                                                                                   Fig. 2. PIPM and CoM phase plots. (a) PIPM 3D position moving on a
+                                                                                   variable height surface. (b) Overlapped PIPM phase plots corresponding CoM
+                                                                              paths during dynamic walking. In the sagittal plane, we can see multiple
+                                                                              parabolas connected to each other corresponding to various walking steps.
+                                                                             Parabolas in the frontal plane produce limit cycles.
+
+
+Fig. 1. Type of humanoid platform our controller explores. The left image  WBC algorithms contain computations for Coriolis/centrifugal
+shows NASA’s Valkyrie humanoid robot, with 135.9 kg weight and 1.83 m  and gravitational forces projected on in operational task space
+height. The right image shows our dynamic simulation of Valkyrie using the
+physics based simulator SrLib.                                           [14], [15], which are costly to calculate specially as the number
+                                                               of control tasks increases. Our WBLC algorithms eliminates
+                                                                         this problems. An analytic solution of the time derivatives of
+control framework compared to the state of the art.            Jacobians is devised by employing Lie group operators, and
+  Devising a new robust dynamic locomotion generator  is   an implementation using the Rigid Body Dynamic Library. We
+insufﬁcient  to be  directly used  in  full humanoid  robots.   also eliminate the need to compute Coriolis/centrifugal terms
+Therefore building on our expertise in this area, we devise   for every task priority.
+a new type of whole-body controller (WBC) which we call     Overall, the main contributions of our study are as follows.
+whole-body locomotion controller (WBLC) that focuses on   First, devising a novel learning framework for robust dynamic
+speed, unilateral contact constraints, and speedy prioritized   locomotion under push disturbances achieving virtually in-
+task control. The proposed WBC algorithm enables to efﬁ-   stantaneous re-planning of an order of magnitude more steps
+ciently compute projection-based hierarchical task controllers   that the state-of-the-art. Second, we devise an elegant method
+[8] and at the same time incorporate contact inequality con-   to introduce steering capabilities to phase-space planning for
+straints which are represented by a quadratic programming   dynamically moving in all directions. Third, we devise a new
+(QP) process [9]–[11], hierarchical quadratic programming   whole-body locomotion controllers, which yields the beneﬁts
+(HQP)  [12]. While QP based  controllers have been very   of QP based computation of reaction forces and projection-
+successful for ﬁeld application  their computational cost  is   based prioritized task control. Due to many optimizations, we
+considerably higher than that of projection-based methods.   believe that this controller is one of the fastest WBC’s that
+In contrast, projection-based methods have not incorporated   fulﬁlls both prioritization and practical inequality constraints.
+before inequality constraints such as unilateral contact and   Lastly, we integrate all of these algorithms into a comprehen-
+friction constraints. Our proposed WBC algorithm combines   sive software and conduct thorough testing on robust dynamic
+for ﬁrst time QP and projection-based methods.               locomotion under large push disturbances on physics-based
+  In our study, we introduce a centroidal angular momentum   simulations of Valkyrie.
+(CAM) tasks to improve agile locomotion performance and    The paper is organized as follows. In Section II, we describe
+we examine its effect when used in the whole-body control   the RL-IP-PSP process after brieﬂy reviewing related work
+hierarchy. For example, when a robot quickly shakes or rotates   in Section C. We then introduce the formulation of WBLC
+its body, we reduced undesirable arm movements that result   in Section III and the methods to efﬁciently obtain the time
+from angular momentum compensation by introducing an arm   derivative of Jacobians for motion control and CAM tasks. In
+motion task with higher priority than the CAM task.           Section V, we study the effects of our framework in agile task
+  In the proposed WBLC, we devise new projection-based   such as shaking the robot’s body, walking while steering, and
+recursive  structures  that incorporate  unilateral contact and   recovering from large pushes while walking. We do all of this
+friction  constraints, yielding  the desired reduction on  the   using a model of NASA’s Valkyrie robot and the srLib physics
+computational cost compared to other QP based algorithms.   based engine1(Fig.1). A more exhaustive review of previous
+However, we don’t only achieve computational efﬁciency by  work can be found in Appendix C.
+combining QP and projection-based methods. We do achieve
+it by important improvements on the computation of the                II. REINFORCEMENT LEARNING BASED
+projection-based operations themselves.                               PHASE SPACE PLANNER
+  Indeed, in conventional projection-based methods, the com-
+                                          We devise an RL process around a PSP framework, the latter
+putational cost of some operations is considerably high. For
+                                                                signiﬁcantly enhancing the learning efﬁciency by exploiting
+instance, one well-known WBC algorithm  that uses  joint
+acceleration, [13], includes costly terms such as the time      1Seoul National University Robotics Library. Physics-based simulation.
+derivative of a null space projection matrix. In addition, many   Open-source http://robotics.snu.ac.kr/srlib/

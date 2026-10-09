@@ -22,6 +22,6 @@ python -m http.server 8000
 
 仓库已包含 `.github/workflows/pages.yml`。把站点推送到 GitHub 仓库 `main` 分支后，工作流会自动发布。首次发布前，在仓库 **Settings → Pages → Build and deployment** 中把来源设为 **GitHub Actions**。部署完成后，Actions 页面会显示网站网址。
 
-当前首篇论文及原文 PDF 已复制为普通文件放在 `papers/humanoid-nonlinear-state-estimation/`，可与网站一起发布。
+论文项目均以普通文件保存在 `papers/<short-id>/`，包含阅读页、原文 PDF 和图表素材，可随网站一起发布。
 
 公开发布前，请确认你有权公开论文原文 PDF、图表和译文。当前目录中的论文项目均包含原始 PDF。

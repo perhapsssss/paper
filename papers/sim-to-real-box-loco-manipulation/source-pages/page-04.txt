@@ -1,0 +1,62 @@
+side faces of the box (goal position 2). The last goal postion      •  If the robot makes contact with the table holding up the
+3 occurs at tlift (3.5 seconds) with the hands on either side of        box.
+the target location, spaced evenly with a box’s width distance      •  If the box is on the ground.
+between them. We were also able to train policies without      •  If it has been 0.5 seconds after the contact countdown
+this hand position trajectory. However, we found that these       and the hands are not in contact with the box.
+policies trained significantly slower (see section VII) and had      •  If it has been 0.5 seconds after the pickup countdown
+less success on hardware.                                    and the box is still in contact with the table.
+   Rbox rewards contact with the box at the correct time (not too
+early), lifting  it off the table, and moving the box to the target
+location with a flat orientation using the following terms:          Name             Weight   Name             Weight
+
+                                                     Hand Position      0.15     Hand Roll          0.05
+          rcontact = ln  0.05 · clefthand,box + 0.05 · crighthand,box
+                                                   Box Position       0.15     Box Orientation     0.05
+        rbox pos = ∥pbox −p∗box∥
+                                                                 Table force         0.05     CoP                 0.1
+        rbox orient = |Φbox| + |Θbox|
+                                                           Base Orientation    0.05       Foot Orientation     0.1          rtable = Ftable,box
+                                                         Motor Velocity     0.05       Foot Velocity       0.05
+
+                                                     Hand Force        0.05     Box Acceleration    0.05
+It is important to highlight the weighting for rcontact, weight
+wcontact = I[t ≥tcontact]·], where I[·] is the indicator function.     Action Change     0.05      Torque             0.05
+This causes the contact reward term to only be active at the                                          TABLE III: Reward weightings for the box pickup reward.
+end of the first phase, which helps prevent early contact with
+the box.
+   Rstand rewards the robot for standing stably while picking   Domain Randomization. In addition to the standard dy-
+up the box. This is done by keeping the center of pressure   namics randomization we use for all policies, we also add
+(CoP) in the middle of the support polygon (or the average   randomization to the policy’s estimate of the box mass
+foot location), the torso orientation upright and the feet   (±0.5kg), dimensions (±5cm), and starting location (±5cm).
+orientation facing forward, motor velocity small (try to move
+as little as possible), and the feet velocities at zero:
+                                                             B. Locomotion Policies
+           rCoP = ∥pCoP −pavg foot pos∥
+             rbase orient = 1 −⟨qtorso, (1, 0, 0, 0)⟩2                To learn locomotion skills we use the same learning setup
+                                                              as described in [5, 23] and we refer readers to those works              rfoot orient = (1 −  qleftfoot, (1, 0, 0, 0) 2)+
+                                                                  for more details on the reward function. The only changes
+                   D             E2                     (1 −   qrightfoot , (1, 0, 0, 0)   )           made for this work was an additional reward term on the hand
+                                                                    positions, to keep them in front of the torso and equidistant
+             rmotor vel = ∥vmotor∥
+                                                      from each other.
+               rfeet vel = ∥vleftfoot∥+ ∥vrightfoot ∥                      The box locomotion policies follow largely the same
+   Finally, Rreg encourages smooth motions of both the robot   learning setup as the regular locomotion policies, with a
+and box itself. It also rewards gentle hand interaction with   few tweaks to accomodate the box. Similar to the box pickup
+the box:                                                           policy, the command input c for the box locomotion policy
+                                                              contains the box dimensions, mass, and a height command
+                raction = ∥ut −ut−1∥                              as input. This height command specifies at what height the
+                rtorque = ∥τ∥                                box should be held at while walking.
+              rhand force = ∥F hand,box∥+left      ∥F hand,box∥right                  Scenario Distribution. At the start of each training episode
+                                                               the robot  is  initialized  to a random  starting pose (see
+             rbox acc = ∥abox∥
+                                                            Section IV-D for more details), at a random phase in the
+The total reward R also has two sparse penalties. There is   walking cycle, and with a random command. The commanded
+a −0.1 penalty if there is a self-collision or if the velocity   x  velocity may be randomized between  [−0.5, 1.0]m/s,
+of either hand exceeds 1.0 m/s. The weightings of each   y velocity between [−0.3, 0.3]m/s, turning  rate between
+dense reward term used is in Table III. To encourage useful   [−π/8, π/8]rad/s, and box height between [1.0, 1.3]m. At
+exploration, we also use the following termination conditions,   a random time during the trajectory the commands with be
+which encourages learning critical aspects of the behavior   randomized again.
+before more detailed aspects.                        Reward Function. The reward function for learning box
+   •  If the height of the robot torso is less than 40cm.        locomotion policies is the same as the regular locomotion
+   •  If the pitch angle of the robot torso is greater than 35◦.   policies [5, 23] with the addition of a few terms similar to
+   •  If either foot loses contact with the ground.               the box pickup rewards. These terms form the box reward

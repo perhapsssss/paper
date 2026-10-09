@@ -1,0 +1,53 @@
+JOURNAL OF LATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2015                                                                                      12
+
+
+state equation, which has identical form to Eq. (35). Then, by   Then, we can manipulate the equation above deﬁning ¨q0 to
+using the equality that ˙y(tapex) = ˙yapex, we can ﬁnd py,       yield
+
+                  ˙yapex −C                                                                                  ¨q0 = J+2|1  ¨x2 −˙J2J+1 ˙x1 −J2 ˙J+1 ˙x1 −J2J+1 ¨x1                                       ,         py =
+          D
+                                     −J+2|1 ˙J2|1 ˙q0
+          ω               ˙yswitch                                                                                   (55)                                  )eωtapex−      C =                   (yswitch +                                     = J+2|1 n¨x2 −˙J2 ˙q −J2J+1   ¨x1 −˙J1 ˙q o             2                      ω                                                         (45)
+                      (yswitch −˙yswitch                                        )e−ωtapex          + J+2|1  ˙J2 ˙q0 −J2J+1 ˙J1 ˙q −J2 ˙J+1 ˙x1 −˙J2|1 ˙q0                        ω
+          ω
+     D =   (e−ωtapex −eωtapex)             2                                          For simplicity, we deﬁne X ≜¨x2−˙J2 ˙q−J2J+1   ¨x1 −˙J1 ˙q  .
+                                                   Then the equation on ¨q0 can be further expressed asAfter calculating py, we can easily get yapex and ˙yapex by
+using Eq. (35).                                                                               ¨q0 = J+2|1X + J+2|1 −J2J+1 ˙J1 ˙q −J2 ˙J+1 ˙x1 −J2 ˙N1 ˙q0
+                                                    n                                    = J+2|1X + J+2|1 −J2J+1 ˙J1 J+1 ˙x1 + ˙q0                  APPENDIX B
+ EQUIVALENT HIERARCHY-BASED JOINT ACCELERATION     −J2 ˙J+1 ˙x1 + J2  ˙J+1 J1 + J+1 ˙J1  ˙q0 o
+  The joint velocity associated with an operational task x1 is                                    = J+2|1X + J+2|1 −J2J+1 ˙J1J+1 ˙x1 −J2 ˙J+1 ˙x1 + J2 ˙J+1 J1 ˙q0
+                            ˙q = J+1 ˙x1 + N1 ˙q0.                (46)                                                           (56)
+                                                       Because J1 ˙q0 = 0, the previous equation becomes
+The deﬁnition of the null-space projection matrix using a
+pseudo inverse and  its time derivative yields the following       ¨q0 = J+2|1X + J+2|1 −J2J+1 ˙J1J+1 ˙x1 −J2 ˙J+1 ˙x1
+expression:
+                                     = J+2|1X + J+2|1 J2J+1 J1 ˙J+1 ˙x1 −J2 ˙J+1 ˙x1                                                                                                                        (57)
+    N1 = I −J+1 J1 ⇒˙N1 = −˙J+1 J1 −J+1 ˙J1.      (47)     = J+2|1X + J+2|1J2 J+1 J1 −I  ˙J+1 ˙x1
+The resulting  joint acceleration can be obtained by time-     = J+2|1X −J+2|1J2N1 ˙J+1 ˙x1.
+derivativating equation (46) as described in [13]
+                                                           Let us develop the term below using the above expression,
+               ¨q = J+1 ¨x1 + ˙J+1 ˙x1 + ˙N1 ˙q0 + N1¨q0           −˙N1J+1 ˙x1 + N1¨q0 = −˙N1J+1 ˙x1 + ¨q0                                                         (48)
+       = J+1 ¨x1 + ˙J+1 J1 ˙q + ˙N1 ˙q0 + N1¨q0                   = J+2|1X −˙N1J+1 ˙x1 −J+2|1J2N1 ˙J+1 ˙x1
+using the equality ˙J+1 J1 = −˙N1 −J+1 ˙J1 we get                   = J+2|1X +  I −J+2|1J2N1 N1 ˙J+1 ˙x1
+                                                                                                              1 ˙x1       ¨q = J+1 ¨x1 −J+1 ˙J1 ˙q −˙N1 ˙q + ˙N1 ˙q0 + N1¨q0     (49)             = J+2|1X + N2|1N1 ˙J+
+                                                                                                                        (58)
+This allows us to simplify equation (49) to                                                           Thus, equation (50) becomes
+            ¨q = J+1   ¨x1 −˙J1 ˙q −˙N1J+1 ˙x1 + N1¨q0.     (50)          ¨q = J+1   ¨x1 −˙J1 ˙q + J+2|1X + N2|1N1 ˙J+1 ˙x1
+                                                                                                                        (59)
+If we consider a secondary task x2, the term ˙q0 becomes       = J+1   ¨x1 −˙J1 ˙q + J+2|1X + N2|1N1¨qres
+                  ˙q0 = (J2N1)+  ˙x2 −J2J+1 ˙x1            (51)                    APPENDIX C
+                                                              RELATED WORK
+because it can be shown that N1 (J2N1)+ = (J2N1)+, we
+                                                             A. Reinforcement Learning based Locomotion Plannerget,
+                                                 One of the main challenges for learning robust dynamic
+                         ˙q0 = N1 ˙q0                             locomotion policies is handling the high number of continuous                                                         (52)
+                         ¨q0 = N1¨q0 + ˙N1 ˙q0.                        variables describing the motion and force interactions of full
+                                                     humanoid robots. To deal with the dimensionality problem,
+From Eq. (51), the term ¨q0 becomes                   we review previous work that has greatly inspired us. [26],
+                                                                solves a periodic locomotion generation problem via RL on a
+     ¨q0 = J+2|1  ¨x2 −˙J2J+1 ˙x1 −J2 ˙J+1 ˙x1 −J2J1¨x1            planar biped robot. We advance upon this work by solving the                                                         (53)
+    + ˙J+2|1  ˙x2 −J2J+1 ˙x1                                   learning problem for 3D robots, avoiding reliance on human
+                                                          walking trajectories, and generating policies for non-periodic
+where J2|1 ≜J2N1 and                                              gaits. Other important works employ learning as an optimiza-
+                                                                    tion problem over known locomotion  trajectories. In [27],
+                  ˙J+2|1 = −J+2|1 ˙J2|1J+2|1.               (54)   a periodic locomotion problems is solved by optimizations

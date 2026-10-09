@@ -1,0 +1,178 @@
+[
+  {
+    "id": "abstract-01",
+    "section": "摘要",
+    "type": "paragraph",
+    "source_ids": [
+      "abstract-01"
+    ],
+    "translation_ids": [
+      "zh-abstract-01"
+    ],
+    "source": "We propose a robust dynamic walking controller consisting of a dynamic locomotion planner, reinforcement learning, and a whole-body locomotion controller.",
+    "translation": [
+      "本文提出鲁棒动态行走控制器，由步行规划器、强化学习和全身步行控制器组成。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "eq-03",
+    "section": "强化学习",
+    "type": "equation",
+    "source_ids": [
+      "eq-03"
+    ],
+    "translation_ids": [
+      "zh-eq-03"
+    ],
+    "source": "$$R=-(\\dot x^{nom}_{apex}-\\dot x_{apex})^2-15(p_y^{nom}-p_y)^2-(\\dot y_{apex})^2. \\tag{3}$$",
+    "translation": [
+      "$$R=-(\\dot x^{nom}_{apex}-\\dot x_{apex})^2-15(p_y^{nom}-p_y)^2-(\\dot y_{apex})^2. \\tag{3}$$"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "eq-06",
+    "section": "WBLC",
+    "type": "equation",
+    "source_ids": [
+      "eq-06"
+    ],
+    "translation_ids": [
+      "zh-eq-06"
+    ],
+    "source": "$$\\ddot q_1=J_1^\\#(\\ddot x_{d,1}-\\dot J_1\\dot q). \\tag{6}$$",
+    "translation": [
+      "$$\\ddot q_1=J_1^\\#(\\ddot x_{d,1}-\\dot J_1\\dot q). \\tag{6}$$"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "eq-11",
+    "section": "WBLC",
+    "type": "equation",
+    "source_ids": [
+      "eq-11"
+    ],
+    "translation_ids": [
+      "zh-eq-11"
+    ],
+    "source": "$$A(q)\\ddot q_d+b(q,\\dot q)+g(q)+J_r^TF_r=U^T\\tau. \\tag{11}$$",
+    "translation": [
+      "$$A(q)\\ddot q_d+b(q,\\dot q)+g(q)+J_r^TF_r=U^T\\tau. \\tag{11}$$"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "eq-31",
+    "section": "质心动量",
+    "type": "equation",
+    "source_ids": [
+      "eq-31"
+    ],
+    "translation_ids": [
+      "zh-eq-31"
+    ],
+    "source": "$$\\dot J_{cm}\\dot q=J_{cm}A^{-1}b. \\tag{31}$$",
+    "translation": [
+      "$$\\dot J_{cm}\\dot q=J_{cm}A^{-1}b. \\tag{31}$$"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "push",
+    "section": "实验结果",
+    "type": "paragraph",
+    "source_ids": [
+      "push"
+    ],
+    "translation_ids": [
+      "zh-push"
+    ],
+    "source": "The maximum disturbance applied to Valkyrie is 520 N for 0.1 s.",
+    "translation": [
+      "Valkyrie 承受的最大推力为 520 N，持续 0.1 秒。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fig-01-caption",
+    "section": "平台",
+    "type": "caption",
+    "source_ids": [
+      "fig-01-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-01-caption"
+    ],
+    "source": "The left image shows NASA’s Valkyrie humanoid robot; the right image shows its physics-based simulation.",
+    "translation": [
+      "图 1. 左：NASA Valkyrie；右：物理仿真模型。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fig-03-caption",
+    "section": "相空间规划",
+    "type": "caption",
+    "source_ids": [
+      "fig-03-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-03-caption"
+    ],
+    "source": "The Phase Space Planner computes switching time and lateral foot placement.",
+    "translation": [
+      "图 3. PSP 计算步态切换时刻与侧向落脚位置。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fig-10-caption",
+    "section": "仿真结果",
+    "type": "caption",
+    "source_ids": [
+      "fig-10-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-10-caption"
+    ],
+    "source": "Whole-body movements generated via WBLC change according to the task hierarchy.",
+    "translation": [
+      "图 10. WBLC 生成的全身动作随任务优先级而改变。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fig-12-caption",
+    "section": "推力恢复",
+    "type": "caption",
+    "source_ids": [
+      "fig-12-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-12-caption"
+    ],
+    "source": "Valkyrie replans its walking trajectories after a 520 N impulse lasting 0.1 s.",
+    "translation": [
+      "图 12. Valkyrie 受到 520 N、持续 0.1 秒的冲击后重新规划步态。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "conclusion",
+    "section": "结论",
+    "type": "paragraph",
+    "source_ids": [
+      "conclusion"
+    ],
+    "translation_ids": [
+      "zh-conclusion"
+    ],
+    "source": "The planner computes a multi-step walking trajectory almost instantaneously and WBLC respects contact and friction constraints.",
+    "translation": [
+      "步行规划器几乎即时生成多步轨迹，WBLC 同时满足接触与摩擦约束。"
+    ],
+    "notes": ""
+  }
+]

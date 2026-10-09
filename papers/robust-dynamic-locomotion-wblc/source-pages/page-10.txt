@@ -1,0 +1,62 @@
+JOURNAL OF LATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2015                                                                                      10
+
+
+                                               PSP in the RL formulation, we can quickly ﬁnd locomotion
+                                                                    policies for 3D walking. The newly developed WBLC takes
+                                                                    into account realistic contact and friction cone constraints.
+                                                     At the same time, WBLC maintains task  priorities using
+                                                                 projection operators which is missing in previous QP based
+                                             WBCs. Overall, WBLC simultaneously exploits the beneﬁts
+                                                               of QP based WBC’s and projection based WBC’s, achieving
+                                                                         versatility and computational efﬁciency. Another beneﬁt of our
+                                                       methods is the planning speed. Our locomotion planner almost
+                                                                instantaneously ﬁnds a multistep walking trajectory faster than
+                                                                 the state of the art. By devising the replanning process during
+                                                      dynamic walking, robots can quickly react to external forces
+                                                       and achieve signiﬁcant robustness.
+                                                 One interesting aspect of our planning algorithm is the value
+                                                               function we used in the learning process. In the future we
+                                                           could use this value function as an indicator for walking risk
+                                                            given the disturbed states. Many researchers have suggested
+                                                                   indicators for locomotion quality. For example, ZMP [22] and
+                                           CP [23] are indicators of balance stability but they don’t take
+                                                                    into account other important information such as kinematic
+                                                                   constraints or swing time limits. Recently, an allowable CoM
+                                                                  acceleration region [24] has been proposed for multi-contact
+                                                                             stability. However, there  is no indication of kinematic or
+                                                      dynamic limitations such as step size or swing time. In contrast
+                                                           our value function takes into account some kinematic and
+                                                      dynamic constraints that could ultimately make it a versatile
+                                                              metric for walking quality evaluation.Fig. 12.  Robustness study. (a) Shows a walking behavior without external
+disturbance. (b) When an external impulse of 520 N and 0.1 s duration is     In the future, we will experiment with more complex func-
+exerted on the robot’s pelvis, Valkyrie replans its walking trajectories using   tions to represent learned values and policies (e.g. deep neural
+the learned policy and maintains its balance without stopping.
+                                                              network). In this paper, we have focused on ﬁnding simple
+                                                          walking patterns. However, complex neural networks, which
+where γ can be selected heuristically, and we use a value of   can represent highly nonlinear and abstract behaviors, can
+0.8. In our tests, we push Valkyrie while she is dynamically   enable more versatile planners. For instance, future planners
+walking using various disturbance forces applied for a duration  may be able to traverse rough terrain by exploiting various
+of 0.1 s. The maximum disturbance impulse that we apply   locomotion modes such as walking, running, or jumping. We
+to Valkyrie  is 520 N for 0.1  s. The results are shown in   also plan to implement the proposed algorithms in real systems
+Fig. 12 compared to the undisturbed trajectories. The CoM  and evaluate their performance. In our previous work [25],
+phase trajectory in the lateral plane shown in Fig. 12 (b) shows  we showed agile bipedal balance with a point-foot biped with
+that the planner is able to ﬁnd a new trajectory after an external   series elastic actuators. Since the system is highly unstable
+impulse is applied. The time to compute 15 steps after the  by nature, we did not apply external disturbances. We believe
+disturbance is less than 1ms using a dual-core 3.0 GHz Intel i7   that the robustness capabilities we have outlined in this paper
+processor. At the moment that the replanning process occurs,  may allow us ot accomplish sophisticated behaviors in the real
+we also ﬁnd a new swing foot trajectory that transitions from   testbeds.
+the original swing trajectory to the new goal.
+   Fig. 13 shows results of push recoveries while dynamically
+walking when being subject to various external forces. In
+all cases, Valkyrie succeeds to sustain the disturbances and                    APPENDIX A
+continue walking without stopping. The robustness capabilities    ANALYTIC SOLUTION OF THE PHASE SPACE PLANNER
+in this test are competitive to the results of [21] which is not
+based on statistical learning. In contrast to this state of the art,    When we constraint PIPM dynamics to a piecewise linear
+due to our use of ofﬂine learning our planner is able to come   height surface, z = a(x −px) + b, we can ﬁnd tswitch and py
+up with numerous steps almost instantaneously with respect   without numerical integration and bisection search because the
+to the walking time frame.                                 system of equations becomes linear, resulting in the following
+                                       CoM behavior:
+          VI. CONCLUSION AND DISCUSSION
+  In this paper, we propose an RL based robust locomo-                   x(t) = Aeωt + Be−ωt + px,
+                                                                                                                        (35)
+tion planner and a new WBC, dubbed WBLC. By utilizing                       ˙x(t) = ω(Aeωt −Be−ωt),

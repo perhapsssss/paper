@@ -1,0 +1,76 @@
+                 REFERENCES                                 G. Neumann, Eds., vol. 164.  PMLR, 9 2022, pp. 308–319. [Online].
+                                                                                      Available: https://proceedings.mlr.press/v164/sun22a.html
+ [1] G. A. Castillo, B. Weng, W. Zhang, and A. Hereid, “Robust feedback    [20] Z. Fu, X. Cheng, and D. Pathak, “Deep whole-body control: Learning
+     motion policy design using reinforcement learning on a 3d digit bipedal         a unified policy for manipulation and locomotion,” 2022.
+      robot,” in 2021 IEEE/RSJ International Conference on Intelligent    [21] E. Arcari, M. V. Minniti, A. Scampicchio, A. Carron, F. Farshidian,
+     Robots and Systems (IROS), 2021, pp. 5136–5143.                     M. Hutter, and M. N. Zeilinger, “Bayesian multi-task learning mpc for
+ [2] V. Tsounis, M. Alge, J. Lee, F. Farshidian, and M. Hutter, “Deepgait:          robotic mobile manipulation,” 11 2022.
+     Planning and control of quadrupedal gaits using deep reinforcement    [22] Z. Xie,  J. Tseng, S. Starke, M. van de Panne, and C. K. Liu,
+      learning,” IEEE Robotics and Automation Letters, vol. 5, pp. 3699–         “Hierarchical planning and control for box loco-manipulation,” 6 2023.
+     3706, 4 2020. [Online]. Available: http://arxiv.org/abs/1909.08399https:          [Online]. Available: http://arxiv.org/abs/2306.09532
+     //ieeexplore.ieee.org/document/9028188/                                 [23]  J. Dao, K. Green, H. Duan, A. Fern, and J. Hurst, “Sim-to-real learning
+ [3] Z. Li, X. Cheng, X. B. Peng, P. Abbeel, S. Levine, G. Berseth,          for bipedal locomotion under unsensed dynamic loads.”  IEEE, 5 2022,
+     and K. Sreenath, “Reinforcement learning for robust parameterized          pp. 10 449–10 455.
+     locomotion control of bipedal robots.”  IEEE, 5 2021, pp. 2811–2817.    [24] E. Todorov, T. Erez, and Y. Tassa, “Mujoco: A physics engine for
+      [Online]. Available: https://ieeexplore.ieee.org/document/9560769/            model-based control,” in 2012 IEEE/RSJ International Conference on
+ [4]  J. Lee,  J. Hwangbo, L. Wellhausen, V. Koltun, and M. Hutter,           Intelligent Robots and Systems.  IEEE, 2012, pp. 5026–5033.
+     “Learning quadrupedal locomotion over challenging terrain,” Science    [25]  J. Schulman, F. Wolski, P. Dhariwal, A. Radford, and O. Klimov,
+     Robotics,  vol.  5,  p.  eabc5986,  10  2020.  [Online].  Available:        “Proximal  Policy  Optimization  Algorithms,”  jul  2017.  [Online].
+      http://robotics.sciencemag.org/content/5/47/eabc5986.abstract                   Available: http://arxiv.org/abs/1707.06347
+ [5]  J. Siekmann, Y. Godse, A. Fern, and J. Hurst, “Sim-to-real learning of    [26] X. B. Peng, M. Andrychowicz, W. Zaremba, and P. Abbeel, “Sim-
+       all common bipedal gaits via periodic reward composition,” in 2021          to-Real Transfer of Robotic Control with Dynamics Randomization,”
+    IEEE International Conference on Robotics and Automation (ICRA),          in 2018 IEEE International Conference on Robotics and Automation
+     2021, pp. 7309–7315.                                                   (ICRA).  IEEE, may 2018, pp. 3803–3810. [Online]. Available:
+ [6] H. Zhu, A. Gupta, A. Rajeswaran, S. Levine, and V. Kumar, “Dexterous          https://ieeexplore.ieee.org/document/8460528/
+     manipulation with deep reinforcement learning: Efficient, general,
+     and low-cost,” in 2019 International Conference on Robotics and
+     Automation (ICRA), 2019, pp. 3651–3657.
+ [7] C. Wang, Q. Zhang, Q. Tian, S. Li, X. Wang, D. Lane, Y. Petillot, and
+      S. Wang, “Learning mobile manipulation through deep reinforcement
+      learning,” Sensors, vol. 20, p. 939, 2 2020.
+ [8] C. Sun, J. Orbik, C. M. Devin, B. H. Yang, A. Gupta, G. Berseth,
+     and S. Levine, “Fully autonomous real-world reinforcement learning
+     with applications to mobile manipulation,” in Proceedings of the
+     5th Conference on Robot Learning,  ser. Proceedings of Machine
+     Learning Research, A. Faust, D. Hsu, and G. Neumann, Eds., vol.
+     164.  PMLR, 08–11 Nov 2022, pp. 308–319. [Online]. Available:
+      https://proceedings.mlr.press/v164/sun22a.html
+ [9] H. Arisumi, J.-R. Chardonnet, A. Kheddar, and K. Yokoi, “Dynamic
+       lifting motion of humanoid robots.”  IEEE, 4 2007, pp. 2661–2667.
+[10] K. Harada, S. Kajita, H. Saito, M. Morisawa, F. Kanehiro, K. Fujiwara,
+     K. Kaneko, and H. Hirukawa, “A humanoid robot carrying a heavy
+      object.”  IEEE, 2007, pp. 1712–1717.
+[11] A. Settimi, D. Caporale, P. Kryczka, M. Ferrati, and L. Pallottino,
+     “Motion primitive based random planning for loco-manipulation tasks,”
+    IEEE-RAS International Conference on Humanoid Robots, pp. 1059–
+     1066, 2016.
+[12]  P. Ferrari, M. Cognetti, and G. Oriolo, “Humanoid whole-body planning
+      for loco-manipulation tasks,” in Proceedings - IEEE International
+     Conference on Robotics and Automation, 2017, pp. 4741–4746.
+[13]  S. Karumanchi, K. Edelberg, I. Baldwin, J. Nash, J. Reid, C. Bergh,
+       J. Leichty, K. Carpenter, M. Shekels, M. Gildner, D. Newill-Smith,
+       J. Carlton, J. Koehler, T. Dobreva, M. Frost, P. Hebert, J. Borders, J. Ma,
+     B. Douillard, P. Backes, B. Kennedy, B. Satzinger, C. Lau, K. Byl,
+     K. Shankar, and J. Burdick, “Team robosimian: Semi-autonomous
+     mobile manipulation at the 2015 darpa robotics challenge finals,”
+     Journal of Field Robotics, vol. 34, pp. 305–332, 3 2017.
+[14] K. Harada, S. Kajita, F. Kanehiro, K. Fujiwara, K. Kaneko, K. Yokoi,
+     and H. Hirukawa, “Real-time planning of humanoid robot’s gait for
+      force-controlled manipulation,” IEEE/ASME Transactions on Mecha-
+      tronics, vol. 12, pp. 53–62, 2 2007.
+[15]  S. Sato, Y. Kojio, K. Kojima, F. Sugai, Y. Kakiuchi, K. Okada, and
+    M. Inaba, “Drop prevention control for humanoid robots carrying
+     stacked boxes.”  IEEE, 9 2021, pp. 4118–4125.
+[16] M. Seo, S. Han, K. Sim, S. H. Bang, C. Gonzalez, L. Sentis, and
+     Y. Zhu, “Deep imitation learning for humanoid loco-manipulation
+     through human teleoperation,” 2023.
+[17]  J. Liu, H. Sim, C. Li, and F. Chen, “Birp: Learning robot generalized
+     bimanual coordination using relative parameterization method on human
+     demonstration,” 2023.
+[18] Y. Ma, F. Farshidian, T. Miki, J. Lee, and M. Hutter, “Combining
+     learning-based locomotion policy with model-based manipulation for
+     legged mobile manipulators,” IEEE Robotics and Automation Letters,
+      vol. 7, pp. 2377–2384, 4 2022.
+[19] C. Sun, J. Orbik, C. M. Devin, B. H. Yang, A. Gupta, G. Berseth,
+     and S. Levine, “Fully autonomous real-world reinforcement learning
+     with applications to mobile manipulation,” A. Faust, D. Hsu, and

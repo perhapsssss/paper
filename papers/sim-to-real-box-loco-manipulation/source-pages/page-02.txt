@@ -1,0 +1,59 @@
+[9, 10] for lifting up boxes, planning a whole-body motion                                              Standing w\
+and compensating for the extra force applied by the box.                                          Box
+However, these methods produce very conservative motion       Walking            Box Pickup
+to ensure absolute stability at all times, resulting in pickup
+                                                                                                      Walking w\motions that take over 20 seconds to be completed. Planning
+                                                                                          Box
+based approaches [11–13] have been explored for producing                  Standing
+long loco-manipulation trajectories, with [11] even showing
+hardware results. Work focused on locomotion [14, 15] has    Fig. 2: Allowed transitions between the 5 different policies.
+explored how to modify a humanoid’s gait when interacting
+                                                              standing while holding a box. For each behavior we learn awith objects. These strategies often augment some baseline
+                                                                        distinct control policy, which has behavior specific commandgait controller to account for and modify the motion of the
+                                                              paramters. Box loco-manipulation involves only a subset ofmanipulated object.
+                                                                the possible transitions between these policies. For example,   Prior work that has used learning for humanoid or bi-
+                                            we will never go directly from walking to box pickup, andmanual manipulation tasks have been mostly trajectory based
+                                                               instead will always use standing as an inbetween behavior.or rely on demonstrations as targets for imitation learning. For
+                                                                  Fig. 2 shows the allowed behavior transitions that we targetexample, Seo et al. (2023) uses teleoperation to obtain expert
+                                                                   for the box loco-manipulation task.trajectories to imitate, while Liu et al. (2023) uses motion
+                                                              All of our policies follow the same general learningtracked human demonstrations for a similar manipulation
+                                                       framework, with changes mainly to the reward functiontracking task. This requirement of prior expert data can
+                                                                  to learn different skills. Following prior work on bipedalintroduce another failure point in the learning system, as
+                                                         locomotion [23] we use an LSTM neural network with twomotion tracking error or alignment error between the human
+                                                         128-dimensional recurrent hidden layers to represent ourand robot data can cause componding issues down the line.
+                                                                    policies, with the inputs and outputs adapted for the Digit
+B. RL for Loco-Manipulation                            humanoid robot, which has 20 DoFs and 10 unactuated joints.
+                                                 The input to each policy is a pair (s, c), where s is the 67-  The use of learning for loco manipulation has been largely
+                                                            dimensional robot-state vector and is the same for all policies,centered around mobile base or quadraped robots with an
+                                                     and c contains a policy specific command. The policy runsattached manipulator arm. Due to the inherent stability of such
+                                                                       at 50Hz and outputs actions corresponding to PD setpointa system a common strategy is to separate out the locomotion
+                                                                    targets for each actuated joint. These are passed to a PDand manipulation control in to two separate modules. Ma et al.
+                                                                   controller running at 2kHz with fixed gains.(2022) utilizes RL for only locomotion while the manipulator
+                                          We train policies in simulation using the MuJoCo physicsarm is controlled by a MPC planner, while Sun et al. (2022)
+                                                            engine [24] and use the actor-critic PPO algorithm [25] withlearns separate grasping and navigation policies. We utilize a
+                                                          a clipped objective and gradient clipping. To facilitate sim-similar separation of locomotion and manipulation skills, in
+                                                                      to-real transfer, we use dynamics randomization [26] duringthat locomotion and box pickup are separate control policies,
+                                                                  training on parameters such as body mass, joint damping,but unlike Ma et al. (2022) our learned policies control all the
+                                                    body center of mass location, and friction. Ranges for thesejoints, so that coordinated full body motion is always possible.
+                                                          randomizations can be found in table Table I. Rather thanFu et al. (2022) and Arcari et al. (2022) both learn a more
+                                                          use a state estimator during training and testing, we simplyunified control approach that commands both the legs and
+                                                           use the true simulation state and apply random noise on topmanipulator arm from the same controller. Fu et al. (2022)
+                                                                of it. We train using 80 cores on a dual Intel Xeon Platinumlearns a policy that executes base velocity and end effector
+                                                    8280 server.position commands from a higher level planner, while Arcari
+                                                     Each of our reward functions is defined in terms of aet al. (2022) learns from a MPC trajectories.
+                                                                     distinct set {(ri, wi)} of paired reward terms and weights.  Perhaps the most relevant prior work to our research is Xie
+                                                  The corresponding reward function is then defined by:et al. (2023), which targets the same humanoid box pickup
+and locomotion task that we do. We follow a similar strategy                                             R = X wiexp(−ri)
+of breaking down the task into different skills with a control                                                                                                                                  i
+policy for each. The main differences that we try to improve
+                                                               In most cases, each of the reward terms will represent someupon is to remove the reliance on trajectory tracking and
+                                                                cost to be avoided, so that the negative exponential will befocus more on hardware execution instead of an animation
+                                                             smaller for larger costs. The state variables used below tosetting.
+                                                                define the reward functions are defined in Table II.
+                    III. SYSTEM OVERVIEW
+                                                                   IV. LEARNING LOCO-MANIPULATION SKILLS
+  We break down the full box loco-manipulation task into 5
+                                                             A. Box Pickup Policydistinct behaviors: 1) WALK, for basic walking, 2) STAND, for
+transitioning to a standing position after walking, 3) PICKUP,    We want to train a control policy that is capable of picking
+for picking up the box, 4) WALKWITHBOX, for walking while   up boxes. It should be able to handle boxes of varying sizes
+holding a box, and 5) STANDWITHBOX for transitioning to   and masses, along with the box starting in a range of positions
