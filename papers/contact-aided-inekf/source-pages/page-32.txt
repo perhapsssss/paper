@@ -1,0 +1,38 @@
+   Tables 2 and 3 give a summary of the left/right world-centric and robo-centric InEKF equations assuming a single
+contact and landmark position. The linearized observation matrix and observation type for several different sensors
+are also provided. In these tables, lt is shorthand for the true landmark position, and m denotes the true magnetic
+ﬁeld vector. Using these tables, it is clear to see the relation between the left/right invariant error dynamics and the
+world/robo-centric formulations. All of these dynamics and observations are supported in an open-source C++ Library
+released alongside this article; available at: https://github.com/RossHartley/invariant-ekf.
+
+13.  Conclusion and future Work
+
+Using recent results on a group-invariant form of the extended Kalman ﬁlter (EKF), this article derived an observer
+for a contact-aided inertial navigation system for a 3D legged robot. Contact and IMU sensors are available on all
+modern bipedal robots; therefore, the developed system has the potential to become an essential part of such platforms
+since an observer with a large basin of attraction can improve the reliability of perception and control algorithms. We
+also included IMU biases in the state estimator and showed that, while some of the theoretical guarantees are lost, in
+real experiments, the proposed system has better convergence performance than that of a commonly used quaternion-
+based EKF. Although the latter is a discrete EKF on a Lie group, it does not exploit symmetries present in the system
+dynamics and observation models, namely, invariance of the estimation error under a group action. In addition to the
+original right-invariant form of the ﬁlter, the left-invariant dynamics are discussed as well as a robo-centric version of
+the ﬁlter.
+  A series of experiments were conducted while running the ﬁlter on a Cassie-series biped robot. The accuracy of
+the invariant-EKF was demonstrated through a motion capture comparison, while long-term odometry was compared
+by overlaying the trajectory on Google Earth imagery. In addition to improving signals used for feedback control,
+the pose estimate from this ﬁlter can be used alongside a vision sensor to build maps of the environment. This was
+demonstrated on Cassie by building LiDAR-based point cloud maps while walking.
+   Future work includes developing an invariant smoother based on this ﬁlter. This would utilize the framework
+developed by Chauchat et al. [26] to potentially improve IMU preintegration [58, 38, 34] as well as contact preinte-
+gration [45] to perform SLAM. One interesting extension would be online estimation of kinematic parameters, which
+may help remove biases in the forward kinematic measurements. Another possibility for improvement of legged robot
+odometry is the detection of mode changes such as standing, ﬂat-ground walking, and turning. During these modes,
+additional constraints may be inferred, which could improve state estimation [24]. Finally, additional experiments need
+to be conducted to explore the potential for visual-inertial-contact odometry using an InEKF as well as incorporating
+prior terrain information into the ﬁlter.
+
+
+
+
+
+                                              32

@@ -1,0 +1,37 @@
+     (a) University of Michigan’s North Campus with the bell tower                            (b) Looking towards a staircase
+
+
+
+
+
+                       (c) Walking along a sidewalk                                      (d) Inside the Bob and Betty Beyster Building
+
+Figure 12: LiDAR maps created by transforming 10 seconds of point cloud data onto the pose trajectory estimated by the InEKF. The high
+frequency odometry estimate allows for motion compensation within a single scan of the LiDAR (10Hz); https://youtu.be/pNyXsZ5zVZk
+and https://youtu.be/nbQTQw0gJ-k.
+
+
+After carrying out the chain rule and making the ﬁrst order approximation, ηlt = exp(ξt) ≈Id + ξt ∧, the individual
+terms of the left-invariant error dynamics become:
+
+                        d
+                       dtRTt ¯Rt ≈  −(˜ωt −ζgt )× ξRt −ζgt + wgt ×
+                   d                         a                  g
+                                        t (¯vt −vt) ≈−  ˜at −¯bt × ξRt −  ˜ωt −¯bt × ξvt −ζat + wat                  dtRT
+                   d                                g
+                                        t (¯pt −pt) ≈ξvt −  ˜ωt −¯bt × ξpt                  dtRT
+                   d                            g
+                                        t (¯dt −dt) ≈−  ˜ωt −¯bt × ξdt + hR(˜αt)wvt .                  dtRT
+
+Using these results, the log-linear left-invariant dynamics can be expressed using the following linear system
+
+                                   d
+                                         dtξt = Atξt + wt
+                                   d
+                                                                                          t + ¯Qt,                     =⇒ dtPt = AtPt + PtAT
+
+
+
+
+
+                                              27

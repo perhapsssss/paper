@@ -1,0 +1,56 @@
+The group action is matrix multiplication. The adjoint is a linear map that can be used to move vectors between the
+tangent spaces of two group elements. The matrix representation of the adjoint of SEK(3) is given by:
+
+                               R     0    · · ·  0 
+                                          (p1)× R  R    · · ·  0
+                           AdX =                                ...                                    ...    ...                ...                                      (63)                                                                                                                                                               .
+                                     (pK)× R  0    · · · R
+
+The matrix representation of a vector, ξ ≜vec(φ, ξ1, · · · , ξK) ∈R3+3K, in the Lie algebra can obtained using the
+“hat” operator:
+                          (φ)×  ξ1    · · ·  ξK 
+                                                03,3   0    · · ·   0
+                    ξ∧=                                                                   (64)
+                                                                                                                                                                                                                                      ...                            ...     ...                    ...                                                                                                                             ∈seK(3),
+                                                03,3   0    · · ·   0
+where (φ)× denotes the skew-symmetric matrix of a vector φ = vec(φ1, φ2, φ3) ∈R3 .
+
+                              0   −φ3   φ2 
+                             (φ)× ≜  φ3    0   −φ1 ∈so(3)                                 (65)
+                               −φ2   φ1    0
+
+The same vector can be moved to the Lie group through the exponential map:
+
+                          Γ0(φ)  Γ1(φ)ξ1    · · ·  Γ1(φ)ξK 
+                                                 03,3      1         · · ·     0
+                            exp(ξ) =                          ...                                              ...         ...                                   ...                                   (66)                                                                                                                                                                          ,
+                                                 03,3      0         · · ·     1
+
+where Γ0(φ) is the exponential map of SO(3), and Γ1(φ) is the left Jacobian of SO(3).
+
+C.  Error-state Conversions
+
+Throughout this document, several versions of error states are used. These include the left/right invariant error (1),
+the QEKF error states (21), and the “Euclidean orientation error” used for plotting the covariance hull (33). It is often
+necessary to convert between these error states for plotting or when initializing the ﬁlters to provide fair comparisons.
+For example, if the QEKF and the InEKF are initialized with identical covariance matrices, the underlying distribution
+that they represent may be substantially different. This makes it impossible to show an accuracy comparison between
+the InEKF and QEKF with identical initial uncertainty. This section provides details on how to convert between these
+error states up to a ﬁrst-order approximation.
+   When designing a QEKF, the orientation error can be deﬁned in either the local or global frame [75]. These errors
+are equivalent to the left- and right-invariant errors for SO(3). In this document, the orientation error in the QEKF was
+chosen to be the error deﬁned in the local frame (left-invariant error). Since the invariant errors are related through the
+group’s adjoint, the exact relation between right-invariant and QEKF orientation errors is
+                                     exp(ξRt ) = exp(¯Rtδθt).                                        (67)
+
+When plotting the individual axes of the orientation error covariance hull, a “Euclidean orientation error” should be
+used. Let δφt ≜φt −¯φt be this Euclidean error where exp(φ) ≜R is the exponential coordinate representation of
+a particular orientation. When the errors are small, a ﬁrst-order approximation can be used to ﬁnd a mapping between
+the right-invariant orientation error and this “Euclidean orientation error”.
+
+                            exp(ξRt ) = ¯RtRTt = exp(¯φt) exp(−¯φt −δφ)
+                                                                                                             (68)
+                                   ≈exp(−Γ1(¯φt)δφ)
+
+
+                                              38

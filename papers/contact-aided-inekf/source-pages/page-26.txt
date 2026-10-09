@@ -1,0 +1,24 @@
+      Figure 11: Long outdoor odometry experiment where Cassie walked roughly 200 m along a sidewalk over 7 minutes and 45 seconds.
+
+
+can then be accumulated to create a map of the environment. Figure 12 shows a few still frames from several Li-
+DAR mapping experiments. Videos of these results can be viewed at https://youtu.be/pNyXsZ5zVZk and
+https://youtu.be/nbQTQw0gJ-k.
+
+10.  Alternative Left-Invariant Formulation
+
+For the derivations in Sections 5-8, we were assuming the use of the right-invariant error. This choice was due to the
+forward kinematic measurement having the right-invariant observation form. However, it is possible to derive a left-
+invariant form of this ﬁlter, which may be more appropriate to use when dealing with left-invariant observations. For
+example, GPS measurements are left-invariant observations for the world-centric observer; see Section 12. Written
+explicitly, the left-invariant error is
+
+                       RTt ¯Rt  RTt (¯vt −vt)  RTt (¯pt −pt)  RTt (¯dt −dt)
+                                           01,3       1           0           0                    ηlt ≜X−1t  ¯Xt =                                           01,3       0           1           0                                                                                                                                                .
+                                           01,3       0           0           1
+
+
+
+
+
+                                              26

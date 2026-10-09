@@ -1,0 +1,58 @@
+  A process dynamics evolving on the Lie group with state at time t, Xt ∈G, is denoted by
+
+                                    d
+                                       dtXt = fut(Xt),
+and ¯Xt is used to denote an estimate of the state. The state estimation error is deﬁned using right or left multiplication
+of X−1t  as follows.
+Deﬁnition 1 (Left and Right Invariant Error). The right- and left-invariant errors between two trajectories Xt and ¯Xt
+are:
+                          ηrt = ¯XtX−1t = (¯XtL)(XtL)−1   (Right-Invariant)
+                                                                                                                      (1)
+                              ηlt = X−1t  ¯Xt = (L¯Xt)−1(LXt),   (Left-Invariant)
+
+where L is an arbitrary element of the group.
+
+   The following two theorems are the fundamental results for deriving an InEKF and show that by correct parametriza-
+tion of the error variable, a wide range of nonlinear problems can lead to linear error equations.
+
+Theorem 1 (Autonomous Error Dynamics [10]). A system is group afﬁne if the dynamics, fut(·), satisﬁes:
+
+                         fut(X1X2) = fut(X1)X2 + X1fut(X2) −X1fut(Id)X2                             (2)
+
+for all t > 0 and X1, X2 ∈G. Furthermore, if this condition is satisﬁed, the right- and left-invariant error dynamics
+are trajectory independent and satisfy:
+
+                     d
+                                            t = gut(ηrt)  where  gut(ηr) = fut(ηr) −ηrfut(Id)                       dtηr
+                     d
+                                            t = gut(ηlt)  where  gut(ηl) = fut(ηl) −fut(Id)ηl                        dtηl
+
+
+    In the above, Id ∈G denotes the group identity element; to avoid confusion, we use I for a 3 × 3 identity matrix,
+and In for the n × n case. The following statements hold for both the left- and right-invariant error dynamics.
+   Deﬁne At to be a dimg × dimg matrix satisfying
+                                    gut(exp(ξ)) ≜(Atξ)∧+ O(||ξ||2).
+
+For all t ≥0, let ξt be the solution of the linear differential equation
+
+                                      d
+                                            dtξt = Atξt.                                                  (3)
+
+Theorem 2 (Log-Linear Property of the Error [10]). Consider the right-invariant error, ηt, between two trajectories
+(possibly far apart). For arbitrary initial error ξ0 ∈Rdimg, if η0 = exp(ξ0), then for all t ≥0,
+
+                                            ηt = exp(ξt);
+
+that is, the nonlinear estimation error ηt can be exactly recovered from the time-varying linear differential equation
+(3).
+
+   This theorem states that (3) is not the typical Jacobian linearization along a trajectory because the (left- or) right-
+invariant error on the Lie group can be exactly recovered from its solution. This result is of major importance for the
+propagation (prediction) step of the InEKF [10], where in the deterministic case, the log-linear error dynamics allows
+for exact covariance propagation.
+
+Remark 1. This indirect way of expressing the Jacobian of gut is from Barrau and Bonnabel [10]; it is used because
+we are working with a matrix Lie group viewed as an embedded submanifold of a set of n × n matrices.
+
+
+                                              7

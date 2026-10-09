@@ -1,0 +1,57 @@
+Appendices
+
+A.  Discretization of Filter Equations
+
+In the preceding sections, the ﬁlters equations were in continuous time. However, in order to implement these ﬁlters
+using software and physical sensors, these equations need to be discretized. For our implementation, we assumed a
+zero-order hold on the inertial measurements, and performed analytical integration [34, 48]. In particular, analytical
+integration was important for the resulting error dynamics to satisfy Theorem 2.
+
+A.1.  World-centric Dynamics
+
+This section demonstrates how to derive the deterministic, discrete time (world-centric) dynamics through analytical
+integration of the continuous state (24) and bias (25) dynamics. The contact, landmark, and bias dynamics are simply
+gaussian noise. Therefore, the discrete, deterministic dynamics are simply:
+                                       ¯dtk+1 = ¯dtk,        ¯bgtk+1 = ¯bgtk,        ¯batk+1 = ¯b atk.                             (47)
+
+Assuming a zero-order hold on the incoming IMU measurements between times tk and tk+1, the orientation can be
+updated using the exponential map of SO(3):
+
+                               Z tk+1
+                                   ¯Rtk+1 =         ¯Rtk (¯ωt)× dt = ¯Rtk exp ¯ωtk∆t
+                                                    tk
+
+where ∆t ≜tk+1−tk. Integrating the velocity dynamics yields an equation that involves the integral of the exponential
+map:
+                       Z tk+1                          Z tk+1
+                   ¯vtk+1 = ¯vtk +          ¯Rt¯at + g dt = ¯vtk + g∆t + ¯Rtk        exp  ¯ωtkt  dt   ¯atk.
+                                       tk                                               tk
+Likewise, analytically solving for the discrete position dynamics involves computing the double integral:
+
+                                     1           Z tk+1 Z τ
+                        ¯ptk+1 = ¯ptk + ¯vtk∆t + 2g∆t2 + ¯Rtk     tk      tk exp  ¯ωtkt  dt dτ   ¯atk.
+
+To solve these integrals, it is useful to deﬁne an auxiliary function [15]:
+
+                           ∞         !                                                  1
+                            Γm(φ) ≜ X         (φ)n×    ,                                   (48)                                               (n + m)!
+                                           n=0
+
+which allows integrals to be easily expressed and computed using the taylor series form of the SO(3) exponential map.
+
+             tk+1                   tk+1          ∞           !       Z               Z                         1           n
+             exp (ωt) dt =       Γ0(¯ωtkt) dt = X          ¯ωtk∆t ×  ∆t = Γ1(ω∆t)∆t                                                 (n + 1)!             tk                        tk                 n=0
+        tk+1   τ                         tk+1          ∞           !    Z    Z                 Z                          1           n
+             exp  ¯ωtkt  dt dτ =       Γ1(¯ωtkt) t dt = X          ¯ωtk∆t ×  ∆t2 = Γ2(ω∆t)∆t2                                                       (n + 2)!        tk      tk                           tk                  n=0
+
+Closed form expressions also exist, allowing fast and easy computation of these quantities [75].
+
+                                      sin(||φ||)        1 −cos(||φ||)
+                Γ0(φ) = I3 +        (φ)× +             (φ)2×                                           ||φ||                  ||φ||2
+                             1 −cos(||φ||)          ||φ|| −sin(||φ||)
+                Γ1(φ) = I3 +            (φ)× +                (φ)2×                            (49)                                            ||φ||2                     ||φ||3
+                         1      ||φ|| −sin(||φ||)          ||φ||2 + 2 cos(||φ||) −2
+                                                            ×                Γ2(φ) = 2I3 +       ||φ||3     (φ)× +          2||φ||4        (φ)2
+
+
+                                              34

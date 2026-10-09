@@ -1,0 +1,55 @@
+These biases form a parameter vector that needs to be estimated as part of the RIEKF state,
+
+                                               bg(t)     bgt                                       θt ≜     ≜    ∈R6.                                      (22)                                               ba(t)     bat
+
+The model’s state now becomes a tuple of our original matrix Lie group and the parameter vector, (Xt, θt) ∈G × R6.
+The augmented right-invariant error is now deﬁned as
+
+                                        ert ≜(¯XtX−1t   , ¯θt −θt) ≜(ηrt, ζt).                                   (23)
+
+Written explicitly, the right-invariant error is
+
+                    ¯RtRTt     ¯vt −¯RtRTt vt    ¯pt −¯RtRTt pt    ¯dt −¯RtRTt dt 
+                                     01,3        1            0            0                     ηrt =                                     01,3        0            1            0                                                                                                                                        ,
+                                     01,3        0            0            1
+
+while the parameter vector error is given by
+
+                                                                            ¯bgt −bgt     ζgt
+                                          ζt =   a    ≜         .                                                                            ¯bt −bat     ζat
+
+7.2.  System Dynamics
+
+With IMU biases included, the system dynamics are now expressed as
+
+                               d
+                                                                                   t −wgt )×                                 dtRt = Rt (˜ωt −bg
+                                d
+                                                                                  t −wat ) + g                                      dtvt = Rt(˜at −ba                                                                                                             (24)
+                                d
+                                     dtpt = vt
+                                d
+                                                                                         t ).                                     dtdt = Rt hR(˜αt)(−wv
+
+   The IMU bias dynamics are modeled using the typical “Brownian motion” model, i.e., the derivatives are white
+Gaussian noise, to capture the slowly time-varying nature of these parameters,
+
+                         d
+                                                  t = wbgt  ,    wbgt  ∼GP(03,1, Σbg δ(t −t′))                            dtbg                                                                                                             (25)
+                         d
+                                                  t = wbat  ,    wbat  ∼GP(03,1, Σba δ(t −t′)).                           dtba
+
+The deterministic system dynamics now depend on both the inputs, ut, and the parameters, θt
+                             ¯Rt (¯ωt)×   ¯Rt¯at + g    ¯vt   03,1 
+                                                      01,3        0      0   0
+                                   fut(¯Xt, ¯θt) =                                                      01,3        0      0   0                                                                                                                                     ,
+                                                      01,3        0      0   0
+
+where ¯ωt ≜˜ωt −¯bgt and ¯at ≜˜at −¯b at are the “bias-corrected” inputs. To compute the linearized error dynamics, the
+augmented right-invariant error (23) is ﬁrst differentiated with respect to time,
+
+                                 d      d     wbgt
+                                        dtert =  dtηrt, wbat       .                                        (26)
+
+
+                                              19

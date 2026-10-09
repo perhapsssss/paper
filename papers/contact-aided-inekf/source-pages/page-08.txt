@@ -1,0 +1,58 @@
+   During the correction step of a Kalman ﬁlter, the error is updated using incoming sensor measurements. If these
+observations take a particular form, then the linearized observation model and the innovation will also be autonomous
+[10]. This happens when the measurement, Yt, can be written as either
+
+                          Yt = Xtb + Vt     (Left-Invariant Observation)  or
+                                                                                                                      (4)
+                          Yt = X−1t b + Vt   (Right-Invariant Observation),
+
+where b is a constant vector and Vt is a vector of Gaussian noise.
+   The adjoint representation plays a key role in the theory of Lie groups and through this linear map we can capture
+the non-commutative structure of a Lie group.
+
+Deﬁnition 2 (The Adjoint Map, see Hall [43] page 63). Let G be a matrix Lie group with Lie algebra g. For any
+X ∈G the adjoint map, AdX : g →g, is a linear map deﬁned as AdX(ξ∧) = Xξ∧X−1. Furthermore, we denote the
+matrix representation of the adjoint map by AdX.
+
+   For more details on the material discussed above, along with the theory and proofs about the InEKF, we refer
+reader to Barrau [8], Barrau and Bonnabel [10, 11].
+
+4. A motivating example: 3D orientation propagation
+
+Suppose we are interested in estimating the 3D orientation of a rigid body given angular velocity measurements in the
+body frame, ˜ωt ≜vec(ωx, ωy, ωz) ∈R3. This type of measurement can be easily obtained from a gyroscope.
+   There are several different parameterizations of SO(3); Euler angles, quaternions, and rotation matrices being the
+most common.  If we let qt ≜vec(qx, qy, qz) be a vector of Euler angles using the RzRyRx convention, then the
+orientation dynamics can be expressed as [33]
+
+                            "qx #   "1   sin(qx) tan(qy)  cos(qx) tan(qy)# "wx #                      d
+                                   qy =  0      cos(qx)        −sin(qx)     wy   .
+                          dt                                    qz      0   sin(qx) sec(qy)   cos(qx) sec(qy)   wz
+
+Let δqt ≜qt −¯qt ∈R3 be the error between the true and estimated Euler angles. The error dynamics can be written
+as a nonlinear function of the error variable, the inputs, and the state
+
+                                  d
+                                       dtδqt = g(δqt, ˜ωt, qt).
+
+In order to propagate the covariance in an EKF, we need to linearize the error dynamics at the current state estimate,
+qt = ¯qt (i.e. zero error). This leads to a linear error dynamics of the form:
+
+                         0     (ωz¯cx + ωy¯sx)/¯c2y      ¯ty(ωy¯cx −ωz¯sx)                        d
+                          dtδqt ≈  0           0                 ωz¯cx + ωy¯sx  δqt
+                                  0   (¯sy(ωz¯cx + ωy¯sx))/¯c2y   (ωy¯cx −ωz¯sx)/¯cy
+                              ≜A(˜ωt, ¯qt)δqt,
+
+where ¯cx, ¯sx, and ¯tx are shorthand for cos(¯qx), sin(¯qx), and tan(¯qx). The linear dynamics matrix clearly depends
+on the estimated angles, therefore bad estimates will affect the accuracy of the linearization and ultimately the perfor-
+mance and consistency of the ﬁlter.
+  Now instead, let’s use a rotation matrix to represent the 3D orientation, Rt ∈SO(3). The dynamics can now be
+simply expressed as
+                                    d
+                                      dtRt = Rt (˜ωt)× ,
+
+
+
+
+
+                                              8

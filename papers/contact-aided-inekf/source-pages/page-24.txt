@@ -1,0 +1,38 @@
+Figure 9: Top-down view of the InEKF’s estimated trajectory for a motion capture experiment. The position drift is unobservable, however, the
+ﬁnal drift is less than 5% of the distance traveled.
+
+
+where the error is deﬁned by Euclidean distance. Up to a ﬁrst-order approximation, this mapping is done using:
+
+                      δφt   −Γ−11  (¯φt)   0   0  ξRt 
+                                                          δvt =    (¯vt)×    −I   0   ξvt ,                               (33)
+                                   δpt          (¯pt)×     0  −I   ξpt
+
+where the “Euclidean orientation error” is deﬁned as δφt ≜φt −¯φt, and the velocity and position errors match the
+QEKF error states (21). The matrix Γ1(¯φt) is known as the left Jacobian of SO(3) and has an analytical form. Further
+explanation and the derivation of the above equation is given in Appendix C.
+
+9.3.  Long Odometry Experiment
+
+In addition to providing accurate estimates of states vital for legged robot control (orientation and velocity), this InEKF
+can also provide reliable odometry for a higher-level mapping or SLAM system. To demonstrate the accuracy of long-
+term odometry, we had Cassie walk about 200 m along a sidewalk around the University of Michigan’s Wave Field.
+In total, the walk took 7 minutes and 45 seconds. The estimated path from the InEKF overlaid onto Google Earth
+imagery is shown in Figure 11. A video of this experiment can be found at https://youtu.be/jRUltB_dMlo.
+
+   Even though the absolute position is unobservable, the odometry estimate from the InEKF contains low enough
+drift to keep the estimate on the sidewalk for the duration of the experiment. The ﬁnal position estimate is within a
+few meters of the true position, and the yaw drift is imperceptible. This odometry estimate is readily available, as it
+only depends on inertial, contact, and kinematic data, which barring sensor failure, always exist. It does not require
+the use of any vision systems that may be susceptible to changes in environment or lighting conditions.
+
+9.4.  LiDAR Mapping Application
+
+One application for the InEKF odometry is the building of local maps of the environment. We equipped the Cassie-
+series robot with a new torso that houses a Velodyne VLP-32C LiDAR. With the ﬁlter running, we can project each
+received packet of point cloud data into the world frame based on the current state estimate. This point cloud data
+
+
+
+
+                                              24

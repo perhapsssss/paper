@@ -1,0 +1,58 @@
+changes in lighting as well as the operating environment. It is therefore beneﬁcial to develop a low-level state estimator
+that fuses data only from proprioceptive sensors to form accurate high-frequency state estimates.  This approach
+was taken by Bloesch et al. [15] when developing a quaternion-based extended Kalman ﬁlter (QEKF) that combines
+inertial, contact, and kinematic data to estimate the robot’s base pose, velocity, and a number of contact states. In
+this article, we expand upon these ideas to develop an invariant extended Kalman ﬁlter (InEKF) that has improved
+convergence and consistency properties allowing for a more robust observer that is suitable for long-term autonomy.
+   The theory of invariant observer design is based on the estimation error being invariant under the action of a
+matrix Lie group [1, 20], which has recently led to the development of the InEKF1 [18, 8, 10, 11] with successful
+applications and promising results in simultaneous localization and mapping [8, 86] and aided inertial navigation
+systems [4, 5, 8, 83]. The invariance of the estimation error with respect to a Lie group action is referred to as a
+symmetry of the system [5]. Summarized brieﬂy, Barrau and Bonnabel [10] showed that if the state is deﬁned on a
+Lie group, and the dynamics satisfy a particular “group afﬁne” property, then the symmetry leads to the estimation
+error satisfying a “log-linear” autonomous differential equation on the Lie algebra.  In the deterministic case, this
+linear system can be used to exactly recover the estimated state of the nonlinear system as it evolves on the group.
+The log-linear property therefore allows the design of a nonlinear observer or state estimator with strong convergence
+properties.
+
+1.1.  Contribution
+
+In this article, we derive an InEKF for a system containing IMU and contact sensor dynamics, with forward kinematic
+correction measurements. We show that the deﬁned deterministic system satisﬁes the “group afﬁne” property, and
+therefore, the error dynamics is exactly log-linear. In practice, with the addition of sensor noise and IMU bias, this
+log-linear error system is only approximate; we show, however, that in many cases the proposed InEKF is still preferred
+over standard QEKFs due to superior convergence and consistency properties. We demonstrate the utility and accuracy
+of the developed observer through a series of LiDAR mapping experiments performed on a Cassie-series biped robot.
+    In summary, this work makes the following contributions:
+
+   1. Derivation of a continuous-time right-invariant EKF for an IMU/contact process model with a forward kinematic
+     measurement model; the observability analysis is also presented;
+
+   2. State augmentation with IMU biases;
+
+   3. Evaluations of the derived observer in simulation and hardware experiments using a 3D bipedal robot;
+
+   4. Alternative derivation of the observer using a left-invariant error deﬁnition;
+
+   5. Detailed explanation of the connection between the invariant error choice and the world-centric and robo-centric
+      estimator formulations;
+
+   6. Equations provided for analytical discretization of the proposed observers; and
+
+   7. Development of an open-source C++ library for aided-inertial navigation using the InEKF https://github.
+    com/RossHartley/invariant-ekf.
+
+1.2.  Outline
+
+The remainder of this article is organized as follows. Background and related work are given in section 2.  Sec-
+tion 3 provides the necessary preliminary material needed for understanding the InEKF formulation, which is motived
+by an example from attitude dynamics in section 4. Section 5 provides the derivation of a right-invariant extended
+Kalman ﬁlter (RIEKF) for contact-inertial navigation with a right-invariant forward kinematic measurement model.
+In Section 6, we present simulation results comparing the convergence properties to a state-of-the-art QEKF. Sec-
+tion 7 discusses the state augmentation of the previously derived InEKF with IMU bias. The consequences of adding
+and removing of contact points in the estimator are described in Section 8. Experimental evaluations on a 3D biped
+
+  1We use the InEKF acronym to distinguish from an iterated-EKF (IEKF).
+
+
+                                              2

@@ -1,0 +1,54 @@
+5.4.  Observability Analysis
+
+Because the error dynamics are log-linear (c.f., Theorem 2), we can determine the unobservable states of the ﬁlter
+without having to perform a nonlinear observability analysis [8]. Noting that the linear error dynamics matrix in our
+case is time-invariant and nilpotent (with a degree of 3), the discrete-time state transition matrix is a polynomial in At,
+
+                                       I       0   0  0 
+                                               (g)× ∆t      I   0  0
+                Φ = expm(At∆t) =  1
+                                                (g)× ∆t2  I∆t   I  0                                                                                                                                    2                                            .
+                                                 0       0   0   I
+
+It follows that the discrete-time observability matrix is
+
+                       H        0          0    −I   I 
+                   HΦ    −1 (g)× ∆t2   −I∆t   −I   I
+                O = HΦ2       2                                               .                               −2 (g)× ∆t2  −2I∆t2  −I   I                                                                                             =                                                                                                                                                                                                                                                                                                         ...                                                                                                                                                                                                                                                                               ...                                                              ...                                    ...                   ...
+
+The last six columns (i.e., two matrix columns) of the observability matrix are clearly linearly dependent, which indi-
+cates the absolute position of the robot is unobservable. In addition, since the gravity vector only has a z component,
+the third column of O is all zeros. Therefore, a rotation about the gravity vector (yaw) is also unobservable. This
+linear observability analysis agrees with the nonlinear observability results of Bloesch et al. [15], albeit with much
+less computation. Furthermore, as the error dynamics do not depend on the estimated state, there is no chance of the
+linearization spuriously increasing the numerical rank of the observability matrix [8]. This latter effect was previously
+known and studied by Bloesch et al. [15], and in order to resolve this problem, an observability-constrained EKF [49]
+was developed. In our proposed framework, by default, the discrete RIEKF has the same unobservable states as the
+underlying nonlinear system; hence, the developed discrete RIEKF intrinsically solves this problem.
+
+6.  Simulation Results
+
+To investigate potential beneﬁts or drawbacks of the proposed ﬁlter, we compare it against a state-of-the-art quaternion-
+based extended Kalman ﬁlter (QEKF), similar to those described by Bloesch et al. [15], Rotella et al. [68].  For
+implementation, the ﬁlter equations were discretized; see Appendix A for more details.
+
+6.1.  Quaternion-Based Filter Equations:
+
+The choice of error variables is the main difference between the InEKF and the QEKF. Instead of the right-invariant
+error (1), a QEKF typically uses decoupled error states
+
+                                         exp(δθt) ≜RTt ¯Rt
+                                                   δvt ≜vt −¯vt
+                                                                                                             (21)
+                                                δpt ≜pt −¯pt.
+                                                δdt ≜dt −¯dt.
+
+Using this deﬁnition of error, the QEKF deterministic error dynamics can be approximated as
+
+                       δθt    −(˜ωt)×   0  0  0  δθt 
+                          d   δvt      −¯Rt (˜at)×  0  0  0    δvt
+                               dt  δpt         0        I  0  0    δpt                                                                        =                                               ,
+                                    δdt         0      0  0  0    δdt
+
+
+                                              14

@@ -1,0 +1,43 @@
+comes from the initial yaw uncertainty that continually grows due to its unobservability (Section 5.4). The InEKF
+is able to closely match this distribution since the samples are taken in the Lie algebra and are mapped to the group
+through the exponential map. This couples the orientation and position errors leading to a curved position distribution.
+In contrast, the QEKF position uncertainty can only have the shape of the standard Gaussian ellipse, which may not
+represent the true uncertainty well.
+   The InEKF can even accurately model the case of complete yaw uncertainty. To demonstrate this, the initial yaw
+standard deviation was set to 360 deg, and the same 8 sec simulation was performed. Each ring in Figure 7 shows the
+sample position distribution spaced 2 sec apart. This type of uncertainty cannot be captured with a standard Gaussian
+covariance ellipse. These examples illustrate that even if the means are identical, the covariance estimate of the InEKF
+can provide a more accurate representation of the state’s uncertainty than the standard QEKF.
+
+
+
+
+
+Figure 7: Samples taken from the InEKF’s estimated position distribution for a walking simulation with a completely uncertain initial yaw angle.
+The robot moved forward at an average speed of 1 m/s. Each ring represents the position uncertainty at times 0, 2, 4, 6, and 8 sec.
+
+
+    In these examples, the initial covariance of all states (except yaw) was small. It is interesting to note what happens
+if we remove the dynamics noise and set the covariance for some states to exactly zero (rank-deﬁcient covariance
+matrix). In this case, the initial covariance is supported by a subgroup and the InEKF will keep the state estimate
+within a time-dependent subset of the Lie group at all times. This theoretical result was proved by Chauchat et al.
+[25], Barrau and Bonnabel [12] to create EKFs with state equality constraints.
+
+7. IMU bias augmentation
+
+Implementation of an IMU-based state estimator on hardware typically requires modeling additional states, such as
+gyroscope and accelerometer biases. Unfortunately, as noted in Barrau [8], there is no Lie group that includes the
+bias terms while also having the dynamics satisfy the group afﬁne property (2). Even though many of the theoretical
+properties of the RIEKF will no longer hold, it is possible to design an “imperfect InEKF” that still outperforms the
+standard EKF [8].
+
+7.1.  State Representation
+
+The IMU biases are slowly varying signals that corrupt the measurements in an additive manner:
+
+                                  ˜ωt = ωt + bgt + wgt ,    wgt ∼GP (03,1, Σg δ(t −t′))
+                                              ˜at = at + bat + wat ,    wat ∼GP (03,1, Σa δ(t −t′)) .
+
+
+
+                                              18

@@ -1,0 +1,53 @@
+Re-written in matrix form, this measurement has the right-invariant observation form (4),
+
+             hp(˜αt)   RTt  −RTt vt  −RTt pt  −RTt dt  03,1   Jp(˜αt)wαt 
+                    0          01,3     1       0       0       0          0                 =                        +                     .
+                    1          01,3     0       1       0       1          0                                                                                                                                                     
+               −1         01,3     0       0       1     −1         0
+                                                                             b  }  |    {zVt    }                  |   {zYt   }   |             X−1{zt               } | {z
+
+Therefore, the innovation depends solely on the invariant error and the update equations take the form [10, Section
+3.1.2]
+                                            ¯X+t = exp Lt  ¯XtYt −b   ¯Xt
+                                                                                                             (18)
+                            ηr+t = exp Lt ηrtb −b + ¯XtVt  ηrt,
+
+where exp(·) is the exponential map corresponding to the state matrix Lie group, G, Lt is a gain matrix to be deﬁned
+later, bT =  01,3  0  1  −1  , and YTt =  hTp(˜αt)  0  1  −1  . Because the last three rows of ¯XtYt −b are identically
+zero, we can express the update equations using a reduced dimensional gain, Kt, and an auxiliary selection matrix
+Π ≜  I   03,3  , so that Lt  ¯XtYt −b = KtΠ ¯XtYt as detailed in Barrau [8].
+   Using the ﬁrst order approximation of the exponential map, ηrt = exp(ξt) ≈Id + ξt ∧, and dropping higher-order
+terms, we can linearize the update equation (18),
+                               03,1     Jp(˜αt)wαt ∧
+                                                ∧    0            0                                                                                                                                                                                             .                                                                                                 ηr+t  ≈Id + ξ+t ∧≈Id + ξt ∧+                                                                                   1                                                                      0                                                                       + ¯Xt                                                                                                                                                                                                                                                                                         KtΠ                                                                                   Id + ξt      
+                                            −1            0
+
+Therefore,
+
+                                                                                ∧                                                                                                                                                                                                                                                                                                       I +                                                                                         03,1                                                                                                                                                                                                                                                      t   ξp                                                                                              t                                                                                        t   ξd                                                                                         Jp(˜αt)wα                                                                                                                             t                                          ξRt ×   ξv
+                                                                        0                                                                                     0                                                                                                                                                                                                             1                                                             0                                                                  0                                                            03,1                                                                                                                                                                   ξ+t ∧ = ξt ∧+                                                                        1                                                                                     0                                                                                                                                                                                                                                                                                                                             + ¯Xt                                                                                                                                                                                                                                                                                                                     0                                                             1                                                                  0                                                            03,1                                                                                                                                                                                                                                                                                                                                                                                      KtΠ                                                                                                                                                                −1                                                                                     0                                                         0                                                             0                                                                  1                                                            03,1
+                                                             ∧
+                     ξpt −ξdt     Jp(˜αt)wαt  
+                                         0              0                                                                                                                                                            .                                                                                                                                                   0                                         1                                                                                                                                                                                                                             = ξt ∧+ KtΠ                                                                            + ¯Xt 
+                               −1             0
+
+Taking (·)∨of both sides yields the linear update equation,
+                    ξ+t = ξt −Kt   03,3   03,3  −I   I  ξt −¯Rt(Jp(˜αt)wαt )
+                     ≜ξt −Kt Htξt −¯Rt Jp(˜αt)wαt     .
+
+Finally, we can write down the full state and covariance update equations of the RIEKF using the derived linear update
+equation and the theory of Kalman ﬁltering [61, 2, 3] as
+                                       ¯X+t = exp KtΠ ¯XtYt  ¯Xt
+                                                                                                             (19)
+                       P+t = (I −KtHt)Pt(I −KtHt)T + Kt ¯NtKTt ,
+
+where the gain Kt is computed using
+                                    St = HtPtHTt + ¯Nt    Kt = PtHTt S−1t
+and from (19), the matrices Ht and ¯Nt are given by
+
+                             Ht =  03,3   03,3  −I   I  ,
+                                                            T                                  (20)
+                                            ¯Nt = ¯Rt Jp(˜αt) Cov(wαt ) JTp(˜αt) ¯Rt .
+
+
+                                              13

@@ -1,0 +1,47 @@
+             Contact-Aided Invariant Extended Kalman Filtering for
+                          Robot State Estimation*
+
+                  Ross Hartley†    Maani Ghaffari†    Ryan M. Eustice†     Jessy W. Grizzle†
+
+                                        November 13, 2019
+2019                                                            Abstract
+
+                      Legged robots require knowledge of pose and velocity in order to maintain stability and execute walking paths.
+                      Current solutions either rely on vision data, which is susceptible to environmental and lighting conditions, or fusion ofNov               kinematic and contact data with measurements from an inertial measurement unit (IMU). In this work, we develop a
+                       contact-aided invariant extended Kalman ﬁlter (InEKF) using the theory of Lie groups and invariant observer design.
+                      This ﬁlter combines contact-inertial dynamics with forward kinematic corrections to estimate pose and velocity along10
+                      with all current contact points. We show that the error dynamics follows a log-linear autonomous differential equation
+                      with several important consequences: (a) the observable state variables can be rendered convergent with a domain
+                       of attraction that is independent of the system’s trajectory; (b) unlike the standard EKF, neither the linearized error
+                    dynamics nor the linearized observation model depend on the current state estimate, which (c) leads to improved
+                     convergence properties and (d) a local observability matrix that is consistent with the underlying nonlinear system.
+                      Furthermore, we demonstrate how to include IMU biases, add/remove contacts, and formulate both world-centric and[cs.RO]                robo-centric versions. We compare the convergence of the proposed InEKF with the commonly used quaternion-based
+               EKF though both simulations and experiments on a Cassie-series bipedal robot.  Filter accuracy is analyzed using
+                    motion capture, while a LiDAR mapping experiment provides a practical use case. Overall, the developed contact-
+                      aided InEKF provides better performance in comparison with the quaternion-based EKF as a result of exploiting
+                     symmetries present in system.
+
+           1.  Introduction
+
+            Legged robots have the potential to transform the logistics and package delivery industries, become assistants in our
+             homes, and aide in search and rescue [29].  In order to develop motion planning algorithms and robust feedback
+                controllers for these tasks, accurate estimates of the robot’s state are needed. Some states, such as joint angles, can be
+                directly measured using encoders, while other states, such as the robot’s pose and velocity, require additional sensors.
+            Most legged robots are equipped with an inertial measurement unit (IMU) that can measure linear acceleration and
+              angular velocity, albeit with noise and bias perturbations. Consequently, nonlinear observers are typically used to fuse
+               leg odometry and inertial measurements to infer trajectory, velocity, and calibration parameters [68, 14, 35, 53]. InarXiv:1904.09251v2
+             view of a practical solution, designing a globally convergent observer is sacriﬁced for one with at best local properties,
+             such as the extended Kalman ﬁlter (EKF) [42, 52, 79, 75]. This EKF-based approach is computationally efﬁcient
+             and easily customizable, allowing successful implementation on a number of legged robots with rigorous real-time
+             performance requirements [15, 17, 36, 65].
+                 Accurate pose estimation can be combined with visual data to build maps of the environment [37]. Then such
+            maps can be used in gait selection to improve the stability of a robot while walking on uneven terrains and as a basis
+                for high-level motion planning. Although there have been many recent advancements in visual-inertial-odometry
+             and simultaneous localization and mapping (SLAM) [66, 48, 38], these algorithms often rely on visual data for pose
+               estimation. This means that the observer (and ultimately the feedback controller) can be adversely affected by rapid
+
+                    *Submitted for journal publication. rosshart@umich.edu
+                    †Robotics Institute and College of Engineering, University of Michigan, Ann Arbor, MI, USA.
+
+
+                                                           1

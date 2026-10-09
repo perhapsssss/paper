@@ -1,0 +1,49 @@
+The estimated state tuple and its covariance are corrected though the update equations
+
+                                   ¯X+t , θ+t  =  exp Kξt Π ¯XtYt  ¯Xt ,  ¯θt + Kζt Π ¯XtYt
+                                                                                                             (29)
+                        P+t = (I −KtHt)Pt(I −KtHt)T + Kt ¯NtKTt ,
+
+where the gains Kξt and Kζt are computed from
+
+                                            " Kξt #                               St = HtPtHTt + ¯Nt    Kt =    = PtHTt S−1t   ,                                            Kζt
+
+with the following measurement, output, and noise matrices,
+
+                         YTt =  hTp(˜αt)  0  1  −1  ,
+                             Ht = 0  0  −I   I  0  0  ,
+                                            ¯Nt = ¯Rt Jp(˜αt) Cov(wαt ) JTp(˜αt) ¯RTt .
+
+Remark 3. The upper-right block of the new linearized dynamics matrix (28) is related to the adjoint of the current
+state estimate (7). Intuitively, this maps the bias error (measured in the body frame) to the world frame.
+
+8.  Addition and Removal of Contact Points
+
+Sections 5 and 7 derived the equations for the RIEKF under the assumption that the contact point is unchanging with
+time. However, for legged robots, contacts are discrete events that are created and broken as a robot navigates through
+the environment. Therefore, it is important to be able to conveniently add and remove contact points states to and from
+the observer’s state.
+
+8.1.  Removing Contact Points
+
+To remove a previous contact point from the state, we marginalize the corresponding state variable by simply removing
+the corresponding column and row from the matrix Lie group. The corresponding elements of the covariance matrix
+are also eliminated. This can be done through a simple linear transformation. For example, if the robot is going from
+one contact to zero contacts, then the newly reduced covariance would be computed by
+
+                                           ξRt                            ξRt    I  0  0  0                                                               ξvt                                                              I  0                                                      0                                        ξv                                                                t                                                                                           = 0                                                              ξp                                                                                                  t                                                                                                                                                                                                                                                                                                                     0  0                                                                  I                                                      0                                       ξp                                                                t                                                                                                             (30)                                                             ξd                                                                                                  t
+                                       ξnewt ≜M ξt
+                        =⇒Pnewt  = M Pt MT.
+
+Remark 4. This marginalization matrix, M, does not depend on the choice of right or left invariant error.
+
+8.2.  Adding Contact Points
+
+When the robot makes a new contact with the environment, the state and covariance matrices need to be augmented.
+Special attention needs to be given to initialize the mean and covariance for the new estimated contact point. For
+example, if the robot is going from zero contacts to one contact, the initial mean is obtained though the forward
+kinematics relation
+                                                                   ¯dt = ¯pt + ¯Rt hp(˜αt).                                          (31)
+
+
+                                              21

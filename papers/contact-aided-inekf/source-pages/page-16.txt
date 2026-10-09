@@ -1,0 +1,42 @@
+Figure 3: A quaternion-based extended Kalman ﬁlter (QEKF) and the proposed right-invariant extended Kalman ﬁlter (RIEKF) were run 100 times
+using the same measurements, noise statistics, and initial covariance, but with random initial orientations and velocities. The noisy measurements
+came from a dynamic simulation of a Cassie-series biped robot where the robot walks forwards after a small drop, accelerating from 0.0 to
+0.3 m / sec. The above plots show the state estimate for the initial second of data, where the dashed black line represents the true state. The
+RIEKF (bottom row) converges considerably faster than the QEKF (top row) for all observable states. The estimated yaw angle (not shown) does
+not converge for either ﬁlter because it is unobservable. Therefore, to compare convergence, the velocities shown are represented in the estimated
+IMU (body) frame.
+
+
+estimates for both ﬁlters are shown in Figure 3. Although both ﬁlters converge for this set of initial conditions, the
+proposed RIEKF converges considerably faster than the standard quaternion-based EKF.
+
+6.3.  Accuracy of Linearized Dynamics
+
+The superior performance of the InEKF over the QEKF comes from the improved accuracy of the linearized error
+dynamics. As indicated by Theorem 2, the deterministic error dynamics of the InEKF are actually exact, while the
+QEKF version is only an approximation. To demonstrate this, a simulation was performed where propagation of the
+true error is compared to the propagation of the linearized error dynamics.
+  We ﬁrst analyzed the deterministic dynamics. Given an initial error vector, ξtrue0   , the initial state estimate for the
+InEKF was computed using the deﬁnition of right-invariant error (1), and the initial state estimate for the QEKF was
+computed using equation (21). The true state was initialized to the identity element. The true and estimated states for
+both ﬁlters were then propagated for 1 second (1000 time steps), using randomly sampled IMU measurements. The
+error states for both the InEKF and the QEKF were also propagated using their respective linearized error dynamics.
+The resulting error, ξtrue1   , between the ﬁnal estimated and true states were computed and compared to the propagated
+error states, ξprop1   to yield a measure of linearization accuracy, ∥ξtrue1  −ξprop1  ∥. This test was performed multiple times
+while linearly scaling the initial orientation error from vec(0, 0, 0) to vec(π/2, π/2, π/2). The results are shown in
+Figure 4.
+   As expected, when the initial error is zero, the difference between the true and propagated error is zero. This
+indicates that the linearized error dynamics for both the InEKF and the QEKF are correct. As the initial error increases,
+the difference between the true and propagated error states for the QEKF grows due to the decreased accuracy of the
+linearization. In contrast, the difference between the true and propagated error states for the InEKF are always exactly
+zero regardless of the initial error. In other words, assuming the initial error is known, the true propagated state can be
+exactly recovered from solving the linearized error dynamics system; see Theorem 2.
+    In the non-deterministic case (with sensor noise), Theorem 2 no longer holds. This can be seen in Figure 5, where
+the same test was performed, but with sensor noise corrupting the propagated state estimate. The difference between
+the true and propagated error is no longer exactly zero for the InEKF. However, the InEKF linearization remains more
+accurate due to the reduced sensitivity to initial state errors. This helps to further explain the improved convergence
+properties shown in Figure 3.
+
+
+
+                                              16

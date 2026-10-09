@@ -1,0 +1,52 @@
+                            Φl22 = ΓT0 (¯ωk∆t)
+                            Φl32 = ΓT0 (¯ωk∆t)∆t
+                            Φl33 = ΓT0 (¯ωk∆t)
+                            Φl44 = ΓT0 (¯ωk∆t)
+                            Φl15 = −ΓT0 (¯ωk∆t)Γ1(¯ωk∆t)∆t
+                            Φl25 = ΓT0 (¯ωk∆t)Ψ1
+                            Φl35 = ΓT0 (¯ωk∆t)Ψ2
+                            Φl26 = −ΓT0 (¯ωk∆t)Γ1(¯ωk∆t)∆t
+                            Φl36 = −ΓT0 (¯ωk∆t)Γ2(¯ωk∆t)∆t2.
+
+
+The matrices Ψ1 and Ψ2 involve computing the solution to a more complicated integral. However, these integrals still
+have analytical solutions which can be expressed easier after deﬁning φ ≜∥¯ωk∥and θ ≜φ∆t.
+
+                          Z tk+1
+                  Ψ1 ≜        (Γ0(¯ωkt)¯ak)× Γ1(¯ωkt) t dt
+                                          tk
+                  = (¯ak)× Γ2(−¯ωk∆t)∆t2
+                                    sin(θ) −θ cos(θ)
+                                                   (¯ωk)× (¯ak)×                                    φ3
+                                   cos(2θ) −4 cos(θ) + 3
+                   +                       (¯ωk)× (¯ak)× (¯ωk)×                                       4φ4
+                               4 sin(θ) + sin(2θ) −4θ cos(θ) −2θ                                               (56)
+                   +                                  (¯ωk)× (¯ak)× (¯ωk)2×                                             4φ5
+                                   θ2 −2θ sin(θ) −2 cos(θ) + 2
+                   +                               (¯ωk)2× (¯ak)×                                          2φ4
+                                6θ −8 sin(θ) + sin(2θ)
+                   +                         (¯ωk)2× (¯ak)× (¯ωk)×                                        4φ5
+                                  2θ2 −4θ sin(θ) −cos(2θ) + 1
+                   +                                (¯ωk)2× (¯ak)× (¯ωk)2×                                           4φ6
+
+                       Z tk+1
+               Ψ2 ≜       Γ0(¯ωkt)Φl25(t, tk) dt
+                                     tk
+               = (¯ak)× Γ3(−¯ωk∆t)∆t3
+                          θ sin(θ) + 2 cos(θ) −2
+                                                 (¯ωk)× (¯ak)×                                 φ4
+                          6θ −8 sin(θ) + sin(2θ)
+               +                        (¯ωk)× (¯ak)× (¯ωk)×                                  8φ5
+                           2θ2 + 8θ sin(θ) + 16 cos(θ) + cos(2θ) −17                                              (57)
+               +                                          (¯ωk)× (¯ak)× (¯ωk)2×                                          8φ6
+                            θ3 + 6θ −12 sin(θ) + 6θ cos(θ)
+               +                                  (¯ωk)2× (¯ak)×                                     6φ5
+                           6θ2 + 16 cos(θ) −cos(2θ) −15
+               +                                  (¯ωk)2× (¯ak)× (¯ωk)×                                     8φ6
+                           4θ3 + 6θ −24 sin(θ) −3 sin(2θ) + 24θ cos(θ)
+               +                                                (¯ωk)2× (¯ak)× (¯ωk)2×                                          24φ7
+   The (world-centric) right-invariant error dynamics matrix depends on the the state estimates, ¯Rt, ¯vt, and ¯pt, which
+will change between times tk and tk+1, see Table 2. Therefore, the state transition matrix will not simply be the matrix
+
+
+                                              36

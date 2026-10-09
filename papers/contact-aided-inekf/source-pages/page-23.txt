@@ -1,0 +1,43 @@
+Figure 8: An experiment was performed where an actual Cassie-series robot slowly walked forward at approximately 0.3 m / sec. The noisy
+measurements came from the on-board IMU (VN-100) and the robot’s joint encoders. The quaternion-based extended Kalman ﬁlter (QEKF) and
+the proposed right-invariant extended Kalman ﬁlter (RIEKF) were run (off-line) 100 times using the same measurements, noise statistics, and initial
+covariance, but with random initial orientations and velocities. The black line represents the ﬁlter state estimates when initialized with a good
+estimate. The RIEKF (bottom row) converges considerably faster than the QEKF (top row) for all observable states. Zoomed-in plots of the RIEKF
+performance is provided in the top-right corner.
+
+   When the state estimate is initialized close to the true value, the RIEKF and QEKF have similar performance (black
+lines), because the linearization of the error dynamics accurately reﬂects the underlying nonlinear dynamics. However,
+when the state estimate is far from the true value, the simulation and experimental results show that RIEKF consistently
+converges faster than the QEKF. The relatively poor performance of the QEKF is due to the error dynamics being
+linearized around the wrong operating point, in which case the linear system does not accurately reﬂect the nonlinear
+dynamics. In addition, when bias estimation is turned off, the invariant error dynamics of the RIEKF do not depend
+on the current state estimate. As a result, the linear error dynamics can be accurately used even when the current state
+estimate is far from its true value, leading to better performance over the QEKF. Although this theoretical advantage
+is lost when bias estimation is turned on, the experimental results (shown in Figure 8) indicate that the RIEKF still is
+the preferred observer due to less sensitivity to initialization.
+
+9.2.  Motion Capture Experiment
+
+In order to verify the accuracy of the InEKF state estimate, we performed a motion capture experiment in the University
+of Michigan’s M-Air facility.  This outdoor space is equipped with 18 Qualisys cameras that allows for position
+tracking. We had the Cassie robot walk untethered for 60 sec along an approximately 15 m path. A top-down view
+of the estimated trajectory is shown in Figure 9. Although there is noticeable drift due to the unobservability of the
+position and yaw, the ﬁnal position error accounts for less than 5% of the distance traveled. This drift error is due to
+a combination of sensor noise and imperfect modeling of the robot’s kinematics which may introduce biases to the
+forward kinematic measurements. The orientation, velocity, and position estimates along with their 3σ covariance
+hulls are shown in Figure 10. Due to the unobservability of the yaw angle, the velocity estimate is given in the body
+frame instead of the world frame. The orientation is plotted using exponential coordinates, exp(φ) = R. Due to an
+inaccurate orientation estimate from the motion capture system, the “ground truth” for the orientation is given by the
+VectorNav-100, which runs a state-of-the-art QEKF that fuses angular velocity, linear acceleration, and magnetometer
+measurements to estimate orientation only. As expected, the error for all observable states remains small. The absolute
+position and the orientation about the gravity vector are unobservable, so some drift will occur for these states. While
+the drift is largely imperceptible for φz, it is interesting to note that the covariance slowly grows over time due to
+this unobservability. More signiﬁcant drift occurs on the absolute position states. This drift can be attributed to a
+combination of sensor noise, foot slip, and kinematic modeling errors.
+    In order to plot the 3σ covariance hull, the right-invariant error covariance needed to be converted to a covariance
+
+
+
+
+
+                                              23

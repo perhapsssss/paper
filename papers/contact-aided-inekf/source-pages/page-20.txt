@@ -1,0 +1,56 @@
+After carrying out the chain rule and making the ﬁrst order approximation, ηrt = exp(ξt) ≈Id + ξt ∧, the individual
+terms of the invariant error dynamics become
+
+                       d
+                               ¯RtRTt ≈  ¯Rt (wgt −ζgt ) ×                           dt
+                  d
+                                           ¯vt −¯RtRTt vt  ≈(g)× ξRt + (¯vt)× ¯Rt(wgt −ζgt ) + ¯Rt(wat −ζat )                     dt                                                                                                             (27)
+                 d
+                                        ¯pt −¯RtRTt pt ≈ξvt + (¯pt)× ¯Rt(wgt −ζgt )                     dt
+                 d
+                                        ¯dt −¯RtRTt dt ≈   ¯dt × ¯Rt(wgt −ζgt ) + ¯Rt hR(˜αt)wvt .                     dt
+
+Importantly, the augmented invariant error dynamics only depends on the estimated trajectory though the noise and bias
+errors, ζt (this is expected because when there are no bias errors, there is no dependence on the estimated trajectory).
+A linear system can now be constructed from (27) to yield,
+
+                            d  ξt         ξt      Ad¯Xt   012,6                        = At   +               wt,
+                                 dt  ζt        ζt      06,12    I6
+
+where the noise vector is augmented to include the bias terms,
+
+                           wt ≜vec(wgt , wat , 03,1, hR(˜αt)wvt , wbgt  , wbat  ).
+
+7.3.  Forward Kinematic Measurements
+
+The forward kinematics position measurement (17) does not depend on the IMU biases. Therefore, the Ht matrix can
+simply be appended with zeros to account for the augmented variables. The linear update equation becomes
+
+                      ξ+t       ξt   " Kξt #       ξt                   =   −       Ht     −¯Rt Jp(˜αt)wαt      .
+                      ζ+t      ζt    Kζt        ζt
+
+7.4.  Final Continuous RIEKF Equations
+
+The ﬁnal “imperfect” RIEKF equations that include IMU biases can now be written down. The estimated state tuple
+is predicted using the following set of differential equations:
+
+                              d
+                                                     ¯Xt , ¯θt =  fut(¯Xt, ¯θt), 06,1  .                                    dt
+
+The covariance of the augmented right invariant error dynamics is computed by solving the Riccati equation
+
+                                d
+                                                                                      t + ¯Qt,                                    dtPt = AtPt + PtAT
+where the matrices At and ¯Qt are now deﬁned using (27),
+                         0    0  0  0     −¯Rt      0 
+                                  (g)×  0  0  0   −(¯vt)× ¯Rt   −¯Rt
+                                   0     I  0  0  −(¯pt)× ¯Rt    0
+                           At =                                   0    0  0  0 −  ¯dt × ¯Rt   0
+                                                                                                             (28)                                   0    0  0  0      0        0                                                                                                                                                                                                                                                                                                                                        
+                                   0    0  0  0      0        0
+
+                                                                T
+                                        Ad¯Xt   012,6            Ad¯Xt   012,6                                    ¯Qt =             Cov(wt)                          .                                           06,12    I6               06,12    I6
+
+
+                                              20

@@ -1,0 +1,61 @@
+[45] Ross Hartley, Maani Ghaffari Jadidi, Lu Gan, Jiunn-Kai Huang, Jessy W Grizzle, and Ryan M Eustice. Hy-
+     brid contact preintegration for visual-inertial-contact state estimation using factor graphs.  In 2018 IEEE/RSJ
+     International Conference on Intelligent Robots and Systems (IROS), pages 3783–3790. IEEE, 2018.
+
+[46] Ross Hartley, Maani Ghaffari Jadidi, Jessy W Grizzle, and Ryan M Eustice. Contact-Aided Invariant Extended
+    Kalman Filtering for Legged Robot State Estimation. In Proceedings of Robotics: Science and Systems, 2018.
+
+[47] Jessica Kate Hodgins. Legged robots on rough terrain: experiments in adjusting step length, 1989.
+
+[48] Zheng Huai and Guoquan Huang. Robocentric visual-inertial odometry. In 2018 IEEE/RSJ International Con-
+     ference on Intelligent Robots and Systems (IROS), pages 6319–6326. IEEE, 2018.
+
+[49] Guoquan P. Huang, Anastasios I. Mourikis, and Stergios I. Roumeliotis. Observability-based rules for designing
+     consistent EKF SLAM estimators. The Int. J. Robot. Res., 29(5):502–528, 2010.
+
+[50] Jemin Hwangbo, Carmine Dario Bellicoso, Péter Fankhauser, and Marco Huttery. Probabilistic foot contact esti-
+     mation by fusing information from dynamics and differential/forward kinematics. In Intelligent Robots and Sys-
+     tems (IROS), 2016 IEEE/RSJ International Conference on, pages 3872–3878. IEEE, 2016. ISBN 1509037624.
+
+[51] Rudolph Emil Kalman. A new approach to linear ﬁltering and prediction problems. Journal of basic Engineering,
+     82(1):35–45, 1960. ISSN 0021-9223.
+
+[52] Arthur J Krener. The convergence of the extended Kalman ﬁlter. In Directions in mathematical systems theory
+    and optimization, pages 173–182. Springer, 2003.
+
+[53] Scott Kuindersma, Robin Deits, Maurice Fallon, Andrés Valenzuela, Hongkai Dai, Frank Permenter, Twan
+     Koolen, Pat Marion, and Russ Tedrake. Optimization-based locomotion planning, estimation, and control design
+      for the atlas humanoid robot. Autonomous Robots, 40(3):429–455, 2016.
+
+[54] Ern J Lefferts, F Landis Markley, and Malcolm D Shuster. Kalman ﬁltering for spacecraft attitude estimation.
+     Journal of Guidance, Control, and Dynamics, 5(5):417–429, 1982. ISSN 0731-5090.
+
+[55] Pei-Chun Lin, Haldun Komsuoglu, and Daniel E Koditschek. A leg conﬁguration measurement system for full-
+    body pose estimates in a hexapod robot. IEEE Transactions on robotics, 21(3):411–422, 2005. ISSN 1552-3098.
+
+[56] Pei-Chun Lin, Haldun Komsuoglu, and Daniel E Koditschek. Sensor data fusion for body state estimation in a
+    hexapod robot with dynamical gaits. IEEE Transactions on Robotics, 22(5):932–943, 2006. ISSN 1552-3098.
+
+[57] Andrew W Long, Kevin C Wolfe, Michael J Mashner, and Gregory S Chirikjian. The banana distribution is
+     gaussian: A localization study with exponential coordinates. Robotics: Science and Systems VIII, 265, 2013.
+
+[58] Todd Lupton and Salah Sukkarieh. Visual-inertial-aided navigation for high-dynamic motion in built environ-
+     ments without initial conditions. IEEE Trans. Robot., 28(1):61–76, 2012.
+
+[59] Venkatesh Madyastha, Vishal Ravindra, Srinath Mallikarjunan, and Anup Goyal. Extended Kalman ﬁlter vs.
+      error state Kalman ﬁlter for aircraft attitude estimation. In AIAA Guidance, Navigation, and Control Conference,
+     page 6615, 2011.
+
+[60] F Landis Markley.  Multiplicative vs. additive ﬁltering for spacecraft attitude determination.  Dynamics and
+     Control of Systems and Structures in Space, (467-474), 2004.
+
+[61] Peter S Maybeck. Stochastic models, estimation, and control, volume 3. Academic press, 1982.
+
+[62] S J Merhav and M Koifman. Autonomously aided strapdown attitude reference system. Journal of guidance,
+      control, and dynamics, 14(6):1164–1172, 1991. ISSN 0731-5090.
+
+[63] J Murrell. Precision attitude determination for multimission spacecraft. In Guidance and Control Conference,
+     page 1248, 1978.
+
+
+                                              42

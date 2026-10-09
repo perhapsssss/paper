@@ -1,0 +1,50 @@
+In order to compute the new covariance, we need to look at the right-invariant error,
+
+                          ηdt = ¯dt −¯RtRTt dt
+                   = ¯pt + ¯Rt hp(˜αt) −¯RtRTt dt
+                   = ¯pt + ¯Rt hp(˜αt) −¯RtRTt (pt + Rt hp(˜αt −wαt ))
+                     ≈ηpt + ¯RtJp(˜αt)wαt
+               =⇒ξdt ≈ξpt + ¯RtJp(˜αt)wαt .
+
+Therefore, covariance augmentation can be done using the following linear map,
+
+                      ξRt    I  0  0          0                                       ξRt                                  ξvt      0   I  0              0                                                    ξv                                                                                                               t                                                                                   t                                                                     ξp                                                            0                                       0                                          0                                                          I                                                     t                                                                                                         =                                                                                                                                       +                                                                              wα                                                    ξp                                                                                   t                                                                                                             (32)                                       0                                          0                                                          I                                ξd                                                                        ¯RtJp(˜αt)                                                     t
+                                ξnewt  ≜Ft ξt + Gtwαt
+                   =⇒Pnewt  = Ft Pt FTt + Gt Cov(wαt ) GTt .
+
+Remark 5. The error augmentation matrix, Ft, and the noise matrix, Gt, will depend on the choice of error variable.
+Here they are derived for the right invariant error case. The matrices will differ in the left invariant error formulation,
+as detailed in Section 10.
+
+9.  Experimental Results on Cassie Robot
+
+We now present an experimental evaluation of the proposed contact-aided RIEKF observer using a 3D bipedal robot.
+The Cassie-series robot, shown in Figure 1, developed by Agility Robotics, has 20 degrees of freedom coming from
+the body pose, 10 actuators, and 4 springs. The robot is equipped with an IMU along with 14 joint encoders that
+can measure all actuator and spring angles. The proposed and baseline algorithms (along with the robot’s feedback
+controller) are implemented in MATLAB (Simulink Real-Time). The IMU (VectorNav-100) is located in the robot’s
+torso and provides angular velocity and linear acceleration measurements at 800 Hz. The encoders provide joint angle
+measurements at 2000 Hz. The robot has two springs on each leg that are compressed when the robot is standing on
+the ground. The spring deﬂections are measured by encoders and serve as a binary contact sensor. The controller used
+for these experiments was developed by Gong et al. [40].
+
+9.1.  Convergence Comparison
+
+An experiment was performed where the robot walked forwards at approximately 0.3 m / sec. The QEKF and the
+proposed RIEKF were run (off-line) 100 times using the same logged measurements, noise statistics, and initial covari-
+ance with random initial orientations and velocities. The noise statistics and initial covariance estimates are provided in
+Table 1. As with the simulation comparison presented in Section 6, the initial mean estimate for the Euler angles were
+uniformly sampled from −30 deg to 30 deg and the initial mean estimate for velocities were sampled uniformly from
+−1.0 m / sec to 1.0 m / sec. Bias estimation was turned on and the initial bias estimate was obtained from processing
+the IMU data when the robot was static. The pitch and roll estimates as well as the (body frame) velocity estimates
+for both ﬁlters are shown in Figure 8. The “ground truth” trajectory estimates (black lines) were computed by initial-
+izing each ﬁlter with a good state estimate at a time before the beginning of the plot (to allow for convergence). The
+initial orientation was obtained from the VectorNav-100’s onboard EKF and the initial velocity was obtained through
+kinematics alone.
+   The experimental results for comparing ﬁlter convergence matches those of the simulation. The proposed RIEKF
+converges faster and more reliably in all 100 runs than the QEKF; therefore, due to the convenience of initialization
+and reliability for tracking the developed RIEKF is the preferred observer.
+
+
+
+                                              22

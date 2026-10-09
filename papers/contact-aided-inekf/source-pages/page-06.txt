@@ -1,0 +1,54 @@
+[28] showed that it is possible to solve the localization problem for legged robots using only proprioceptive sensors and
+a particle ﬁlter. The key idea was that if the robot “senses” that a terrain change through kinematics, then this limits
+the potential locations the robot can be in a known map. The method was demonstrated on the LittleDog quadruped.
+  A breakthrough came in 2012 when Bloesch et al. [15] combined inertial and kinematic measurements in an
+observability-constrained ErEKF using the strapdown IMU modeling approach. In this work, no a priori knowledge
+of the terrain is assumed, and the IMU integration model completely eliminates the need for dynamic modeling of
+the robot. Therefore, the derived ﬁlter equations are general enough to be used on any legged robot. The key idea
+was to augment the state vector with the set of all foot positions currently in contact with the environment. During
+the prediction phase, the foot contact dynamics are assumed to be Brownian motion, which can account for some
+foot slippage. In the correction phase, forward-kinematic position measurements are used to correct the estimated
+state. This work was conducted on the StarlETH quadruped robot. If the stance feet orientations also remain constant,
+as is the case for many humanoids, Rotella et al. [68] showed that this ErEKF can be extended to allow forward-
+kinematic orientation measurements. The same group also formulated a similar unscented Kalman ﬁlter that uses
+forward-kinematic velocity measurements to correct inertial predictions and to accurately detect foot slip [16]. A
+detailed analysis of these ﬁltering techniques combined with methods for incorporating computer vision can be found
+in Bloesch [17]. Due to the complexity involved in accurately formulating dynamic models, many groups have since
+adopted this IMU motion model approach to legged robot state estimation [84, 36, 46].
+   This combined inertial and kinematic ﬁltering approach yields an estimate of the robot’s base pose and velocity.
+However, some legged robots require additional states to be estimated. Hwangbo et al. [50] formulated a probabilistic
+contact estimator for cases when contact sensors are unavailable. Xinjilefu et al. [84] developed a decoupled EKF
+that is able to estimate the full state of the humanoid robot ATLAS, including base states, joint angles, and joint
+velocities. Using proprioceptive sensing only, Bloesch et al. [15] proved that the absolute positions and yaw angles are
+unobservable. Thus, over time, estimates of these quantities will drift unboundedly. This is unacceptable for global
+mapping and planning algorithms; however, local elevation maps can still be obtained [37]. Fallon et al. [36] proposed
+a method for drift-free state estimation for the humanoid ATLAS. In their implementation, inertial and kinematic
+measurements were fused to yield accurate odometry. Point cloud data from a LiDAR sensor was used with a particle
+ﬁlter to localize the robot into a pre-built map. This approach provided corrections of position and yaw to obtain a
+drift-free estimate of the state. Nobili et al. [64] took a similar approach but used the Iterative Closest Point (ICP)
+algorithm to perform LiDAR-based point cloud matching. The algorithm was tested on the HyQ quadruped robot.
+    In this article, we propose using an InEKF to estimate the base pose and velocity of a general legged robot. The
+approach we take is most similar to Bloesch et al. [15], however we model the entire state as a single matrix Lie group
+as opposed to a decoupled state approach. This allows us to take advantage of the geometry and symmetry of the
+estimation problem to formulate autonomous error dynamics. In addition with our formulation, the linearizations are
+independent of the state estimate resulting in improved convergence properties, especially for poor state initializations.
+We formulate both world-centric and robo-centric state estimators highlighting the relation between the left- and right-
+invariant error dynamics. In addition, we provide exact analytical time-discretizations of both ﬁlters. The implemented
+ﬁlters can be run at high speeds (> 2000 Hz) and can be directly used for accurate local odometry. We demonstrate
+this idea through a LiDAR terrain mapping application on a Cassie-series biped robot.
+
+3.  Theoretical background and preliminaries
+
+We assume a matrix Lie group [43, 27] denoted G and its associated Lie Algebra denoted g. If elements of G are n×n
+matrices, then so are elements of g. When doing calculations, it is very convenient to let
+
+                                             (·)∧: Rdimg →g
+
+be the linear map that takes elements of the tangent space of G at the identity to the corresponding matrix representation
+so that the exponential map of the Lie group, exp : Rdimg →G, is computed by
+                                        exp(ξ) = expm(ξ∧),
+
+where expm(·) is the usual exponential of n × n matrices.
+
+
+                                              6

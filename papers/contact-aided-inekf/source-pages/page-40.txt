@@ -1,0 +1,61 @@
+[11] Axel Barrau and Silvère Bonnabel.  Invariant Kalman ﬁltering. Annual Review of Control, Robotics, and Au-
+    tonomous Systems, 2018.
+
+[12] Axel Barrau and Silvère Bonnabel. Extended kalman ﬁltering with nonlinear equality constraints: a geometric
+     approach. 2019.
+
+[13] Billur Barshan and Hugh F Durrant-Whyte. Inertial navigation systems for mobile robots. IEEE Transactions
+    on Robotics and Automation, 11(3):328–342, 1995. ISSN 1042-296X.
+
+[14] Mehdi Benallegue and Florent Lamiraux. Estimation and stabilization of humanoid ﬂexibility deformation using
+     only inertial measurement units and contact information. International Journal of Humanoid Robotics, 12(03):
+     1550025, 2015.
+
+[15] Michael Bloesch, Marco Hutter, Mark A Hoepﬂinger, Stefan Leutenegger, Christian Gehring, CD Remy, and
+    Roland Siegwart. State estimation for legged robots: Consistent fusion of leg kinematics and imu. In Robotics:
+     Science and Systems Conference (RSS 2012). RSS 2012: Robotics: Science and Systems Conference, 2012.
+
+[16] Michael Bloesch, Christian Gehring, Péter Fankhauser, Marco Hutter, Mark A Hoepﬂinger, and Roland Siegwart.
+     State estimation for legged robots on unstable and slippery terrain. In 2013 IEEE/RSJ International Conference
+    on Intelligent Robots and Systems, pages 6058–6064. IEEE, 2013.
+
+[17] Michael Andre Bloesch. State Estimation for Legged Robots–Kinematics, Inertial Sensing, and Computer Vision.
+    PhD thesis, 2017.
+
+[18] Silvere Bonnabel. Left-invariant extended Kalman ﬁlter and attitude estimation. In IEEE Conf. Decision and
+     Control, pages 1027–1032. IEEE, 2007.
+
+[19] Silvere Bonnabel. Symmetries in observer design: Review of some recent results and applications to ekf-based
+     slam. In Robot Motion and Control 2011, pages 3–15. Springer, 2012.
+
+[20] Silvere Bonnabel, Philippe Martin, and Pierre Rouchon.  Non-linear symmetry-preserving observers on Lie
+     groups. IEEE Transactions on Automatic Control, 54(7):1709–1713, 2009.
+
+[21] Silvère Bonnable, Philippe Martin, and Erwan Salaün. Invariant Extended Kalman Filter: theory and application
+      to a velocity-aided attitude estimation problem. In Decision and Control, 2009 held jointly with the 2009 28th
+     Chinese Control Conference. CDC/CCC 2009. Proceedings of the 48th IEEE Conference on, pages 1297–1304.
+    IEEE, 2009. ISBN 1424438713.
+
+[22] Guillaume Bourmaud, Rémi Mégret, Audrey Giremus, and Yannick Berthoumieu. Discrete extended Kalman
+      ﬁlter on Lie groups.  In Signal Processing Conference (EUSIPCO), 2013 Proceedings of the 21st European,
+     pages 1–5. IEEE, 2013. ISBN 0992862604.
+
+[23] Guillaume Bourmaud, Rémi Mégret, Marc Arnaudon, and Audrey Giremus.  Continuous-discrete extended
+    Kalman ﬁlter on matrix Lie groups using concentrated Gaussian distributions. Journal of Mathematical Imaging
+    and Vision, 51(1):209–228, 2015. ISSN 0924-9907.
+
+[24] Martin Brossard, Axel Barrau, and Silvere Bonnabel.  Rins-w: Robust inertial navigation system on wheels.
+     arXiv preprint arXiv:1903.02210, 2019.
+
+[25] Paul Chauchat, Axel Barrau, and Silvere Bonnabel. Kalman ﬁltering with a class of geometric state equality
+      constraints. In 2017 IEEE 56th Annual Conference on Decision and Control (CDC), pages 2581–2586. IEEE,
+     2017.
+
+[26] Paul Chauchat, Axel Barrau, and Silvere Bonnabel.  Invariant smoothing on lie groups.  In 2018 IEEE/RSJ
+     International Conference on Intelligent Robots and Systems (IROS), pages 1703–1710. IEEE, 2018.
+
+[27] Gregory S Chirikjian. Stochastic Models, Information Theory, and Lie Groups, Volume 2: Analytic Methods and
+    Modern Applications. Springer Science & Business Media, 2011.
+
+
+                                              40

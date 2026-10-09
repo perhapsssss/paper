@@ -1,0 +1,56 @@
+where (·)× denotes a 3 × 3 skew-symmetric matrix. The inverse operation is deﬁned using the wedge operator,
+(·)∨: g →R3N+9. The matrix representation of the adjoint is given by:
+
+                               R     0   0   0 
+                                             (vt)× Rt  Rt   0   0
+                              AdXt =                                                                     (7)                                            (pt)× Rt   0   Rt   0                                                                                                                          .
+                                            (dt)× Rt   0   0   Rt
+
+A closed form expression for the exponential map of SEN+2(3) is given in Appendix B.
+
+5.2.  Continuous-Time System Dynamics
+
+The IMU measurements are modeled as being corrupted by additive Gaussian white noise processes, per
+
+                                     ˜ωt = ωt + wgt ,    wgt ∼GP (03,1, Σg δ(t −t′))
+                                                  ˜at = at + wat ,    wat ∼GP (03,1, Σa δ(t −t′)) ,
+
+where GP denotes a Gaussian process and δ(t −t′) denotes the Dirac delta function. These are explicit measurements
+coming directly from a physical sensor. In contrast, the velocity of the contact point is implicitly inferred through
+a contact sensor; speciﬁcally, when a binary sensor indicates contact, the position of the contact point is assumed to
+remain ﬁxed in the world frame, i.e. the measured velocity is zero. In order to accommodate potential slippage, the
+measured velocity is assumed to be the actual velocity plus white Gaussian noise, namely
+
+                            W˜vC = 03,1 = CvC + wvt ,  wvt ∼GP (03,1, Σv δ(t −t′)) .
+
+Using the IMU and contact measurements, the individual terms of the system dynamics can be written as:
+
+                                 d
+                                                                                       t )×                                   dtRt = Rt (˜ωt −wg
+                                 d
+                                                                                     t ) + g                                        dtvt = Rt(˜at −wa                                                                                                                      (8)
+                                 d
+                                       dtpt = vt
+                                 d
+                                                                                            t ),                                       dtdt = Rt hR(˜αt)(−wv
+
+where g is the gravity vector and  hR(˜αt) is the measured orientation of the contact frame with respect to the IMU
+frame as computed through encoder measurements, ˜αt ∈RM, and forward kinematics. Therefore, Rt hR(˜αt) is a
+rotation matrix that transforms a vector from the contact frame to the world frame.
+    In matrix form, the dynamics can be expressed as
+         Rt (˜ωt)×   Rt˜at + g   vt   03,1    Rt   vt  pt  dt  (wgt )×  wat   03,1   hR(˜αt)wvt 
+     d            01,3        0      0   0        01,3  1   0   0      01,3    0    0       0
+                                                          01,3  0   1   0                    01,3        0      0   0                                                                                  01,3    0    0       0     dtXt =                                                −                                                                                                                                                                                                                                                                                                                                              (9)
+                    01,3        0      0   0        01,3  0   0   1      01,3    0    0       0
+         ≜fut(Xt) −Xtwt ∧,
+with wt ≜vec(wgt , wat , 03,1, hR(˜αt)wvt ). The deterministic system dynamics, fut(·), can be shown to satisfy the
+group afﬁne property, (2). Therefore, following Theorem 1, the left- and right-invariant error dynamics will evolve
+independently of the system’s state.
+   Using Theorem 1, the right-invariant error dynamics is
+
+                         d                                −1
+                                                   t = fut(ηrt) −ηrtfut(Id) + (¯Xtwt ∧¯Xt  )ηrt                           dtηr                                                                                                             (10)
+                              ≜gut(ηrt) + ¯w∧t ηrt
+
+
+                                              11

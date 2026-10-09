@@ -1,0 +1,54 @@
+where the dynamics and noise matrices are
+
+                    −(¯ωt)×     0        0        0    −I   0 
+                               −(¯at)×  −(¯ωt)×     0        0      0  −I
+                               0          I     −(¯ωt)×     0      0   0                      Alt =
+                               0        0        0     −(¯ωt)×   0   0                         (34)
+                               0        0        0        0      0   0                                                                                                                                                                                                                                                                                                                                                                             
+                               0        0        0        0      0   0
+                             ¯Qt = Cov(wt).
+
+Similar to the right-invariant case, the dynamics only depend on the state through the IMU bias. When a left-invariant
+observation comes in, the state estimate is corrected using
+                                ¯X+t , θ+t  =   ¯Xt exp Kξt Π ¯X−1t  Yt    ,  ¯θt + Kζt Π ¯X−1t  Yt   ,                      (35)
+
+where the exponential map is now multiplied on the right side [10].
+
+10.1.  Switching Between Left and Right-Invariant Errors
+
+Because forward kinematic measurements have the right invariant observation form, the innovation equations are only
+autonomous when the right invariant error is used. Fortunately, it is possible to switch between the left and right error
+forms through the use of the adjoint map.
+                                    ηrt = ¯XtX−1t = ¯Xtηlt ¯X−1t
+                      =⇒exp(ξrt) = ¯Xt exp(ξlt)¯X−1t = exp(Ad¯Xtξlt)
+                     =⇒ξrt = Ad¯Xtξlt
+
+This transformation is exact, which means that we can easily switch between the covariance of the left and right
+invariant errors using
+                                       Prt = Ad¯Xt Plt AdT¯Xt.                                          (36)
+    Therefore, when handling a right-invariant observation, we can map the propagated left-invariant covariance to
+the right-invariant covariance temporarily, apply the right-invariant update equations (29), then map the corrected
+covariance back to the left-invariant form.
+     It is also possible to compute the log-linear left-invariant dynamics starting from the right-invariant form. Substi-
+tuting (36) into the (right-invariant) covariance propagation equation (13) and solving for the left-invariant covariance
+yields
+
+                       d                         d
+                                                                                                            t                          dtPl                                              t =  Ad¯X−1t ArtAd¯Xt −Ad¯X−1t  dt  Ad¯Xt    Pl
+                           −d                                               AdT                                                    AdT                                                                                                                 ¯Xt                    + Plt  AdT¯XtArTt AdT¯X−1t                                                                                              ¯X−1t                                                          dt
+                                                       r
+                    + Ad¯X−1t  ¯Q tAdT¯X−1t   .
+
+Therefore, we learn that the right and left dynamics and noise matrices are related by the following expressions
+
+                                                  d
+                               Alt ≜Ad¯X−1t ArtAd¯Xt −Ad¯X−1t  dt  Ad¯Xt                                 (37)
+                                                                                       .                                      ¯Q lt ≜Ad¯X−1t  ¯Q rtAdT¯X−1t
+
+Remark 6. Intuitively, the left-invariant error represents an error measured in the body frame of the robot, while the
+right-invariant error represents an error measured in the world or spatial frame. The frame of measurement dictates
+whether the exponential map appears on the right or left in the update equations. The error can be moved between
+these two frames using the adjoint map of the Lie group.
+
+
+                                              28

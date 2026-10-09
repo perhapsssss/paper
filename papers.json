@@ -3,16 +3,54 @@
     "id": "humanoid-nonlinear-state-estimation",
     "title": "人形机器人非线性状态估计框架",
     "title_original": "A nonlinear state estimation framework for humanoid robots",
-    "authors": ["Jingchao Li", "Zhaohui Yuan", "Sheng Dong", "Jingqin Zhang", "Jianrui Zhang"],
+    "authors": [
+      "Jingchao Li",
+      "Zhaohui Yuan",
+      "Sheng Dong",
+      "Jingqin Zhang",
+      "Jianrui Zhang"
+    ],
     "year": 2022,
     "venue": "Robotics and Autonomous Systems 153, 104100",
     "doi": "10.1016/j.robot.2022.104100",
-    "tags": ["人形机器人", "状态估计", "DLKF", "IEKF"],
+    "tags": [
+      "人形机器人",
+      "状态估计",
+      "DLKF",
+      "IEKF"
+    ],
     "abstract": "提出融合 IMU、关节编码器和足底 FSR 的非线性状态估计框架，使用 DLKF 补偿模型误差，并用 IEKF 估计浮动基座运动学。",
     "project": "papers/humanoid-nonlinear-state-estimation",
     "reader": "papers/humanoid-nonlinear-state-estimation/translation-reading.html",
     "pdf": "papers/humanoid-nonlinear-state-estimation/original.pdf",
     "cover": "papers/humanoid-nonlinear-state-estimation/assets/figures/fig-14.png",
+    "status": "已完成"
+  },
+  {
+    "id": "contact-aided-inekf",
+    "title": "接触辅助不变扩展卡尔曼滤波：机器人状态估计",
+    "title_original": "Contact-Aided Invariant Extended Kalman Filtering for Robot State Estimation",
+    "authors": [
+      "Ross Hartley",
+      "Maani Ghaffari",
+      "Ryan M. Eustice",
+      "Jessy W. Grizzle"
+    ],
+    "year": 2019,
+    "venue": "arXiv:1904.09251v2",
+    "doi": "10.48550/arXiv.1904.09251",
+    "tags": [
+      "腿式机器人",
+      "状态估计",
+      "InEKF",
+      "李群",
+      "接触辅助导航"
+    ],
+    "abstract": "提出接触辅助不变扩展卡尔曼滤波器，融合 IMU、接触与正向运动学估计机器人位姿、速度及接触点，并通过 Cassie 仿真和实验验证收敛性能。",
+    "project": "papers/contact-aided-inekf",
+    "reader": "papers/contact-aided-inekf/translation-reading.html",
+    "pdf": "papers/contact-aided-inekf/original.pdf",
+    "cover": "papers/contact-aided-inekf/assets/figures/fig-01.png",
     "status": "已完成"
   }
 ]

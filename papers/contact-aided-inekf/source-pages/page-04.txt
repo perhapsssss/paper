@@ -1,0 +1,56 @@
+mate [77]. Due to its low computational complexity and accurate performance, the EKF quickly became the de facto
+standard of nonlinear ﬁltering for many mobile robot applications, including wheeled vehicles, drones, and legged
+robots [24, 70, 15]. The EKFs has also been proposed to solve the SLAM problem [74]. However, since the nonlinear
+system is linearized about the current state estimate, the EKF is, at best, only a locally stable observer [76, 52]. The
+local convergence proofs are based on Lipschitz bounds of the nonlinear terms in a model, and hence “the more non-
+linear a system is, the worse an EKF may perform”. Importantly, if the state estimate is initialized poorly, it is possible
+for the ﬁlter to diverge. In addition, because an EKFs uses a systems linearization about the current estimate, states
+that are unobservable can spuriously be treated as observable by the ﬁlter. While, this can be mitigated through the
+use of an observability-constrained EKF developed by Huang et al. [49], it cannot be altogether avoided.
+   For many systems, the error-state (or indirect) EKF offers superior performance to the standard (total state or
+direct) form. As the name implies, the error-state extended Kalman ﬁlter (ErEKF) is formulated using the errors,
+such as pose and velocity errors, as the ﬁlter variables, while the standard EKF tracks the states themselves (pose and
+velocity directly) [59, 69, 79, 75]. Under small noise assumptions, this leads to linear error dynamics which are then
+used for covariance propagation in the error-state ﬁlter. The measurement model is also rewritten with respect to these
+errors. Although the error dynamics are linear in the error variables, they may still depend on the current state estimate,
+which if initialized poorly, will degrade the performance of the ﬁlter. However, the approximately linear nature of the
+error dynamics may respect the linear assumptions of the original Kalman ﬁlter better than the underlying system
+dynamics, which can lead to improved performance [59].
+   Perhaps the most important feature of the ErEKF is the ability to circumvent dynamic modeling [69]. This is done
+by replacing the potentially complicated process model with a relatively simple IMU integration model (also known as
+strapdown modeling) [78, 62, 82]. Essentially, the IMU’s angular velocity and linear acceleration measurements are
+integrated to propagate the state estimate, while the covariance is propagated using the error dynamics. Additional (in-
+dependent) sensor measurements will correct the estimated error, which can then be used to update the state estimate.
+Using this method, there is no longer a need to formulate complicated, platform-speciﬁc dynamics models, which
+may require a large number of state variables and is likely to be exceedingly nonlinear. The “strapdown” ErEKFs has
+proven to yield highly accurate results (even with a low-cost IMUs) and continues to form the basis of many inertial
+navigation systems (INSs) [13, 54, 79, 75, 15].
+    In the standard formulation of Kalman ﬁltering theory, the system evolves on Euclidean spaces. However, in
+many cases, the state variables we are interested in lie on a manifold. For example, the orientation of a 3D rigid
+body is represented by an element of the special orthogonal group, SO(3).  This matrix Lie group is deﬁned by
+the set of orthogonal 3 × 3 matrices with a determinant of one. While the matrix contains nine variables, yet the
+dimension of the manifold is only three. One common approach is to parameterize SO(3) using local coordinates
+such as three Euler or Tait-Bryan angles [39, 71]. This allows the standard ErEKF equations to be applied; however,
+these local parameterizations are often arbitrary (and therefore confusing) and contain singularities (the well-known
+Gimbal lock problem). Alternatively, it is possible to represent 3D orientation using quaternions, which are a four-
+dimensional double cover (a two to one diffeomorphism) of SO(3). Using quaternions eliminates the singularities;
+however, modiﬁcations to the standard ErEKF equations have to be made [75, 79]. In brief, while the orientation
+is represented by a four-dimensional quaternion, the orientation error has to be deﬁned by a 3−vector (in the Lie
+algebra of SO(3)) and the associated covariance by a 3×3 matrix in order to prevent degeneracy. Also, the orientation
+corrections are done through quaternion multiplication instead of vector addition. This QEKF 2 has been well studied
+and implemented on a number of platforms, ranging from spacecraft [63, 54] to legged robots [15, 68, 36].
+     It turns out, many useful robot states can be characterized using matrix Lie groups. Examples include 2D orien-
+tation, SO(2), 3D orientation, SO(3), and 3D pose (orientation and position), SE(3). If the state to be estimated is
+a matrix Lie group, it is possible to further improve the EKF ﬁltering approach. Bourmaud et al. [22, 23] developed
+versions of both discrete and continuous-time EKFs for systems where the state dynamics and measurements evolve
+on matrix Lie groups. In these formulations, noise is represented as a concentrated Gaussian on Lie groups [80, 81],
+which is a generalization of the multivariate Gaussian distribution. In essence, noise is represented as a Gaussian in the
+tangent space about a point on the manifold. This noise is then mapped to the Lie group through the use of the group’s
+exponential map, resulting in a decidedly non-Gaussian distribution on the manifold. An improved state estimate is
+
+   2The quaternion-based formulation of EKFs is also sometimes called “multiplicative ﬁltering” (MEKF) due to the orientation correction being
+done through quaternion multiplication [60].
+
+
+
+                                              4

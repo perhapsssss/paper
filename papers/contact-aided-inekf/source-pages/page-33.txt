@@ -1,0 +1,63 @@
+                                          Table 2: Summary of World-centric State Estimator
+
+
+State Deﬁnition                                                Deterministic Nonlinear Dynamics
+     RWB   WvB  WpWB  WpWC  WpWL                     ¯Rt (¯ωt)×    ¯Rt¯at + g     ¯vt   03×1   03×1 
+      01×3    1     0      0      0                                  01×3        0      0    0      0
+Xt ≜  01×301×3    00     10      01      00                         fut(¯Xt, ¯θt) =    01×301×3        00      00    00      00     
+      01×3    0     0      0      1                                  01×3        0      0    0      0
+
+Log-Linear Right-Invariant Dynamics                         Log-Linear Left-Invariant Dynamics
+      0     0   0   0   0      −¯Rt        0            −(¯ωt)×       0          0          0          0     −I    0 
+      (g)×   0   0   0   0   −(¯vt)× ¯Rt   −¯Rt                   −(¯at)×   −(¯ωt)×       0          0          0       0   −I
+         0      I   0   0   0   −(¯pt)× ¯Rt     0                         0             I      −(¯ωt)×       0          0       0     0
+Art =    0     0   0   0   0  −  ¯dt × ¯Rt     0              Alt =      0          0          0      −(¯ωt)×       0       0     0
+         0     0   0   0   0  −  ¯lt × ¯Rt     0                         0          0          0          0      −(¯ωt)×    0     0                                   0     0   0   0   0        0         0                                                                                                               0          0          0          0          0       0     0     
+         0     0   0   0   0        0         0                         0          0          0          0          0       0     0
+                                           T
+ˆQ rt =  Ad¯Xt   015,6  Cov(wt)  Ad¯Xt   015,6                      ˆQ lt = Cov(wt)        06,15     I6              06,15     I6
+
+Measurement                                Observation Matrix, H                        Observation Type
+
+Forward Kinematic                            0   0  −I    I   0   0   0                   Right-Invariant
+Relative Landmark Position                    0   0  −I   0    I   0   0                   Right-Invariant
+Absolute Landmark Position                   (l)×   0  −I   0   0   0   0               Right-Invariant
+Magnetometer                          (m)×   0   0   0   0   0   0                Right-Invariant
+GPS Position                                 0   0    I   0   0   0   0                     Left-Invariant
+
+
+
+                                          Table 3: Summary of Robo-centric State Estimator
+
+
+State Deﬁnition                                   Deterministic Nonlinear Dynamics
+
+     RBW   −BvB   BpBW   BpCW   BpLW             −(¯ωt)× Rt   −¯at −Rtg −(¯ωt)× vt   vt −(¯ωt)× pt   −(¯ωt)× dt   −(¯ωt)× lt 
+       01×3    1      0      0      0                        01×3              0                 0            0           0
+                                                                                    0                 0            0           0            Xt ≜  01×301×3    00      10      01      00         fut(¯Xt, ¯θt) =     01×301×3              0                 0            0           0
+       01×3    0      0      0      1                        01×3              0                 0            0           0
+
+Log-Linear Right-Invariant Dynamics                                       Log-Linear Left-Invariant Dynamics
+
+    −(¯ωt)×       0          0          0          0         I   0         0     0   0   0   0        ¯Rt       0 
+        −(¯at)×   −(¯ωt)×       0          0          0       0    I           (g)×   0   0   0   0    (¯vt)× ¯Rt    ¯Rt
+           0             I      −(¯ωt)×       0          0       0   0              0      I   0   0   0    (¯pt)× ¯Rt    0
+Art =      0          0          0      −(¯ωt)×       0       0   0     Alt =    0     0   0   0   0      ¯dt × ¯Rt    0
+           0          0          0          0      −(¯ωt)×   0   0              0     0   0   0   0       ¯lt × ¯Rt    0                                        0          0          0          0          0       0   0                                                       0     0   0   0   0       0       0    
+           0          0          0          0          0       0   0              0     0   0   0   0       0       0
+                                                            "Ad¯X−1t     015,6 # Cov(wt) "Ad¯X−1t     015,6 #TˆQ rt = Cov(wt)                                                                                ˆQ lt =
+                                                                                           06,15      I6               06,15      I6
+
+Measurement                                Observation Matrix, H                        Observation Type
+
+Forward Kinematic                            0   0    I  −I   0   0   0                   Left-Invariant
+Relative Landmark Position                    0   0    I   0  −I   0   0                   Left-Invariant
+Absolute Landmark Position                −(l)×   0    I   0   0   0   0               Left-Invariant
+Magnetometer                       −(m)×   0   0   0   0   0   0              Left-Invariant
+GPS Position                                 0   0  −I   0   0   0   0                  Right-Invariant
+
+
+
+
+
+                                             33

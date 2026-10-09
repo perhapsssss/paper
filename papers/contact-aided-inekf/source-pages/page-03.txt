@@ -1,0 +1,35 @@
+Figure 1: A Cassie-series biped robot is used for both simulation and experimental results. The robot was developed by Agility Robotics and has
+20 degrees of freedom, 10 actuators, joint encoders, and an inertial measurement unit (IMU). The contact and IMU frames used in this work are
+depicted above.
+
+
+robot, shown in Figure 1, are presented in Section 9 along with an application towards LiDAR-based terrain mapping.
+Section 10 provides an alternative derivation of the proposed observer using the left-invariant dynamics along with
+an explanation of how to easily switch between the two formulations. Section 11 details how these equations can
+be modiﬁed to create a “robot-centric” estimator. Section 12 itemizes additional sensor measurements that ﬁt within
+the InEKF framework and describes the relation between the developed ﬁlter and landmark-based SLAM. Finally,
+Section 13 concludes the article and suggests future directions. Details about time-discretization and useful Lie group
+expressions are given in the appendix.
+
+2.  Background and Related work
+
+In this section, we ﬁrst review the Kalman ﬁltering literature to locate the proposed state estimator within the relate
+work. Then, we review the state estimation techniques for humanoid and legged robots.
+
+2.1.  Kalman Filtering
+
+Filtering methods involve estimating the robot’s current state (and potentially landmarks) using the set of all measure-
+ments up to the current time [2, 41, 73]. When the process model and measurements are linear, and the noise is white
+and Gaussian, Kalman ﬁltering [51] provides an optimal method (minimum mean squared error) for state estimation.
+The general process for Kalman ﬁltering involves two phases, propagation and correction. The state is typically repre-
+sented using a Gaussian random vector, which is parameterized by a mean and a covariance. During the propagation
+phase, the previous state and covariance estimate are propagated forward in time using the system dynamics (alterna-
+tively known as the process model). When a measurement is obtained, the state and covariance estimate are corrected
+using the measurement model along with an associated measurement noise covariance.
+   Although the Kalman ﬁlter provides a method for optimal linear ﬁltering, most practical mobile robots have non-
+linear system dynamics, and many useful sensor models are also nonlinear. For these cases, an EKF can be designed,
+which utilizes Taylor series expansions to linearize the process and measurement models around the current state esti-
+
+
+
+                                              3

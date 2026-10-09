@@ -1,0 +1,49 @@
+exponential, as in the left-invariant case. Solving (53) yields a state transition matrix of the form:
+                                I    0   0  0  Φr15   0 
+                                  Φr21    I   0  0  Φr25  Φr26
+                                  Φr31  Φr32   I  0  Φr35  Φr36                            Φr(tk+1, tk) =                                                              (58)                                          0    0   0   I  Φr45   0
+                                          0    0   0  0    I    0                                                                                                                                                                                                                                                                                                                                                     
+                                          0    0   0  0   0      I
+
+where the individual terms can be analytically computed as
+                        Φr21 = (g)× ∆t
+                                   1
+                        Φr31 =  (g)× ∆t2                                   2
+                        Φr32 = I∆t
+                        Φr15 = −¯RkΓ1(¯ωk∆t)∆t
+                        Φr25 = −  ¯vk+1 × ¯RkΓ1(¯ωk∆t)∆t + ¯RkΨ1
+                        Φr35 = −  ¯pk+1 × ¯RkΓ1(¯ωk∆t)∆t + ¯RkΨ2
+                        Φr45 = −  ¯dk+1 × ¯RkΓ1(¯ωk∆t)∆t
+                        Φr26 = −¯RkΓ1(¯ωk∆t)∆t
+                        Φr36 = −¯RkΓ2(¯ωk∆t)∆t2.
+
+
+   Since the left/right-invariant errors are related through the adjoint, the two state transition and discrete noise ma-
+trices also satisfy the following relations [8].
+                               Φr = Ad¯Xk+1ΦlAd¯X−1k
+                                                    r                     l                                                (59)
+                                               ¯Q d = Ad¯Xk+1 ¯Q dAdT¯Xk+1
+
+Therefore, the right-invariant state transition matrix can alternatively be computed using:
+                              Φr(tk+1, tk) = Ad¯Xk+1 expm(Alt∆t) Ad¯X−1k  ,                              (60)
+
+which can simplify implementation since many software libraries already contain efﬁcient methods to compute the
+matrix exponential.
+    Similar to the state transition matrices, the discrete noise covariance matrix (52) also has an analytical solution. In
+practice, this matrix is often approximated as:
+                                               ¯Qd ≈Φ ¯QkΦT∆t.                                           (61)
+
+This approximated discrete noise matrix was used for all results in this article.
+
+B.  Useful Lie Group Expressions
+
+The matrix Lie group SEK(3) is known as the group of K direct isometries [8]. This group is comprised of a rotation
+matrix, R ∈SO(3), and K vectors in R3, p1, · · · , pK. Let X be an element of SEK(3), which can be written as a
+(3 + K) × (3 + K) matrix:
+                              R   p1    · · ·  pK 
+                                                     03,3   1     · · ·   0
+                        X ≜                   ...                         ...     ...                    ...                                          (62)                                                                                                                                                          .
+                                                     03,3   0     · · ·   1
+
+
+                                              37

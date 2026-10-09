@@ -1,0 +1,242 @@
+[
+  {
+    "id": "title",
+    "section": "题名",
+    "type": "title",
+    "source_ids": [
+      "title"
+    ],
+    "translation_ids": [
+      "zh-title"
+    ],
+    "source": "Contact-Aided Invariant Extended Kalman Filtering for Robot State Estimation",
+    "translation": [
+      "接触辅助不变扩展卡尔曼滤波：机器人状态估计"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "abstract-01",
+    "section": "摘要",
+    "type": "abstract",
+    "source_ids": [
+      "abstract"
+    ],
+    "translation_ids": [
+      "zh-abstract"
+    ],
+    "source": "Legged robots require knowledge of pose and velocity in order to maintain stability and execute walking paths.",
+    "translation": [
+      "腿式机器人需要准确的位姿和速度信息，才能保持稳定并按规划路径行走。"
+    ],
+    "notes": "摘要主体译文见阅读页。"
+  },
+  {
+    "id": "abstract-02",
+    "section": "摘要",
+    "type": "abstract",
+    "source_ids": [
+      "abstract"
+    ],
+    "translation_ids": [
+      "zh-abstract-method"
+    ],
+    "source": "We develop a contact-aided invariant extended Kalman filter using the theory of Lie groups and invariant observer design.",
+    "translation": [
+      "本文基于李群理论和不变观测器设计，构造一种接触辅助不变扩展卡尔曼滤波器。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "abstract-03",
+    "section": "摘要",
+    "type": "abstract",
+    "source_ids": [
+      "abstract"
+    ],
+    "translation_ids": [
+      "zh-abstract-result"
+    ],
+    "source": "The filter combines contact-inertial dynamics with forward kinematic corrections to estimate pose and velocity along with all current contact points.",
+    "translation": [
+      "该滤波器将接触—惯性动力学与正向运动学校正结合起来，同时估计位姿、速度和当前所有接触点。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "eq-01",
+    "section": "理论背景",
+    "type": "equation",
+    "source_ids": [
+      "eq-01"
+    ],
+    "translation_ids": [
+      "zh-eq-01"
+    ],
+    "source": "$$\\eta_t^r=\\bar X_tX_t^{-1},\\qquad \\eta_t^l=X_t^{-1}\\bar X_t. \\tag{1}$$",
+    "translation": [
+      "$$\\eta_t^r=\\bar X_tX_t^{-1},\\qquad \\eta_t^l=X_t^{-1}\\bar X_t. \\tag{1}$$"
+    ],
+    "notes": "公式为语言无关的群误差定义。"
+  },
+  {
+    "id": "eq-02",
+    "section": "理论背景",
+    "type": "equation",
+    "source_ids": [
+      "eq-02"
+    ],
+    "translation_ids": [
+      "zh-eq-02"
+    ],
+    "source": "$$f_t(X_1X_2)=f_t(X_1)X_2+X_1f_t(X_2)-X_1f_t(I)X_2. \\tag{2}$$",
+    "translation": [
+      "$$f_t(X_1X_2)=f_t(X_1)X_2+X_1f_t(X_2)-X_1f_t(I)X_2. \\tag{2}$$"
+    ],
+    "notes": "PDF 公式文本层可辨；保留原式。"
+  },
+  {
+    "id": "theorem-02",
+    "section": "理论背景",
+    "type": "paragraph",
+    "source_ids": [
+      "theorem-02"
+    ],
+    "translation_ids": [
+      "zh-theorem-02"
+    ],
+    "source": "If the initial error is eta_0 = exp(xi_0), then for all t >= 0, eta_t = exp(xi_t), where xi_t solves a linear differential equation.",
+    "translation": [
+      "若初始误差为 η₀=exp(ξ₀)，则任意时刻都有 ηₜ=exp(ξₜ)，其中 ξₜ 满足线性微分方程。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "eq-05",
+    "section": "姿态示例",
+    "type": "equation",
+    "source_ids": [
+      "eq-05"
+    ],
+    "translation_ids": [
+      "zh-eq-05"
+    ],
+    "source": "$$\\dot\\eta_t=\\eta_t(\\tilde\\omega_t)^\\times-(\\tilde\\omega_t)^\\times\\eta_t. \\tag{5}$$",
+    "translation": [
+      "$$\\dot\\eta_t=\\eta_t(\\tilde\\omega_t)^\\times-(\\tilde\\omega_t)^\\times\\eta_t. \\tag{5}$$"
+    ],
+    "notes": "保留原式。"
+  },
+  {
+    "id": "eq-08",
+    "section": "系统动力学",
+    "type": "equation",
+    "source_ids": [
+      "eq-08"
+    ],
+    "translation_ids": [
+      "zh-eq-08"
+    ],
+    "source": "$$\\dot R_t=R_t(\\tilde\\omega_t-w_{g,t})^\\times,\\quad \\dot v_t=R_t(\\tilde a_t-w_{a,t})+g,\\quad \\dot p_t=v_t. \\tag{8}$$",
+    "translation": [
+      "$$\\dot R_t=R_t(\\tilde\\omega_t-w_{g,t})^\\times,\\quad \\dot v_t=R_t(\\tilde a_t-w_{a,t})+g,\\quad \\dot p_t=v_t. \\tag{8}$$"
+    ],
+    "notes": "从 PDF 公式转写，接触点动力学见原文公式 (8)。"
+  },
+  {
+    "id": "eq-19",
+    "section": "观测更新",
+    "type": "equation",
+    "source_ids": [
+      "eq-19"
+    ],
+    "translation_ids": [
+      "zh-eq-19"
+    ],
+    "source": "$$\\bar X_t^+=\\exp(K_t\\Pi\\bar X_tY_t)\\bar X_t,\\qquad P_t^+=(I-K_tH_t)P_t(I-K_tH_t)^T+K_t\\bar N_tK_t^T. \\tag{19}$$",
+    "translation": [
+      "$$\\bar X_t^+=\\exp(K_t\\Pi\\bar X_tY_t)\\bar X_t,\\qquad P_t^+=(I-K_tH_t)P_t(I-K_tH_t)^T+K_t\\bar N_tK_t^T. \\tag{19}$$"
+    ],
+    "notes": "公式结构可辨；矩阵定义见译文。"
+  },
+  {
+    "id": "eq-31",
+    "section": "接触点增广",
+    "type": "equation",
+    "source_ids": [
+      "eq-31"
+    ],
+    "translation_ids": [
+      "zh-eq-31"
+    ],
+    "source": "$$\\bar d_t=\\bar p_t+\\bar R_th_p(\\tilde\\alpha_t). \\tag{31}$$",
+    "translation": [
+      "$$\\bar d_t=\\bar p_t+\\bar R_th_p(\\tilde\\alpha_t). \\tag{31}$$"
+    ],
+    "notes": "保留原式。"
+  },
+  {
+    "id": "fig-01-caption",
+    "section": "5. State Representation",
+    "type": "caption",
+    "source_ids": [
+      "fig-01-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-01-caption"
+    ],
+    "source": "A Cassie-series biped robot is used for both simulation and experimental results. The robot was developed by Agility Robotics.",
+    "translation": [
+      "图 1. Cassie 系列双足机器人及其 IMU、接触坐标系。"
+    ],
+    "notes": "图中标签保留英文。"
+  },
+  {
+    "id": "fig-03-caption",
+    "section": "6. Simulation Results",
+    "type": "caption",
+    "source_ids": [
+      "fig-03-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-03-caption"
+    ],
+    "source": "The RIEKF converges considerably faster than the QEKF for all observable states.",
+    "translation": [
+      "图 3. QEKF 与 RIEKF 在随机初始姿态、速度下的收敛比较；RIEKF 对可观测状态收敛更快。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fig-09-caption",
+    "section": "9.2 Motion Capture Experiment",
+    "type": "caption",
+    "source_ids": [
+      "fig-09-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-09-caption"
+    ],
+    "source": "The final drift is less than 5% of the distance traveled.",
+    "translation": [
+      "图 9. 运动捕捉实验的 InEKF 估计轨迹；最终位置漂移小于行走距离的 5%。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "conclusion-01",
+    "section": "结论",
+    "type": "paragraph",
+    "source_ids": [
+      "conclusion-01"
+    ],
+    "translation_ids": [
+      "zh-conclusion-01"
+    ],
+    "source": "The developed system has the potential to become an essential part of modern bipedal robots.",
+    "translation": [
+      "接触传感器和 IMU 已是现代双足机器人的常见配置，因此该系统有望成为机器人状态估计的重要组成部分。"
+    ],
+    "notes": ""
+  }
+]

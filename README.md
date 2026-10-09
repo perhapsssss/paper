@@ -24,4 +24,4 @@ python -m http.server 8000
 
 当前首篇论文及原文 PDF 已复制为普通文件放在 `papers/humanoid-nonlinear-state-estimation/`，可与网站一起发布。
 
-公开发布前，请确认你有权公开论文原文 PDF、图表和译文。
+公开发布前，请确认你有权公开论文原文 PDF、图表和译文。当前目录中的论文项目均包含原始 PDF。

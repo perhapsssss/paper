@@ -1,0 +1,55 @@
+obtained due to the ﬁlter taking into account the geometry and structure of the problem [23].
+   Most recently, a new type of EKF has been developed that is rooted in the theory of invariant observer design,
+in which the estimation error is invariant under the action of a Lie group [1, 20]. This invariance is referred to as
+the symmetries of the system [5]. This work led to the development of the InEKF [18, 8, 10, 11], with successful
+applications and promising results in SLAM [8, 86] and aided INSs [21, 4, 5, 8, 83]. Similar to the above mentioned
+EKFs on matrix Lie groups, the state is again represented as a matrix Lie group and the noise as a concentrated
+Gaussian on the group.
+   However, the InEKF exploits available system symmetries to further improve ﬁltering results. The culminating
+result of the InEKF states that if a system satisﬁes a “group-afﬁne” property, the estimation error satisﬁes a “log-linear”
+autonomous differential equation on the Lie algebra of the corresponding Lie group [11, 8]. In other words, the system
+linearization does not depend upon the estimated states. Therefore, one can design a nonlinear state estimator with
+strong convergence properties. Surprisingly, many mobile robot state estimation problems can be solved within the
+InEKF framework. This includes attitude estimation [18], inertial odometry [11, 8], velocity-aided inertial navigation
+[21], landmark-aided navigation [8], GPS and magnetometer-aided navigation [4], and even EKF-based SLAM. In
+this article, we extend this class of solutions to contact-aided inertial navigation [46], where forward kinematics is
+used to correct an inertial and contact-based process model. This approach successfully allows an InEKF to be used
+for legged robot state estimation.
+
+2.2.  Legged Robot and Humanoid State Estimation
+
+Legged robots are a subclass of mobile robots that locomote through direct and switching contact with the environment.
+These robots typically contain proprioceptive sensors, such as IMU, joint encoders, and contact sensors. In addition,
+some legged robots, especially humanoids, also have access to exteroceptive sensors, namely cameras and LiDARs.
+As with all mobile robots, state estimation for legged robots is critical for mapping, planning, designing feedback
+controllers, and developing general autonomy. In this section, an overview of notable techniques for legged robot state
+estimation is given.
+   The simplest approach for estimation of a legged robot’s spatial location and velocity is kinematic dead-reckoning,
+otherwise known as kinematic odometry. This involves estimating relative transformations using only kinematic and
+contact measurements. In particular, encoder measurements and the kinematics model are used to track the position,
+orientation, and velocity of the robot’s base frame based on the assumption that a stance foot remains ﬁxed to the
+ground.  Although this method can be easily implemented, the state estimate is typically noisy due to kinematic
+modeling errors, encoder noise, and foot slip [67]. When only one foot is in contact with the ground, this “static
+contact assumption” may be violated. For example, if the robot has point feet, the stance foot position may remain
+ﬁxed, but the foot orientation is free to rotate (without changing the joint angles). Therefore, a gyroscope is often used
+to provide angular velocity measurements which allows the robot’s body velocity to be recovered.
+    Alternatively, if the terrain is known a priori and at least three noncollinear point feet are on the ground, Lin
+et al. [55] showed that the robot’s instantaneous base pose can be computed through kinematics. These kinematic-
+based methods have been implemented on a number of legged robots including a planar one-legged hopper [47], the
+CMU Ambler hexapod [67], the RHex hexapod [55], and the biped robot MARLO [31, 32]. However, due to the high
+amounts of noise coming from encoders and foot slip, the velocity estimate typically needs to be heavily ﬁltered before
+becoming usable in the feedback controller [44]. In addition, this noise causes the position and orientation estimates
+to drift substantially rendering the estimator impractical for mapping and autonomy tasks.
+    Fortunately, legged robots are often equipped with additional sensors such as IMUs, GPS, cameras, or LiDARs
+which provide independent, noisy odometry measurements. Much of the literature on legged robot state estimation
+focuses on fusing these measurements (potentially with kinematic odometry) using ﬁltering and smoothing methods.
+Singh et al. [72] combined inertial measurements with optical ﬂow measurements in a four-phase hybrid EKF. This
+required explicit dynamic modeling of the robot in ﬂight, landing, stance, and thrust phases. Lin et al. [56] took a
+similar model-based approach and used an EKF to fuse kinematic information with IMU measurements to estimate
+the state of a hexapod. Cobano et al. [30] developed an EKF that fuses kinematic odometry and magnetometer readings
+with position measurements from a GPS to localize a SILO4 quadruped outdoors. This implementation ﬁxes the issues
+with unbounded drift, but cannot operate in GPS-denied environments. If a prior terrain map is known, Chitta et al.
+
+
+
+                                              5

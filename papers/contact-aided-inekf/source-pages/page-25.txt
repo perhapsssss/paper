@@ -1,0 +1,6 @@
+Figure 10: Motion capture experiment conducted in the University of Michigan’s M-Air facility. The dashed black line represents ground truth,
+the solid red line is the right-invariant EKF estimate, and the red shaded area represents the 3σ covariance hull. The ground truth for position
+and velocity were obtained using 18 Qualisys cameras. Due to poor orientation estimates from the motion capture system, the “ground truth”
+for orientation was obtained from the VectorNav-100, which runs a highly accurate on-board QEKF. The orientation data is plotted using the
+exponential coordinates.
+                                              25

@@ -1,0 +1,57 @@
+where (·)× denotes a 3 × 3 skew-symmetric matrix. If we deﬁne the error between the true and estimated orientation
+as ηt ≜RTt ¯Rt ∈SO(3), then the (left-invariant) error dynamics becomes
+
+                            d                           T
+                                                                 t ¯Rt (˜ωt)× + Rt (˜ωt)×    ¯Rt                               dtηt = RT
+                       = RTt ¯Rt (˜ωt)× −(˜ωt)× RTt ¯Rt                                        (5)
+                       = ηt (˜ωt)× −(˜ωt)× ηt
+                       = g(ηt, ˜ωt).
+
+Using this particular choice of state and error variable yields an autonomous error dynamics function (independent of
+the state directly). Since, SO(3) is a Lie Group, we can look at the dynamics of a redeﬁned error that resides in the
+tangent space, ηt ≜exp(ξt).
+
+                       d
+                            dt(exp(ξt)) = exp(ξt) (˜ωt)× −(˜ωt)× exp(ξt)
+                     d
+                                  I + (ξt)× ≈  I + (ξt)×  (˜ωt)× −(˜ωt)×  I + (ξt)×                         dt
+                          d
+               =⇒    (ξt)× = (ξt)× (˜ωt)× −(˜ωt)× (ξt)×                               dt
+                       = −(˜ωt)× ξt ×
+                             d
+                 =⇒ dtξt = (−˜ωt)× ξt
+
+After making a ﬁrst-order approximation of the exponential map, the tangent space error dynamics become linear.
+In addition, this linear system only depends on the error, not the state estimate directly. In other words, wrong state
+estimates will not affect the accuracy of the linearization, which leads to better accuracy and consistency of the ﬁlter.
+For SO(3), this effect is well studied and has been leveraged to design the commonly used QEKFs3, [79, 75]. However,
+the extension to general matrix Lie groups, called the InEKF, was only recently developed by Barrau and Bonnabel
+[10].
+    In the above example, we utilized the ﬁrst-order approximation for the exponential map of SO(3); exp(ξt) ≈
+I + (ξt)×. In general, one may ask how much accuracy is lost when making this approximation. The surprising result
+by Barrau and Bonnabel [10] is that this linearization is, in fact, exact. This is the basis of Theorem 2. If the initial
+error is known, the nonlinear error dynamics can be exactly recovered from this linear system.
+    Let’s demonstrate this theorem for the SO(3) example. Let η0 = exp(ξ0) be the initial left invariant error. We can
+show that ηt = RTt η0Rt is a solution to the error dynamics equation (5) through differentiation.
+
+                           d
+                                                               t η0Rt (˜ωt)× −(˜ωt)× RTt η0Rt                               dtηt = RT
+                      = ηt (˜ωt)× −(˜ωt)× ηt
+
+Once we replace the group error with the tangent space error and use the group’s adjoint deﬁnition to shift the rotation
+inside the exponential, we arrive at a simple expression for the tangent space error.
+
+                                        ηt = RTt η0Rt
+                        =⇒exp(ξt) = RTt exp(ξ0)Rt = exp(RTt ξ0)
+                      =⇒ξt = RTt ξ0
+
+Our ﬁnal log-linear error dynamics can now be obtained by differentiating this new error expression.
+
+                                  d
+                                                                                        t ξ0                                        dtξt = −(˜ωt)× RT
+                           = −(˜ωt)× ξt
+
+   3The set of quaternions, along with quaternion multiplication, actually forms a Lie group.
+
+
+                                              9

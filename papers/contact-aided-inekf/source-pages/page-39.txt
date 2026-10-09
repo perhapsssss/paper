@@ -1,0 +1,58 @@
+A similar ﬁrst-order approximation can be used to ﬁnd the relation between the right-invariant error and the QEKF
+velocity errors.
+
+                             ηvt = ¯vt −¯RtRTt vt = ¯vt −exp(ξRt )vt
+                                    ≈¯vt −vt − ξRt    vt = −δvt + (vt)× ξRt                            (69)
+                                       ×
+                 =⇒ξvt ≈−δvt + (¯vt)× ξRt
+
+The same process can be repeated for the position states.
+
+                                       ξpt ≈−δpt + (¯pt)× ξRt
+                                                                                                             (70)
+                                       ξdt ≈−δdt +  ¯dt × ξRt .
+
+Acknowledgments
+
+The authors would like to thank Yukai Gong for the development of the feedback controller utilized in the Cassie
+experiments as well as Bruce Huang, Ray Zhang, Lu Gan, Zhenyu Gan, Omar Harib, Eva Mungai, and Grant Gibson
+for their help in collecting experimental data. Funding for R. Hartley and M. Ghaffari is given by the Toyota Research
+Institute (TRI), partly under award number N021515, however this article solely reﬂects the opinions and conclusions
+of its authors and not TRI or any other Toyota entity. Funding for J. Grizzle was in part provided by TRI and in part
+by NSF Award No. 1808051.
+
+References
+
+ [1] Nasradine Aghannan and Pierre Rouchon. On invariant asymptotic observers.  In IEEE Conf. Decision and
+     Control, volume 2, pages 1479–1484. IEEE, 2002.
+
+ [2] Brian DO Anderson and John B Moore. Optimal ﬁltering. Englewood Cliffs, 1979.
+
+ [3] Yaakov Bar-Shalom, X Rong Li, and Thiagalingam Kirubarajan. Estimation with applications to tracking and
+     navigation: theory algorithms and software. John Wiley & Sons, 2001.
+
+ [4] Martin Barczyk and Alan F Lynch. Invariant extended Kalman ﬁlter design for a magnetometer-plus-GPS aided
+      inertial navigation system.  In IEEE Conference on Decision and Control and European Control Conference
+    (CDC-ECC), pages 5389–5394. IEEE, 2011.
+
+ [5] Martin Barczyk and Alan F Lynch.  Invariant observer design for a helicopter UAV aided inertial navigation
+     system. IEEE Transactions on Control Systems Technology, 21(3):791–806, 2013.
+
+ [6] Timothy D Barfoot. State Estimation for Robotics. Cambridge University Press, 2017.
+
+ [7] Timothy D Barfoot and Paul T Furgale. Associating uncertainty with three-dimensional poses for use in estima-
+      tion problems. IEEE Transactions on Robotics, 30(3):679–693, 2014.
+
+ [8] Axel Barrau. Non-linear state error based extended Kalman ﬁlters with applications to navigation. PhD thesis,
+    Mines Paristech, 2015.
+
+ [9] Axel Barrau and Silvere Bonnabel.  An ekf-slam algorithm with consistency properties.  arXiv preprint
+     arXiv:1510.06263, 2015.
+
+[10] Axel Barrau and Silvère Bonnabel. The invariant extended Kalman ﬁlter as a stable observer. IEEE Transactions
+    on Automatic Control, 62(4):1797–1812, 2017.
+
+
+
+
+                                              39

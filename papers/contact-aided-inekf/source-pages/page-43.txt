@@ -1,0 +1,61 @@
+[64] Simona Nobili, Marco Camurri, Victor Barasuol, Michele Focchi, D Caldwell, Claudio Semini, and M F Fallon.
+     Heterogeneous sensor fusion for accurate state estimation of dynamic legged robots. 2017. ISSN 0992374731.
+
+[65] Simona Nobili, Marco Camurri, Victor Barasuol, Michele Focchi, Darwin G Caldwell, Claudio Semini, and
+     Maurice Fallon. Heterogeneous sensor fusion for accurate state estimation of dynamic legged robots. In Robotics:
+     Science and Systems, 2017.
+
+[66] Tong Qin, Peiliang Li, and Shaojie Shen. Vins-mono: A robust and versatile monocular visual-inertial state
+      estimator. IEEE Transactions on Robotics, 34(4):1004–1020, 2018.
+
+[67] Gerald P Roston and Eric P Krotkov. Dead reckoning navigation for walking robots. Technical report, Carnegie-
+    Mellon University, Pittsburgh, PA, Robotics Institute, 1991.
+
+[68] Nicholas Rotella, Michael Bloesch, Ludovic Righetti, and Stefan Schaal. State estimation for a humanoid robot.
+     In Proc. IEEE/RSJ Int. Conf. Intell. Robots Syst., pages 952–958. IEEE, 2014.
+
+[69] Stergios I Roumeliotis, Gaurav S Sukhatme, and George A Bekey. Circumventing dynamic modeling: Evaluation
+     of the error-state kalman ﬁlter applied to mobile robot localization. In Robotics and Automation, 1999. Proceed-
+      ings. 1999 IEEE International Conference on, volume 2, pages 1656–1663. IEEE, 1999. ISBN 0780351800.
+
+[70] Kenneth D Sebesta and Nicolas Boizot. A real-time adaptive high-gain ekf, applied to a quadcopter inertial
+     navigation system. IEEE Transactions on Industrial Electronics, 61(1):495–503, 2014.
+
+[71] Peyman Setoodeh, Alireza Khayatian, and Ebrahim Frajah. Attitude estimation by separate-bias Kalman ﬁlter-
+     based data fusion. The Journal of Navigation, 57(2):261–273, 2004. ISSN 1469-7785.
+
+[72] Surya PN Singh, Paul J Csonka, and Kenneth J Waldron.  Optical ﬂow aided motion estimation for legged
+     locomotion. In 2006 IEEE/RSJ International Conference on Intelligent Robots and Systems, pages 1738–1743.
+    IEEE, 2006.
+
+[73] Duncan Smith and Sameer Singh. Approaches to multisensor data fusion in target tracking: A survey. IEEE
+     transactions on knowledge and data engineering, 18(12):1696–1710, 2006. ISSN 1041-4347.
+
+[74] Randall Smith, Matthew Self, and Peter Cheeseman. Estimating uncertain spatial relationships in robotics. In
+    Autonomous robot vehicles, pages 167–193. Springer, 1990.
+
+[75] Joan Sola. Quaternion kinematics for the error-state Kalman ﬁlter. arXiv preprint arXiv:1711.02508, 2017.
+
+[76] Yongkyu Song and Jessy W Grizzle. The extended Kalman ﬁlter as a local asymptotic observer for nonlinear
+     discrete-time systems. In American Control Conference, pages 3365–3369. IEEE, 1992.
+
+[77] Sebastian Thrun, Wolfram Burgard, and Dieter Fox. Probabilistic robotics. MIT press, 2005. ISBN 0262303809.
+
+[78] David Titterton, John L Weston, and John Weston. Strapdown inertial navigation technology, volume 17. IET,
+     2004. ISBN 0863413587.
+
+[79] Nikolas Trawny and Stergios I Roumeliotis. Indirect Kalman ﬁlter for 3D attitude estimation. Technical Report
+     2005-002, Dept. of Computer Science & Engineering University of Minnesota, Minneapolis, MN 55455, 2005.
+   URL http://mars.cs.umn.edu/tr/reports/Trawny05b.pdf.
+
+[80] Yunfeng Wang and Gregory S Chirikjian. Error propagation on the Euclidean group with applications to manip-
+      ulator kinematics. IEEE Transactions on Robotics, 22(4):591–602, 2006. ISSN 1552-3098.
+
+[81] Yunfeng Wang and Gregory S Chirikjian. Nonparametric second-order theory of error propagation on motion
+     groups. The International journal of robotics research, 27(11-12):1258–1273, 2008. ISSN 0278-3649.
+
+[82] Oliver J Woodman. An introduction to inertial navigation. Technical report, 2007.
+
+
+
+                                              43

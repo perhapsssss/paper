@@ -1,0 +1,51 @@
+10.2.  Adding New Contact Points
+
+The process for removing a contact point from the state (marginalization) is identical to the right-invariant error case,
+described in Section 8.1.  Likewise, when a new contact is detected, the state can be augmented using the same
+kinematics relation (31) as before. However, due to the change in error variable, the process for augmenting the
+covariance will be different.
+    In order to compute the new covariance, we need to look at the left-invariant error,
+
+                        ηdt = RTt (¯dt −dt)
+                  = RTt   ¯pt + ¯Rt hp(˜αt) −RTt (pt + Rt hp(˜αt −wαt ))
+                    ≈ηpt + ηRt  hp(˜αt) −hp(˜αt) + Jp(˜αt)wαt
+              =⇒ξdt ≈ξpt −( hp(˜αt))× ξRt + Jp(˜αt)wαt .
+
+Therefore, covariance augmentation can be done using the following linear map,
+
+                   ξRt         I       0  0         0                                          ξRt                              ξvt           0         I  0             0                                                           ξv                                                                                                                      t                                                                                             t                                                                                0                                                0                                                                 I                             ξp                                                                 0                                               t                                                                                            =                                                                                                                                                                                                       wα                                  +                                                           ξp                                                                                             t                                                                                                             (38)                                                0                                                                 I                            ξd                                                                            Jp(˜αt)                                    (−hp(˜αt))×                                               t
+                            ξnewt  ≜Ft ξt + Gtwαt
+                =⇒Pnewt  = Ft Pt FTt + Gt Cov(wαt ) GTt .
+
+11.  Robo-centric Estimator
+
+In this section, we derive a “robot-centric” version of the contact-aided InEKF where the estimated state is measured
+in the robot’s base (IMU) frame. When switching to a robot-centric model, the forward kinematics measurements take
+the left-invariant observation form. In addition, the left/right-invariant error dynamics equations are identical to the
+world-centric form, albeit swapped. The right-invariant error dynamics for the world-centric estimator are equivalent
+to the left-invariant error dynamics for the robo-centric estimator.
+   The properties of this ﬁlter are identical to the RIEKF derived in Section 5. However, in some cases this ﬁlter may
+be preferred as it directly estimates states that are useful for controlling a legged robot (namely the velocity measured
+in the body frame).
+
+11.1.  State and Dynamics
+
+We are interested in estimating the same states as before, though measured in the robot’s body frame. Again, the state
+variables can form a matrix Lie group, G. Speciﬁcally, for N contact points, Xt ∈SEN+2(3) can be represented by
+the following matrix (which is simply the inverse of the world-centric state)5:
+
+                   RBW(t)  −BvB(t)  BpBW(t)  BpC1W(t)    · · ·  BpCNW(t)
+                            01×3      1        0        0         · · ·      0
+                                        redeﬁne   01×3      0        1        0         · · ·      0
+                  Xt ≜    01×3      0        0        1         · · ·      0
+                                                                                                                                                                              ...                                                ...                                                  ...                                                    ...         ...                                    ...                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+                            01×3      0        0        0         · · ·      1
+
+   5The negative sign on body velocity appears when inverting the world-centric state; −BvB = −RTWB WvB. This sign is removed on the position
+vectors by swapping the start and end points, BpBW = −RTWB BpWB.
+
+
+
+
+
+                                              29

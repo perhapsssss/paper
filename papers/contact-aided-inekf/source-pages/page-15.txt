@@ -1,0 +1,48 @@
+                                    Table 1: Experiment Discrete Noise Statistics and Initial Covariance
+
+               Measurement Type       noise st. dev.          State Element              initial st. dev.
+                 Linear Acceleration      0.04 m / sec2         Orientation of IMU     30.0 deg
+                Angular Velocity         0.002 rad / sec       Velocity of IMU        1.0 m / sec
+                 Accelerometer Bias      0.001 m / sec3       Position of IMU        0.1 m
+                Gyroscope Bias          0.001 rad / sec2      Position of Right Foot   0.1 m
+                 Contact Linear Velocity   0.05 m / sec          Position of Left Foot    0.1 m
+                   Joint Encoders           1.0 deg            Gyroscope Bias        0.005 rad / sec
+                                                             Accelerometer Bias     0.05 m / sec2
+
+
+
+while the linearized observation matrix becomes
+
+                                    h  ¯RTt (¯dt −¯pt)     0  −¯RTt   ¯RTt i .                           Ht =
+                                      ×
+
+   The above linearizations are clearly dependent on the state estimate. Therefore, when the estimated state deviates
+from the true state, the linearizations are potentially wrong, reducing accuracy and consistency in the QEKF. In con-
+trast, the deterministic right-invariant error dynamics are exactly log-linear (14). In addition, the linearized observation
+matrix for our InEKF (20) is also independent of the state estimate.
+
+6.2.  Convergence Comparison:
+
+A dynamic simulation of a Cassie-series bipedal robot (described in Section 9) was performed in which the robot
+slowly walked forward after a small drop, accelerating from 0.0 to 0.3 m / sec. The discrete, simulated measurements
+were corrupted by additive white Gaussian noise, which are speciﬁed in Table 1 along with the initial state covariance
+values. The same values were used in both simulation and experimental convergence evaluations of the ﬁlters. The
+IMU bias estimation was turned off for these simulations. The simulation was performed with MATLAB and Simulink
+(Simscape Multibody™) where the simulation environment models ground contact forces with a linear force law
+(having a stiffness and damping term) and a Coulomb friction model. A typical walking gait is shown in Figure 2.
+
+
+
+
+
+     Figure 2: A typical walking gait that is used for ﬁlter comparisons. The Cassie bipedal robot is simulated using Simscape Multibody™.
+
+
+   To compare the convergence properties of the two ﬁlters, 100 simulations of each ﬁlter were performed using
+identical measurements, noise statistics, initial covariance, and various random initial orientations and velocities. The
+initial Euler angle estimates were sampled uniformly from −30 deg to 30 deg. The initial velocity estimates were
+sampled uniformly from −1.0 m / sec to 1.0 m / sec. The pitch and roll estimates as well as the (body frame) velocity
+
+
+
+                                              15

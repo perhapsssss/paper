@@ -1,0 +1,56 @@
+Re-written in matrix form, this measurement will have now have the left-invariant observation form (4),
+
+                  hp(˜αt)   Rt   vt  pt  dt   0   Jp(˜αt)wαt 
+                           0          01,3  1   0   0    0         0
+                     =               +                     .                       (45)
+                           1          01,3  0   1   0    1         0                                                                                                                                       
+                    −1         01,3  0   0   1   −1         0
+                         |   {z   }   |        {z        } | {z }  |    {z    }                          Yt             Xt         b         Vt
+The state update equation will take the left-invariant form (35), where the matrices Ht and ¯Nt can be derived to be:
+
+                             Ht =  03,3   03,3   I  −I  ,
+                                     T                                                              (46)
+                                            ¯Nt = ¯R t Jp(˜αt) Cov(wαt ) JTp(˜αt) ¯Rt.
+
+It is important to note that the forward kinematics measurement is a right-invariant observation for the world-centric
+estimator, while the same measurement becomes a left-invariant observation for the body-centric version. Also, the
+above linearization (46) is similar to the world-centric, right-invariant one (20). Namely, Ht is simply negated, while
+¯Nt is identical after accounting for the redeﬁnition of the state as its inverse.
+
+12.  Additional Sensor Observations
+
+This article extends upon our conference paper results [46] where we originally presented the contact-aided InEKF.
+As described in earlier sections, this ﬁlter uses an inertial-contact dynamics model with corrections coming from
+forward kinematics. In addition to forward kinematics, other groups have discovered that a number of measurements
+common to robotics can also ﬁt the invariant observation model (4). Bonnabel [18] developed an invariant observer
+that uses magnetometer and acceleration measurements to solve the attitude estimation problem. Barczyk and Lynch
+[4], Barrau [8] described methods for invariant observer design for GPS and magnetometer-aided navigation. Wu et al.
+[83] developed an InEKF to solve visual-inertial navigation.  It has also been shown that an InEKF can be used for
+SLAM [19, 9, 86].
+    In particular, it is interesting to note the similarities between our contact-aided InEKF and landmark-based SLAM.
+In the simplest case, this SLAM problem involves jointly estimating the robots state along with the position of static
+landmarks in the environment. The robot is often assumed to have a sensor capable of measuring the position of the
+landmark relative to the robot. This formulation is identical to our developed InEKF with the contact positions acting
+as landmarks and forward kinematics measuring the relative translation between the base and contact frames. This
+similarity was also mentioned by Bloesch et al. [15]. However, there are a few notable differences. The contact frame
+velocity is assumed to be white noise to allow for foot slip, while landmarks are usually treated as static. Forward
+kinematics measurements often come at high frequencies (2000 Hz on Cassie). In contrast, landmarks measurements
+are often at a much lower frequency. Finally, with landmark observations, a data association problem often has to be
+solved which associates the measurement with a particular landmark state. This problem does not exist with forward
+kinematic measurements.
+   Due to the similarities between contacts and landmarks, in our state matrix, the contact states could be easily
+replaced with landmark states, WpWLi(t),
+
+                  RWB(t)  WvB(t)  WpWB(t)  WpWL1(t)    · · ·  WpWLN (t)
+                                   01,3      1       0         0          · · ·      0
+                                   01,3      0       1         0          · · ·      0
+                   Xt ≜    01,3      0       0         1          · · ·      0          ,
+                                                                                                                                                                        ...                                            ...                                                ...                                                      ...         ...                                     ...                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                   01,3      0       0         0          · · ·      1
+
+or a combination of contact and landmark positions. In this way, it is possible to develop an observer that contains
+no unobservable states. Of course, like EKF-SLAM, the ﬁlter can become too computationally expensive to run in
+real-time if the number of landmarks grows too large.
+
+
+                                              31

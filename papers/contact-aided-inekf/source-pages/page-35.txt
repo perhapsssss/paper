@@ -1,0 +1,58 @@
+Remark 7. Γ0(φ) is simply the exponential map of SO(3), while Γ1(φ) is also known as the left Jacobian of SO(3)
+[27, 6].
+
+   Using these expressions, we can write down the discrete dynamics for the rotation, velocity, and positions states
+as:
+                             ¯Rk+1 = ¯Rk Γ0(¯ωk∆t)
+                                 ¯vk+1 = ¯vk + ¯RkΓ1(¯ωk∆t)¯ak∆t + g∆t                                                                                                             (50)
+                                                               1
+                                ¯pk+1 = ¯pk + ¯vk∆t + ¯RkΓ2(¯ωk∆t)¯ak∆t2 + 2g∆t2,
+
+where the t is dropped from the subscript for readability. These discrete dynamics are an exact integration of the
+continuous-time system under the assumption that the IMU measurements are constant over ∆t.
+
+A.2.  Covariance Propagation
+
+In order to propagate the covariance, a continuous-time Riccati equation needs to be solved.
+
+                                 d
+                                                                                       t + ¯Qt                                     dtPt = AtPt + PtAT
+
+The analytical solution to the differential equation above is given by [61]:
+
+                                 Ptk+1 = Φ(tk+1, tk)PtkΦ(tk+1, tk)T + ¯Qd,                               (51)
+
+where the discrete noise covariance matrix is computed by
+
+                                Z tk+1
+                                    ¯Qd =      Φ(tk+1, t)¯QtΦ(tk+1, t)Tdt,                                (52)
+                                                     tk
+
+and the state transition matrix, Φ(tk+1, tk), satisﬁes
+
+                          d
+                             dtΦ(t, tk) = AtΦ(t, tk) with Φ(tk, tk) = I.                              (53)
+
+   The (world-centric) left-invariant error dynamics matrix only depends on the IMU inputs and the estimated bias
+terms, see Table 2. Since both are assumed to be constant between times tk and tk+1, the state transition matrix can
+be simply computed from the matrix exponential.
+
+                                      Φl(tk+1, tk) = expm(Alt∆t)                                      (54)
+
+This state transition matrix also has an analytical solution of the form:
+
+                            Φl11   0    0    0   Φl15   0 
+                                   Φl21  Φl22   0    0   Φl25  Φl26
+                                   Φl31  Φl32  Φl33   0   Φl35  Φl36                          Φl(tk+1, tk) =                                                                 (55)
+                                       0    0    0   Φl44   0    0
+                                       0    0    0    0      I    0                                                                                                                                                                                                                                                                                                                                                                
+                                       0    0    0    0    0      I
+
+where the individual terms are
+
+                            Φl11 = ΓT0 (¯ωk∆t)
+                            Φl21 = −ΓT0 (¯ωk∆t) (Γ1(¯ωk∆t)¯ak)× ∆t
+                            Φl31 = −ΓT0 (¯ωk∆t) (Γ2(¯ωk∆t)¯ak)× ∆t2
+
+
+                                              35

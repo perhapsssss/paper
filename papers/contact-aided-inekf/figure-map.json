@@ -1,0 +1,138 @@
+[
+  {
+    "figure": 1,
+    "page": 3,
+    "path": "assets/figures/fig-01.png",
+    "caption_id": "fig-01-caption",
+    "caption_zh": "Cassie 系列双足机器人及其 IMU、接触坐标系。",
+    "status": "从 PDF 嵌入图像提取；已目视检查"
+  },
+  {
+    "figure": 2,
+    "page": 15,
+    "path": "assets/figures/fig-02.png",
+    "caption_id": "fig-02-caption",
+    "caption_zh": "用于滤波器比较的 Cassie 双足机器人典型步态仿真。",
+    "status": "从 PDF 嵌入图像提取；已目视检查"
+  },
+  {
+    "figure": 3,
+    "page": 16,
+    "path": "assets/figures/fig-03.png",
+    "caption_id": "fig-03-caption",
+    "caption_zh": "QEKF 与 RIEKF 在随机初始姿态、速度下的收敛比较。",
+    "status": "从 PDF 嵌入图像提取；已目视检查"
+  },
+  {
+    "figure": 4,
+    "page": 17,
+    "path": "assets/figures/fig-04.png",
+    "caption_id": "fig-04-caption",
+    "caption_zh": "确定性误差动力学的传播精度。",
+    "status": "从 PDF 嵌入图像提取；已目视检查"
+  },
+  {
+    "figure": 5,
+    "page": 17,
+    "path": "assets/figures/fig-05.png",
+    "caption_id": "fig-05-caption",
+    "caption_zh": "测量含噪时真实误差与传播误差的差异。",
+    "status": "从 PDF 嵌入图像提取；已目视检查"
+  },
+  {
+    "figure": 6,
+    "page": 17,
+    "path": "assets/figures/fig-06.png",
+    "caption_id": "fig-06-caption",
+    "caption_zh": "Cassie 行走过程中的位置不确定度样本。",
+    "status": "从 PDF 嵌入图像提取；已目视检查"
+  },
+  {
+    "figure": 7,
+    "page": 18,
+    "path": "assets/figures/fig-07.png",
+    "caption_id": "fig-07-caption",
+    "caption_zh": "初始偏航完全不确定时 InEKF 的位置分布。",
+    "status": "从 PDF 嵌入图像提取；已目视检查"
+  },
+  {
+    "figure": 8,
+    "page": 23,
+    "path": "assets/figures/fig-08.png",
+    "caption_id": "fig-08-caption",
+    "caption_zh": "真实 Cassie 机器人行走时两种滤波器的收敛比较。",
+    "status": "从 PDF 嵌入图像提取；已目视检查"
+  },
+  {
+    "figure": 9,
+    "page": 24,
+    "path": "assets/figures/fig-09.png",
+    "caption_id": "fig-09-caption",
+    "caption_zh": "运动捕捉实验的 InEKF 估计轨迹。",
+    "status": "从 PDF 嵌入图像提取；已目视检查"
+  },
+  {
+    "figure": 10,
+    "page": 25,
+    "path": "assets/figures/fig-10a.png",
+    "caption_id": "fig-10-caption",
+    "caption_zh": "运动捕捉试验中的姿态、速度、位置和协方差范围。",
+    "status": "从 PDF 嵌入图像提取；已目视检查"
+  },
+  {
+    "figure": 10,
+    "page": 25,
+    "path": "assets/figures/fig-10b.png",
+    "caption_id": "fig-10-caption",
+    "caption_zh": "运动捕捉试验中的姿态、速度、位置和协方差范围。",
+    "status": "从 PDF 嵌入图像提取；已目视检查"
+  },
+  {
+    "figure": 10,
+    "page": 25,
+    "path": "assets/figures/fig-10c.png",
+    "caption_id": "fig-10-caption",
+    "caption_zh": "运动捕捉试验中的姿态、速度、位置和协方差范围。",
+    "status": "从 PDF 嵌入图像提取；已目视检查"
+  },
+  {
+    "figure": 11,
+    "page": 26,
+    "path": "assets/figures/fig-11.png",
+    "caption_id": "fig-11-caption",
+    "caption_zh": "Cassie 沿人行道行走约 200 米的室外里程计轨迹。",
+    "status": "从 PDF 嵌入图像提取；已目视检查"
+  },
+  {
+    "figure": 12,
+    "page": 27,
+    "path": "assets/figures/fig-12a.png",
+    "caption_id": "fig-12-caption",
+    "caption_zh": "基于 InEKF 位姿估计构建的 LiDAR 点云地图。",
+    "status": "从 PDF 嵌入图像提取；已目视检查"
+  },
+  {
+    "figure": 12,
+    "page": 27,
+    "path": "assets/figures/fig-12b.png",
+    "caption_id": "fig-12-caption",
+    "caption_zh": "基于 InEKF 位姿估计构建的 LiDAR 点云地图。",
+    "status": "从 PDF 嵌入图像提取；已目视检查"
+  },
+  {
+    "figure": 12,
+    "page": 27,
+    "path": "assets/figures/fig-12c.png",
+    "caption_id": "fig-12-caption",
+    "caption_zh": "基于 InEKF 位姿估计构建的 LiDAR 点云地图。",
+    "status": "从 PDF 嵌入图像提取；已目视检查"
+  },
+  {
+    "figure": 12,
+    "page": 27,
+    "path": "assets/figures/fig-12d.png",
+    "caption_id": "fig-12-caption",
+    "caption_zh": "基于 InEKF 位姿估计构建的 LiDAR 点云地图。",
+    "status": "从 PDF 嵌入图像提取；已目视检查"
+  }
+]

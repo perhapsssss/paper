@@ -1,0 +1,57 @@
+where the second term arises from the additive noise. The derivation follows the results in Barrau and Bonnabel [10]
+and is not repeated here.
+   Furthermore, Theorem 2 speciﬁes that the invariant error satisﬁes a log-linear property. Namely, if At is deﬁned
+by gut(exp(ξ)) ≜(Atξ)∧+ O(||ξ||2), then the log of the invariant error, ξ ∈Rdimg, approximately satisﬁes4 the
+linear system
+
+                             d
+                                  dtξt = Artξt + ¯wt = Atξt + Ad¯Xtwt                                  (11)
+                                 ηrt = exp(ξt).
+
+To compute the matrix At, we linearize the invariant error dynamics, gut(·), using the ﬁrst order approximation
+ηrt = exp(ξt) ≈Id + ξt ∧to yield
+
+gut(exp(ξt)) ≈
+                                                                                                                    I + ξRt        I + ξRt                                                                      ˜at + g  ξvt   03,1                                                                         ξvt  ξpt  ξdt  (˜ωt)×    ˜a + g   03,1   03,1                      (˜ωt)×     I + ξRt                                                    ×           ×                           ×
+                01,3                  0           0    0  −      03,1      1   0   0
+                                                                                          0                                                                                                0                                                                                                     0                                                                                                           01,3                                                                     0                                                                         1                                                                             0                                                                              03,1                                                                                                                                                                                                                                                                          0           0                                                  0                01,3                                                                                                                                                                                                                                                                                                                                                             01,3     0     0    0                                                                                                                                                                                                                                                                                                   0                                                                                                0                                                                                                     0                                                                                                           01,3                                                                     0                                                                         0                                                                             1                                                                              03,1                                 0                                             0                                                  0                01,3
+                                          ∧
+       03,3  (g)× ξRt   ξvt   03,1     03,1 
+              01,3     0     0    0       (g)× ξRt
+              01,3     0     0    0                                     =                                           ξvt           =                                                                 .
+              01,3     0     0    0           03,1
+                                                                                                             (12)
+   With the above, we can express the prediction step of the RIEKF. The state estimate, ¯Xt, is propagated though the
+deterministic system dynamics, while the covariance matrix, Pt, is computed using the Riccati equation [61], namely,
+
+                        d               d
+                                          ¯Xt = fut(¯Xt) and   = AtPt + PtATt + ¯Qt,                            (13)                             dt                dtPt
+where the matrices At and ¯Qt are obtained from (12) and (11),
+
+                      0    0  0  0 
+                               (g)×  0  0  0
+                               0     I  0  0                                                         and ¯Qt = Ad¯XtCov (wt) AdT¯Xt.                        (14)                       At = 
+                               0    0  0  0
+
+Remark 2. For the right-invariant case, expression (14), At is time-invariant and the time subscript could be dropped.
+However, in general it can be time-varying, therefore, we use At throughout the paper.
+
+5.3.  Right-invariant Forward Kinematic Measurement Model
+Let αt ∈RM denote the vector of joint positions (prismatic or revolute) between the body and the contact point. We
+assume that the encoder measurements at time t are corrupted by additive white Gaussian noise.
+
+                                            ˜αt = αt + wαt ,  wαt ∼N(0M,1, Σα)                                  (15)
+
+Using forward kinematics, we measure the relative position of the contact point with respect to the body,
+
+                             BpBC(t) ≜hp(˜αt −wαt ) ≈hp(˜αt) −Jp(˜αt)wαt ,                            (16)
+
+where Jp denotes the analytical Jacobian of the forward kinematics function. Using the state variables, the forward-
+kinematics position measurement becomes
+
+                                       hp(˜αt) = RTt (dt −pt) + Jp(˜αt)wαt .                                  (17)
+
+   4With input noise, Theorem 2 no longer holds, and the linearization is only approximate.
+
+
+                                              12

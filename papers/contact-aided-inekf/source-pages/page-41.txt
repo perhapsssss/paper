@@ -1,0 +1,60 @@
+[28] Sachin Chitta, Paul Vemaza, Roman Geykhman, and Daniel D Lee.   Proprioceptive localilzatilon for a
+     quadrupedal robot on known terrain.  In Robotics and Automation, 2007 IEEE International Conference on,
+     pages 4582–4587. IEEE, 2007. ISBN 1424406021.
+
+[29] Catherine Clifford. This start-up is building a humanoid robot that could soon be delivering packages to your
+     door. May 2018. [Online; Published Tue, May 1 2018 1:05 PM EDT].
+
+[30] Jose A Cobano, Joaquin Estremera, and P Gonzalez De Santos. Location of legged robots in outdoor environ-
+     ments. Robotics and Autonomous Systems, 56(9):751–761, 2008. ISSN 0921-8890.
+
+[31] Xingye Da, Omar Harib, Ross Hartley, Brent Grifﬁn, and Jessy W Grizzle. From 2D design of underactuated
+     bipedal gaits to 3D implementation: Walking with speed tracking. IEEE Access, 4:3469–3478, 2016. ISSN
+     2169-3536.
+
+[32] Xingye Da, Ross Hartley, and Jessy W Grizzle. Supervised learning for stabilizing underactuated bipedal robot
+     locomotion, with outdoor experiments on the wave ﬁeld. In Robotics and Automation (ICRA), 2017 IEEE Inter-
+     national Conference on, pages 3476–3483. IEEE, 2017. ISBN 150904633X.
+
+[33] James Diebel. Representing attitude: Euler angles, unit quaternions, and rotation vectors. Matrix, 58(15-16):
+     1–35, 2006.
+
+[34] Kevin Eckenhoff, Patrick Geneva, and Guoquan Huang. Closed-form preintegration methods for graph-based
+      visual–inertial navigation. The International Journal of Robotics Research, page 0278364919835021, 2018.
+
+[35] Jorhabib Eljaik, Naveen Kuppuswamy, and Francesco Nori. Multimodal sensor fusion for foot state estimation
+      in bipedal robots using the extended kalman ﬁlter.  In Proc. IEEE/RSJ Int. Conf. Intell. Robots Syst., pages
+     2698–2704. IEEE, 2015.
+
+[36] Maurice F Fallon, Matthew Antone, Nicholas Roy, and Seth Teller. Drift-free humanoid state estimation fusing
+     kinematic, inertial and lidar sensing. In IEEE-RAS Int. Conf. Humanoid Robots, pages 112–119. IEEE, 2014.
+
+[37] P Fankhauser, M Bloesch, C Gehring, M Hutter, and R Siegwart. Robot-centric elevation mapping with uncer-
+      tainty estimates. In International Conference on Climbing and Walking Robots, pages 433–440, 2014.
+
+[38] C. Forster, L. Carlone, F. Dellaert, and D. Scaramuzza. On-manifold preintegration for real-time visual–inertial
+     odometry. IEEE Trans. Robot., 33(1):1–21, 2017.
+
+[39] Demoz Gebre-Egziabher, Roger C Hayward, and J David Powell. Design of multi-sensor attitude determination
+     systems. IEEE Transactions on aerospace and electronic systems, 40(2):627–649, 2004. ISSN 0018-9251.
+
+[40] Yukai Gong, Ross Hartley, Xingye Da, Ayonga Hereid, Omar Harib, Jiunn-Kai Huang, and Jessy Grizzle. Feed-
+     back control of a cassie bipedal robot: Walking, standing, and riding a segway.  In 2019 American Control
+     Conference (ACC), pages 4559–4566. IEEE, 2019.
+
+[41] Mohinder S Grewal. Kalman ﬁltering.  In International Encyclopedia of Statistical Science, pages 705–708.
+     Springer, 2011.
+
+[42] JW Grizzle and Y Song. The extended Kalman ﬁlter as a local asymptotic observer for nonlinear discrete-time
+     systems. Journal of Mathematical Systems, Estimation and Control, 5(1):59–78, 1995.
+
+[43] Brian Hall. Lie groups, Lie algebras, and representations: an elementary introduction, volume 222. Springer,
+     2015.
+
+[44] Ross Hartley, Xingye Da, and Jessy W Grizzle. Stabilization of 3D underactuated biped robots: Using posture
+     adjustment and gait libraries to reject velocity disturbances. In Control Technology and Applications (CCTA),
+    2017 IEEE Conference on, pages 1262–1269. IEEE, 2017. ISBN 1509021825.
+
+
+
+                                              41

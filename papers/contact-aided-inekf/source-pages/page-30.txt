@@ -1,0 +1,59 @@
+Without loss of generality, assume a single contact point. Furthermore, for the sake of readability, we redeﬁne our
+shorthand notation to be body-centric states,
+
+                                Rt    vt  pt  dt 
+                                                                       redeﬁne  01×3  1   0   0
+                                 Xt ≜                                                              (39)                                            01×3  0   1   0                                                                                                                       .
+                                            01×3  0   0   1
+
+   Using the bias corrected IMU measurements, the individual terms of the new robot-centric system dynamics can
+be derived as [16]
+
+                          d
+                                                                         t )× Rt                            dtRt = −(¯ωt −wg
+                          d
+                                                                        t ) −Rt g −(¯ωt −wgt )× vt                                dtvt = −(¯at −wa                                                                                                             (40)
+                          d
+                                                                             t )× pt                               dtpt = vt −(¯ωt −wg
+                          d
+                                                                         t )× dt −hR(˜αt)wvt .                               dtdt = −(¯ωt −wg
+
+Written in matrix form, this becomes
+
+      −(¯ωt)× Rt   −¯at −Rtg −(˜ωt)× vt   vt −(˜ωt)× pt  −(¯ωt)× dt   (wgt )×  wat   03,1   hR(˜αt)wvt   Rt   vt  pt  dt 
+ d             01,3              0                0           0             01,3    0    0       0         01,3  1   0   0
+                                                                                                                               01,3  0   1   0                01,3              0                0           0                                                                                           01,3    0    0       0 dtXt =                                                                             −                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+                01,3              0                0           0             01,3    0    0       0         01,3  0   0   1
+     ≜fu(Xt, θt) −wt ∧Xt
+                                                                                                             (41)
+with wt ≜vec(wgt , wat , 03,1, hR(˜αt)wvt ). The deterministic dynamics function fu(·) can be shown to satisfy the
+group afﬁne property (2). Therefore, the left (and right) invariant error dynamics depends solely on the invariant error.
+  We can derive the log-linear dynamics matrices for the body-centric estimator following a similar derivation pro-
+cess to the world-centric version in Section 5. In fact, without IMU bias, the linearization of the left-invariant dynamics
+for the body-centric estimator is the same as the right-invariant dynamics for the world-centric estimator;
+
+                                Alt (body-centric) = Art (world-centric)
+                                                                                                             (42)
+                            Art (body-centric) = Alt (world-centric).
+
+When IMU bias is included, the above relation still holds, though with the bias terms negated6. The noise covariance
+matrices for the body-centric left/right-invariant propagation models are given by:
+
+                                                                 T
+                                    Ad¯X−1t    015,6                                                            Ad¯X−1t    015,6                                             Cov(wt)                                  ¯Q lt =
+                                           06,15     I6               06,15     I6                                (43)
+                                  ¯Q rt = Cov(wt),
+which are also swapped versions of the world-centric noise matrices, after accounting for the redeﬁnition of ¯Xt as its
+inverse. A comparison of the world-centric and body-centric equations are given in Tables 2 and 3.
+
+11.2.  Left-Invariant Forward Kinematic Measurement Model
+
+We use forward-kinematics to measure the relative position of the contact point with respect to the body,  hp(˜αt).
+Using the new robot-centric state variables, the measurement model (16) becomes
+
+                                          hp(˜αt) = pt −dt + Jp(˜αt)wt.                                     (44)
+
+    6If deﬁnition of bias error is negated, even these terms would remain the same.
+
+
+                                              30

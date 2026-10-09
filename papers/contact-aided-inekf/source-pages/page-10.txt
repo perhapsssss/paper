@@ -1,0 +1,55 @@
+Again, this result shows that if the initial error is known, the nonlinear error dynamics can be exactly recovered from
+this linear system. In this work, we leverage these ideas to develop a contact-aided inertial observer for legged robots.
+
+5.  SEN+2(3) Continuous Right-Invariant EKF
+
+In this section, we derive a right-invariant extended Kalman ﬁlter (RIEKF) using IMU and contact motion models with
+corrections made through forward kinematic measurements. This RIEKF can be used to estimate the state of a robot
+that has an arbitrary (ﬁnite) number of points in contact with a static environment. While the ﬁlter is particularly useful
+for legged robots, the same theory can be applied for manipulators as long as the contact assumptions (presented in
+Section 5.2) are veriﬁed.
+    In order to be consistent with the standard InEKF theory, IMU biases are neglected for now. Section 7 provides a
+method for reintroducing the bias terms.
+
+5.1.  State Representation
+
+As with typical aided inertial navigation, we wish to estimate the orientation, velocity, and position of the IMU (body)
+in the world frame [58, 38, 85]. These states are represented by RWB(t), WvB(t), and WpWB(t) respectively. In addition,
+we append the position of all contact points (in the world frame), WpWCi(t), to the list of state variables. This is similar
+to the approach taken in Bloesch et al. [15], Bloesch [17].
+   The above collection of state variables forms a matrix Lie group, G. Speciﬁcally, for N contact points, Xt ∈SEN+2(3)
+can be represented by the following matrix:
+
+                  RWB(t)  WvB(t)  WpWB(t)  WpWC1(t)    · · ·  WpWCN (t)
+                                   01,3      1       0         0          · · ·      0
+                                   01,3      0       1         0          · · ·      0
+                  Xt ≜    01,3      0       0         1          · · ·      0          .
+                                                                                                                                                                       ...                                            ...                                                ...                                                      ...         ...                                     ...                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                   01,3      0       0         0          · · ·      1
+
+This Lie group is an extension of SE(3) and has been previously used to solve inertial navigation [8] and SLAM
+problems [19, 9]. In fact, the estimators derived in this work have a connection to the landmark-based SLAM problem.
+This connection is detailed later in Section 12.
+   Because the process and measurements models for each contact point, WpWCi(t), are identical, without loss of
+generality, we will derive all further equations assuming only a single contact point. Furthermore, for the sake of
+readability, we introduce the following shorthand notation:
+
+                      Rt   vt  pt  dt 
+                                       01,3  1   0   0           B ˜ωWB(t)       ˜ωt
+                       Xt ≜                        ut =       ≜         ,                                       01,3  0   1   0             B˜aWB(t)          ˜at                                                                                          ,
+                                       01,3  0   0   1
+
+where the input ut is formed from the angular velocity and linear acceleration measurements coming from the IMU.
+It is important to note that these measurements are taken in the body (or IMU) frame. The Lie algebra of G, denoted
+by g, is an N + 5 dimensional square matrix. We use the hat operator, (·)∧: R3N+9 →g, to map a vector to the
+corresponding element of the Lie algebra. In the case of a single contact, for example, this function is deﬁned by:
+
+                              ξR     ξv  ξp  ξd 
+                                    ×
+                       ξ∧=    01,3    0   0   0                                            (6)
+                                                      01,3    0   0   0                                                                                                                                                             ,
+                                                      01,3    0   0   0
+
+
+
+                                              10

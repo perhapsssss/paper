@@ -1,0 +1,18 @@
+[83] Kanzhi Wu, Teng Zhang, Daobilige Su, Shoudong Huang, and Gamini Dissanayake. An invariant-EKF VINS
+     algorithm for improving consistency. In Proc. IEEE/RSJ Int. Conf. Intell. Robots Syst., 2017.
+
+[84] X. Xinjilefu, Siyuan Feng, Weiwei Huang, and Christopher G. Atkeson. Decoupled state estimation for hu-
+    manoids using full-body dynamics. Proceedings - IEEE International Conference on Robotics and Automation,
+     2014. ISSN 10504729. doi: 10.1109/ICRA.2014.6906609.
+
+[85] Zhenfei Yang and Shaojie Shen. Monocular visual–inertial state estimation with online initialization and camera–
+   IMU extrinsic calibration. IEEE Transactions on Automation Science and Engineering, 14(1):39–51, 2017.
+
+[86] Teng Zhang, Kanzhi Wu, Jingwei Song, Shoudong Huang, and Gamini Dissanayake. Convergence and consis-
+     tency analysis for a 3-D invariant-EKF SLAM. IEEE Robotics and Automation Letters, 2(2):733–740, 2017.
+
+
+
+
+
+                                              44
