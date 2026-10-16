@@ -1,0 +1,76 @@
+DROPO: Sim-to-Real Transfer with Ofﬂine Domain Randomization
+Gabriele Tibonia,b, Karol Arndtb,∗, Ville Kyrkib
+aDept. of Control and Computer Engineering, Politecnico di Torino, Francesco Ferrucci Street, 112, Torino, 10141, Italy
+bIntelligent Robotics Group, Dept. of Electrical Engineering and Automation, Aalto University, Maarintie 8, Espoo, 02150, Finland
+Abstract
+In recent years, domain randomization over dynamics parameters has gained a lot of traction as a method for sim-to-real transfer of
+reinforcement learning policies in robotic manipulation; however, ﬁnding optimal randomization distributions can be difﬁcult. In
+this paper, we introduce DROPO, a novel method for estimating domain randomization distributions for safe sim-to-real transfer.
+Unlike prior work, DROPO only requires a limited, precollected ofﬂine dataset of trajectories, and explicitly models parameter
+uncertainty to match real data using a likelihood-based approach. We demonstrate that DROPO is capable of recovering dynamic
+parameter distributions in simulation and ﬁnding a distribution capable of compensating for an unmodeled phenomenon. We also
+evaluate the method in two zero-shot sim-to-real transfer scenarios, showing successful domain transfer and improved performance
+over prior methods.
+Keywords: Robot Learning, Transfer Learning, Reinforcement Learning, Domain Randomization
+1. Introduction
+Over the past decade, there have been signiﬁcant research ad-
+vances in reinforcement learning (RL), resulting in a variety of
+success stories, from playing Atari games [1] to defeating the
+world champion in Go [2]. These successes have sparked a lot
+of interest in RL among roboticists; however, due to low sam-
+ple efﬁciency of most algorithms, the challenge of accessing
+signiﬁcant data collections at training time, as well as the need
+for random exploration resulting in the risk of hardware dam-
+age, applications of RL in robotics have been lagging behind.
+A promising approach to solve the problem of limited data
+availability is to use simulated environments for training the
+RL agents, and to later deploy them on real-world physical sys-
+tems [3–5]. However, while this solves the problem of fast and
+safe data collection, inaccuracies in simulation caused by, e.g.,
+uncertainty over physical parameters and unmodeled phenom-
+ena, may result in policies that do not transfer well to the real
+system. Such discrepancy is commonly known as the reality
+gap.
+One can aim for more generalizable RL agents by perform-
+ing the training over multiple variants of the environment, vary-
+ing in appearance [5–8], dynamics parameters [4, 9–13], or
+both [14, 15]. This technique, known as domain randomiza-
+tion (DR), has proven to be successful in a range of robotics se-
+tups. However, ﬁnding well-performing domain randomization
+distributions over physical parameters can be difﬁcult [16]—the
+distributions need to be wide enough to encompass the plausible
+true parameter values in the real world, or make up for phenom-
+ena which are speciﬁc to the real system but are not modelled
+∗Corresponding author.
+Email address: karol.arndt@aalto.fi (Karol Arndt)
+Human 
+demonstrations
+Replay in
+simulation
+Domain 
+randomization 
+distribution
+Policy training
+in simulation
+Deployment
+in the real world
+ξ 1
+ξ 2
+Figure 1: DROPO uses off-policy data or human demonstrations to learn a
+domain randomization distribution, which is later used to train a policy that can
+be directly transferred to the real world.
+in the simulator [17]. At the same time, the DR distribution
+needs to allow for convergence while training a single policy
+that performs well across all the randomized environments, es-
+pecially in the zero-shot transfer scenario. Therefore, there has
+been an increasing research interest in developing approaches
+to automate DR [18–22].
+In this paper, we introduce Domain Randomization Off-
+Policy Optimization (DROPO), a novel method for automat-
+ically inferring domain randomization distributions. DROPO
+ﬁts a dynamics parameter distribution to an ofﬂine dataset us-
+ing a likelihood-based metric, which explicitly maximizes the
+probability of observing real-world data in simulation. The sim-
+Preprint submitted to Robotics and Autonomous Systems
+January 13, 2023
+arXiv:2201.08434v2  [cs.RO]  12 Jan 2023

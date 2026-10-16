@@ -1,0 +1,423 @@
+Experiment
+Number of
+trajectories
+Transitions
+per trajectory
+Time per
+transition
+Total
+transitions
+Total
+time
+Hopper
+2
+500
+8ms
+1000
+8s
+Hockeypuck
+5
+750
+10ms
+3750
+37.5s
+Sim-to-sim push
+50
+30
+20ms
+1500
+30s
+Sim-to-real push
+1
+1286
+10ms
+1286
+12.86s
+Table B.5: The amount of data used for each experiment, broken down into trajectories, state transitions, and the total time.
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Noise variance
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Epsilon
+MSE in Hopper
+10
+4
+10
+3
+10
+2
+10
+1
+(a)
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Noise variance
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Epsilon
+Torsomass
+1.0
+1.5
+2.0
+2.5
+3.0
+3.5
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Noise variance
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Epsilon
+Thighmass
+1
+2
+3
+4
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Noise variance
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Epsilon
+Legmass
+1
+2
+3
+4
+5
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Noise variance
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Epsilon
+Footmass
+1
+2
+3
+4
+5
+Hopper distribution means
+(b)
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Noise variance
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Epsilon
+Torsomass
+10
+5
+10
+4
+10
+3
+10
+2
+10
+1
+100
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Noise variance
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Epsilon
+Thighmass
+10
+5
+10
+4
+10
+3
+10
+2
+10
+1
+100
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Noise variance
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Epsilon
+Legmass
+10
+5
+10
+4
+10
+3
+10
+2
+10
+1
+100
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Noise variance
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Epsilon
+Footmass
+10
+5
+10
+4
+10
+3
+10
+2
+10
+1
+100
+Hopper distribution standard devs
+(c)
+Figure B.14: Relationship between noise level, epsilon and the resulting (a)
+MSE and the (b, c) distribution, expressed by mean and standard deviation in
+the Hopper dynamics distribution recovery case. (results averaged over 4 ran-
+dom seeds)
+101
+102
+103
+Number of state transitions
+3.51
+3.52
+3.53
+3.54
+3.55
+torsomass:_mean
+Torsomass
+noise
+0.0
+1e-10
+1e-08
+1e-06
+101
+102
+103
+Number of state transitions
+3.91
+3.92
+3.93
+3.94
+3.95
+3.96
+thighmass:_mean
+Thighmass
+noise
+0.0
+1e-10
+1e-08
+1e-06
+101
+102
+103
+Number of state transitions
+2.67
+2.68
+2.69
+2.70
+2.71
+2.72
+legmass:_mean
+Legmass
+noise
+0.0
+1e-10
+1e-08
+1e-06
+101
+102
+103
+Number of state transitions
+5.06
+5.08
+5.10
+5.12
+5.14
+5.16
+5.18
+footmass:_mean
+Footmass
+noise
+0.0
+1e-10
+1e-08
+1e-06
+Hopper distribution means
+Figure C.15: Hopper dynamics parameter estimated mean with its 95% conﬁ-
+dence interval (estimated by bootstrapping over 4 random seeds)
+for critical-to-operate environments. Noticeably more data has
+been used to infer dynamics for the Hockeypuck environment,
+due to the nature of the task and the robot arm moving through
+the air before hitting the hockey puck, with the puck moving
+only for about a second in each trajectory (thus, only a small
+subset of state transitions could be used to infer the dynamics
+of the hockey puck).
+Appendix D. Complete BayesSim results
+BayesSim parameterizes the resulting dynamics distributions
+as a mixture of multivariate Gaussians, while other methods
+used simple Gaussian distributions. In order to clearly present
+the inferred distributions in comparison with the other meth-
+ods in the Experiments section of the paper, we simpliﬁed the
+BayesSim results by only reporting the diagonal uncorrelated
+approximation of the Gaussian mixture. While this gives a good
+intuition about the accuracy of the results, it loses some of the
+information; hence, we here provide plots of the full mixture
+Gaussian distributions.
+In this section, we provide the full BayesSim inference re-
+sults by plotting histograms and joint distributions over all pairs
+of dynamics parameters. Each color corresponds to an indepen-
+dent training run of the BayesSim inference network.
+Appendix D.1. Hopper
+Here, we present the complete dynamics estimation results in
+Hopper. The ground-truth values for the point dynamics recov-
+ery experiment were reported in Table 1 and for the dynamics
+distribution recovery in Figure 3.
+14

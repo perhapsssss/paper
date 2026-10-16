@@ -104,5 +104,31 @@
     "pdf": "papers/robust-dynamic-locomotion-wblc/original.pdf",
     "cover": "papers/robust-dynamic-locomotion-wblc/assets/figures/fig-01.png",
     "status": "已完成"
+  },
+  {
+    "id": "dropo-offline-domain-randomization",
+    "title": "DROPO：利用离线域随机化实现仿真到现实迁移",
+    "title_original": "DROPO: Sim-to-Real Transfer with Offline Domain Randomization",
+    "authors": [
+      "Gabriele Tiboni",
+      "Karol Arndt",
+      "Ville Kyrki"
+    ],
+    "year": 2023,
+    "venue": "Robotics and Autonomous Systems 166, 104432",
+    "doi": "10.1016/j.robot.2023.104432",
+    "tags": [
+      "机器人学习",
+      "仿真到现实",
+      "域随机化",
+      "强化学习",
+      "离线学习"
+    ],
+    "abstract": "提出 DROPO，利用预先采集的离线轨迹，通过似然目标同时估计动力学参数均值与方差；在 Hopper、冰球滑动和 Panda 推箱任务中评估分布恢复、未建模效应补偿及零样本迁移。",
+    "project": "papers/dropo-offline-domain-randomization",
+    "reader": "papers/dropo-offline-domain-randomization/translation-reading.html",
+    "pdf": "papers/dropo-offline-domain-randomization/original.pdf",
+    "cover": "papers/dropo-offline-domain-randomization/assets/figures/fig-01.png",
+    "status": "已完成"
   }
 ]

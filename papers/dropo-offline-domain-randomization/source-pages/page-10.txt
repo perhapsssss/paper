@@ -1,0 +1,244 @@
+DROPO
+DROID
+UDR
+BayesSim
+(MDRFF)
+BayesSim
+(MDNN)
+0.0
+2.5
+5.0
+7.5
+10.0
+12.5
+15.0
+Distance (cm)
+Figure 12: Sim-to-real performance in terms of the ﬁnal distance to the target
+position on the pushing setup (in centimeters; lower is better).
+all benchmarked methods are presented in Table 4, averaged
+over three seeds. Once again, we point out the smaller standard
+deviations DROID converged to, compared to DROPO. How-
+ever, as the real-world dynamics parameters are not known, the
+ﬁnal evaluation has to be carried out by means of policy perfor-
+mance on the real system, displayed in Figure 12 (5 rollouts per
+policy, per seed).
+In this task, DROPO consistently outperformed previous
+methods and pushed the box as close as 2cm away from the
+target location, showing another successful zero-shot transfer.
+We observe how BayesSim, which resulted in less accurate pa-
+rameter inference across our experiments, achieved inconsistent
+performance and obtains similar results to DROID and UDR on
+average. This result further motivated the need to infer dynam-
+ics such as to account for both accurate system identiﬁcation
+and domain randomization at the same time, even for a simple
+pushing task. BayesSim with neural network features (MDNN)
+predicted the box center of mass to be over 20 cm away from
+the center in each direction, with a standard deviation of over
+50cm, which results in the center of mass being located way
+outside of the object. Like in the Hopper experiment with an
+unmodeled phenomenon, this likely originates from the rather
+poor generalization to real-world data, which lies outside of the
+BayesSim network’s training distribution—consisting of simu-
+lated data only. However, since the environment implementa-
+tion clips the center of mass values to be within object bound-
+aries, the agent was still able to learn a somewhat sensible pol-
+icy for some random seeds. BayesSim with random Fourier
+features (MDRFF) shows slightly better generalization to real
+world data, producing a more sensible center of mass value, al-
+beit with an excessive standard deviation of over 7cm in both
+directions and (as visualized in the detailed results in Appendix
+D.2) with negative mass being predicted on some occasions.
+In terms of task performance, the trained policy still performs
+worse on average than DROPO or DROID.
+5. Conclusions
+In this paper we introduced DROPO, a method for crossing
+the reality gap by optimizing domain randomization distribu-
+tions with limited, ofﬂine data. We demonstrated that, unlike
+previous methods, DROPO is capable of accurately recovering
+the dynamics parameter distributions used to generate a dataset
+m
+fx
+fy
+comx
+comy
+Search
+space
+min
+0.08
+0.20
+0.20
+-0.032
+-0.032
+max
+2.00
+2.00
+2.00
+0.032
+0.032
+Ground
+truth
+µ∗
+0.7
+0.8
+0.8
+0.01
+0.01
+σ∗
+0.3
+0.2
+0.2
+0.001
+0.001
+DROPO
+ϵ=0
+µ∗
+0.788
+0.603
+0.683
+0.015
+0.009
+σ∗
+0.108
+0.033
+0.18
+0.001
+0.003
+DROID
+µ∗
+0.774
+0.737
+0.716
+0.014
+0.011
+σ∗
+3.1e-11
+1.3e-10
+1.2e-11
+7.6e-11
+2.4e-11
+BayesSim
+µ∗
+0.703
+0.894
+0.840
+-0.011
+0.004
+σ∗
+0.269
+0.224
+0.257
+0.309
+0.234
+Table 3: Results of the sim-to-sim pushing task experiment with randomized
+box mass m, table-box friction coefﬁcients ( fx, fy) and box center of mass in
+meters (comx, comy).
+m
+fx
+fy
+comx
+comy
+Search
+space
+min
+0.08
+0.20
+0.20
+-0.032
+-0.032
+max
+2.00
+2.00
+2.00
+0.032
+0.032
+DROPO
+ϵ=1e−4
+µ∗
+1.065
+0.387
+0.921
+0.012
+-0.032
+σ∗
+1.3e-04
+3.0e-03
+5.3e-04
+5.2e-05
+7.5e-04
+DROID
+µ∗
+0.826
+0.444
+0.665
+-0.028
+-0.028
+σ∗
+1.4e-07
+2.3e-08
+2.6e-08
+7.7e-08
+6.6e-08
+BayesSim
+MDNN model
+µ∗
+1.548
+3.889
+0.964
+-0.322
+-0.240
+σ∗
+2.017
+0.805
+0.953
+0.577
+0.632
+BayesSim
+MDRFF model
+µ∗
+0.796
+1.181
+1.013
+-0.023
+-0.040
+σ∗
+0.252
+0.218
+0.316
+0.090
+0.075
+Table 4: Optimized dynamics distributions on a single ofﬂine trajectory col-
+lected on the real pushing environment. The converged box mass m, friction
+coefﬁcients fx and fy, and box center of mass comx and comy (in meters) are
+reported.
+in simulation. We also showed how DROPO may compensate
+for a misidentiﬁed value of a physical parameter, leading to
+well-performing reinforcement learning policies in the target
+domain.
+We then moved on to real-world robotics setups—a hockey
+puck sliding and a box pushing tasks. We demonstrated that a
+policy trained in simulation with DROPO can be directly trans-
+ferred to the real world on both setups, while previous methods
+fail on the box pushing task. We conclude that our method is
+able to effectively perform domain randomization and system
+identiﬁcation at the same time, ﬁnding the right balance of pa-
+rameter uncertainty by adjusting ϵ.
+In the current work, we used a variety of data collection
+strategies to collect the ofﬂine dataset—a partially-trained task
+policy (Hopper), random sliding trajectories (Hockeypuck) and
+human demonstrations obtained through kinesthetic teaching
+(Pushing). Future works may investigate how the data collec-
+tion strategy impacts the accuracy of parameters obtained by of-
+ﬂine methods such as DROPO and DROID; in particular, prior
+work on exploration in meta-learning would make an interest-
+ing extension [37,38].
+Under the current formulation, DROPO is limited to rela-
+tively low-dimensional parametric distributions. This limita-
+tion stems from the rather costly non-differentiable optimiza-
+tion procedure; using less restrictive sampling procedures, such
+as Stein variational gradient descent used in [22], could be a
+promising way of further improving the accuracy. We showed
+that DROPO is capable of performing optimization in up to
+18-dimensional parameter spaces; while this was enough for
+simple manipulation tasks, complex scenarios involving inter-
+actions between multiple objects may involve many more pa-
+10

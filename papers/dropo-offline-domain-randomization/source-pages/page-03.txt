@@ -1,0 +1,130 @@
+Figure 2: Overview of the main stages of DROPO. The dynamics parameter
+distribution is optimized to maximize the probability of observing the collected
+dataset in simulation.
+MDPs share the state and action spaces, the initial state distri-
+bution, and the reward function.
+Under this formulation, the problem we address in this work
+can be stated as follows: given a dataset of real-world state-
+action trajectories D = {s0, a0, s1, . . . , sT}, ﬁnd the distribution
+p∗(ξ) such that the likelihood of transitioning to the real state
+st+1 when taking action at while in st is maximized over the
+dataset:
+p∗(ξ) = arg max
+p(ξ)
+E
+st,at,st+1∼D
+ξ∼p(ξ)
+psim(st+1|st, at, ξ).
+(1)
+3.2. Method overview
+DROPO consists of three main steps: dataset collection on
+the real hardware, dynamics distribution ﬁtting, and policy
+training. An overview of the method is presented in Figure 2
+with a step-by-step walkthrough of dynamics distribution ﬁt-
+ting presented in Algorithm 1.
+Algorithm 1: DROPO
+Result: Parameters φ∗of pφ∗(ξ)
+1 Initialize φ to (µinit, Σinit) ;
+2 Initialize empty dataset D ;
+3 Fill D with trajectories from the target domain ;
+4 while not converged do
+5
+Sample a set Ξ of K random dynamics ξ ∼pφ(ξ) ;
+6
+forall st, at..t+λ−1, st+λ ∈D do
+7
+forall ξk ∈Ξ do
+8
+Set simulator parameters to ξk ;
+9
+Set the simulator state to st ;
+10
+Execute actions at..t+λ−1 ;
+11
+Observe sξk
+t+λ ∼psim(ssim
+t+λ|st, at..t+λ−1, ξk) ;
+12
+end
+13
+Compute the mean ¯sφ
+t+λ and covariance Σφ
+t+λ (Eq.
+2);
+14
+Evaluate the log-likelihood Lt of st+λ under
+N(¯sφ
+t+λ, Σφ
+t+λ) (Eq. 3);
+15
+end
+16
+Compute the total log-likelihood L = P
+t Lt;
+17
+Update φ towards maximizing L ;
+18 end
+19 Train a policy with DR using the converged pφ∗(ξ) ;
+The data collection step is where the dataset D, used for
+parameter optimization, is collected on the physical hardware.
+This can be done either by running any previously trained pol-
+icy (e.g., a policy for another task) or by manually guiding the
+robot through kinesthetic teaching. Since DROPO uses ofﬂine,
+off-policy data, there is no need to collect additional data at
+later stages. This is also the only step where the physical hard-
+ware is necessary—all later steps of the method are performed
+in simulation, up until the ﬁnal deployment.
+The core part of DROPO is the second step, where the do-
+main randomization distribution pφ(ξ)—parameterized by φ—
+is optimized to maximize the likelihood of real-world data. In
+particular, the likelihood is computed w.r.t. the next-state distri-
+bution under φ, which can be expressed as the marginal proba-
+bility density psim(ssim
+t+1|st, at, φ) =
+R
+psim(ssim
+t+1|st, at, ξ)pφ(ξ)dξ.
+To approximate this integral, the state-action pair (st, at) in
+question is executed multiple times through simulators with dif-
+ferent dynamics parameters ξk sampled from pφ(ξ) (steps 7–12
+in Algorithm 1). By doing so, the resulting next-state distri-
+bution psim(ssim
+t+1|st, at, φ) may be estimated, which captures un-
+certainty induced by both the simulator dynamics and the given
+DR distribution. The parameters φ of pφ(ξ) are then adjusted to
+maximize the likelihood of the real st+1 under psim(ssim
+t+1|st, at, φ).
+We can further generalize the algorithm by allowing to step
+the simulator by more than a single step during the inference
+process. This mechanism allows to pick a desired evaluation
+frequency—regardless of the sampling rate of collected data—
+and to increase the signal-to-noise ratio in the difference be-
+tween successive states. This results in an additional hyper-
+parameter λ ∈N+, which controls how many successive ac-
+tions are executed in the environment before evaluating the log-
+likelihood of the real st+λ under psim(ssim
+t+λ|st, at..t+λ−1, φ). This
+generalization is reﬂected in step 10 of Algorithm 1.
+Once the parameter optimization process has converged, the
+resulting distribution pφ∗(ξ) is used to train a policy in the third
+step of DROPO. This policy can then be deployed on the setup
+that the data was collected from in the ﬁrst step.
+3.3. Data collection
+The ﬁrst step of DROPO is to collect the state-action tra-
+jectory dataset D, which is going to be used for domain ran-
+domization parameter optimization. This dataset can either be
+collected from human demonstrations, or by running a previ-
+ously trained, safe policy in the environment. Regardless of the
+method used, the data should be collected in such a way that al-
+lows for identiﬁcation of the relevant dynamics parameters; for
+example, it will not be possible for DROPO to infer the friction
+coefﬁcient of an object that does not move during demonstra-
+tions.
+In case demonstrations are provided, the true actions are not
+directly known and need to be inferred based on the measured
+state sequence using an inverse dynamics model. While learn-
+ing inverse dynamics may be a challenging problem in itself, in
+certain environments—such as position- or velocity-controlled
+robot arms—this inference can be simpliﬁed under the assump-
+tions that the robot’s on-board controllers are perfect. While
+3

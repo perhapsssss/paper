@@ -1,0 +1,141 @@
+m
+fx
+fy
+tconst
+Search
+space
+min
+0.08
+0.2
+0.2
+0.001
+max
+0.2
+0.75
+0.75
+0.02
+DROPO
+ϵ=1e−2
+µ∗
+0.111
+0.349
+0.231
+0.019
+σ∗
+2.2e-04
+3.4e-05
+4.7e-04
+6.7e-05
+DROID
+µ∗
+0.100
+0.334
+0.226
+0.019
+σ∗
+1.5e-07
+8.9e-06
+9.7e-06
+1.7e-05
+Table 2: Optimized dynamics distributions on 5 trajectories collected on the
+Hockeypuck environment. The converged mass m, friction coefﬁcients fx and
+fy along the two axes, and timeconst parameter tconst are reported.
+(a)
+(b)
+(c)
+Figure 11: The push setup in simulation (a) and in the real world (b), with the
+insides of the box shown in (c).
+in Figure 10. We see that, on this setup, both DROPO and
+DROID signiﬁcantly outperformed UDR, and that there was no
+signiﬁcant difference between the two methods, despite DROID
+essentially converging to point estimates (see Table 2). This is
+likely caused by the bandit formulation and the resulting feed-
+forward nature of the task; once the action is selected, the agent
+does not receive any feedback from the environment. Under
+this setup, it is thus optimal for the policy to select the action
+(or the trajectory) which minimizes the expected ﬁnal distance
+from the target position under the dynamics distribution used in
+training. This closely resembles the optimization criterion used
+by DROID (minimizing the expected L2 norm between trajec-
+tories). Additionally, under this formulation the policy lacks the
+ability to make up for possible deviations from the trajectory
+obtained in point-estimate dynamics. In a sequential decision
+making problem with uncertain dynamics, the agent needs to
+be able to recover from a wider range of states, due to the un-
+certainty in state transitions that stems from the uncertainty in
+dynamics. In a bandit problem, however, the system operates in
+a feedforward manner, and thus is not able to handle such situ-
+ations at all. As a result, the beneﬁts of having a distribution of
+dynamics are diminished.
+4.3.2. Pushing
+We ﬁnally evaluated DROPO on a pushing task with the
+Franka Panda robot. In this setup, shown in Figure 11, the goal
+of the robot was to push a box to a ﬁxed target position. To
+make this task more challenging, the box center of mass was
+altered by ﬁlling it up with heavy steel bolts on one side and
+bubble wrap on the other, as shown in Figure 11c. Therefore,
+we randomize a total of 5 dynamics parameters to shorten the
+reality gap in this setup: mass of the box, box-table friction
+coefﬁcients fx and fy, and center of mass offset from the geo-
+metric center (comx, comy). Due to the offset center of mass,
+we additionally included the orientations and angular velocity
+of the box in the state space used for ﬁtting DROPO.
+In order to model log-likelihood of orientations with
+DROPO, we used quaternion representations and evaluated the
+angle between the quaternion in the real-world dataset and the
+one in simulation; this angle, α, then replaced the orientation in-
+side the next state sξ
+t+1, with α inside the real-world state vector
+set to 0. Since such a distribution would not be well-modeled
+with a Gaussian, for each transition we insert two resulting next
+states (with α and −α), resulting in a symmetric distribution of
+angles centered around 0.
+We ﬁrst tested our method in a sim-to-sim version of the task:
+synthetic data was collected by a forward-pushing policy as
+demonstrations for DROPO, DROID and BayesSim, sampling
+new dynamics parameters from the ground-truth distribution af-
+ter every rollout, for a total of 50 trajectories of 30 transitions
+each, amounting to 30 seconds of wall-time interaction. The
+resulting DR distributions are presented in Table 3. Like be-
+fore, the reported BayesSim results are independent Gaussian
+approximations of the actual results, which can be found in Ap-
+pendix D.2. We again observe that DROID converged to a
+point estimate, with standard deviations in the order of 10−10–
+10−11, while DROPO results in a distribution that is relatively
+close to the ground truth, albeit not the same. The largest dis-
+crepancy can be observed in the inferred friction value along
+the x direction. Since the trajectory used for this demonstra-
+tion was pushing the box primarily away from the robot (along
+the y axis), accurately inferring friction along the lateral axis
+is challenging, and the variations in box motion resulting from
+variations in this friction are minor and can be reasonably well
+modeled by variation in other parameters. Similarly, the mass
+of the box can also be relatively difﬁcult to identify, given that
+the inference is performed with a position controller and the
+mass of the box is much smaller than the mass of the robot.
+We then used these DR distributions to train a policy for
+pushing the box to a goal on the front-left side of the robot.
+We used the same reward function as for the Hockey experi-
+ments, with additional control penalties added to regularize the
+motions and to deter the simulated robot from going over the
+velocity and acceleration limits of the physical robot arm. The
+performance of each policy is shown in Figure 8. We observe
+that, despite the converged distribution being slightly different
+than the ground truth, the policies trained with DROPO per-
+formed close to the ground truth policies, while DROID poli-
+cies performed noticeably worse, likely due to overﬁtting to
+point-estimate dynamics. Interestingly, the UDR baseline out-
+performed DROID too. This suggests that, for the underly-
+ing task, DR is a more effective transfer technique than system
+identiﬁcation even when the distribution is not carefully tuned;
+in other words, wider but less accurate dynamics parameter dis-
+tributions provide better results than converged point estimate
+parameter values.
+We then evaluated DROPO’s ability to transfer to the real-
+world setup, in comparison to DROID, BayesSim, and UDR.
+A single task-agnostic trajectory of about 13 seconds was col-
+lected through kinesthetic guidance and preprocessed in a sim-
+ilar way to hockey puck—we used robot’s joint encoders to get
+the joint positions and OptiTrack to track the object.
+The converged DR distributions obtained from this data by
+9

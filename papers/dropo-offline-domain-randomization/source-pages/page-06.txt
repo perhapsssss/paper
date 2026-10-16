@@ -1,0 +1,141 @@
+3.2
+3.3
+3.4
+3.5
+Torso mass
+3.6
+3.8
+4.0
+4.2
+4.4
+4.6
+Thigh mass
+DROPO
+DROID
+BayesSim DROPO
+(noisy)
+DROID
+(noisy)
+BayesSim
+(noisy)
+2.4
+2.6
+2.8
+3.0
+Leg mass
+DROPO
+DROID
+BayesSim DROPO
+(noisy)
+DROID
+(noisy)
+BayesSim
+(noisy)
+4.6
+4.8
+5.0
+5.2
+5.4
+Foot mass
+Figure 3: Dynamics distributions optimized by DROPO, DROID and BayesSim
+on ofﬂine data collected from a distribution of Hopper environments (blue
+shaded areas). The distributions are displayed with 2σ-wide ranges centered
+on their means.
+masses, in addition to their means. We believe that such ex-
+plainability is only possible when explicitly optimizing param-
+eters through probabilistic distance metrics, as DROID’s L2-
+based cost function fails at providing wide distribution ranges
+on the randomized masses. Note how BayesSim, while pre-
+serving some variance in the converged distributions, resulted
+in much less accurate dynamics distribution estimates. Analo-
+gously to the previous experiment, a noisy version of the dataset
+has also been tested, yielding similar results.
+4.2.3. Unmodeled phenomena
+Finally, we also tested DROPO’s ability to compensate for
+unmodeled phenomena in simulation by assessing the complete
+transfer to a target simulator from an under-modeled source do-
+main. We introduced such unmodeled effect by misspecifying
+the Hopper torso mass by 1kg in the source simulator and ex-
+cluding it from the optimization space. Hence, each method
+may only optimize the means and variances of the remaining
+three masses to match the target transitions, and cannot adjust
+the incorrect torso mass.
+To perform this evaluation, we ﬁrst ran each method to infer
+the dynamics distribution given the same noiseless data as in
+Section 4.2.1. Since there are no ground-truth domain param-
+eter values that could be used as a reference when unmodeled
+phenomena are present, the domain randomization distributions
+cannot directly be used to quantitatively compare the estimated
+dynamics parameters. Instead, we used the obtained distribu-
+tions for policy training in the environment with a misspeciﬁed
+mass, and evaluated the resulting policies in the original envi-
+ronment where data was collected. We repeated this process 3
+times for each method, with different random seeds. The poli-
+cies were trained with SAC [30].
+The results of this evaluation are presented in Figure 4, to-
+gether with a policy trained directly in the target environment
+to provide a notion of the upper bound. We observe that policies
+trained with DROPO’s randomization distributions outperform
+all baseline methods, almost matching the policy trained in the
+ground-truth environment in terms of performance. At the same
+time, the policies obtained with DROID and BayesSim perform
+much worse. Note how some UDR policies are at times able
+to generalize well to the target environment, suggesting that the
+task could be solved by manual trial and error with different
+True env DROPO
+DROID
+UDR
+BayesSim
+500
+1000
+1500
+2000
+Return
+Figure 4: Sim-to-sim: episode returns in the target Hopper environment, com-
+paring policies trained directly in the target environment, and trained in the
+environment with a misspeciﬁed torso mass using domain randomization dis-
+tributions inferred by DROID, DROPO and BayesSim.
+uniform bounds.
+To provide more insight into these results, we can look at the
+converged domain randomization distribution reported in Ta-
+ble 1. Note how, even though the target dataset has been col-
+lected on point-dynamics parameters, DROPO converges to a
+distribution over the three randomized masses. This behavior is
+indeed expected, as due to the unmodeled phenomenon intro-
+duced, a single point-estimate parameter vector is not able to
+accurately reproduce all transitions in the target dataset. There-
+fore, DROPO widens the dynamics distribution to maximize
+the likelihood of target-domain data to be observed in simula-
+tion. In addition, the optimized means are now much different
+from the ground truth parameters. On the other hand, the results
+show that—just like in the distribution recovery experiments—
+DROID is eager to converge to point-estimate parameters, in
+order to minimize the L2-distance based objective function (see
+Appendix A for an intuitive explanation of this phenomenon).
+Such a policy performs well in the training environment, but
+fails to generalize to the test conditions.
+Furthermore, notice how BayesSim produced distributions
+with means located close the center of the search space with
+large standard deviations. As such, it was able to learn a suc-
+cessful policy that works over a range of dynamics parameters,
+including the environment where the unmodeled phenomenon
+is present. However, excessively large standard deviations re-
+sult in overly conservative policies that produce a slower for-
+ward motion than DROPO, resulting in a lower return.
+We
+suspect that this might be caused by the domain shift between
+the training data collected from the simulation with misspeci-
+ﬁed mass and the data from the real environment used to in-
+fer the randomization distribution. In BayesSim, the inference
+network is trained on trajectories obtained from the simulator,
+each collected in different dynamics conditions. As a result, any
+trajectory that cannot be reproduced by single dynamics condi-
+tions in simulation will effectively lie outside of the inference
+network’s training domain. Thus, we claim that any task involv-
+ing unmodeled phenomena or unmodeled noise is substantially
+difﬁcult for the BayesSim neural network, as the evaluation do-
+main does not match the training domain anymore. Later, we
+obtained similar results in the Panda sim-to-real experiments,
+as described in Section 4.3.2.
+To summarize, we observe that a combination of both system
+6

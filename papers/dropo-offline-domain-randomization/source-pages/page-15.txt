@@ -1,0 +1,143 @@
+The parameters (from param0 to param3) represent the
+masses of consecutive Hopper links—torso, thigh, leg and foot.
+In the unmodeled phenomenon experiment (Figure D.18), the
+torso mass is excluded as it is ﬁxed to an incorrect value and
+is not inferred during optimization. In this case, as previously
+argued, the test environment does not lie within the distribution
+of environments used for training data generation. As a result,
+the evaluation data lies outside of the training domain of the
+BayesSim inference network. This is likely the reason why the
+network produces a distribution with a large standard deviation
+centered around the mean of the search bounds.
+We observe that in all distribution recovery experiments,
+BayesSim correctly returns a mixture model that is effectively
+a unimodal Gaussian distribution (with the weights of the re-
+maining mixture components very close to zero).
+In Figure D.17, we also observed a signiﬁcant discrepancy
+between different repetitions of the experiment, i.e. indepen-
+dent training runs of the BayesSim inference network.
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+param0
+10
+0
+10
+20
+param1
+5
+0
+5
+10
+param2
+2.5
+0.0
+2.5
+5.0
+param0
+0
+5
+10
+15
+param3
+10
+0
+10
+20
+param1
+5
+0
+5
+10
+param2
+0
+5
+10
+15
+param3
+Figure D.16:
+Complete dynamics identiﬁcation results in Hopper with
+BayesSim
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+param0
+4.0
+4.5
+5.0
+param1
+2.00
+2.25
+2.50
+2.75
+3.00
+param2
+2.8
+3.0
+3.2
+3.4
+param0
+4.5
+5.0
+5.5
+param3
+4.0
+4.5
+5.0
+param1
+2.0
+2.5
+3.0
+param2
+4.5
+5.0
+5.5
+param3
+Figure D.17: Complete dynamics distribution recovery results in Hopper with
+BayesSim
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+param0
+2.5
+0.0
+2.5
+5.0
+7.5
+param1
+0
+5
+10
+param0
+2.5
+0.0
+2.5
+5.0
+7.5
+10.0
+param2
+0
+5
+param1
+0
+5
+10
+param2
+Figure D.18: Complete dynamics estimation results in Hopper with unmodeled
+phenenomena with BayesSim
+Appendix D.2. Panda
+Here, we present the full BayesSim results for the Panda
+pushing task. The estimated dynamics parameters are, in or-
+der, the mass of the box, the friction coefﬁcient values along
+axes x and y, and the x and y position of center of mass of the
+box.
+15

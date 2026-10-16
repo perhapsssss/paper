@@ -1,0 +1,110 @@
+ulator can thus be thought of as a stochastic forward model
+whose randomness arises from variability in the physical pa-
+rameters of the scene. Our approach, outlined in Figure 1, de-
+parts the trend of online-adaptive DR—where data from the
+target domain is collected on-policy during the parameter op-
+timization process, requiring iterative access to the real-world
+setup [15, 18, 21, 23]—and follows the recently introduced of-
+ﬂine setting [20], while using a probabilistic metric to encour-
+age variance in the converged parameter distributions. This al-
+lows DROPO to optimize DR distributions using only precol-
+lected data (e.g. human demonstrations) without suffering from
+the distributions collapsing to point estimates due to L2-based
+loss functions. In contrast to previous claims [19], our ﬁnd-
+ings support that a likelihood-based method can be effortlessly
+implemented with a non-differentiable black-box simulator and
+gradient-free optimization techniques.
+The contributions of this work are: (1) introducing DROPO,
+a novel method for ofﬂine optimization of domain randomiza-
+tion distributions given safely collected data, (2) an experimen-
+tal evaluation of DROPO to show convergence to ground truth
+dynamics distributions, (3) demonstrating that domain random-
+ization distributions obtained with DROPO can be used to suc-
+cessfully train control policies in the presence of unmodeled
+phenomena, (4) showing that RL policies can be directly trans-
+ferred to the real world when trained in simulation on DROPO’s
+dynamics distributions. The source code for running DROPO
+with arbitrary ofﬂine datasets is publicly available1.
+2. Related work
+Domain randomization as a method for training generaliz-
+able reinforcement learning policies has been widely studied
+over the past few years, both in the context of computer vi-
+sion [5–8], dynamics models [4, 9–13] and both at the same
+time [14,15]. A major challenge, however, is that domain ran-
+domization requires the randomization distributions for each
+parameter to be speciﬁed when the model is trained. DR essen-
+tially trades optimality for robustness: using too wide ranges
+may have negative impact on the training, making it difﬁcult
+for the agent to learn a single policy that generalizes to such a
+wide range of dynamics, while using too narrow ranges would
+bias the model towards a small set of dynamics values and thus
+possibly hinder generalization to the real world, as in the case
+of system identiﬁcation of point-estimate dynamics [24,25].
+To this end, multiple methods for automatically tuning the
+randomization ranges were proposed, such as minimizing dis-
+crepancy between simulated and real trajectories [21] or di-
+rectly maximizing the expected real-world return [23]; how-
+ever, as these methods explicitly ask for real-world feedback
+during the process, they require access to and careful supervi-
+sion of the physical setup in order to run the policy trained on
+the intermediate DR distributions.
+To relax these requirements, DROID [20] proposed a setting
+where the DR distribution is optimized using a ﬁxed, ofﬂine
+1https://github.com/gabrieletiboni/dropo
+dataset pre-collected in the target domain, aiming to improve
+data-efﬁciency and reduce safety risks coming from rolling out
+policies trained in unconverged dynamics in contact-rich tasks.
+This framework reduced the real-world interaction to a single
+data collection step performed before parameter optimization;
+additionally, this setting does not make any assumptions about
+the data collection procedure, allowing it to be collected with
+another policy, or through human demonstrations. Our method
+follows the same problem setting, but differs from DROID in
+that it uses a likelihood-based objective function and optimizes
+the distribution variance in addition to the mean. We provide a
+thorough comparison between our method and DROID in Sec-
+tion 4.
+A variation of this ofﬂine setting, where the real-world data
+collection policy is assumed to be available, was addressed in
+BayesSim [19]. Under this assumption, BayesSim trains a neu-
+ral network to predict dynamics parameter posteriors using tra-
+jectories collected in simulation by the given policy under a va-
+riety of dynamic conditions. Trajectories collected by the same
+policy on the real world setup are then passed to the trained net-
+work to predict the dynamics parameter distributions in the real
+world. Similar to our work and DROID, BayesSim does not re-
+quire access to the real hardware during optimization; however,
+it still assumes the data collection policy to be available during
+optimization. In contrast, we propose a maximum likelihood-
+based framework which does not require the data collection pol-
+icy to be known, making it more suitable for use with human
+demonstrations. We provide a detailed comparison between our
+method and BayesSim with human demonstrations in Section 4.
+Other works followed a different approach for applying do-
+main randomization, by keeping a ﬁxed range of the physical
+parameters and, instead, relying on intelligent sampling tech-
+niques to improve generalization: [22] guides training on in-
+creasingly harder environment variations, while [26] increases
+the number of sampled simulated environments until satisfac-
+tory transfer behavior is reached.
+Finally, approaches based around differentiable physics sim-
+ulators were also devised [27]. While DROPO could in princi-
+ple be used with a differentiable simulator, allowing for the use
+of a gradient-based optimizer, we do not make any assumptions
+about the differentiability of the simulator in this work.
+3. Method
+3.1. Background and problem formulation
+A Markov decision process (MDP) M is described by its
+state space S, action space A, initial state distribution p(s0),
+state transition distribution p(st+1|st, at) and the reward distribu-
+tion p(rt|st, at, st+1). Each episode begins with an agent starting
+in state s0 ∼p(s0). At each step, the agent selects an action a
+following a policy π(a|s). The problem addressed in reinforce-
+ment learning is then to ﬁnd an optimal policy π∗(a|s), such that
+the expected cumulative reward (the return) is maximized.
+In the domain transfer scenario, we can view the real world
+as an MDP with state transition probabilities preal(st+1|st, at),
+with the simulation additionally parametrized by the dynam-
+ics parameter vector ξ: psim(ssim
+t+1|st, at, ξ). We assume that both
+2

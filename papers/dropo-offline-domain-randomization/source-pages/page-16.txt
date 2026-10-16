@@ -1,0 +1,173 @@
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+param0
+0.0
+0.5
+1.0
+1.5
+2.0
+param1
+0
+1
+2
+param2
+1
+0
+1
+2
+param3
+1
+0
+1
+param0
+1
+0
+1
+param4
+0
+1
+2
+param1
+0
+1
+2
+param2
+0
+2
+param3
+1
+0
+1
+param4
+Figure D.19: Complete dynamics distribution recovery results in Panda with
+BayesSim
+In the sim-to-sim inference experiment (Figure D.19) we ob-
+serve that, despite there being some variance between random
+seeds, the models generally agree that the center of mass along
+x and y should be shifted in the positive direction, and that the
+mass of the object is rather hard to identify (as expressed by the
+large standard deviation for param0).
+However, when operating on real-world data, the model’s
+performance degrades signiﬁcantly, especially with the neural
+network features (MDNN), shown in Figure D.20. In this case,
+the model produces very large standard deviations, potentially
+hindering the training process and often leading to unfeasible
+physical parameters—e.g. negative masses or box center of
+mass that lies outside the box boundaries. To address this is-
+sue, all values were clipped inside the simulator and kept within
+the pre-identiﬁed search space, which made the policy train-
+ing possible. Like in the unmodeled Hopper experiment, we
+suspect that this behaviour is the result of the network being
+evaluated on out-of-distribution data. This hypothesis appears
+stronger when looking at the results obtained with the quasi-
+random Fourier features, where the inferred distributions look
+more sensible, although in some cases the mixture components
+still predict the mass to be negative (Figure D.21). The feature
+extraction process reduces the dimensionality of the input data,
+making it easier for the model to generalize to new data, as it
+is more likely that the noisy, unmodeled real-world trajectory
+would appear close to data seen during training.
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+param0
+0
+2
+4
+6
+8
+param1
+2.5
+0.0
+2.5
+5.0
+7.5
+param2
+4
+2
+0
+2
+param3
+10
+0
+10
+param0
+4
+2
+0
+2
+4
+param4
+0
+5
+param1
+0
+5
+param2
+5.0
+2.5
+0.0
+2.5
+param3
+2.5
+0.0
+2.5
+param4
+Figure D.20: Complete real-world dynamics estimation results in Panda with
+BayesSim (MDNN features)
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+param0
+0.0
+0.5
+1.0
+1.5
+param1
+0
+1
+2
+param2
+0.4
+0.2
+0.0
+0.2
+param3
+0
+1
+2
+param0
+0.4
+0.2
+0.0
+0.2
+param4
+0
+1
+param1
+0
+1
+2
+param2
+0.4
+0.2
+0.0
+0.2
+param3
+0.2
+0.0
+0.2
+param4
+Figure D.21: Complete real-world dynamics estimation results in Panda with
+BayesSim (MDRFF features)
+16

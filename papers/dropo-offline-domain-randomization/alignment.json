@@ -1,0 +1,274 @@
+[
+  {
+    "id": "title",
+    "section": "Title",
+    "type": "title",
+    "source_ids": [
+      "title"
+    ],
+    "translation_ids": [
+      "zh-title"
+    ],
+    "source": "DROPO: Sim-to-Real Transfer with Offline Domain Randomization",
+    "translation": [
+      "DROPO：利用离线域随机化实现仿真到现实迁移"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "abstract",
+    "section": "Abstract",
+    "type": "abstract",
+    "source_ids": [
+      "abstract"
+    ],
+    "translation_ids": [
+      "zh-abstract"
+    ],
+    "source": "In recent years, domain randomization over dynamics parameters has gained a lot of traction as a method for sim-to-real transfer of reinforcement learning policies in robotic manipulation; however, finding optimal randomization distributions can be difficult. In this paper, we introduce DROPO, a novel method for estimating domain randomization distributions for safe sim-to-real transfer. Unlike prior work, DROPO only requires a limited, precollected offline dataset of trajectories, and explicitly models parameter uncertainty to match real data using a likelihood-based approach. We demonstrate that DROPO is capable of recovering dynamic parameter distributions in simulation and finding a distribution capable of compensating for an unmodeled phenomenon. We also evaluate the method in two zero-shot sim-to-real transfer scenarios, showing successful domain transfer and improved performance over prior methods.",
+    "translation": [
+      "近年来，对动力学参数进行域随机化已成为将强化学习策略从仿真迁移到真实机器人的常用方法，但要找到合适的随机化分布并不容易。本文提出 DROPO，一种用于安全仿真到现实迁移的域随机化分布估计方法。DROPO 只需要规模有限、预先采集的离线轨迹数据，并通过基于似然的方法显式建模参数不确定性，使仿真数据与真实数据相匹配。实验表明，DROPO 能够恢复仿真中使用的动力学参数分布，也能找到可补偿未建模现象的分布。作者还在两种零样本迁移任务中评估该方法，结果显示迁移成功，性能优于若干已有方法。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "eq-01",
+    "section": "3.1 Background and setup",
+    "type": "equation",
+    "source_ids": [
+      "eq-01"
+    ],
+    "translation_ids": [
+      "zh-eq-01"
+    ],
+    "source": "$$p^*(\\xi)=\\arg\\max_{p(\\xi)}\\;\\mathbb{E}_{s_t,a_t,s_{t+1}\\sim D,\\,\\xi\\sim p(\\xi)}[p_{\\mathrm{sim}}(s_{t+1}\\mid s_t,a_t,\\xi)]. \\tag{1}$$",
+    "translation": [
+      "$$p^*(\\xi)=\\arg\\max_{p(\\xi)}\\;\\mathbb{E}_{s_t,a_t,s_{t+1}\\sim D,\\,\\xi\\sim p(\\xi)}[p_{\\mathrm{sim}}(s_{t+1}\\mid s_t,a_t,\\xi)]. \\tag{1}$$"
+    ],
+    "notes": "Source formula copied in canonical LaTeX notation; PDF line breaks normalized."
+  },
+  {
+    "id": "eq-02",
+    "section": "3.4 Distribution fitting",
+    "type": "equation",
+    "source_ids": [
+      "eq-02"
+    ],
+    "translation_ids": [
+      "zh-eq-02"
+    ],
+    "source": "$$\\bar{s}^{\\phi}_{t+\\lambda}=\\frac{1}{K}\\sum_k s^{\\xi_k}_{t+\\lambda},\\qquad \\Sigma^{\\phi}_{t+\\lambda}=\\widehat{\\mathrm{Cov}}(p_{\\mathrm{sim}}(s^{\\mathrm{sim}}_{t+\\lambda}\\mid s_t,a_{t:t+\\lambda-1},\\phi))+\\mathrm{diag}(\\epsilon). \\tag{2}$$",
+    "translation": [
+      "$$\\bar{s}^{\\phi}_{t+\\lambda}=\\frac{1}{K}\\sum_k s^{\\xi_k}_{t+\\lambda},\\qquad \\Sigma^{\\phi}_{t+\\lambda}=\\widehat{\\mathrm{Cov}}(p_{\\mathrm{sim}}(s^{\\mathrm{sim}}_{t+\\lambda}\\mid s_t,a_{t:t+\\lambda-1},\\phi))+\\mathrm{diag}(\\epsilon). \\tag{2}$$"
+    ],
+    "notes": "Source formula normalized from PDF extraction."
+  },
+  {
+    "id": "eq-03",
+    "section": "3.4 Distribution fitting",
+    "type": "equation",
+    "source_ids": [
+      "eq-03"
+    ],
+    "translation_ids": [
+      "zh-eq-03"
+    ],
+    "source": "$$L_t=\\frac{1}{2}(\\log\\det\\Sigma^{\\phi}_{t+\\lambda}+(\\bar{s}^{\\phi}_{t+\\lambda}-s_{t+\\lambda})^\\top(\\Sigma^{\\phi}_{t+\\lambda})^{-1}(\\bar{s}^{\\phi}_{t+\\lambda}-s_{t+\\lambda})). \\tag{3}$$",
+    "translation": [
+      "$$L_t=\\frac{1}{2}(\\log\\det\\Sigma^{\\phi}_{t+\\lambda}+(\\bar{s}^{\\phi}_{t+\\lambda}-s_{t+\\lambda})^\\top(\\Sigma^{\\phi}_{t+\\lambda})^{-1}(\\bar{s}^{\\phi}_{t+\\lambda}-s_{t+\\lambda})). \\tag{3}$$"
+    ],
+    "notes": "Source formula copied as negative log-likelihood up to the omitted constant."
+  },
+  {
+    "id": "fig-01-caption",
+    "section": "Figures",
+    "type": "caption",
+    "source_ids": [
+      "fig-01-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-01-caption"
+    ],
+    "source": "Figure 1: DROPO workflow.",
+    "translation": [
+      "图 1：DROPO workflow。"
+    ],
+    "notes": "Caption summarized/translated; see figure-map.json for the original page crop."
+  },
+  {
+    "id": "fig-02-caption",
+    "section": "Figures",
+    "type": "caption",
+    "source_ids": [
+      "fig-02-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-02-caption"
+    ],
+    "source": "Figure 2: DROPO stages.",
+    "translation": [
+      "图 2：DROPO stages。"
+    ],
+    "notes": "Caption summarized/translated; see figure-map.json for the original page crop."
+  },
+  {
+    "id": "fig-03-caption",
+    "section": "Figures",
+    "type": "caption",
+    "source_ids": [
+      "fig-03-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-03-caption"
+    ],
+    "source": "Figure 3: Hopper recovered distributions.",
+    "translation": [
+      "图 3：Hopper recovered distributions。"
+    ],
+    "notes": "Caption summarized/translated; see figure-map.json for the original page crop."
+  },
+  {
+    "id": "fig-04-caption",
+    "section": "Figures",
+    "type": "caption",
+    "source_ids": [
+      "fig-04-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-04-caption"
+    ],
+    "source": "Figure 4: Hopper transfer returns.",
+    "translation": [
+      "图 4：Hopper transfer returns。"
+    ],
+    "notes": "Caption summarized/translated; see figure-map.json for the original page crop."
+  },
+  {
+    "id": "fig-05-caption",
+    "section": "Figures",
+    "type": "caption",
+    "source_ids": [
+      "fig-05-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-05-caption"
+    ],
+    "source": "Figure 5: Epsilon sweep for point-dynamics recovery.",
+    "translation": [
+      "图 5：Epsilon sweep for point-dynamics recovery。"
+    ],
+    "notes": "Caption summarized/translated; see figure-map.json for the original page crop."
+  },
+  {
+    "id": "fig-06-caption",
+    "section": "Figures",
+    "type": "caption",
+    "source_ids": [
+      "fig-06-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-06-caption"
+    ],
+    "source": "Figure 6: Epsilon sweep for distribution recovery.",
+    "translation": [
+      "图 6：Epsilon sweep for distribution recovery。"
+    ],
+    "notes": "Caption summarized/translated; see figure-map.json for the original page crop."
+  },
+  {
+    "id": "fig-07-caption",
+    "section": "Figures",
+    "type": "caption",
+    "source_ids": [
+      "fig-07-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-07-caption"
+    ],
+    "source": "Figure 7: Epsilon sweep with an unmodeled phenomenon.",
+    "translation": [
+      "图 7：Epsilon sweep with an unmodeled phenomenon。"
+    ],
+    "notes": "Caption summarized/translated; see figure-map.json for the original page crop."
+  },
+  {
+    "id": "fig-08-caption",
+    "section": "Figures",
+    "type": "caption",
+    "source_ids": [
+      "fig-08-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-08-caption"
+    ],
+    "source": "Figure 8: Panda sim-to-sim pushing returns.",
+    "translation": [
+      "图 8：Panda sim-to-sim pushing returns。"
+    ],
+    "notes": "Caption summarized/translated; see figure-map.json for the original page crop."
+  },
+  {
+    "id": "fig-09-caption",
+    "section": "Figures",
+    "type": "caption",
+    "source_ids": [
+      "fig-09-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-09-caption"
+    ],
+    "source": "Figure 9: Hockeypuck simulation and real setup.",
+    "translation": [
+      "图 9：Hockeypuck simulation and real setup。"
+    ],
+    "notes": "Caption summarized/translated; see figure-map.json for the original page crop."
+  },
+  {
+    "id": "fig-10-caption",
+    "section": "Figures",
+    "type": "caption",
+    "source_ids": [
+      "fig-10-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-10-caption"
+    ],
+    "source": "Figure 10: Hockeypuck sim-to-real error.",
+    "translation": [
+      "图 10：Hockeypuck sim-to-real error。"
+    ],
+    "notes": "Caption summarized/translated; see figure-map.json for the original page crop."
+  },
+  {
+    "id": "fig-11-caption",
+    "section": "Figures",
+    "type": "caption",
+    "source_ids": [
+      "fig-11-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-11-caption"
+    ],
+    "source": "Figure 11: Panda pushing setup.",
+    "translation": [
+      "图 11：Panda pushing setup。"
+    ],
+    "notes": "Caption summarized/translated; see figure-map.json for the original page crop."
+  },
+  {
+    "id": "fig-12-caption",
+    "section": "Figures",
+    "type": "caption",
+    "source_ids": [
+      "fig-12-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-12-caption"
+    ],
+    "source": "Figure 12: Panda pushing sim-to-real error.",
+    "translation": [
+      "图 12：Panda pushing sim-to-real error。"
+    ],
+    "notes": "Caption summarized/translated; see figure-map.json for the original page crop."
+  }
+]

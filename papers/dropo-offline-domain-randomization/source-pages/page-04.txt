@@ -1,0 +1,131 @@
+this is never the case in real-world systems, we found that
+DROPO was able to handle this discrepancy.
+Once collected, the dataset is preprocessed in order for the
+states to be directly replicable in simulation. First, data from
+different sensor modalities needs to be synchronized; this is be-
+cause data from position measuring devices, such as motion
+capture systems, is likely to be delayed w.r.t. robot joint po-
+sition measurements. Additionally, it is necessary to ensure
+that the data is sampled with the same frequency as the sim-
+ulated environment timesteps. To achieve this, we ﬁt an Akima
+spline to all sensor measurements and evaluate it at each envi-
+ronment timestep. We chose the Akima interpolation method
+over a cubic spline, as it prevents the values from overshooting
+in-between sampled points.
+3.4. Distribution ﬁtting
+Once a preprocessed dataset is available, we move on to the
+core part of DROPO—estimating the dynamics probability dis-
+tribution pφ(ξ).
+In our method, the optimized parameter vector φ includes
+both the means and variances of each univariate distribution,
+assuming uncorrelated parameters. Therefore, with a dynamics
+parameter vector ξ ∈Rd, the parameterization is represented
+by a 2d-dimensional vector φ ∈R2d. This is in contrast to
+DROID [20], where only the means are optimized while the
+standard deviations are taken from the CMA-ES optimization
+distribution instead. This change allows to explicitly learn the
+variability of each simulated physical parameter to best explain
+heteroschedasticity and uncertainty in real-world data. DROPO
+can thus be thought as a random coefﬁcient statistical model,
+where the optimized coefﬁcients are themselves assumed to be
+random variables, as opposed to the more standard ﬁxed-effects
+regression analysis.
+The distribution ﬁtting process starts with an arbitrary initial
+guess φinit = (µinit, Σinit) on the dynamics distribution, roughly
+informed by looking at the replayed trajectory in sim.
+The
+main inference part follows by sampling K dynamics param-
+eters from pφ(ξ). Then, for each parameter vector ξk, we set
+the simulator state to the original real state st, execute the
+real action sequence at..t+λ−1 and observe the next state sξk
+t+λ.
+This process allows us to estimate the next-state distribution
+psim(ssim
+t+λ|st, at..t+λ−1, φ), modelled as a Gaussian distribution. In
+particular, we infer the corresponding mean and covariance ma-
+trix as follows:
+¯sφ
+t+λ = 1
+K
+X
+k
+sξk
+t+λ
+Σφ
+t+λ = d
+Cov(psim(ssim
+t+λ|st, at..t+λ−1, φ)) + diag(ϵ),
+(2)
+where d
+Cov(·) is the unbiased sample covariance matrix estima-
+tor. Here, ϵ is a hyperparameter used to compensate for obser-
+vation noise and regularize the likelihood computation in case
+singular covariance matrices would appear—e.g. due to direc-
+tions of variance in the state-space unexplainable by the sim-
+ulator dynamics. Tuning this hyperparameter will, effectively,
+adjust how much next-state variance is to be modelled by vari-
+ance in dynamics parameters, relative to observation noise. As
+demonstrated in our experiments, setting this parameter to too
+low values may result in obtaining an overly wide randomiza-
+tion distribution: in the extreme case of ϵ = 0, DROPO would
+attempt to model all phenomena that cannot be reproduced in
+a single simulation by variability in the dynamics, potentially
+overﬁtting to noise or unmodeled effects. However, increas-
+ing ϵ to excessively large values will eventually lead to over-
+regularization and point-estimate dynamics, as all unexplained
+variance would be modeled as observation noise, falling back
+to pure system identiﬁcation. To ensure stability while promot-
+ing variance in the dynamics parameters, we propose to tune ϵ
+by increasing it until the Mean Squared Error (MSE) between
+real and sim trajectories no longer meaningfully decreases—
+similarly to the Elbow method popularly used in machine learn-
+ing. We present a thorough analysis of the impact of the ϵ pa-
+rameter in the Experiments section.
+After observing the resulting simulator states, we make the
+assumption that the true, real-world observation st+λ originates
+from the next-state distribution induced by dynamics random-
+ization: st+λ ∼N(¯sφ
+t+λ, Σφ
+t+λ)
+The log-likelihood of st+λ under this distribution can be then
+calculated following the standard Gaussian formula (ignoring
+the constant term)
+Lt = 1
+2(log det Σφ
+t+λ + (¯sφ
+t+λ −st+λ)⊤Σφ
+t+λ
+−1(¯sφ
+t+λ −st+λ))
+(3)
+The log-likelihoods of each individual transition can then be
+summed to obtain the total log-likelihood of the dataset D under
+pφ(ξ): L = P
+t Lt
+We ﬁnally adjust the parameters φ to maximize the total log-
+likelihood L. As we don’t make any assumptions about the dif-
+ferentiability of the simulator, we optimize L using a gradient-
+free optimization method.
+DROPO can, in principle, work
+with an arbitrary optimization method; we use CMA-ES [28]
+throughout the experiments, with initial scale of 1 and opti-
+mization parameters normalized linearly (means) or in log scale
+(variances) to the interval [0, 4]. Note that, in order to further
+improve stability, we model pφ(ξ) as an uncorrelated truncated
+normal distribution bounded to values within two standard devi-
+ations away from the mean, with consecutive resampling when
+unfeasible parameters are drawn (e.g. negative masses).
+3.5. Policy training
+The policy π(a|s) is trained for the given target task entirely in
+simulation using the converged domain randomization distribu-
+tion pφ(ξ). This is achieved by sampling new dynamics param-
+eters ξ ∼pφ(ξ) at the start of each training episode. The RL pol-
+icy can then be trained with an arbitrary reinforcement learning
+algorithm; we use Proximal Policy Optimization (PPO; [29])
+and Soft Actor-Critic (SAC; [30]) in our experiments. The tra-
+jectories coming from the ofﬂine dataset are not used in any
+way during the policy training process; as such, the demonstra-
+tions are not required to be speciﬁc to the particular task, as
+long as they allow the relevant dynamics parameters to be iden-
+tiﬁed.
+4

@@ -1,0 +1,149 @@
+10−9
+10−7
+10−5
+10−3
+10−1
+Epsilon
+1
+2
+3
+4
+5
+Value
+Thighmass
+10−9
+10−7
+10−5
+10−3
+10−1
+Epsilon
+0
+1
+2
+3
+4
+5
+6
+Value
+Legmass
+10−9
+10−7
+10−5
+10−3
+10−1
+Epsilon
+0
+1
+2
+3
+4
+5
+6
+Value
+Footmass
+Hopper distributions (mean and standard deviation)
+(a)
+10−9
+10−7
+10−5
+10−3
+10−1
+Epsilon
+0.002
+0.004
+0.006
+0.008
+mse
+Hopper MSE
+(b)
+Figure 7: Epsilon sweep on the unmodeled phenomenon experiment: (a) shows
+the converged distributions, (b) shows how the MSE changes with ϵ. (means
+and variances averaged over 8 seeds)
+GT
+DROPO DROID
+UDR BayesSim
+0
+500
+1000
+1500
+2000
+2500
+3000
+Return
+Figure 8: Sim-to-sim: episode returns in the target simulated environment when
+trained on domain randomization distributions inferred by DROID, DROPO
+and BayesSim and on the ground-truth dynamics distribution (GT) in the Panda
+pushing task.
+providing similar results to DROID), while allowing a desirably
+low MSE to be obtained.
+Note how the proposed tuning procedure draws similarities
+to the elbow method popularly used in machine learning, e.g.
+to ﬁnd the best number of clusters in clustering analysis or the
+number of principle components to retain in principal compo-
+nent analysis.
+4.3. Robotics experiments
+We further evaluate DROPO on two sim-to-real robotics se-
+tups: a hockey puck sliding and a box pushing task.
+4.3.1. HockeyPuck
+In the HockeyPuck setup, the Kuka LWR4+ is equipped with
+a hockey stick and tasked with hitting a hockey puck such that
+(a)
+(b)
+Figure 9: The hockeypuck setup in simulation (a) and in the real-world (b). The
+purple area in (a) shows the range of possible goal positions.
+DROPO
+DROID
+UDR
+0
+10
+20
+30
+40
+Distance (cm)
+Figure 10: Sim-to-real performance in terms of the ﬁnal distance to the target
+position on the hockeypuck setup (in centimeters; lower is better).
+it stops at the given target location. For this setup, we use an ice
+hockey puck and a whiteboard as a low-friction surface for the
+puck to slide on. The simulation environment is built in Mu-
+JoCo [34] akin to the real-world setup. Both setups are shown
+in Figure 9. The yellow puck and the purple area in Figure 9a
+show the initial position of the puck and the range of possible
+goal positions.
+In this setup, the actions are whole hitting trajectories; this
+is achieved by ﬁrst training a variational autoencoder (VAE) on
+a range of task-speciﬁc trajectories, and later using the decoder
+as a trajectory generator, with actions given in the latent space
+of the VAE, following [6,35]. This simpliﬁes the reinforcement
+learning problem by turning it into a contextual multi-armed
+bandit problem.
+The demonstrations for optimizing the parameter distribution
+are obtained by rolling out 5 random trajectories of 750 transi-
+tions (or 7.5 seconds) each, sampled from the latent space of the
+VAE (z ∼N(0, I)). The joint positions are obtained using the
+robot’s internal sensors, while the positions of the hockey puck
+are obtained with OptiTrack, a motion capture system, with the
+frequency of 120Hz. During the post-processing, the data is
+synchronized, the positions are resampled to match the simu-
+lated timesteps of the simulated environment, and the velocities
+are obtained by taking the derivative of the spline used to re-
+sample the signal.
+The state space used for dynamics ﬁtting with DROPO con-
+tains the positions and velocities of the robot joints and the
+hockey puck. The use of a trajectory generator allows us to
+use original commanded velocities as actions when replaying
+trajectories in the simulator, and—on this particular setup—
+removes the need of action inference from demonstrations.
+We randomize a total of 18 dynamics parameters: the mass
+of the puck, the puck-surface friction coefﬁcients, the time con-
+stant of the stick-puck contact—regulating the stiffness and
+damping while keeping the interaction critically damped—and
+the gains of the position controller used in simulation. Note
+that, while more parameters may be added to the optimization
+problem to increase the model’s explanatory power, complex
+correlations between the parameters may arise in addition to a
+generally higher complexity.
+We use the reward function of [36]: r = −d2 −log(d + α),
+where d is the distance to the target and α is a constant (we use
+α = 10−3 throughout the experiments).
+The results comparing DROPO, DROID and UDR are shown
+8

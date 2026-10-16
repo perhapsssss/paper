@@ -1,0 +1,444 @@
+Masses (kg)
+m1
+m2
+m3
+m4
+Ground truth
+3.534
+3.927
+2.714
+5.089
+min
+1.767
+1.963
+1.357
+2.545
+Search
+space
+max
+7.069
+7.854
+5.429
+10.18
+µ∗
+3.534
+3.927
+2.714
+5.089
+DROPO
+ϵ=1e−8
+σ∗
+1.0e-5
+1.1e-5
+1.1e-5
+1.0e-5
+µ∗
+3.534
+3.927
+2.714
+5.089
+DROID
+σ∗
+1.2e-12
+2.1e-12
+2.0e-12
+1.1e-12
+Noiseless
+µ∗
+3.350
+5.342
+3.994
+5.560
+BayesSim
+σ∗
+0.697
+0.707
+0.686
+0.541
+µ∗
+3.531
+3.931
+2.717
+5.093
+DROPO
+ϵ=1e−5
+σ∗
+8.1e-3
+1.3e-3
+1.3e-3
+2.4e-4
+µ∗
+3.534
+3.927
+2.714
+5.089
+DROID
+σ∗
+1.2e-12
+2.4e-11
+2.0e-12
+1.2e-12
+µ∗
+6.295
+4.002
+3.486
+3.771
+Noisy
+BayesSim
+σ∗
+0.218
+0.257
+0.245
+0.256
+µ∗
+4.707
+3.181
+4.385
+DROPO
+ϵ=1e−3
+σ∗
+2.534
+(ﬁxed)
+0.667
+0.206
+0.826
+µ∗
+4.021
+3.591
+4.845
+DROID
+σ∗
+2.534
+(ﬁxed)
+6.0e-6
+1.7e-6
+4.2e-6
+µ∗
+3.493
+2.901
+4.596
+Unmodeled
+BayesSim
+σ∗
+2.534
+(ﬁxed)
+1.576
+1.471
+1.537
+Table 1: Optimized dynamics distributions on Hopper OpenAI Gym environ-
+ment. The ground truth values indicate the simulator instance used during data
+collection.
+identiﬁcation and domain randomization is essential to solve
+the task under this unmodeled effect, as neither UDR—pure un-
+optimized domain randomization—nor DROID—which con-
+verged to a point-estimate—result in a successful zero-shot
+transfer.
+4.2.4. The domain variance–observation noise tradeoff
+Throughout our experiments, we observed that introducing
+the ϵ hyperparameter is generally beneﬁcial to obtain more sta-
+ble and sound results (see Section 3). This turned out to be
+particularly effective when optimizing the estimated likelihood
+function in presence of noise or unmodeled effects. However,
+overly large values of ϵ should be avoided to prevent DROPO
+from converging to point-estimate dynamics parameters. To
+study this trade-off, we report a thorough sensitivity analysis
+on this hyperparameter, showing its impact on the ﬁnal perfor-
+mance of DROPO for the previously described Hopper experi-
+ments and describing our tuning procedure in more detail.
+The results of point-dynamics recovery in Hopper with vary-
+ing ϵ are presented in Figure 5. We observe that, for a low
+value of ϵ, DROPO overestimates the standard deviation in
+the noisy setting, as it attempts to explain the random varia-
+tion in next-states by variance in dynamics. However, for ϵ
+values equal to the noise variance (or higher), DROPO con-
+verges to very low standard deviations, corresponding to a
+point-estimate of dynamics parameters and leading to a signif-
+icant drop in MSE. The MSE is computed w.r.t. the converged
+distribution φ∗obtained by DROPO, as follows: MS E(φ∗) =
+P
+t ∥(¯sφ∗
+t+1 −st+1)∥2. This metric resembles the trajectory dis-
+crepancy function adopted by previous works [20, 21], and we
+propose to use it as a reference to reach a stable optimization
+process and account for observation noise when tuning ϵ. Note
+how, in the same ﬁgure, the MSE drop is not as clear for the
+noiseless setting: here, ϵ only serves the purpose to regularize
+the log-likelihood computation, which could be ill-conditioned
+with too low values (e.g. ϵ = 10−10 in Figure 5b) as close-to-
+singular covariance matrices may appear when estimating the
+10
+9
+10
+7
+10
+5
+10
+3
+10
+1
+Epsilon
+0
+1
+2
+3
+4
+5
+6
+Value
+Torsomass
+Noiseless
+Noisy
+Ground truth
+10
+9
+10
+7
+10
+5
+10
+3
+10
+1
+Epsilon
+1
+2
+3
+4
+5
+6
+7
+Value
+Thighmass
+Noiseless
+Noisy
+Ground truth
+10
+9
+10
+7
+10
+5
+10
+3
+10
+1
+Epsilon
+0
+1
+2
+3
+4
+5
+6
+Value
+Legmass
+Noiseless
+Noisy
+Ground truth
+10
+9
+10
+7
+10
+5
+10
+3
+10
+1
+Epsilon
+2.5
+3.0
+3.5
+4.0
+4.5
+5.0
+5.5
+6.0
+Value
+Footmass
+Noiseless
+Noisy
+Ground truth
+Hopper distributions (mean and standard deviation)
+(a)
+10
+9
+10
+7
+10
+5
+10
+3
+10
+1
+epsilon
+10
+14
+10
+12
+10
+10
+10
+8
+10
+6
+10
+4
+10
+2
+mse
+Hopper MSE
+Noisy
+Noiseless
+(b)
+Figure 5: Epsilon sweep on point-estimate dynamics recovery: (a) shows the
+converged distributions in the noiseless and noisy (σ2 = 10−5) cases, (b) shows
+how the MSE changes with ϵ. (results averaged over 4 random seeds)
+10
+9
+10
+7
+10
+5
+10
+3
+10
+1
+Epsilon
+1.0
+1.5
+2.0
+2.5
+3.0
+3.5
+4.0
+4.5
+Value
+Torsomass
+Noiseless
+Noisy
+Ground truth
+10
+9
+10
+7
+10
+5
+10
+3
+10
+1
+Epsilon
+2
+3
+4
+5
+6
+Value
+Thighmass
+Noiseless
+Noisy
+Ground truth
+10
+9
+10
+7
+10
+5
+10
+3
+10
+1
+Epsilon
+1.5
+2.0
+2.5
+3.0
+3.5
+4.0
+4.5
+5.0
+Value
+Legmass
+Noiseless
+Noisy
+Ground truth
+10
+9
+10
+7
+10
+5
+10
+3
+10
+1
+Epsilon
+3
+4
+5
+6
+7
+Value
+Footmass
+Noiseless
+Noisy
+Ground truth
+Hopper distributions (mean and standard deviation)
+(a)
+10
+9
+10
+7
+10
+5
+10
+3
+10
+1
+epsilon
+10
+4
+10
+3
+10
+2
+10
+1
+mse
+Hopper MSE
+Noisy
+Noiseless
+(b)
+Figure 6: Epsilon sweep on dynamics distribution recovery: (a) shows the con-
+verged distributions in the noiseless and noisy (σ2 = 10−5) cases, (b) shows
+how the MSE changes with ϵ. (results averaged over 4 random seeds)
+next-state distribution2.
+We observe a similar phenomenon in the dynamics distribu-
+tion recovery scenario (Figure 6). Small ϵ values result in an
+excessively large variance in masses in presence of noise, while
+correctly identifying the ground-truth distribution in the noise-
+less case. As ϵ grows larger, more of the variety in next-states
+gets attributed to noise and the estimated dynamics distributions
+move towards point dynamics, both in the noisy and noiseless
+case. The best ground-truth distribution recovery is observed
+when ϵ matches the true noise variance, which also corresponds
+to the sharp drop in MSE observed in Figure 6b—thus validat-
+ing the proposed tuning process.
+Finally, we report similar observations for the unmodeled
+phenomenon experiment (Figure 7), where—as ϵ increases—
+unexplainable effects in state space due to under-modeled dy-
+namics get attributed to noise, stabilizing the optimization prob-
+lem. Once again, we tuned ϵ based on the MSE observed in
+Figure 7b, and picked ϵ = 10−3, which is where the MSE val-
+ues stop to meaningfully improve. As observed in Figure 7a,
+this value closely approximates the mean obtained with higher
+ϵ values, while preventing the distribution from collapsing due
+to excessive regularization. To this end, we would like to em-
+phasize that a conservative choice may always be made with
+DROPO when tuning the value of ϵ: higher values will only
+shift DROPO towards lower standard deviations (eventually
+2Adding a small value ϵ to the diagonal of an ill-conditioned covariance
+matrix has the effect to increase all eigenvalues by ϵ, thus making the likelihood
+computation more stable.
+7

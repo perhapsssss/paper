@@ -1,0 +1,115 @@
+rameters, which could make DROPO prohibitively expensive.
+Furthermore, in addition to larger dynamics parameter spaces,
+we encourage future works to extend our method for likelihood
+computation in high-dimensional state spaces, e.g. allowing
+DROPO to work on vision-based policies and plain images col-
+lected ofﬂine. In this case, the general idea behind DROPO
+could be used not only to optimize the dynamics parameters
+of the system, but also to adjust visual domain randomization
+distributions for image rendering, for instance by adjusting pa-
+rameters used for procedural generation of textures.
+Domain randomization methods require the user not only to
+specify the dynamics parameter distributions, but also to select
+what parameters need to be randomized. In our experiments,
+those parameters were indeed selected manually based on do-
+main knowledge. While this approach works well with simple
+and well-understood environments, it can present a challenge
+in situations where expert knowledge of the application domain
+is limited. Even though randomizing as much as possible may
+appear to be a good idea on paper, it often leads to a signiﬁcant
+increase in the computation cost. Additionally, some parameter
+combinations may be physically impossible, leading to simula-
+tor instabilities.
+Aside from that, sim-to-real transfer with domain random-
+ization often requires a signiﬁcant development effort, requir-
+ing an accurate physics engine, object meshes and paramet-
+ric simulation models to be available. As of now, there is no
+automated way of designing simulation models that accurately
+mimic real-world setups; such methods would make the initial
+software development effort much lower, allowing sim-to-real
+transfer with domain randomization to be used more widely in
+the industry, for example in digital twin applications. Recent
+developments in automated design open up the possibility of
+automating the construction of simulation models beyond para-
+metric inference. More speciﬁcally, the object shapes and the
+general kinematic structure of the scene could be inferred based
+on the appearance of the real world system, and have its dynam-
+ics parameters tuned based on pre-collected physical observa-
+tions using a method like DROPO.
+Acknowledgment
+This work was supported by Academy of Finland grants
+317020 and 328399. We acknowledge the computational re-
+sources generously provided by CSC – IT Center for Science,
+Finland, and by the Aalto Science-IT project.
+References
+[1] V. Mnih, K. Kavukcuoglu, D. Silver, A. Graves, I. Antonoglou, D. Wier-
+stra, and M. Riedmiller, “Playing atari with deep reinforcement learn-
+ing,” 2013.
+[2] D. Silver, A. Huang, C. J. Maddison, A. Guez, L. Sifre, G. van den
+Driessche, J. Schrittwieser, I. Antonoglou, V. Panneershelvam, M. Lanc-
+tot, S. Dieleman, D. Grewe, J. Nham, N. Kalchbrenner, I. Sutskever,
+T. Lillicrap, M. Leach, K. Kavukcuoglu, T. Graepel, and D. Hassabis,
+“Mastering the game of Go with deep neural networks and tree search,”
+Nature, vol. 529, pp. 484–489, January 2016.
+[3] W. Zhao, J. P. Queralta, and T. Westerlund, “Sim-to-real transfer in deep
+reinforcement learning for robotics: a survey,” in IEEE Symposium Se-
+ries on Computational Intelligence (SSCI), 2020.
+[4] J. Tan, T. Zhang, E. Coumans, A. Iscen, Y. Bai, D. Hafner, S. Bohez, and
+V. Vanhoucke, “Sim-to-real: Learning agile locomotion for quadruped
+robots,” in RSS, 2018.
+[5] F. Sadeghi and S. Levine, “CAD2RL: real single-image ﬂight without a
+single real image,” in Robotics: Science and Systems, 2017.
+[6] A. H¨am¨al¨ainen, K. Arndt, A. Ghadirzadeh, and V. Kyrki, “Affordance
+learning for end-to-end visuomotor robot control,” in IROS, 2019.
+[7] J. Tobin, R. Fong, A. Ray, J. Schneider, W. Zaremba, and P. Abbeel,
+“Domain randomization for transferring deep neural networks from sim-
+ulation to the real world,” in IROS, 2017.
+[8] F. Sadeghi, A. Toshev, E. Jang, and S. Levine, “Sim2real view invariant
+visual servoing by recurrent control,” in CVPR, 2018.
+[9] X. B. Peng, M. Andrychowicz, W. Zaremba, and P. Abbeel, “Sim-to-
+real transfer of robotic control with dynamics randomization,” in ICRA,
+2018.
+[10] K. Arndt, M. Hazara, A. Ghadirzadeh, and V. Kyrki, “Meta reinforce-
+ment learning for sim-to-real domain adaptation,” in ICRA, 2019.
+[11] R. Antonova, S. Cruciani, C. Smith, and D. Kragic, “Reinforcement
+learning for pivoting task,” 2017.
+[12] A. Nagabandi, I. Clavera, S. Liu, R. S. Fearing, P. Abbeel, S. Levine,
+and C. Finn, “Learning to adapt in dynamic, real-world environments
+through meta-reinforcement learning,” in ICLR, 2019.
+[13] M. Hazara and V. Kyrki, “Transferring generalizable motor primitives
+from simulation to real world,” IEEE RA-L, vol. 4, 2019.
+[14] OpenAI, “Learning dexterous in-hand manipulation,” IJRR, vol. 39,
+2020.
+[15] Y. Du, O. Watkins, T. Darrell, P. Abbeel, and D. Pathak, “Auto-tuned
+sim-to-real transfer,” 2021.
+[16] E. Valassakis, Z. Ding, and E. Johns, “Crossing the gap: A deep dive
+into zero-shot sim-to-real transfer for dynamics,” in IROS, 2020.
+[17] K. Arndt, A. Ghadirzadeh, M. Hazara, and V. Kyrki, “Few-shot model-
+based adaptation in noisy conditions,” IEEE RA-L, 2021.
+[18] A. Rajeswaran, S. Ghotra, B. Ravindran, and S. Levine, “EPOpt: Learn-
+ing robust neural network policies using model ensembles,” 2017.
+[19] F. Ramos, R. C. Possas, and D. Fox, “Bayessim: adaptive domain ran-
+domization via probabilistic inference for robotics simulators,” 2019.
+[20] Y.-Y. Tsai, H. Xu, Z. Ding, C. Zhang, E. Johns, and B. Huang, “Droid:
+Minimizing the reality gap using single-shot human demonstration,”
+IEEE Robotics and Automation Letters, vol. 6, no. 2, 2021.
+[21] Y. Chebotar, A. Handa, V. Makoviychuk, M. Macklin, J. Issac, N. Ratliff,
+and D. Fox, “Closing the sim-to-real loop: Adapting simulation random-
+ization with real world experience,” in ICRA, 2019.
+[22] B. Mehta, M. Diaz, F. Golemo, C. J. Pal, and L. Paull, “Active domain
+randomization,” in CoRL, 2020.
+[23] F. Muratore, C. Eilers, M. Gienger, and J. Peters, “Data-efﬁcient domain
+randomization with bayesian optimization,” IEEE RA-L, vol. 6, 2021.
+[24] S. Kolev and E. Todorov, “Physically consistent state estimation and sys-
+tem identiﬁcation for contacts,” in 2015 IEEE-RAS 15th International
+Conference on Humanoid Robots, IEEE, 2015.
+[25] A. D. Allevato, E. Schaertl Short, M. Pryor, and A. L. Thomaz, “Iterative
+residual tuning for system identiﬁcation and sim-to-real robot learning,”
+vol. 44, no. 7, pp. 1167–1182, 2020.
+[26] F. Muratore, M. Gienger, and J. Peters, “Assessing transferability from
+simulation to reality for reinforcement learning,” IEEE Transactions on
+Pattern Analysis and Machine Intelligence, 2019.
+[27] F. de Avila Belbute-Peres, K. Smith, K. Allen, J. Tenenbaum, and J. Z.
+Kolter, “End-to-end differentiable physics for learning and control,” in
+NIPS, vol. 31, 2018.
+11

@@ -1,0 +1,118 @@
+[28] N. Hansen and A. Ostermeier,
+“Completely derandomized self-
+adaptation in evolution strategies,” Evolutionary Computation, vol. 9,
+no. 2, pp. 159–195, 2001.
+[29] J. Schulman, F. Wolski, P. Dhariwal, A. Radford, and O. Klimov, “Prox-
+imal policy optimization algorithms,” 2017.
+[30] T. Haarnoja, A. Zhou, P. Abbeel, and S. Levine, “Soft actor-critic: Off-
+policy maximum entropy deep reinforcement learning with a stochastic
+actor.,” in ICML, 2018.
+[31] J. Rapin and O. Teytaud, “Nevergrad - A gradient-free optimization plat-
+form,” 2018.
+[32] G. Brockman, V. Cheung, L. Pettersson, J. Schneider, J. Schulman,
+J. Tang, and W. Zaremba, “Openai gym,” 2016.
+[33] A. Kumar, J. Fu, G. Tucker, and S. Levine, “Stabilizing off-policy q-
+learning via bootstrapping error reduction,” 2019.
+[34] E. Todorov, T. Erez, and Y. Tassa, “Mujoco: A physics engine for model-
+based control,” in IROS, 2012.
+[35] A. Ghadirzadeh, A. Maki, D. Kragic, and M. Bj¨orkman, “Deep predic-
+tive policy training using reinforcement learning,” in IROS, 2017.
+[36] S. Levine, C. Finn, T. Darrell, and P. Abbeel, “End-to-end training of
+deep visuomotor policies,” J. Mach. Learn. Res., vol. 17, Jan. 2016.
+[37] K. Arndt, O. Struckmeier, and V. Kyrki, “Domain curiosity: Learning
+efﬁcient data collection strategies for domain adaptation,” in IROS, 2021.
+[38] J. Zhang, J. Wang, H. Hu, Y. Chen, C. Fan, and C. Zhang, “Learn to
+effectively explore in context-based meta-rl,” in Arxiv, 2020.
+[39] B. Mehta, A. Handa, D. Fox, and F. Ramos, “A user’s guide to calibrating
+robotics simulators,” 2020.
+[40] J. Peters, K. Muelling, and Y. Altun, “Relative entropy policy search,” in
+AAAI, 2010.
+Appendix A. Least squares for ofﬂine DR optimization
+In this appendix section we attempt to give a more thor-
+ough explanation to why DROID converged to point-estimate
+dynamics parameters across all our experiments.
+In partic-
+ular, we aim to provide an intuition for why we discourage
+the use of least squares-like methods for trajectory alignment
+during ofﬂine optimization of DR distributions. This discus-
+sion is further motivated by the results reported in [39], where
+SimOpt’s [21] objective function was used in the ofﬂine set-
+ting by replaying actions from off-policy data in simulation.
+Similarly to our results with DROID, this approach resulted in
+point-estimate dynamics estimates, leading the authors to con-
+sider ofﬂine SimOpt as a point-estimate system identiﬁcation
+method.
+Based on the notation used throughout our work, let us con-
+sider the optimization problem aiming to minimize the follow-
+ing objective function:
+J(ξ) = 1
+K
+K
+X
+i=1
+∥f(si, ai; ξ) −si+1∥2
+(A.1)
+with f(·; ξ) being the simulator dynamics—assumed to be
+deterministic for simplicity—parameterized by parameters ξ.
+Note that, since the objective function is deﬁned for a given
+dynamics parameter vector ξ, minimizing it by acting on the full
+distribution is not straightforward. For example, DROID [20]
+uses CMA to minimize the squared residuals and then re-
+tains the ﬁnal inner CMA covariance matrix to ultimately build
+the DR distribution. Similarly, SimOpt [21] uses a sampling-
+based gradient-free algorithm based on relative entropy policy
+search [40] allowing to minimize residuals using only samples
+ξ ∼pφ(ξ).
+Regardless of the speciﬁc method, since the ﬁnal goal is the
+minimization of J(ξ), we can reason about its expected value
+w.r.t. pφ(ξ), which we are ultimately interested in minimizing.
+Intuitively, when optimizing the objective in (A.1) under no ad-
+ditional assumptions or constraints, it is indeed reasonable to
+believe that no beneﬁt is gained by ending up with a higher ex-
+pected value of J(ξ) in exchange for a certain desired variance.
+We then claim that optimization problems aiming to optimize
+the expected value of quantity in A.1 by acting on the random
+component itself, inevitably converge to point-estimates. Inter-
+estingly enough, this draws similarities to the weighted average
+of a ﬁnite sequence of numbers: no matter how you pick the
+weights (e.g. the probability distribution), the average will al-
+ways be greater than or equal to the minimum of the sequence;
+only when moving all the probability mass to the minimum
+value itself we get the lowest possible average value.
+We attempt to give a concise mathematical demonstration
+for this in our continuous case, under a few assumptions for
+the sake of simplicity. Let us bound the search space of the
+optimization problem to an arbitrary region in the dynamics
+space. Let jmin = J(ξmin) be the global minimum of J(ξ) in
+the region delimited by the support of the current pφ(ξ), poten-
+tially trimmed by the predeﬁned search space in case of un-
+bounded support.
+Therefore, note how the random variable
+Y = J(ξ) −jmin is always greater than or equal than zero. Fol-
+lowing the non-negativity and linearity properties of expected
+values, we consequently get:
+E[Y] = E[J(ξ) −jmin] ⩾0
+(A.2)
+E[J(ξ)] ⩾jmin
+(A.3)
+This ﬁnal result indicates that regardless of how we design
+the distribution pφ(ξ), we cannot do better than simply minimiz-
+ing the objective function w.r.t. ξ only — indeed, we can only
+do worse. Therefore, the optimization problem should converge
+to the point-estimate ξmin even if acting on the full distribution,
+assuming that our optimizer converges to the global minimum.
+We then encourage future works to take these considerations
+into account when designing optimization of dynamics distri-
+butions with ﬁxed ofﬂine data. For example, one could add
+custom constraints to promote variance in the dynamics param-
+eters or, as shown by our work and BayesSim [19], move to
+probabilistic metrics to infer target parameters.
+Finally, it’s worth noting that these considerations do not ap-
+ply to the original SimOpt method (as presented in [21]), as its
+objective function is conceptually different in the online setting:
+SimOpt optimizes φ so that a policy trained on such distribution
+gets minimum squared residuals between its observed sim and
+real states; i.e., the objective is directly to get a policy that per-
+forms the same in both domains, as opposed to simple trajec-
+tory alignment. Thus, having policy training and data collection
+12

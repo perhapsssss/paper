@@ -1,0 +1,115 @@
+4. Experiments
+The experimental evaluation aims to answer the following
+questions:
+1. is DROPO capable of recovering the original dynamics pa-
+rameters and randomization distributions in simulated en-
+vironments?;
+2. is DROPO capable of training a policy that can solve the
+task and transfer when unmodeled phenomena are present
+in simulation?;
+3. how does the value of the ϵ hyperparameter affect the ob-
+tained domain randomization distribution?;
+4. what is the real-world performance of policies trained with
+DROPO compared to DROID [20], BayesSim [19], and
+uniform domain randomization (UDR)?
+4.1. Benchmark methods
+Throughout our experiments we benchmark UDR similarly
+to [23], as we assess the average performance of several policies
+trained on different uniform bounds. More precisely, we train
+10 policies with DR on 10 uniform bounds respectively, which
+are randomly sampled from the search spaces reported in the
+corresponding tables. This would reﬂect how manually picking
+uniform distributions within a reasonable search space affects
+the ﬁnal performance.
+Furthermore,
+in
+contrast
+to
+the
+original
+paper
+on
+DROID [20], we replaced torque measurements with the
+raw state vectors when implementing the DROID baseline.
+This modiﬁcation makes more sense for the pushing and sliding
+tasks that we use for evaluation, as joint torques do not express
+enough information about the object being manipulated by the
+robot, especially for the sliding task—in contrast to the door
+opening task used in the original DROID paper. The CMA-ES
+implementation used in DROPO and DROID is provided by
+Nevergrad [31].
+Finally, in order to adapt BayesSim to the ofﬂine setting
+with human demonstrations (where the data collection policy
+is not available), we repeat the original action sequence dur-
+ing data collection. Besides this modiﬁcation, we make use of
+the original open-source repository provided by [19]. In most
+experiments, we evaluate both neural network (MDNN) and
+quasi-random Fourier (MDRFF) features and report the better
+result for brevity. An exception to this is the sim-to-real ex-
+periment with the Panda robot, where results with both features
+are reported in order to compare the generalization capability of
+both variants. Since BayesSim uses mixture Gaussian distribu-
+tions, the distribution inference results reported in the tables and
+plots in this section are independent Gaussian approximations
+of the complete results, for the sake of brevity. The complete
+BayesSim posteriors can be found in Appendix D.2.
+4.2. Hopper
+In the Hopper environment [32], a one-legged robot is tasked
+to learn to jump forward as fast as possible without falling
+down. This environment has been used as a standard control
+benchmark in a variety of papers [18, 29, 30, 33]. We intro-
+duce parameter randomization to this environment by varying
+the mass of each link. We use this environment as a simple
+benchmark to test DROPO’s capability of identifying the dy-
+namic parameters of the system and recovering the parameter
+distribution that was used to generate the dataset. We later in-
+troduce an unmodeled effect in the form of a misspeciﬁed mass
+(which is not included in the optimization problem), similarly
+to [18]. Given the simple sim-to-sim scenario, the ofﬂine tra-
+jectories for running DROPO have been collected by rolling out
+semi-converged policies trained directly in the target domain.
+4.2.1. Point-dynamics system identiﬁcation
+When the ofﬂine dataset is collected on a single Hopper en-
+vironment instance, DROPO is expected to identify the target
+physical parameters and to converge to point-estimate dynamics
+rather than distributions. We tested this behavior on the Hopper
+environment by collecting two trajectories (1000 state transi-
+tions corresponding to 8 seconds of wall time) on the ground
+truth dynamics shown in Table 1, both with and without noise
+of variance 10−5 injected in the ofﬂine observations. The results
+are reported in the same table, as DROPO achieved convergence
+to the original dynamics regardless of the presence of noise and
+effectively decreased the standard deviation of learned param-
+eters to 10−5, set as the lowest bound during the optimization
+problem.
+In the point-estimate dynamics estimation, DROID also con-
+verged to the ground-truth parameter values, with a lower stan-
+dard deviation than DROPO (as CMA-ES does not impose any
+lower bounds on the variance). Thus, both DROPO and DROID
+perform virtually the same in this benchmark.
+On the other hand, BayesSim overestimates the distribution
+variance and does not accurately recover the mean parameter
+value.
+This is in line with the results reported in the orig-
+inal paper [19], where the resulting posterior distribution is
+much wider than the ground-truth values used for data gen-
+eration. While wider distributions may beneﬁt generalization,
+BayesSim falls short of DROID and DROPO in terms of pure
+system identiﬁcation capabilities.
+4.2.2. Recovering the dynamics distribution
+In this experiment, the dataset D was collected while vary-
+ing the target dynamics according to some ground truth dis-
+tribution p(ξ), which we want to recover. We collected two
+trajectories on the Hopper environment, varying all masses as
+mi ∼N(µi, 0.252) around their original values µi every 25
+state transitions, except for the torso mass which was kept
+ﬁxed. Since BayesSim expects the input to be trajectories col-
+lected from a single dynamics setting rather than a set of transi-
+tions, we had to use a different test procedure for this baseline;
+namely, we sample multiple dynamics conditions from the true
+distribution and run BayesSim individually for each of them.
+The resulting distribution is then obtained by marginalizing the
+output distribution over the input dynamics distribution.
+The results are reported in Figure 3, which shows DROPO
+successfully learning the original variance of the randomized
+5

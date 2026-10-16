@@ -1,0 +1,352 @@
+from the real-world system in the loop prevents the optimiza-
+tion from converging to a point estimate, as a policy trained on
+a point estimate would—in most cases—fail to generalize to the
+real world, resulting in a larger discrepancy between simulated
+and real trajectories than a policy trained on a non-degenerate
+dynamics distribution.
+Appendix B. The impact of ϵ
+To further analyze the impact of ϵ on DROPO’s performance
+in presence of noise, we performed a secondary analysis where
+we corrupt the collected Hopper datasets with different levels
+of noise.
+The results for the point-dynamics Hopper dataset described
+in Section 4.2.1 are depicted in Figure B.13. In line with the
+main experimental evaluation, we observed a consistent drop
+in MSE where ϵ matches the noise level σ2. In addition, the
+results in terms of the converged mean (Figure B.13b) are con-
+sistent for ϵ ≥σ2, and the standard deviations are very low,
+corresponding to a correct identiﬁcation of point dynamics pa-
+rameters.
+We ﬁnally performed a similar analysis for the distribution
+recovery case, which produced similar results: the dynamics
+distribution recovery is most accurate at ϵ close to the noise
+variance σ2, which also corresponds to the sharp drop in MSE.
+In particular, note how the converged standard deviations of the
+four masses resemble the ground truth distributions deﬁned in
+Section 4.2.2, as long as ϵ does not increase to overly large
+values w.r.t. the current noise level.
+Appendix C. Sensitivity to the amount of data
+As observed in our experiments section, DROPO succeeded
+to transfer RL pushing policies to the real world with as little
+as a single demonstrative trajectory for parameter inference. In
+this section, we aim to quantify the sensitivity of DROPO to the
+amount of ofﬂine data collected. To this end, we analyzed the
+converged means of the dynamics distributions with different
+amount of state transitions in different noise levels, for the Hop-
+per environment in the point-dynamics setting of Section 4.2.1.
+In particular, we tested DROPO with 10, 30, 100, 300, 1000
+and 3000 state transitions sub-sampled from the ofﬂine dataset,
+and kept ϵ ﬁxed at the value of 10−5. We report the conﬁdence
+interval of the converged mean of each mass of the Hopper in
+Fig. C.15, obtained from 4 runs for each evaluation.
+We observe that, when noise variance is around 10−8 or
+lower, as little as 10 state transitions are enough for DROPO
+to converge to values very close to the ground truth values. For
+higher noise levels, this number increases to several hundreds
+of state transitions. However, note the relatively small scale on
+the y-axis, where conﬁdence intervals get as wide as 10 grams
+at most.
+For the sake of clarity, we ﬁnally combine and report in Ta-
+ble B.5 the amount of data used in all our experiments. Target
+data has been collected in less than a minute of interaction for
+all tasks, motivating the adoption of ofﬂine DR optimization
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Noise variance
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Epsilon
+MSE in Hopper
+10
+11
+10
+9
+10
+7
+10
+5
+10
+3
+10
+1
+(a)
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Noise variance
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Epsilon
+Torsomass
+1.0
+1.5
+2.0
+2.5
+3.0
+3.5
+4.0
+4.5
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Noise variance
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Epsilon
+Thighmass
+1.0
+1.5
+2.0
+2.5
+3.0
+3.5
+4.0
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Noise variance
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Epsilon
+Legmass
+1.0
+1.5
+2.0
+2.5
+3.0
+3.5
+4.0
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Noise variance
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Epsilon
+Footmass
+2
+3
+4
+5
+6
+Hopper distribution means
+(b)
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Noise variance
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Epsilon
+Torsomass
+10
+5
+10
+4
+10
+3
+10
+2
+10
+1
+100
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Noise variance
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Epsilon
+Thighmass
+10
+5
+10
+4
+10
+3
+10
+2
+10
+1
+100
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Noise variance
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Epsilon
+Legmass
+10
+5
+10
+4
+10
+3
+10
+2
+10
+1
+100
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Noise variance
+1e-10
+1e-09
+1e-08
+1e-07
+1e-06
+1e-05
+0.0001
+0.001
+0.01
+0.1
+Epsilon
+Footmass
+10
+5
+10
+4
+10
+3
+10
+2
+10
+1
+100
+Hopper distribution standard devs
+(c)
+Figure B.13: Relationship between noise level, epsilon and the resulting (a)
+MSE and (b, c) distribution, expressed by mean and standard deviation in the
+Hopper point-dynamics system identiﬁcation case. (results averaged over 4
+random seeds)
+13
