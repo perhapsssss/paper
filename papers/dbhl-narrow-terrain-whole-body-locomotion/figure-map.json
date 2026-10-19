@@ -1,0 +1,82 @@
+[
+  {
+    "figure": 1,
+    "page": 2,
+    "path": "assets/figures/fig-01.png",
+    "caption_id": "fig-01-caption",
+    "caption_zh": "图 1 实机窄道、障碍、负载、圆锥与推扰场景",
+    "crop_status": "按原文 PDF 页坐标裁出图体；中文图注独立呈现"
+  },
+  {
+    "figure": 2,
+    "page": 3,
+    "path": "assets/figures/fig-02.png",
+    "caption_id": "fig-02-caption",
+    "caption_zh": "图 2 DBHL 整体训练流程",
+    "crop_status": "按原文 PDF 页坐标裁出图体；中文图注独立呈现"
+  },
+  {
+    "figure": 3,
+    "page": 4,
+    "path": "assets/figures/fig-03.png",
+    "caption_id": "fig-03-caption",
+    "caption_zh": "图 3 基于 ZMP 的动态平衡示意",
+    "crop_status": "按原文 PDF 页坐标裁出图体；中文图注独立呈现"
+  },
+  {
+    "figure": 4,
+    "page": 5,
+    "path": "assets/figures/fig-04.png",
+    "caption_id": "fig-04-caption",
+    "caption_zh": "图 4 Isaac Gym 训练地形",
+    "crop_status": "按原文 PDF 页坐标裁出图体；中文图注独立呈现"
+  },
+  {
+    "figure": 5,
+    "page": 6,
+    "path": "assets/figures/fig-05.png",
+    "caption_id": "fig-05-caption",
+    "caption_zh": "图 5 不同窄地形和难度下的基线比较",
+    "crop_status": "按原文 PDF 页坐标裁出图体；中文图注独立呈现"
+  },
+  {
+    "figure": 6,
+    "page": 6,
+    "path": "assets/figures/fig-06.png",
+    "caption_id": "fig-06-caption",
+    "caption_zh": "图 6 ZMP 奖励定量比较",
+    "crop_status": "按原文 PDF 页坐标裁出图体；中文图注独立呈现"
+  },
+  {
+    "figure": 7,
+    "page": 7,
+    "path": "assets/figures/fig-07.png",
+    "caption_id": "fig-07-caption",
+    "caption_zh": "图 7 外推扰动下两条轨迹比较",
+    "crop_status": "按原文 PDF 页坐标裁出图体；中文图注独立呈现"
+  },
+  {
+    "figure": 8,
+    "page": 7,
+    "path": "assets/figures/fig-08.png",
+    "caption_id": "fig-08-caption",
+    "caption_zh": "图 8 奖励向量化训练曲线比较",
+    "crop_status": "按原文 PDF 页坐标裁出图体；中文图注独立呈现"
+  },
+  {
+    "figure": 9,
+    "page": 7,
+    "path": "assets/figures/fig-09.png",
+    "caption_id": "fig-09-caption",
+    "caption_zh": "图 9 动作噪声消融",
+    "crop_status": "按原文 PDF 页坐标裁出图体；中文图注独立呈现"
+  },
+  {
+    "figure": 10,
+    "page": 7,
+    "path": "assets/figures/fig-10.png",
+    "caption_id": "fig-10-caption",
+    "caption_zh": "图 10 Unitree H1-2 真实世界实验",
+    "crop_status": "按原文 PDF 页坐标裁出图体；中文图注独立呈现"
+  }
+]

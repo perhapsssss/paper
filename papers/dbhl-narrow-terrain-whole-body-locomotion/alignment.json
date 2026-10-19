@@ -1,0 +1,370 @@
+[
+  {
+    "id": "title-01",
+    "section": "标题",
+    "type": "title",
+    "source_ids": [
+      "title-01"
+    ],
+    "translation_ids": [
+      "zh-title-01"
+    ],
+    "source": "Humanoid Whole-Body Locomotion on Narrow Terrain via Dynamic Balance and Reinforcement Learning",
+    "translation": [
+      "人形机器人在狭窄地形上的全身运动：动态平衡与强化学习"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "abstract-01",
+    "section": "摘要",
+    "type": "abstract",
+    "source_ids": [
+      "abstract-01"
+    ],
+    "translation_ids": [
+      "zh-abstract-01"
+    ],
+    "source": "We propose a novel whole-body locomotion algorithm based on dynamic balance and Reinforcement Learning (RL) that enables humanoid robots to traverse extreme terrains using only proprioception.",
+    "translation": [
+      "本文提出基于动态平衡与强化学习的全身运动算法，使人形机器人仅凭本体感知即可通过极端地形。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "intro-01",
+    "section": "I. 引言",
+    "type": "paragraph",
+    "source_ids": [
+      "intro-01"
+    ],
+    "translation_ids": [
+      "zh-intro-01"
+    ],
+    "source": "Current RL-based controllers lack fast and diverse gait adjustment at critical moments of instability; a robust policy should leverage contact forces, the support polygon, and the robot centroid.",
+    "translation": [
+      "现有强化学习控制器难以在失稳关键时刻快速、灵活地调整步态；鲁棒策略应利用接触力、支撑多边形和机器人质心等信息。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "method-01",
+    "section": "III. 方法",
+    "type": "paragraph",
+    "source_ids": [
+      "method-01"
+    ],
+    "translation_ids": [
+      "zh-method-01"
+    ],
+    "source": "We formulate the problem as goal-conditioned RL; actions are target joint positions, and the observation comprises velocity commands and proprioception history.",
+    "translation": [
+      "问题被表述为目标条件强化学习任务；动作是关节目标位置，观测由速度指令和本体感知历史构成。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "eq-01",
+    "section": "III-A ZMP",
+    "type": "equation",
+    "source_ids": [
+      "eq-01"
+    ],
+    "translation_ids": [
+      "zh-eq-01"
+    ],
+    "source": "$$\\boldsymbol{\\tau}=\\mathbf{p}_{\\mathrm{zmp}}\\times\\mathbf{f}+\\boldsymbol{\\tau}_p.\\tag{1}$$",
+    "translation": [
+      "$$\\boldsymbol{\\tau}=\\mathbf{p}_{\\mathrm{zmp}}\\times\\mathbf{f}+\\boldsymbol{\\tau}_p.\\tag{1}$$"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "eq-02",
+    "section": "III-A ZMP",
+    "type": "equation",
+    "source_ids": [
+      "eq-02"
+    ],
+    "translation_ids": [
+      "zh-eq-02"
+    ],
+    "source": "$$\\begin{cases}\\dot{\\mathbf{P}}=M\\mathbf{g}+\\mathbf{f},\\\\\\dot{\\mathbf{L}}=\\mathbf{p}_{\\mathrm{CoM}}\\times M\\mathbf{g}+\\boldsymbol{\\tau}.\\end{cases}\\tag{2}$$",
+    "translation": [
+      "$$\\begin{cases}\\dot{\\mathbf{P}}=M\\mathbf{g}+\\mathbf{f},\\\\\\dot{\\mathbf{L}}=\\mathbf{p}_{\\mathrm{CoM}}\\times M\\mathbf{g}+\\boldsymbol{\\tau}.\\end{cases}\\tag{2}$$"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "eq-03-05",
+    "section": "III-A ZMP",
+    "type": "equation",
+    "source_ids": [
+      "eq-03-05"
+    ],
+    "translation_ids": [
+      "zh-eq-03-05"
+    ],
+    "source": "$$\\tau_{p,x}=\\tau_{p,y}=0.\\tag{3}$$\n$$p_{\\mathrm{zmp},x}=\\frac{Mg p_{\\mathrm{CoM},x}+p_{\\mathrm{zmp},z}\\dot{P}_x-\\dot{L}_y}{Mg+\\dot{P}_z}.\\tag{4}$$\n$$p_{\\mathrm{zmp},y}=\\frac{Mg p_{\\mathrm{CoM},y}+p_{\\mathrm{zmp},z}\\dot{P}_y+\\dot{L}_x}{Mg+\\dot{P}_z}.\\tag{5}$$",
+    "translation": [
+      "$$\\tau_{p,x}=\\tau_{p,y}=0.\\tag{3}$$\n$$p_{\\mathrm{zmp},x}=\\frac{Mg p_{\\mathrm{CoM},x}+p_{\\mathrm{zmp},z}\\dot{P}_x-\\dot{L}_y}{Mg+\\dot{P}_z}.\\tag{4}$$\n$$p_{\\mathrm{zmp},y}=\\frac{Mg p_{\\mathrm{CoM},y}+p_{\\mathrm{zmp},z}\\dot{P}_y+\\dot{L}_x}{Mg+\\dot{P}_z}.\\tag{5}$$"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "eq-06-07",
+    "section": "III-A ZMP",
+    "type": "equation",
+    "source_ids": [
+      "eq-06-07"
+    ],
+    "translation_ids": [
+      "zh-eq-06-07"
+    ],
+    "source": "$$\\mathbf{p}_{\\mathrm{csp}}=\\frac{\\mathbf{p}_{\\mathrm{left-foot}}(c_{\\mathrm{left-foot}}+\\epsilon)+\\mathbf{p}_{\\mathrm{right-foot}}(c_{\\mathrm{right-foot}}+\\epsilon)}{c_{\\mathrm{left-foot}}+c_{\\mathrm{right-foot}}+2\\epsilon}.\\tag{6}$$\n$$r_{\\mathrm{zmp}}=\\exp\\left(-\\frac{\\|\\mathbf{p}_{\\mathrm{csp}}-\\operatorname{Proj}_{\\mathrm{ZML}}(\\mathbf{p}_{\\mathrm{csp}})\\|_2}{0.05}\\right).\\tag{7}$$",
+    "translation": [
+      "$$\\mathbf{p}_{\\mathrm{csp}}=\\frac{\\mathbf{p}_{\\mathrm{left-foot}}(c_{\\mathrm{left-foot}}+\\epsilon)+\\mathbf{p}_{\\mathrm{right-foot}}(c_{\\mathrm{right-foot}}+\\epsilon)}{c_{\\mathrm{left-foot}}+c_{\\mathrm{right-foot}}+2\\epsilon}.\\tag{6}$$\n$$r_{\\mathrm{zmp}}=\\exp\\left(-\\frac{\\|\\mathbf{p}_{\\mathrm{csp}}-\\operatorname{Proj}_{\\mathrm{ZML}}(\\mathbf{p}_{\\mathrm{csp}})\\|_2}{0.05}\\right).\\tag{7}$$"
+    ],
+    "notes": "原文式（7）使用 L2 范数；按 PDF 保留为非平方距离。"
+  },
+  {
+    "id": "eq-08-10",
+    "section": "III-B 全身运动",
+    "type": "equation",
+    "source_ids": [
+      "eq-08-10"
+    ],
+    "translation_ids": [
+      "zh-eq-08-10"
+    ],
+    "source": "$$r_{\\mathrm{AM}}=\\exp(-\\|\\mathbf{L}_{\\mathrm{base}}\\|_2/5).\\tag{8}$$\n$$\\mathbf{L}_{\\mathrm{base}}=\\sum_{i=1}^{n}\\left[\\mathbf{p}_{i}^{\\mathrm{base}}\\times(m_i\\mathbf{v}_{i}^{\\mathrm{base}})+\\mathbf{I}_i\\boldsymbol{\\omega}_{i}^{\\mathrm{base}}\\right].\\tag{9}$$\n$$a'_t=a_t(1+\\sigma_{\\mathrm{AN}}\\epsilon_t),\\quad \\epsilon_t\\sim\\mathcal{N}(0,I).\\tag{10}$$",
+    "translation": [
+      "$$r_{\\mathrm{AM}}=\\exp(-\\|\\mathbf{L}_{\\mathrm{base}}\\|_2/5).\\tag{8}$$\n$$\\mathbf{L}_{\\mathrm{base}}=\\sum_{i=1}^{n}\\left[\\mathbf{p}_{i}^{\\mathrm{base}}\\times(m_i\\mathbf{v}_{i}^{\\mathrm{base}})+\\mathbf{I}_i\\boldsymbol{\\omega}_{i}^{\\mathrm{base}}\\right].\\tag{9}$$\n$$a'_t=a_t(1+\\sigma_{\\mathrm{AN}}\\epsilon_t),\\quad \\epsilon_t\\sim\\mathcal{N}(0,I).\\tag{10}$$"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "eq-11-13",
+    "section": "III-C 策略学习",
+    "type": "equation",
+    "source_ids": [
+      "eq-11-13"
+    ],
+    "translation_ids": [
+      "zh-eq-11-13"
+    ],
+    "source": "$$V_{\\mathrm{total}}(s_t)=\\sum_i V^i(s_t).\\tag{11}$$\n$$L_{\\mathrm{value}}=\\sum_i\\mathbb{E}[(r_t^i+\\gamma V^i(s_{t+1})-V^i(s_t))^2].\\tag{12}$$\n$$L_{\\mathrm{symm}}=\\mathbb{E}[\\|V(G(s_t))-V(s_t)\\|_2^2+\\|\\pi(G(o_t))-G(\\pi(o_t))\\|_2^2].\\tag{13}$$",
+    "translation": [
+      "$$V_{\\mathrm{total}}(s_t)=\\sum_i V^i(s_t).\\tag{11}$$\n$$L_{\\mathrm{value}}=\\sum_i\\mathbb{E}[(r_t^i+\\gamma V^i(s_{t+1})-V^i(s_t))^2].\\tag{12}$$\n$$L_{\\mathrm{symm}}=\\mathbb{E}[\\|V(G(s_t))-V(s_t)\\|_2^2+\\|\\pi(G(o_t))-G(\\pi(o_t))\\|_2^2].\\tag{13}$$"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "results-01",
+    "section": "IV. 实验",
+    "type": "paragraph",
+    "source_ids": [
+      "results-01"
+    ],
+    "translation_ids": [
+      "zh-results-01"
+    ],
+    "source": "DBHL consistently outperforms baselines in success rate and mean X-displacement; removing upper-body control substantially reduces performance.",
+    "translation": [
+      "DBHL 在成功率和平均 X 方向位移上持续优于基线；去除上身控制后性能显著下降。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "conclusion-01",
+    "section": "V. 结论",
+    "type": "paragraph",
+    "source_ids": [
+      "conclusion-01"
+    ],
+    "translation_ids": [
+      "zh-conclusion-01"
+    ],
+    "source": "DBHL introduces a ZMP-based reward and whole-body control framework; experiments show strong performance on narrow and uneven terrain.",
+    "translation": [
+      "DBHL 引入基于 ZMP 的奖励和全身控制框架；实验显示其在狭窄和不平地形上的表现较强。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fig-01-caption",
+    "section": "I. 引言",
+    "type": "caption",
+    "source_ids": [
+      "fig-01-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-01-caption"
+    ],
+    "source": "Fig. 1: The locomotion capabilities of full-sized Humanoid without vision or LiDAR sensors.",
+    "translation": [
+      "图 1：无视觉或激光雷达传感器时全尺寸人形机器人的运动能力。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fig-02-caption",
+    "section": "III. 方法",
+    "type": "caption",
+    "source_ids": [
+      "fig-02-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-02-caption"
+    ],
+    "source": "Fig. 2: The overall training process of the proposed method.",
+    "translation": [
+      "图 2：提出方法的整体训练流程。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fig-03-caption",
+    "section": "III-A ZMP",
+    "type": "caption",
+    "source_ids": [
+      "fig-03-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-03-caption"
+    ],
+    "source": "Fig. 3: Illustration of ZMP-based reward in different locomotion conditions.",
+    "translation": [
+      "图 3：不同运动状态下基于 ZMP 的奖励示意。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fig-04-caption",
+    "section": "IV. 实验",
+    "type": "caption",
+    "source_ids": [
+      "fig-04-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-04-caption"
+    ],
+    "source": "Fig. 4: Visualization of the various training terrains of our method in Isaac Gym.",
+    "translation": [
+      "图 4：Isaac Gym 中 DBHL 使用的不同训练地形。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fig-05-caption",
+    "section": "IV-A 窄地形比较",
+    "type": "caption",
+    "source_ids": [
+      "fig-05-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-05-caption"
+    ],
+    "source": "Fig. 5: Comparison of our method to baselines in various terrains and difficulties.",
+    "translation": [
+      "图 5：不同地形和难度下 DBHL 与基线方法的比较。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fig-06-caption",
+    "section": "IV-B ZMP 奖励分析",
+    "type": "caption",
+    "source_ids": [
+      "fig-06-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-06-caption"
+    ],
+    "source": "Fig. 6: Quantitative comparison for ZMP-based reward.",
+    "translation": [
+      "图 6：基于 ZMP 的奖励定量比较。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fig-07-caption",
+    "section": "IV-B ZMP 奖励分析",
+    "type": "caption",
+    "source_ids": [
+      "fig-07-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-07-caption"
+    ],
+    "source": "Fig. 7: Comparison of two example trajectories under external pushes.",
+    "translation": [
+      "图 7：外推扰动下两条示例轨迹的比较。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fig-08-caption",
+    "section": "IV-C 消融",
+    "type": "caption",
+    "source_ids": [
+      "fig-08-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-08-caption"
+    ],
+    "source": "Fig. 8: Comparison of training curves with and without reward vectorization.",
+    "translation": [
+      "图 8：有无奖励向量化的训练曲线比较。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fig-09-caption",
+    "section": "IV-C 消融",
+    "type": "caption",
+    "source_ids": [
+      "fig-09-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-09-caption"
+    ],
+    "source": "Fig. 9: Ablation study for action noise.",
+    "translation": [
+      "图 9：动作噪声消融研究。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fig-10-caption",
+    "section": "IV-D 实机实验",
+    "type": "caption",
+    "source_ids": [
+      "fig-10-caption"
+    ],
+    "translation_ids": [
+      "zh-fig-10-caption"
+    ],
+    "source": "Fig. 10: Real-world experiments on narrow paths, slope, moving stick, plates, blocks, and stone roads.",
+    "translation": [
+      "图 10：真实世界实验，包括窄路径、斜坡、移动木棍、按摩板、木块和石铺路面。"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "references-01",
+    "section": "参考文献",
+    "type": "reference-note",
+    "source_ids": [
+      "references-01"
+    ],
+    "translation_ids": [
+      "zh-references-01"
+    ],
+    "source": "References [1]–[41] retained in the original language.",
+    "translation": [
+      "参考文献 [1]–[41] 的书目信息按原文保留。"
+    ],
+    "notes": "全部书目条目见中文阅读页与原文 PDF 第 8 页。"
+  }
+]

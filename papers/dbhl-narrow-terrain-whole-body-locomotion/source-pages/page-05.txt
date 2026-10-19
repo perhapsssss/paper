@@ -1,0 +1,125 @@
+where summing all rewards makes it difficult for the value
+function to capture changes of reward terms with relatively
+small magnitudes. Specifically, we have
+V total(st) =
+X#Reward
+i=1
+V i(st),
+(11)
+and the loss function to train a value function is given by
+Lvalue =
+X#Reward
+i=1
+E
+hri
+t + γV i(st+1) −V i(st)
+2
+2
+i
+. (12)
+The reward functions of DBHL are given in Table I.
+TABLE I: Reward functions of DBHL. The feet contact
+reward encourages single contact between the feet and the
+ground. The feet edge distance reward encourages the feet to
+stay far from the ground edge. The action closeness reward
+encourages the action to be close to the current DOF position.
+Group
+Reward Function
+Task
+Linear Velocity Tracking, Angular Velocity Track-
+ing, Low Speed Penalty
+Gait
+ZMP, Feet Air Time, Feet Contact, Feet Separation,
+Feet Slippage, Feet Height, Base Height, Feet Edge
+Distance
+Regularization
+Angular Momentum, Orientation, Base Acceleration,
+Action Smoothness, Action Closeness, Torque, DOF
+Velocity, DOF Position Limit, Collision
+4) Symmetry Regularization: Inspired by [39], we intro-
+duce a symmetry loss term to enhance sample efficiency
+and promote more harmonious gaits. This loss leverages the
+symmetry of the robot’s motion with respect to the x-z plane,
+defined as
+Lsymm = E
+
+∥V (G(st))−V (st)∥2
+2+∥π(G(ot))−G(π(ot))∥2
+2
+
+,
+(13)
+where G denotes the reflection operator across the x-z plane.
+TABLE II: Domain randomization settings.
+Term
+Value
+External Push
+∆T ∼Exp(6) s, ∆vxy ∼U(−0.6, 0.6) m/s,
+∆ω ∼U(−0.8, 0.8) rad/s
+Action Delay
+U(4, 20) ms
+P Gain
+U(0.8, 1.2)× default
+D Gain
+U(0.8, 1.2)× default
+Friction
+U(0.1, 2)
+Link Mass
+U(0.8, 1.2)× default
+Load Mass
+U(−1, 3) kg
+Base CoM Offset
+U(−0.1, 0.1) m
+Torque RFI
+∆τ ∼U(−0.1, 0.1) × τrfi× torque limit N·m,
+τrfi ∼U(0.5, 1.5) for each episode
+Action Noise
+σAN = 0.03, see Sec. III-B.2.
+5) Domain Randomization: To enable zero-shot sim-to-
+real transfer, we randomize the physical parameters of the
+simulated environment and humanoids, listed in Table II.
+IV. EXPERIMENT
+In this section, we present extensive experiments to eval-
+uate the proposed method. Our experiments aim to address
+the following key questions:
+Fig. 4: Visualization of the various training terrains of our
+method in Isaac Gym.
+• Q1: Can DBHL outperform other methods in various
+extreme terrains?
+• Q2: How does the ZMP-based reward contribute to
+dynamic balance?
+• Q3: How do design choices (i.e., reward vectorization
+and action noise) influence training performance?
+• Q4: Can DBHL transfer to real-world hardware?
+Experiments Setup. We conduct experiments on Unitree
+H1-2, which is a full-sized humanoid robot with 27 DoF. The
+policy controls 21 DoF, excluding the 3 DoF in each wrist of
+the hands. We train the RL policy in Isaac Gym [40] and use
+MuJoCo [41] as a sim-to-sim verification platform. As shown
+in Fig. 4, we visualize the different training terrains in the
+Isaac Gym simulation. In our experiments, we evaluate the
+performance across the three types of terrains (i.e., narrow
+flat, narrow slope, and narrow stairs), where each terrain has
+varying road widths and difficulties (i.e., maximum linear
+velocity of random push in flat, slope gradient in slope,
+and step height in stairs). For evaluation, we sample 104
+episodes with 20s duration and 0.5m/s heading velocity in
+Isaac Gym, and 100 episodes with 25s duration and 0.3m/s
+heading velocity in MuJoCo. The discrepancy in evalua-
+tion episode is due to MuJoCo is renowned for its high-
+fidelity physics modeling, enabling reliable results with fewer
+episodes. Meanwhile, the policy is trained on Isaac Gym
+and transferred to MuJoCo, which often leads to decreased
+performance. Thus, we adopt a longer duration and more
+conservative command for MuJoCo evaluation. We report
+the success rate (where success means the move distance
+≥4m) and the Mean X-Displacement (MXD) as metrics.
+A. Result Comparison in Narrow Terrains
+To address Q1, we compare our methods with the follow-
+ing baselines in Isaac Gym:
+• DBHL w/o Upper: This variant of our method fixes the
+upper body, focusing solely on the lower-body control.
+• Unitree RL Gym (URG): The official RL framework
+provided by Unitree, which basically follows [1] by em-
+ploying asymmetric actor-critic for lower-body control
+and relying on phase-based rewards to learn periodic

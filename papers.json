@@ -130,5 +130,21 @@
     "pdf": "papers/dropo-offline-domain-randomization/original.pdf",
     "cover": "papers/dropo-offline-domain-randomization/assets/figures/fig-01.png",
     "status": "已完成"
+  },
+  {
+    "id": "dbhl-narrow-terrain-whole-body-locomotion",
+    "title": "人形机器人在狭窄地形上的全身运动：动态平衡与强化学习",
+    "title_original": "Humanoid Whole-Body Locomotion on Narrow Terrain via Dynamic Balance and Reinforcement Learning",
+    "authors": ["Weiji Xie", "Chenjia Bai", "Jiyuan Shi", "Junkai Yang", "Yunfei Ge", "Weinan Zhang", "Xuelong Li"],
+    "year": 2025,
+    "venue": "arXiv:2502.17219v2",
+    "doi": "10.48550/arXiv.2502.17219",
+    "tags": ["人形机器人", "动态平衡", "强化学习", "全身控制", "ZMP"],
+    "abstract": "提出 DBHL 全身运动框架，通过 ZMP 奖励、角动量正则化和奖励向量化，使 Unitree H1-2 仅凭本体感知通过狭窄地形并抵抗扰动。",
+    "project": "papers/dbhl-narrow-terrain-whole-body-locomotion",
+    "reader": "papers/dbhl-narrow-terrain-whole-body-locomotion/translation-reading.html",
+    "pdf": "papers/dbhl-narrow-terrain-whole-body-locomotion/original.pdf",
+    "cover": "papers/dbhl-narrow-terrain-whole-body-locomotion/assets/figures/fig-01.png",
+    "status": "已完成"
   }
 ]

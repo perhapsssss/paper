@@ -1,0 +1,154 @@
+show DBHL can overcome these complex terrain challenges.
+V. CONCLUSIONS
+This work presents DBHL, a novel reinforcement learning
+framework that enables humanoid robots to traverse extreme
+terrains by introducing a ZMP-based reward function and a
+whole-body control framework. Through extensive simula-
+tions and real-world experiments, DBHL demonstrates supe-
+rior performance in narrow and uneven terrains, highlighting
+its robustness and adaptability. The proposed methodology
+opens new possibilities for real-world applications requiring
+extreme mobility and balance.
+ACKNOWLEDGMENT
+This work is supported by the National Natural Science
+Foundation of China (Grant No.62306242).
+REFERENCES
+[1] X. Gu, Y.-J. Wang, and J. Chen, “Humanoid-gym: Reinforcement
+learning for humanoid robot with zero-shot sim2real transfer,” arXiv
+preprint arXiv:2404.05695, 2024.
+[2] X. Gu, Y.-J. Wang, X. Zhu, C. Shi, Y. Guo, Y. Liu, and J. Chen,
+“Advancing humanoid locomotion: Mastering challenging terrains
+with denoising world model learning,” in RSS, 2024.
+[3] Y. Xue, W. Dong, M. Liu, W. Zhang, and J. Pang, “A unified and
+general humanoid whole-body controller for fine-grained locomotion,”
+arXiv preprint arXiv:2502.03206, 2025.
+[4] Y. Guo, Z. Jiang, Y.-J. Wang, J. Gao, and J. Chen, “Decentralized
+motor skill learning for complex robotic systems,” IEEE RA-L, 2023.
+[5] Q. Zhang, C. Weng, G. Li, F. He, and Y. Cai, “Hilo: Learning whole-
+body human-like locomotion with motion tracking controller,” arXiv
+preprint arXiv:2502.03122, 2025.
+[6] T. Peng, L. Bao, J. Humphreys, A. M. Delfaki, D. Kanoulas, and
+C. Zhou, “Learning bipedal walking on a quadruped robot via ad-
+versarial motion priors,” in Annual Conference Towards Autonomous
+Robotic Systems.
+Springer, 2024, pp. 118–129.
+[7] Z. Zhuang and H. Zhao, “Embrace collisions: Humanoid shad-
+owing for deployable contact-agnostics motions,” arXiv preprint
+arXiv:2502.01465, 2025.
+[8] N. Rudin, D. Hoeller, P. Reist, and M. Hutter, “Learning to walk
+in minutes using massively parallel deep reinforcement learning,” in
+Conference on Robot Learning, 2022, pp. 91–100.
+[9] L. Engstrom, A. Ilyas, S. Santurkar, D. Tsipras, F. Janoos, L. Rudolph,
+and A. Madry, “Implementation matters in deep rl: A case study on
+ppo and trpo,” in ICLR, 2019.
+[10] G. B. Margolis and P. Agrawal, “Walk these ways: Tuning robot
+control for generalization with multiplicity of behavior,” in CoRL,
+2023, pp. 22–31.
+[11] M. Vukobratovic and J. Stepanenko, “On the stability of anthropomor-
+phic systems,” Mathematical Biosciences, vol. 15, pp. 1–37, 1972.
+[12] M. Vukobratovi´c, B. Borovac, D. Surla, and D. Stoki´c, Biped Locomo-
+tion: Dynamics, Stability, Control and Application.
+Berlin: Springer-
+Verlag, 1990.
+[13] I. Yamaguchi, A. Takanishi, and I. Kato, “Development of a biped
+walking robot compensation for three — axis moment by trunk
+motion,” in Proc. IEEE/RSJ Int. Conf. Intelligent Robot and Systems,
+Yokohama, Japan, 1993.
+[14] I. Kato, S. Ohteru, H. Kobayashi, K. Shirai, and A. Uchiyama,
+“Information-power machine with senses and limbs (wabot 1),” in
+First CISM-IFToMM Symposium on Theory and Practice of Robots
+and Manipulators, vol. 1.
+Vienna: Springer-Verlag, 1974, pp. 11–24.
+[15] R. Grandia, F. Jenelten, S. Yang, F. Farshidian, and M. Hutter,
+“Perceptive locomotion through nonlinear model-predictive control,”
+IEEE Transactions on Robotics, vol. 39, no. 5, pp. 3402–3421, 2023.
+[16] A. Meduri, P. Shah, J. Viereck, M. Khadiv, I. Havoutis, and L. Righetti,
+“Biconmp: A nonlinear model predictive control framework for whole
+body motion planning,” IEEE Transactions on Robotics, vol. 39, no. 2,
+pp. 905–922, 2023.
+[17] J. Li and Q. Nguyen, “Multi-contact mpc for dynamic loco-
+manipulation on humanoid robots,” in American Control Conference
+(ACC).
+IEEE, 2023, pp. 1215–1220.
+[18] L. Sentis and O. Khatib, “A whole-body control framework for
+humanoids operating in human environments,” in ICRA.
+Orlando,
+FL, USA: IEEE, 2006, pp. 2641–2648.
+[19] J.-P. Sleiman, F. Farshidian, M. V. Minniti, and M. Hutter, “A unified
+mpc framework for whole-body dynamic locomotion and manipula-
+tion,” IEEE RA-L, vol. 6, no. 3, pp. 4688–4695, 2021.
+[20] J. Koenemann, A. D. Prete, Y. Tassa, E. Todorov, O. Stasse, M. Ben-
+newitz, and N. Mansard, “Whole-body model-predictive control ap-
+plied to the HRP-2 humanoid,” in IROS.
+Hamburg, Germany: IEEE,
+2015, pp. 3346–3351.
+[21] G. Schultz and K. Mombaur, “Modeling and optimal control of human-
+like running,” IEEE/ASME Transactions on Mechatronics, vol. 15,
+no. 5, pp. 783–792, 2009.
+[22] S. Ha, J. Lee, M. van de Panne, Z. Xie, W. Yu, and M. Khadiv,
+“Learning-based legged locomotion: State of the art and future per-
+spectives,” The International Journal of Robotics Research, 2024.
+[23] H. He, P. Wu, C. Bai, H. Lai, L. Wang, L. Pan, X. Hu, and W. Zhang,
+“Bridging the sim-to-real gap from the information bottleneck per-
+spective,” in CoRL, 2024.
+[24] J. Levy, T. Westenbroek, and D. Fridovich-Keil, “Learning to walk
+from three minutes of real-world data with semi-structured dynamics
+models,” in CoRL, 2024.
+[25] J. Shi, C. Bai, H. He, L. Han, D. Wang, B. Zhao, M. Zhao, X. Li,
+and X. Li, “Robust quadrupedal locomotion via risk-averse policy
+learning,” in ICRA.
+IEEE, 2024, pp. 11 459–11 466.
+[26] L. Han, Q. Zhu, Sheng, et al., “Lifelike agility and play in quadrupedal
+robots using reinforcement learning and generative pre-trained mod-
+els,” Nature Machine Intelligence, vol. 6, no. 7, pp. 787–798, 2024.
+[27] X. Huang, Y. Chi, R. Wang, Z. Li, X. B. Peng, S. Shao, B. Nikolic,
+and K. Sreenath, “Diffuseloco: Real-time legged locomotion control
+with diffusion from offline datasets,” in CoRL, 2024.
+[28] Z. Zhuang, Z. Fu, J. Wang, C. G. Atkeson, S. Schwertfeger, C. Finn,
+and H. Zhao, “Robot parkour learning,” in CoRL, 2023.
+[29] X. Cheng, K. Shi, A. Agarwal, and D. Pathak, “Extreme parkour with
+legged robots,” in ICRA.
+IEEE, 2024, pp. 11 443–11 450.
+[30] H. Wang, Z. Wang, J. Ren, Q. Ben, J. Pang, T. Huang, and
+W. Zhang, “Beamdojo: Learning agile humanoid locomotion on sparse
+footholds,” 2024.
+[31] M. Vukobratovi´c and B. Borova´c, “Zero-moment point — thirty five
+years of its life,” International Journal of Humanoid Robotics, vol. 1,
+no. 1, pp. 157–173, 2004.
+[32] S. Kajita, H. Hirukawa, K. Harada, and K. Yokoi, Introduction to
+Humanoid Robotics, 1st ed.
+Springer Publishing Company, 2016.
+[33] J. Schulman, F. Wolski, P. Dhariwal, A. Radford, and O. Klimov,
+“Proximal
+policy
+optimization
+algorithms,”
+arXiv
+preprint
+arXiv:1707.06347, 2017.
+[34] L. Pinto, M. Andrychowicz, P. Welinder, W. Zaremba, and P. Abbeel,
+“Asymmetric actor critic for image-based robot learning,” in RSS.
+MIT Press Journals, 2018.
+[35] T. Brecelj and T. Petriˇc, “Zero moment line—universal stability
+parameter for multi-contact systems in three dimensions,” Sensors,
+vol. 22, no. 15, p. 5656, 2022.
+[36] S. Caron, Q.-C. Pham, and Y. Nakamura, “Zmp support areas for
+multicontact mobility under frictional constraints,” IEEE Transactions
+on Robotics, vol. 33, no. 1, pp. 67–80, 2017.
+[37] M. Popovic, A. Hofmann, and H. Herr, “Angular momentum regulation
+during human walking: biomechanics and control,” in IEEE Interna-
+tional Conference on Robotics and Automation, 2004. Proceedings.
+ICRA ’04. 2004, vol. 3, 2004, pp. 2405–2411 Vol.3.
+[38] X. Zhang, X. Wang, L. Zhang, G. Guo, X. Shen, and W. Zhang,
+“Achieving stable high-speed locomotion for humanoid robots with
+deep reinforcement learning,” arXiv preprint arXiv:2409.16611, 2024.
+[39] Z. Su, X. Huang, D. Ordonez-Apraez, et al., “Leveraging symmetry
+in rl-based legged locomotion control,” IROS, pp. 6899–6906, 2024.
+[40] V. Makoviychuk, L. Wawrzyniak, Y. Guo, M. Lu, K. Storey, M. Mack-
+lin, D. Hoeller, N. Rudin, A. Allshire, A. Handa, et al., “Isaac gym:
+High performance gpu-based physics simulation for robot learning,”
+arXiv preprint arXiv:2108.10470, 2021.
+[41] E. Todorov, T. Erez, and Y. Tassa, “Mujoco: A physics engine for
+model-based control,” in 2012 IEEE/RSJ international conference on
+intelligent robots and systems.
+IEEE, 2012, pp. 5026–5033.

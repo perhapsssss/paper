@@ -1,0 +1,72 @@
+(b) Unknown Obstacle
+(a) Narrow Path (25cm)
+(c) Carry Payload
+(d) Dense Conical Obstacles
+(e) Push on Unconstructed Terrains
+Fig. 1: The locomotion capabilities of full-sized Humanoid without vision or LiDAR sensors. (a) Narrow Path (25cm):
+The humanoid traverses a narrow pathway, including slopes and stairs, demonstrating precise foot placement and dynamic
+balance. (b) Unknown Obstacle: The humanoid robot showcases its dynamic balance control by swiftly adapting to the
+moving stick’s attempts to trip it, maintaining stability even in this challenging scenario. (c) Carry Payload: Our method
+can maintain stability while carrying loads, highlighting its robust control. (d) Dense Conical Obstacles: The humanoid
+steps over a series of closely spaced cones, exhibiting agility and coordination. (e) External Pushes: The system responds
+to external forces applied during locomotion over uneven terrain, proving its resilience against disturbances. Each scenario
+underscores the DBHL’s versatility and effectiveness in handling complex conditions.
+known disturbances, stepping on stairs with different widths
+and heights, and traversing narrow slopes with varying
+widths and degrees. The results demonstrate that DBHL
+exhibits significantly better stability compared to other main-
+stream methods. We also analyze the role of the ZMP-
+reward through comparison, highlighting its crucial role in
+maintaining dynamic balance. Additionally, we conducted a
+detailed ablation study on other design elements. Our real-
+world experiments using the full-sized Unitree H1-2 robot
+illustrate the robot’s capability to traverse narrow terrains,
+handle disturbances such as pushes and trips, and showcase
+enhanced stability and adaptability in various extreme sce-
+narios, as shown in Fig. 1.
+The key contributions are summarized as follows.
+• We intergrate ZMP into the RL-based humanoid con-
+trol framework as a novel reward function, realizing
+dynamic balance in complex terrains.
+• We construct a whole-body control framework with
+newly introduced techniques including reward vector-
+ization, angular momentum regularization, and multi-
+plicative action noise.
+• We evaluate the proposed method via extensive exper-
+iments in both the simulation and the real-world using
+full-sized humanoid robots.
+II. RELATED WORK
+A. Humanoid Locomotion
+Research on humanoid locomotion can be traced back
+to the 1970s [14]. The fundamental idea for a locomotion
+controller is to decompose it into planning and tracking
+modules, where the planning module is responsible for gen-
+erating desired trajectories and the tracking module ensures
+that the robot follows these trajectories accurately [15], [16].
+Methods such as Whole-Body Control (WBC) and Model
+Predictive Control (MPC) have achieved significant success
+in this domain [17], [18], [19]. However, these methods
+typically require precise modeling of the dynamics [20],
+[21], which poses substantial challenges for complex robot
+structures. In recent years, learning-based algorithms have
+emerged as a promising alternative to legged locomotion
+[1], [22] with efficient parallel simulation [8], significantly
+reducing the cost of interaction between the robot and
+the environment. Policies trained extensively in simulation
+environments can then be transferred to real robots [23].
+In the field of quadrupedal locomotion, RL algorithms have
+demonstrated excellent performance in complex tasks such
+as complex-terrain walking [24], [25], gait control [26], [27],
+and even parkour [28], [29].
+For RL-based humanoid locomotion, things become more
+difficult due to their limited support areas and high center
+of gravity. Meanwhile, classical control algorithms are also
+limited by the inaccurate modeling of the complex dynamical
+system. Recent approaches have proposed using RL algo-
+rithms for phase-based gait learning [2], [3], motor skill
+control [4], [5], and motion imitation [6], [7]. However, these
+methods still lags far behind that of humans in terms of
+dynamic balance under complex terrain (e.g., narrow paths)
+and extreme conditions (e.g., sudden disturbance). In our
+work, we address this problem by measuring the relationship
+between the ZMP and the humanoid support polygon in an

@@ -1,0 +1,350 @@
+TABLE III: Comparison of our method to baselines in various terrains under the hard difficulty setting (i.e., flat push 0.6m/s,
+slope gradient 0.2, stair height 0.08m). The second row shows the road widths in meters. The best results are highlighted
+in boldface. Our method significantly outperforms the baseline methods.
+Metric
+Method
+Flat
+Slope
+Stairs
+0.25
+0.3
+0.35
+0.25
+0.3
+0.35
+0.25
+0.3
+0.35
+Success Rate
+DBHL
+0.90 ± 0.02
+0.94 ± 0.02
+0.99 ± 0.01
+0.92 ± 0.02
+0.96 ± 0.02
+1.00 ± 0.00
+0.89 ± 0.02
+0.93 ± 0.02
+0.98 ± 0.01
+DBHL w/o Upper
+0.00 ± 0.00
+0.04 ± 0.03
+0.18 ± 0.03
+0.01 ± 0.01
+0.13 ± 0.05
+0.24 ± 0.04
+0.00 ± 0.00
+0.12 ± 0.04
+0.25 ± 0.04
+URG
+0.01 ± 0.01
+0.14 ± 0.12
+0.12 ± 0.04
+0.03 ± 0.02
+0.18 ± 0.12
+0.34 ± 0.21
+0.02 ± 0.02
+0.12 ± 0.08
+0.22 ± 0.14
+MXD
+DBHL
+6.58 ± 0.17
+6.78 ± 0.21
+7.02 ± 0.20
+5.83 ± 0.11
+6.20 ± 0.15
+6.52 ± 0.20
+5.62 ± 0.20
+5.79 ± 0.20
+6.03 ± 0.23
+DBHL w/o Upper
+0.85 ± 0.04
+1.16 ± 0.17
+1.92 ± 0.25
+1.07 ± 0.08
+1.47 ± 0.15
+1.81 ± 0.17
+1.07 ± 0.06
+1.55 ± 0.16
+2.10 ± 0.16
+URG
+1.33 ± 0.11
+1.93 ± 0.73
+2.02 ± 0.37
+1.61 ± 0.24
+2.24 ± 0.59
+3.09 ± 1.04
+1.48 ± 0.15
+1.91 ± 0.43
+2.42 ± 0.67
+0.25
+0.30
+0.35
+0
+2
+4
+6
+8
+MXD (m)
+Flat, Push=0m/s
+0.25
+0.30
+0.35
+0
+2
+4
+6
+8
+Flat, Push=0.3m/s
+0.25
+0.30
+0.35
+0
+2
+4
+6
+8
+Flat, Push=0.6m/s
+0.25
+0.30
+0.35
+0
+2
+4
+6
+8
+MXD (m)
+Slope, Gradient=0.10
+0.25
+0.30
+0.35
+0
+2
+4
+6
+8
+Slope, Gradient=0.15
+0.25
+0.30
+0.35
+0
+2
+4
+6
+8
+Slope, Gradient=0.20
+0.25
+0.30
+0.35
+Road Width (m)
+0
+2
+4
+6
+8
+MXD (m)
+Stairs, Height=0.04m
+0.25
+0.30
+0.35
+Road Width (m)
+0
+2
+4
+6
+8
+Stairs, Height=0.06m
+0.25
+0.30
+0.35
+Road Width (m)
+0
+2
+4
+6
+8
+Stairs, Height=0.08m
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+Success Rate
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+Success Rate
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+Success Rate
+MXD
+Success Rate
+DBHL
+DBHL w/o Upper
+URG
+Fig. 5: Comparison of our method to baselines in various
+terrains and difficulties. The result shows that whole-body
+control is essential for DBHL, and the dynamic balance
+mechanism is more effective than phase-based gait in chal-
+lenging conditions. Each setting is evaluated over 3 random
+seeds. The shaded region around each curve represents ±1σ
+range, indicating the variability of the results.
+gaits. We also incorporate the height field as part of the
+observation space to ensure a fair comparison.
+According to Fig. 5 and Table III, our method consistently
+outperforms the baselines in terms of both success rate and
+MXD. The results highlight the critical role of whole-body
+control in our approach. The performance drops significantly
+when only the lower body is controlled, indicating that
+narrow-terrain locomotion requires the coordinated effort
+of the entire robot. Meanwhile, our method demonstrates
+superior robustness compared to the phase-based control
+method across various terrains, achieving higher success
+rates and better MXD at all difficulty levels. This underscores
+the importance of phase-free locomotion and whole-body
+control in complex environments.
+B. Analysis of ZMP-based Reward
+To address Q2, we compare the performance of policy
+trained with and without the ZMP-based reward, focusing
+on dynamic balance and task performance.
+1) Quantitative Comparison: Fig. 6 presents a quantita-
+tive comparison of success rate and MXD between variants
+with and without ZMP-based reward in MuJoCo. The reason
+to compare in MuJoCo is to leverage its high-fidelity simula-
+tion for sensitive detection of subtle policy differences. The
+results clearly show that incorporating ZMP-based rewards
+allows the robot to traverse narrow and challenging terrains
+more effectively than the non-ZMP variant, resulting in a
+significantly better success rate and MXD in most settings.
+An special case for non-ZMP variant arises when the slope
+gradient is 0.2, where the performance surpasses that ob-
+served on slopes of 0.1 and 0.15. We hypothesize that the
+non-ZMP variant may overfit to this condition, resulting in
+better performance compared to less challenging settings.
+0.25
+0.30
+0.35
+1
+2
+3
+4
+5
+6
+MXD (m)
+Flat
+w/o ZMP
+w/ ZMP
+Random Push = 0.0 m/s
+Random Push = 0.3 m/s
+Random Push = 0.6 m/s
+0.25
+0.30
+0.35
+1
+2
+3
+4
+5
+6
+Slope
+Slope Gradient = 0.10
+Slope Gradient = 0.15
+Slope Gradient = 0.20
+0.25
+0.30
+0.35
+1
+2
+3
+4
+5
+6
+Stairs
+Stair Height = 0.04 m
+Stair Height = 0.06 m
+Stair Height = 0.08 m
+0.25
+0.30
+0.35
+Road Width (m)
+0.0
+0.5
+1.0
+Success Rate
+Flat
+0.25
+0.30
+0.35
+Road Width (m)
+0.0
+0.5
+1.0
+Slope
+0.25
+0.30
+0.35
+Road Width (m)
+0.0
+0.5
+1.0
+Stairs
+Fig. 6: Quantitative comparison for ZMP-based reward. The
+inclusion of the ZMP reward improves the robot’s dynamic
+stability, leading to a better success rate and MXD on narrow
+terrains. Each setting is evaluated over 3 random seeds. The
+shaded region around each curve represents ±0.5σ range.
+2) Qualitative Comparison: In Fig. 7(a), we provide two
+example trajectories for a qualitative comparison. At t =
+0.1s, an external push (∆vy = 0.6m/s) is exerted on the
+robot. The trajectory without ZMP-based reward results in
+the robot losing balance, where the corresponding ZMP-
+distance, defined as ∥pcsp −ProjZML(pcsp)∥2 in Eq. (7),
+becomes particularly large and eventually diverges, as shown
+in Fig. 7(b). In contrast, the policy incorporating ZMP-
+based reward successfully maintains the robot’s stability
+throughout the disturbance since the distance is constrained
+by maximizing the ZMP-reward in Eq. (7).

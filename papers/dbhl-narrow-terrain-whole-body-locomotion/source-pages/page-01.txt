@@ -1,0 +1,102 @@
+Humanoid Whole-Body Locomotion on Narrow Terrain via Dynamic
+Balance and Reinforcement Learning
+Weiji Xie1,2, Chenjia Bai2∗, Jiyuan Shi2, Junkai Yang1,2, Yunfei Ge2, Weinan Zhang1∗, Xuelong Li2
+Abstract— Humans possess delicate dynamic balance mech-
+anisms that enable them to maintain stability across diverse
+terrains and under extreme conditions. However, despite sig-
+nificant advances recently, existing locomotion algorithms for
+humanoid robots are still struggle to traverse extreme environ-
+ments, especially in cases that lack external perception (e.g.,
+vision or LiDAR). This is because current methods often rely
+on gait-based or perception-condition rewards, lacking effective
+mechanisms to handle unobservable obstacles and sudden bal-
+ance loss. To address this challenge, we propose a novel whole-
+body locomotion algorithm based on dynamic balance and
+Reinforcement Learning (RL) that enables humanoid robots to
+traverse extreme terrains, particularly narrow pathways and
+unexpected obstacles, using only proprioception. Specifically,
+we introduce a dynamic balance mechanism by leveraging
+a novel Zero Moment Point (ZMP)-driven reward and task-
+driven rewards in a whole-body actor-critic framework, aiming
+to achieve coordinated actions of the upper and lower limbs
+for robust locomotion. Experiments conducted on a full-sized
+Unitree H1-2 robot verify the ability of our method to maintain
+balance on extremely narrow terrains and under external
+disturbances, demonstrating its effectiveness in enhancing the
+robot’s adaptability to complex environments. The videos are
+given at https://whole-body-loco.github.io.
+I. INTRODUCTION
+Recent advances in humanoid locomotion control have
+achieved significant progress, benefited from large-scale in-
+teraction and policy learning [1] in a Reinforcement Learning
+(RL) framework. These methods mainly include phase-based
+gait learning [2], [3], motor skill control [4], [5], and motion
+imitation [6], [7]. By leveraging large-scale parallelized
+simulation [8] and policy optimization techniques [9], current
+humanoid locomotion methods demonstrate well adaptation
+capabilities in conventional terrains. Despite these achieve-
+ments, the locomotion ability of humanoid robots still lags
+far behind that of humans in terms of dynamic balance
+under extreme conditions. Especially, humans can quickly
+adjust their foot placements and centroids when faced with
+situations such as slipping or stepping off the edge, thus
+regaining stability. In contrast, current RL-based controllers
+lack such abilities primarily due to their reliance on periodic
+gait [10], [3] or motion primitives [1], [6], which cannot
+achieve fast and diverse gait adjustment at critical moments
+of instability. We argue that a robust control policy should
+fully leverage the information on contact forces, the support
+polygon, and the centroid of the robot, which describes the
+1Shanghai Jiao Tong University
+2Institute of Artificial Intelligence (TeleAI), China Telecom
+*Correspondence to: Chenjia Bai (baicj@chinatelecom.cn), Weinan
+Zhang (wnzhang@sjtu.edu.cn).
+fine-grained relationship between the robot and the support
+surface and is crucial for dynamic equilibrium.
+Alternatively, classical biped locomotion research ad-
+dresses this problem by considering two types of foot-ground
+contact during a walk cycle [11], [12]. Specifically, there
+is a double-support phase when the robot is supported on
+both feet, and a single-support phase when only one foot
+of the robot is in contact with the ground while the other
+is transitioning from the rear to the front position. In both
+cases, it is crucial to determine whether the contact can be
+maintained between the robot and the ground at a specific
+moment. Consequently, the concept of the Zero Moment
+Point (ZMP) is introduced to measure the influence of all
+forces acting on the robot that can be represented by a single
+force [13]. Specifically, the ZMP is defined as the point
+where the inertial and gravitational forces have no component
+along the horizontal axes. It has been demonstrated that if
+the ZMP lies within the support polygon of the foot and
+ground, the entire system is in dynamic balance. Inspired
+by this, we intergrate ZMP into learning-based humanoid
+whole body control, demonstrating significant improvements
+in the dynamic stability of humanoid robots when navigating
+complex terrains and resisting external disturbances.
+In this paper, we propose a novel RL framework for whole-
+body locomotion in extreme scenarios, named Dynamic
+Balanced Humanoid Locomotion (DBHL). To enhance the
+locomotion policy’s ability to traverse complex terrains, par-
+ticularly narrow pathways and sudden obstacles, we extend
+the concept of ZMP to non-planar surfaces, thereby forming
+a line of ZMPs. We then design a reward function for the RL
+policy that encourages the ZMP coordinates to be close to
+the center of the humanoid’s support polygon. This reward
+function is calculated using privileged information obtained
+from simulations, while the policy is learned solely based
+on proprioception via an asymmetric actor-critic framework.
+This design allows the policy to be deployed in real-world
+scenarios without relying on external perception. Within the
+RL framework, we train a whole-body control policy that
+leverages upper-body swings to assist dynamic balance. We
+introduce angular momentum regularization and multiplica-
+tive action noise to constrain undesired body rotation and
+action range. Finally, we integrate the ZMP-based reward
+with command-following and regularization rewards using a
+reward vectorization technique, where each reward term is
+associated with a specific value function, avoiding inaccurate
+value estimation of small items in an accumulated reward.
+In experiments, we evaluate DBHL under various chal-
+lenging conditions, including walking on surfaces with un-
+arXiv:2502.17219v2  [cs.RO]  28 Feb 2025

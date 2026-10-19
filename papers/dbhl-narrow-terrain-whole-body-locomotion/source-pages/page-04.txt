@@ -1,0 +1,140 @@
+CoM
+𝑑
+ZML
+(a)
+Standing
+still
+with two feet
+𝑎
+𝑑
+ZML
+(b) Leaning forward
+with two feet
+ZML
+𝑑
+𝑎
+(c) Stepping forward
+with one foot
+Fig. 3: Illustration of ZMP-based reward in different locomo-
+tion conditions. The brown dot represents the approximated
+center of the support polygon, pcsp, and the green dot is the
+projection of point pcsp onto the ZML in the horizontal plane.
+as
+rzmp = exp (−∥pcsp −ProjZML(pcsp)∥2/0.05) ,
+(7)
+where ProjZML(pcsp) is a projection function that projects
+pcsp to the ZML in the horizontal plane. Intuitively, dynamic
+stability is guaranteed when pcsp is close to the ZML, and a
+smaller distance indicates better stability, as shown in Fig. 3.
+B. Whole-Body Locomotion
+To achieve coordinated whole-body motion and enhance
+dynamic stability, we propose a whole-body locomotion
+framework that leverages upper-body swings to assist dy-
+namic balance. To achieve this, we incorporate two key tech-
+niques: angular momentum regularization and multiplicative
+action noise injection.
+1) Angular Momentum Regularization: It is introduced to
+minimize the undesired rotational motion during locomotion,
+thus improving coordination and improving resistance to
+external disturbances. As extensively discussed in prior work
+[37], [38], the motion of swinging legs generates significant
+angular momentum, which can disrupt whole-body motion.
+This effect can be mitigated through the proper use of
+upper limbs to counterbalance the angular momentum. We
+introduce a regularization reward rAM based on the L2 norm
+of the total angular momentum about the robot base position,
+Lbase, which is defined as
+rAM = exp (−∥Lbase∥2/5) ,
+(8)
+Lbase =
+n
+X
+i=1
+pbase
+i
+× (mivbase
+i
+) + Iiωbase
+i
+,
+(9)
+where mi represents the mass of i-th link, pbase
+i
+, vbase
+i
+, ωbase
+i
+are the CoM position, linear velocity, and angular velocity
+of the i-th link relative to the base position, respectively, and
+Ii is the inertia tensor of the i-th link about its CoM.
+2) Multiplicative Action Noise Injection: It is employed
+to constrain the range of motion of the upper body joints
+to enhance the robustness of the policy. If the policy is not
+restricted, the locomotion policy can often result in unstable
+and large-angle upper limb movements. Such a technique is
+implemented by modifying the input to the PD controller,
+where the nominal action at is perturbed by a multiplicative
+noise term, as
+a′
+t = at(1 + σANϵt),
+(10)
+where ϵt ∼N(0, I). By applying large perturbations to
+actions with greater magnitudes, the policy is encouraged to
+favor small actions for the upper body joints and to promote
+cautious behavior when significant movements are required.
+C. Policy Learning Details
+1) Task and Command: We developed three types of
+narrow terrain in policy training, including flat, stairs, and
+slopes. The robot is trained in a mixing of these narrow
+terrains, each containing 30% with an additional 10% planar
+terrain. Meanwhile, a terrain-curriculum mechanism intro-
+duced in [8] is used in training with 20 difficulty levels,
+where the path width gradually decreases from 1.0 to 0.2m,
+the slope gradient increases from 0 to 0.3, and the step
+height increases from 0 to 0.12m. For each episode, the linear
+velocity command is uniformly sampled in the range ˆvx,t ∈
+[−0.5m/s, 1.0m/s] and ˆvy,t ∈[−0.2m/s, 0.2m/s], while the
+yaw velocity command is determined by ˆωyaw,t = clip(0.5 ∗
+∆θyaw, −1rad/s, 1rad/s) where ∆θyaw is the horizontal angle
+between positive X-axis direction and the orientation of the
+robot.
+2) Asymmetric Actor-Critic Framework: The observation
+for the actor network ot ∈R279 comprises velocity com-
+mand ct = [ˆvx,t, ˆvy,t, ˆωyaw,t] and the robot’s proprioception
+sprop
+t
+= [qt−3:t, ˙qt−3:t, ωt−3:t, gt−3:t, at−4:t−1] with 4-step
+history of joint position qt ∈R21, joint velocity ˙qt ∈R21,
+base angular velocity ωt ∈R3, base projected gravity
+gt ∈R3 and last action at−1 ∈R21. The observation
+for the critic network st includes actor observation ot,
+privileged information spriv
+t
+∈R70 and surrounding height
+field shf
+t
+∈R187. The privileged observation spriv
+t
+contain
+the linear velocity, the base height, feet contact indicator,
+randomized PD parameter and randomized link mass. The
+height field shf
+t is sampled from a 1.6m × 1.0m area around
+the robot, with a point spacing of 0.1m. This framework
+leverages privileged information to enhance value function
+estimation for policy guidance, while restricting the actor to
+a local state ensures the policy’s transferability to real-world
+environments.
+3) Vectorization of Reward and Value: To facilitate the
+learning of the value function with different reward functions,
+we introduce the vectorization of the reward and value
+function. Instead of aggregating all reward terms into a single
+scalar and learning a single value function, we combine
+the different rewards as a vector and learn the correspond-
+ing value functions via Temporal-Difference (TD) learning
+independently. Then, we obtain a set of value functions,
+each associated with a specific TD target. To achieve this,
+the value function is implemented by a neural network
+with multiple output heads. Then, all value functions are
+aggregated in computing the action advantage function. This
+method addresses a key limitation in traditional approaches,

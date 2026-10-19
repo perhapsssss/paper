@@ -1,0 +1,134 @@
+RL framework. We note that a concurrent work uses foothold
+rewards to pass through narrow areas, while it relies on a
+LiDAR-based elevation map for real-world deployment [30].
+In contrast, our method can traverse complex terrains only
+using proprioception without vision or LiDAR perception.
+B. Zero Moment Point
+ZMP became a crucial tool in classical humanoid loco-
+motion a few decades ago [11], which provides a framework
+for ensuring dynamic stability in bipedal robots. Formally,
+ZMP is defined as the point on the ground at which the
+net moment of the inertial forces and the gravity forces has
+no component along the horizontal axes [12]. In subsequent
+research, the ZMP concept has been instrumental in gait
+synthesis and has been integrated with advanced sensors
+to facilitate real-time balance adjustments [31]. In addition,
+it has inspired the exploration of innovative materials and
+foot designs to enhance the interaction of robots [32]. In
+our work, we extend the ZMP as a reward function to
+measure the relationship between the line of ZMPs and the
+support polygon, which enables the humanoid to maintain
+dynamic balance in complex terrains without relying on
+external perception.
+III. METHOD
+In this section, we present our method for training an end-
+to-end RL policy that enables humanoid robots to traverse
+extreme terrains using only proprioceptive information. We
+formulate our problem as a goal-conditioned RL task, where
+the policy π is trained to follow the target velocity command.
+The action at represents the target joint positions, which
+are fed into the PD controller to actuate the robot’s degrees
+of freedom. The agent’s observation ot comprises velocity
+command ct and the history of proprioception information
+sprop
+t
+. We employ the Proximal Policy Optimization (PPO)
+algorithm [33] with asymmetric actor-critic networks [34] to
+maximize the cumulative discounted reward of the policy.
+The whole architecture is shown in Fig. 2.
+A. ZMP-based Dynamic Balance
+To achieve dynamic balance, we design a ZMP-based
+reward and integrate it into the RL framework. The reward
+is calculated by the distance between a line of ZMPs, called
+Zero Moment Line (ZML) [35], and the center of the support
+polygon formed by the robot’s feet, as shown in Fig. 3.
+Assuming that the ground reaction force is the only
+external force applied to the robot system, the moment of the
+ground reaction force about the origin of the world frame is
+given by
+τ = pzmp × f + τp,
+(1)
+where pzmp is the position of ZMP, τp is the moment about
+the ZMP, and f represents the ground reaction force. By
+Newton-Euler equations, we have the following relationship
+
+˙P = Mg + f
+˙L = pCoM × Mg + τ,
+(2)
+PD Controller
+Policy
+Optimization
+Proprioception 𝒔𝑡
+prop
+Command 𝒄𝒕
+Privilege Info 𝒔𝑡
+priv
+Height Field 𝒔𝑡
+hf
+𝒂𝑡
+𝝉𝑡
+𝑟0
+𝑉0
+……
+……
+reward vector
+Critic
+Actor
+𝑉1
+𝑉n
+𝑟1
+𝑟n
+ZMP-based reward
+Simulation
+ZML
+𝑉
+TD Update
+Angular Momentum 
+Regularization
+Fig. 2: The overall training process of the proposed method.
+where P, L, M, pCoM represents the linear momentum, the
+angular momentum about the origin, the total mass, the
+center of mass (CoM) position of the system, respectively,
+and g = [0, 0, −g]⊤. By the definition of ZMP, we have
+τp,x = τp,y = 0.
+(3)
+Solving the above equations with respect to pzmp, we have
+pzmp,x = MgpCoM,x + pzmp,z ˙Px −˙Ly
+Mg + ˙Pz
+(4)
+pzmp,y = MgpCoM,y + pzmp,z ˙Py + ˙Lx
+Mg + ˙Pz
+.
+(5)
+According to Eq. (4) and Eq. (5), ZMP at different heights
+pCoM,z lies at different locations, whose trajectory forms a
+line of ZMPs, called ZML [35].
+The condition for stable locomotion is that the ZML must
+cross the support polygon. In planar surfaces, the support
+polygon is determined by computing the convex hull of all
+contact points for scenarios with multiple contact points.
+However, the calculation becomes intricate when dealing
+with irregular contact surfaces, such as slopes or uneven
+terrain, where contact points need to be projected onto a
+virtual plane [36]. In DBHL, we bypass explicit computation
+of the support polygon through reward design. In this way,
+the problem of dynamic balance is transformed into the
+design of a metric, which encourages the ZML to be close
+to the center of the support polygon.
+Specifically, the geometric center of support polygon (de-
+noted as pcsp) is approximated by the center of supporting
+feet, as
+pcsp = pleft-foot · (cleft-foot+ϵ)+pright-foot · (cright-foot+ϵ)
+cleft-foot + cright-foot + 2ϵ
+, (6)
+where pleft-foot and pright-foot are the center of the left and
+right foot, respectively; cleft-foot = 1[∥fleft-foot∥2 > 0] and
+cright-foot = 1[∥fright-foot∥2 > 0] are indicator functions to
+determine whether the foot is in contact with the ground.
+According to Eq. (6), if a humanoid robot is supported by
+two feet, pcsp is approximately equal to the center of two
+feet. And if a humanoid robot is supported by one foot, pcsp
+is approximately equal to either pleft-foot or pright-foot.
+Based on the simplified pcsp, we design a computationally
+tractable reward function, denoted as rzmp, with the horizon-
+tal distance between pcsp and the ZML, called ZMP-distance,
